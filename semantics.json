@@ -46,14 +46,6 @@
           "importance": "medium"
         },
         {
-          "name": "sampleSlow",
-          "type": "audio",
-          "label": "Sound sample slow",
-          "description": "Sentence in slow speed",
-          "importance": "medium",
-          "optional": true
-        },
-        {
           "name": "text",
           "type": "text",
           "label": "Text",

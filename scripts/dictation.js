@@ -35,7 +35,6 @@ H5P.Dictation = function ($, Audio, Question) {
       }
     });
 
-    //console.log(config);
     this.sentences = [];
     this.config.sentences.forEach(function (element) {
       that.sentences.push(new H5P.Dictation.Sentence({
@@ -94,20 +93,19 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   Dictation.prototype.showEvaluation = function () {
-    // map function
-    var toMistakes = function (sentences) {
-      return sentences.computeMistakes();
-    };
+    let results = [];
+    this.sentences.forEach(function (element) {
+      results.push(element.computeResults());
+    });
 
-    // reduce function
-    var sum = function (a, b) {
+    // The results basically allow us to punish different mistakes differently,
+    // e.g. wrong = 1 but typo = 0.5
+    let mistakes = results.map(function(element) {
+      return element.mistakes.total;
+    }).reduce(function (a, b) {
       return a + b;
-    };
-
-    // scoreMax = Maximum number of points available by all keyword groups
-    let mistakes = this.sentences
-        .map(toMistakes)
-        .reduce(sum, 0);
+    }, 0);
+    console.log(mistakes);
 
     // TODO: Think about a good way to score the input, e.g. at max one
     //       mistake per word, punctuation etc.

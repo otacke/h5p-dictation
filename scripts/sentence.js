@@ -26,12 +26,7 @@
     });
     this.content.appendChild(this.audio);
 
-    // Optional slow audio
-    this.audioSlow = this.createAudio(params.sentence.sampleSlow, params.audioNotSupported);
-    this.audioSlow.addEventListener('click', function () {
-      that.handleTries();
-    });
-    this.content.appendChild(this.audioSlow);
+    // TODO: Possibly 2nd sample with slower speed
 
     // Text input field
     this.inputField = document.createElement('input');
@@ -46,7 +41,6 @@
     this.triesLeft--;
     if (this.triesLeft === 0) {
       this.audio.classList.add(HIDE);
-      this.audioSlow.classList.add(HIDE);
     }
   };
 
@@ -104,6 +98,57 @@
     }
 
     return $audioWrapper.get(0);
+  };
+
+  Dictation.Sentence.prototype.computeResults = function() {
+    // TODO: Think about .,! etc.
+    let aligned = H5P.TextUtilities.alignArrays(
+          this.getCorrectText().split(' '),
+          this.getText().split(' ')
+    );
+    let html = [];
+    let mistakesAdded = 0;
+    let mistakesMissing = 0;
+    let mistakesWrong = 0;
+    let mistakesTypo = 0;
+    for (let i = 0; i < aligned.text1.length; i++) {
+      if (aligned.text1[i] === undefined) {
+        html.push('<span class="added">' + aligned.text2[i] + '</span>');
+        mistakesAdded++;
+      }
+      if (aligned.text2[i] === undefined) {
+        html.push('<span class="missing">' + aligned.text1[i] + '</span>');
+        mistakesMissing++;
+      }
+
+      if (aligned.text1[i] !== aligned.text2[i] &&
+            aligned.text1[i] !== undefined &&
+            aligned.text2[i] !== undefined) {
+        if (H5P.TextUtilities.areSimilar(aligned.text1[i], aligned.text2[i])) {
+          mistakesTypo++;
+        }
+        else {
+          mistakesWrong++;
+        }
+        html.push('<span class="added">' + aligned.text1[i] + '</span>' +
+            '<span class="missing">' + aligned.text2[i] + '</span>');
+      }
+
+       if (aligned.text1[i] === aligned.text2[i]) {
+        html.push('<span class="match">' + aligned.text1[i] + '</span>');
+      }
+    }
+    return {
+      'html': html.join(' '),
+      'mistakes': {
+        'added': mistakesAdded,
+        'missing': mistakesMissing,
+        'wrong': mistakesWrong,
+        'typo': mistakesTypo,
+        'total': mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo
+      },
+      'length': html.length
+    };
   };
 
 })(H5P.jQuery, H5P.Dictation, H5P.Audio);
