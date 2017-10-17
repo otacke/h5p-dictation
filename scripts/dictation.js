@@ -40,7 +40,8 @@ H5P.Dictation = function ($, Audio, Question) {
       that.sentences.push(new H5P.Dictation.Sentence({
         "sentence": element,
         "audioNotSupported": that.config.audioNotSupported,
-        "repetitions": that.config.behaviour.repetitions
+        "repetitions": that.config.behaviour.repetitions,
+        "ignorePunctuation": that.config.behaviour.ignorePunctuation
       }));
     });
   }

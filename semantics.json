@@ -121,20 +121,28 @@
     "description": "These options will let you control how the task behaves.",
     "fields": [
       {
+        "name": "repetitions",
+        "type": "number",
+        "label": "Maximum repetitions",
+        "description": "Will limit the number of times the samples for each sentence can be listened to.",
+        "optional": true,
+        "min": 1
+      },
+      {
+        "name": "ignorePunctuation",
+        "type": "boolean",
+        "label": "Ignore Punctuation",
+        "description": "If checked, the punctuation will not be considerd for scoring",
+        "optional": false,
+        "default": true
+      },
+      {
         "name": "enableRetry",
         "label": "Enable \"Retry\"",
         "type": "boolean",
         "importance": "low",
         "default": true,
         "optional": true
-      },
-      {
-        "name": "repetitions",
-        "type": "number",
-        "label": "Maximum repetitions",
-        "description": "Will limit the number of times the samples for each sentence can be listened to",
-        "optional": true,
-        "min": 1
       },
       {
         "name": "mistakesPassing",

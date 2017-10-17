@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 (function ($, Dictation, Audio) {
   'use strict';
 
@@ -9,6 +11,11 @@
   const INPUT_WRAPPER = 'h5p-input-wrapper';
   const INPUT_FIELD = 'h5p-text-input';
   const HIDE = 'hide';
+
+  const PUNCTUATION_SYMBOLS = /[.?!,\'\";\:\-\(\)\/\u201E\u201C]/g;
+
+  // Not visible, but present
+  const DELATUR = '\u200C';
 
   Dictation.Sentence = function (params) {
     let that = this;
@@ -101,11 +108,11 @@
   };
 
   Dictation.Sentence.prototype.computeResults = function() {
-    // TODO: Think about .,! etc.
     let aligned = H5P.TextUtilities.alignArrays(
-          this.getCorrectText().split(' '),
-          this.getText().split(' ')
+          this.splitSentence(this.getCorrectText(), {'stripPunctuation': this.params.ignorePunctuation}),
+          this.splitSentence(this.getText(), {'stripPunctuation': this.params.ignorePunctuation})
     );
+
     let html = [];
     let mistakesAdded = 0;
     let mistakesMissing = 0;
@@ -150,5 +157,52 @@
       'length': html.length
     };
   };
+
+  /**
+   * Split a sentence in words and account for spaces to be deleted in regard to punctuation.
+   * @params {string} sentence - Sentence to be split.
+   * @params {object} params - Parameters.
+   * @params {string} params.punctuationSymbols - Punctuation symbols.
+   * @params {boolean} params.StripPunctuation - If true, punctuation symbols will be removed.
+   * @return {Array} Words (and punctuation symbols) from the sentence.
+   */
+  Dictation.Sentence.prototype.splitSentence = function (sentence, params) {
+    // Sanitization
+    if (!sentence) {
+      return [];
+    }
+    if (!params) {
+      params = {};
+    }
+    if (typeof params.punctuationSymbols === 'undefined') {
+      params.punctuationSymbols = PUNCTUATION_SYMBOLS.source;
+    }
+
+    // Strip punctuation from sentence if requested
+    if (typeof params.stripPunctuation === 'undefined' || params.stripPunctuation === true) {
+      sentence = sentence.replace(new RegExp(params.punctuationSymbols, 'g'), '');
+    }
+
+    // Add delatur symbol indicating the the space before/after the punctuation symbol should be removed when joining
+    sentence = sentence.replace(new RegExp('(' + params.punctuationSymbols + ')(\\w{2,})', 'g'), '$1' + DELATUR + ' $2');
+    sentence = sentence.replace(new RegExp('(\\w{2,})(' + params.punctuationSymbols + ')', 'g'), '$1 ' + DELATUR + '$2');
+
+    return sentence.split(' ');
+  };
+
+  /**
+   * Join words together to a sentence.
+   * @params {string} words - Words to concatenate with regard to removable spaces.
+   * @return {string} Sentence.
+   */
+  Dictation.Sentence.prototype.joinWords = function (words) {
+    // Sanitization
+    if (typeof words === 'undefined') {
+      return;
+    }
+    return words.join(' ')
+        .replace(new RegExp(DELATUR + ' ', 'g'), '')
+        .replace(new RegExp(' ' + DELATUR, 'g'), '');
+    };
 
 })(H5P.jQuery, H5P.Dictation, H5P.Audio);
