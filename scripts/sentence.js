@@ -107,6 +107,22 @@
     return $audioWrapper.get(0);
   };
 
+  Dictation.Sentence.prototype.getMaxMistakes = function () {
+    return (this.splitSentence(this.getCorrectText(), {'stripPunctuation': this.params.ignorePunctuation})).length;
+  };
+
+  Dictation.Sentence.prototype.reset = function () {
+    this.inputField.value = '';
+  };
+
+  Dictation.Sentence.prototype.disable = function () {
+    this.inputField.disabled = true;
+  };
+
+  Dictation.Sentence.prototype.enable = function () {
+    this.inputField.disabled = false;
+  };
+
   Dictation.Sentence.prototype.computeResults = function() {
     let aligned = H5P.TextUtilities.alignArrays(
           this.splitSentence(this.getCorrectText(), {'stripPunctuation': this.params.ignorePunctuation}),

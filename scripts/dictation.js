@@ -1,3 +1,4 @@
+/* jslint esversion: 6 */
 var H5P = H5P || {};
 
 H5P.Dictation = function ($, Audio, Question) {
@@ -44,6 +45,7 @@ H5P.Dictation = function ($, Audio, Question) {
         "ignorePunctuation": that.config.behaviour.ignorePunctuation
       }));
     });
+    this.maxMistakes = this.computeMaxMistakes();
   }
 
   // Extends Question
@@ -89,14 +91,26 @@ H5P.Dictation = function ($, Audio, Question) {
 
     // Retry button
     that.addButton('try-again', that.config.tryAgain, function () {
-      // TODO: that.reset();
+      that.reset();
     }, false, {}, {});
+  };
+
+  Dictation.prototype.computeMaxMistakes = function () {
+    let that = this;
+    return this.sentences
+        .map(function (sentence) {
+          return sentence.getMaxMistakes();
+        })
+        .reduce(function (a, b) {
+          return a + b;
+        }, 0);
   };
 
   Dictation.prototype.showEvaluation = function () {
     let results = [];
     this.sentences.forEach(function (element) {
       results.push(element.computeResults());
+      element.disable();
     });
 
     // The results basically allow us to punish different mistakes differently,
@@ -106,11 +120,41 @@ H5P.Dictation = function ($, Audio, Question) {
     }).reduce(function (a, b) {
       return a + b;
     }, 0);
-    console.log(mistakes);
+
+    let score = Math.floor((this.maxMistakes - mistakes) / this.maxMistakes * 100);
+    let textScore = H5P.Question.determineOverallFeedback(
+        this.config.overallFeedback, score / 100) // TODO: scoreMastering!
+            .replace('@score', score)
+            .replace('@total', 100); // TODO: scoreMastering!
+
+    this.setFeedback(
+        'You have made ' + mistakes + ' mistakes. ' + textScore, // TODO: make feedback parameter
+        score,
+        100); // TODO: scoreMastering!
 
     // TODO: Think about a good way to score the input, e.g. at max one
     //       mistake per word, punctuation etc.
     // TODO: Visualize mistakes
+
+    this.hideButton('check-answer');
+    if (score < 100) { // TODO: scoreMastering!
+      if (this.config.behaviour.enableRetry) {
+        this.showButton('try-again');
+      }
+    }
+
+    this.trigger('resize');
+  };
+
+  Dictation.prototype.reset = function () {
+    this.sentences.forEach(function (sentence) {
+      sentence.reset();
+      sentence.enable();
+    });
+    this.removeFeedback();
+    this.hideButton('try-again');
+    this.showButton('check-answer');
+    this.trigger('resize');
   };
 
   Dictation.prototype.extend = function () {
