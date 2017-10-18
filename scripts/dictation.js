@@ -152,10 +152,8 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   Dictation.prototype.showSolution = function () {
-    let that = this;
-    this.sentences.forEach(function (sentence, i) {
-      sentence.setText(that.results[i].html);
-    });
+    let solution = this.buildSolution(this.results);
+    console.log(solution);
   };
 
   Dictation.prototype.reset = function () {
@@ -168,6 +166,11 @@ H5P.Dictation = function ($, Audio, Question) {
     this.hideButton('show-solution');
     this.showButton('check-answer');
     this.trigger('resize');
+  };
+
+  Dictation.prototype.buildSolution = function (results) {
+      // TODO: Change CSS (border to wrapper, etc.)
+      return results;
   };
 
   Dictation.prototype.extend = function () {

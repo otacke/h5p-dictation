@@ -142,18 +142,30 @@
           this.splitSentence(this.getText(), {'stripPunctuation': this.params.ignorePunctuation})
     );
 
-    let html = [];
+    // TODO: Fix for delatur symbols
+    // TODO: clean up
+    // TODO: xAPI values needed per sentence
+
+    let texts = [];
     let mistakesAdded = 0;
     let mistakesMissing = 0;
     let mistakesWrong = 0;
     let mistakesTypo = 0;
     for (let i = 0; i < aligned.text1.length; i++) {
       if (aligned.text1[i] === undefined) {
-        html.push('<span class="added">' + aligned.text2[i] + '</span>');
+        texts.push({
+          'solution': aligned.text1[i],
+          'answer': aligned.text2[i],
+          'type': 'added'
+        });
         mistakesAdded++;
       }
       if (aligned.text2[i] === undefined) {
-        html.push('<span class="missing">' + aligned.text1[i] + '</span>');
+        texts.push({
+          'solution': aligned.text1[i],
+          'answer': aligned.text2[i],
+          'type': 'missing'
+        });
         mistakesMissing++;
       }
 
@@ -162,21 +174,33 @@
             aligned.text2[i] !== undefined) {
         if (H5P.TextUtilities.areSimilar(aligned.text1[i], aligned.text2[i])) {
           mistakesTypo++;
+          texts.push({
+            'solution': aligned.text1[i],
+            'answer': aligned.text2[i],
+            'type': 'typo'
+          });
         }
         else {
           mistakesWrong++;
+          texts.push({
+            'solution': aligned.text1[i],
+            'answer': aligned.text2[i],
+            'type': 'wrong'
+          });
         }
-        html.push('<span class="added">' + aligned.text1[i] + '</span>' +
-            '<span class="missing">' + aligned.text2[i] + '</span>');
       }
 
        if (aligned.text1[i] === aligned.text2[i]) {
-        html.push('<span class="match">' + aligned.text1[i] + '</span>');
+        texts.push({
+          'solution': aligned.text1[i],
+          'answer': aligned.text2[i],
+          'type': 'match'
+        });
       }
     }
     return {
-      // TODO: Find fix for join failing ... :-/
-      'html': this.joinWords(html),
+      'solution': this.getCorrectText(),
+      'texts': texts,
       'mistakes': {
         'added': mistakesAdded,
         'missing': mistakesMissing,
@@ -184,7 +208,7 @@
         'typo': mistakesTypo,
         'total': mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo
       },
-      'length': html.length
+      'length': texts.length
     };
   };
 
