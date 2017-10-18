@@ -15,7 +15,8 @@
   const PUNCTUATION_SYMBOLS = /[.?!,\'\";\:\-\(\)\/\u201E\u201C]/g;
 
   // Not visible, but present
-  const DELATUR = '\u200C';
+  //const DELATUR = '\u200C';
+  const DELATUR = '\u00ff';
 
   Dictation.Sentence = function (params) {
     let that = this;
@@ -73,7 +74,6 @@
    */
   Dictation.Sentence.prototype.setText = function (text) {
     // Sanitization
-    console.log(text);
     if (typeof text !== 'string') {
       return;
     }
@@ -121,7 +121,11 @@
   };
 
   Dictation.Sentence.prototype.getMaxMistakes = function () {
-    return (this.splitSentence(this.getCorrectText(), {'stripPunctuation': this.params.ignorePunctuation})).length;
+    let words = this.splitSentence(
+        this.getCorrectText(),
+        {'stripPunctuation': this.params.ignorePunctuation}
+    );
+    return words.words.length;
   };
 
   Dictation.Sentence.prototype.reset = function () {
@@ -137,12 +141,12 @@
   };
 
   Dictation.Sentence.prototype.computeResults = function() {
-    let aligned = H5P.TextUtilities.alignArrays(
-          this.splitSentence(this.getCorrectText(), {'stripPunctuation': this.params.ignorePunctuation}),
-          this.splitSentence(this.getText(), {'stripPunctuation': this.params.ignorePunctuation})
-    );
+    let wordsCorrect = this.splitSentence(this.getCorrectText(), {'stripPunctuation': this.params.ignorePunctuation});
+    let wordsAnswer = this.splitSentence(this.getText(), {'stripPunctuation': this.params.ignorePunctuation});
 
-    // TODO: Fix for delatur symbols
+    // TODO: Get that out of TextUtilities
+    let aligned = H5P.TextUtilities.alignArrays(wordsCorrect.words, wordsAnswer.words);
+
     // TODO: clean up
     // TODO: xAPI values needed per sentence
 
@@ -151,64 +155,63 @@
     let mistakesMissing = 0;
     let mistakesWrong = 0;
     let mistakesTypo = 0;
-    for (let i = 0; i < aligned.text1.length; i++) {
-      if (aligned.text1[i] === undefined) {
-        texts.push({
-          'solution': aligned.text1[i],
-          'answer': aligned.text2[i],
-          'type': 'added'
-        });
-        mistakesAdded++;
-      }
-      if (aligned.text2[i] === undefined) {
-        texts.push({
-          'solution': aligned.text1[i],
-          'answer': aligned.text2[i],
-          'type': 'missing'
-        });
-        mistakesMissing++;
-      }
+    let mistakesPunctuation = 0;
+    let solution, answer, type = '';
+    let punctuation = false;
 
-      if (aligned.text1[i] !== aligned.text2[i] &&
-            aligned.text1[i] !== undefined &&
-            aligned.text2[i] !== undefined) {
-        if (H5P.TextUtilities.areSimilar(aligned.text1[i], aligned.text2[i])) {
+    for (let i = 0; i < aligned.text1.length; i++) {
+      solution = aligned.text1[i];
+      answer = aligned.text2[i];
+      punctuation = PUNCTUATION_SYMBOLS.test(aligned.text1[i]);
+
+      if (solution === undefined) {
+        // TODO: Make constants
+        type = 'added';
+        mistakesAdded++;
+        mistakesPunctuation += punctuation ? 1 : 0;
+      }
+      if (answer === undefined) {
+        type = 'missing';
+        mistakesMissing++;
+        mistakesPunctuation += punctuation ? 1 : 0;
+      }
+      if (solution !== answer && solution !== undefined && answer !== undefined) {
+        if (H5P.TextUtilities.areSimilar(solution, answer)) {
+          type = 'typo';
           mistakesTypo++;
-          texts.push({
-            'solution': aligned.text1[i],
-            'answer': aligned.text2[i],
-            'type': 'typo'
-          });
+          mistakesPunctuation += punctuation ? 1 : 0;
         }
         else {
+          type = 'wrong';
           mistakesWrong++;
-          texts.push({
-            'solution': aligned.text1[i],
-            'answer': aligned.text2[i],
-            'type': 'wrong'
-          });
+          mistakesPunctuation += punctuation ? 1 : 0;
         }
       }
 
-       if (aligned.text1[i] === aligned.text2[i]) {
-        texts.push({
-          'solution': aligned.text1[i],
-          'answer': aligned.text2[i],
-          'type': 'match'
-        });
+      if (solution === answer) {
+        type = 'match';
       }
+      texts.push({
+        'solution': solution,
+        'answer': answer,
+        'punctuation': punctuation,
+        'type': type
+      });
     }
     return {
       'solution': this.getCorrectText(),
       'texts': texts,
       'mistakes': {
+        'punctuation': mistakesPunctuation,
+        'spelling': texts.length - mistakesPunctuation,
         'added': mistakesAdded,
         'missing': mistakesMissing,
         'wrong': mistakesWrong,
         'typo': mistakesTypo,
         'total': mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo
       },
-      'length': texts.length
+      'length': texts.length,
+      'spacePattern': wordsCorrect.spacePattern
     };
   };
 
@@ -221,9 +224,11 @@
    * @return {Array} Words (and punctuation symbols) from the sentence.
    */
   Dictation.Sentence.prototype.splitSentence = function (sentence, params) {
+    let words = [];
+    let spacePattern = [];
     // Sanitization
     if (!sentence) {
-      return [];
+      return {'words': words, 'spacePattern': spacePattern};
     }
     if (!params) {
       params = {};
@@ -241,22 +246,17 @@
     sentence = sentence.replace(new RegExp('(' + params.punctuationSymbols + ')(\\w{2,})', 'g'), '$1' + DELATUR + ' $2');
     sentence = sentence.replace(new RegExp('(\\w{2,})(' + params.punctuationSymbols + ')', 'g'), '$1 ' + DELATUR + '$2');
 
-    return sentence.split(' ');
-  };
+    words = sentence.split(' ');
 
-  /**
-   * Join words together to a sentence.
-   * @params {string} words - Words to concatenate with regard to removable spaces.
-   * @return {string} Sentence.
-   */
-  Dictation.Sentence.prototype.joinWords = function (words) {
-    // Sanitization
-    if (typeof words === 'undefined') {
-      return;
+    for (let i = 0; i < words.length-1; i++) {
+      spacePattern.push(!(words[i].substr(-1) === DELATUR || words[i+1].substring(0, 1) === DELATUR));
     }
-    return words.join(' ')
-        .replace(new RegExp(DELATUR + ' ', 'g'), '')
-        .replace(new RegExp(' ' + DELATUR, 'g'), '');
-    };
+    spacePattern.push(false);
+    words = words.map(function (word) {
+      return word.replace(new RegExp(DELATUR, 'g'), '');
+    });
+
+    return {'words': words, 'spacePattern': spacePattern};
+  };
 
 })(H5P.jQuery, H5P.Dictation, H5P.Audio);

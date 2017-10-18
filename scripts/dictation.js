@@ -152,8 +152,12 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   Dictation.prototype.showSolution = function () {
-    let solution = this.buildSolution(this.results);
-    console.log(solution);
+    // TODO: Should get the DOM to be shown
+    let that = this;
+    let solutions = this.buildSolutions(this.results);
+    solutions.forEach(function (solution, index) {
+      that.sentences[index].setText(solution);
+    });
   };
 
   Dictation.prototype.reset = function () {
@@ -168,9 +172,19 @@ H5P.Dictation = function ($, Audio, Question) {
     this.trigger('resize');
   };
 
-  Dictation.prototype.buildSolution = function (results) {
-      // TODO: Change CSS (border to wrapper, etc.)
-      return results;
+  Dictation.prototype.buildSolutions = function (results) {
+    // TODO: Change CSS (border to wrapper, etc.)
+    let output = [];
+    results.forEach(function (result) {
+      let sentence = '';
+      result.texts.forEach(function (text, index) {
+        // TODO: element + styling according to type
+        sentence += text.solution;
+        sentence += result.spacePattern[index] ? ' ' : '';
+      });
+      output.push(sentence);
+    });
+    return output;
   };
 
   Dictation.prototype.extend = function () {
