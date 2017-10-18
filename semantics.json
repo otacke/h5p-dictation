@@ -145,6 +145,14 @@
         "optional": true
       },
       {
+        "name": "enableSolution",
+        "label": "Enable \"Solution\"",
+        "type": "boolean",
+        "importance": "low",
+        "default": true,
+        "optional": true
+      },
+      {
         "name": "mistakesPassing",
         "type": "number",
         "label": "Maximum mistakes for passing",

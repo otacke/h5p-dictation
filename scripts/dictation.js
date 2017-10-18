@@ -81,7 +81,7 @@ H5P.Dictation = function ($, Audio, Question) {
 
     // Show solution button
     that.addButton('show-solution', that.config.showSolution, function () {
-      // TODO: that.showSolution();
+      that.showSolution();
     }, false, {}, {});
 
     // Check answer button
@@ -107,15 +107,17 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   Dictation.prototype.showEvaluation = function () {
-    let results = [];
+    let that = this;
+    this.results = [];
     this.sentences.forEach(function (element) {
-      results.push(element.computeResults());
+      let currentResult = element.computeResults();
+      that.results.push(currentResult);
       element.disable();
     });
 
     // The results basically allow us to punish different mistakes differently,
     // e.g. wrong = 1 but typo = 0.5
-    let mistakes = results.map(function(element) {
+    let mistakes = this.results.map(function(element) {
       return element.mistakes.total;
     }).reduce(function (a, b) {
       return a + b;
@@ -137,6 +139,9 @@ H5P.Dictation = function ($, Audio, Question) {
     // TODO: Visualize mistakes
 
     this.hideButton('check-answer');
+    if (this.config.behaviour.enableSolution) {
+      this.showButton('show-solution');
+    }
     if (score < 100) { // TODO: scoreMastering!
       if (this.config.behaviour.enableRetry) {
         this.showButton('try-again');
@@ -146,6 +151,13 @@ H5P.Dictation = function ($, Audio, Question) {
     this.trigger('resize');
   };
 
+  Dictation.prototype.showSolution = function () {
+    let that = this;
+    this.sentences.forEach(function (sentence, i) {
+      sentence.setText(that.results[i].html);
+    });
+  };
+
   Dictation.prototype.reset = function () {
     this.sentences.forEach(function (sentence) {
       sentence.reset();
@@ -153,6 +165,7 @@ H5P.Dictation = function ($, Audio, Question) {
     });
     this.removeFeedback();
     this.hideButton('try-again');
+    this.hideButton('show-solution');
     this.showButton('check-answer');
     this.trigger('resize');
   };

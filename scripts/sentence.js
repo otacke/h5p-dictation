@@ -68,6 +68,19 @@
   };
 
   /**
+   * Set current text in InputField.
+   * @param {string} text - Current text.
+   */
+  Dictation.Sentence.prototype.setText = function (text) {
+    // Sanitization
+    console.log(text);
+    if (typeof text !== 'string') {
+      return;
+    }
+    this.inputField.value = text;
+  };
+
+  /**
    * Get correct text.
    * @return {string} Correct text.
    */
@@ -162,7 +175,8 @@
       }
     }
     return {
-      'html': html.join(' '),
+      // TODO: Find fix for join failing ... :-/
+      'html': this.joinWords(html),
       'mistakes': {
         'added': mistakesAdded,
         'missing': mistakesMissing,
