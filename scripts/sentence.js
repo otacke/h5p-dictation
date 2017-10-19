@@ -211,7 +211,7 @@
         'total': mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo
       },
       'length': texts.length,
-      'spacePattern': wordsCorrect.spacePattern
+      'spaces': wordsCorrect.spaces
     };
   };
 
@@ -225,10 +225,10 @@
    */
   Dictation.Sentence.prototype.splitSentence = function (sentence, params) {
     let words = [];
-    let spacePattern = [];
+    let spaces = [];
     // Sanitization
     if (!sentence) {
-      return {'words': words, 'spacePattern': spacePattern};
+      return {'words': words, 'spaces': spaces};
     }
     if (!params) {
       params = {};
@@ -249,14 +249,16 @@
     words = sentence.split(' ');
 
     for (let i = 0; i < words.length-1; i++) {
-      spacePattern.push(!(words[i].substr(-1) === DELATUR || words[i+1].substring(0, 1) === DELATUR));
+      spaces.push(
+          !(words[i].substr(-1) === DELATUR || words[i+1].substring(0, 1) === DELATUR) ? ' ': ''
+      );
     }
-    spacePattern.push(false);
+    spaces.push('');
     words = words.map(function (word) {
       return word.replace(new RegExp(DELATUR, 'g'), '');
     });
 
-    return {'words': words, 'spacePattern': spacePattern};
+    return {'words': words, 'spaces': spaces};
   };
 
 })(H5P.jQuery, H5P.Dictation, H5P.Audio);

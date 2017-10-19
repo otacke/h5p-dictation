@@ -180,7 +180,7 @@ H5P.Dictation = function ($, Audio, Question) {
       result.texts.forEach(function (text, index) {
         // TODO: element + styling according to type
         sentence += text.solution;
-        sentence += result.spacePattern[index] ? ' ' : '';
+        sentence += result.spaces[index];
       });
       output.push(sentence);
     });
