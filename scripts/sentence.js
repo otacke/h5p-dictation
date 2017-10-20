@@ -48,9 +48,6 @@
     inputWrapper.classList.add(INPUT_WRAPPER);
     inputWrapper.appendChild(this.inputField);
     this.content.appendChild(inputWrapper);
-
-    // TODO: delete
-    console.log(H5P.TextUtilities.areSimilar('brown', 'bri'))
   };
 
   /**
@@ -223,8 +220,6 @@
     console.log(wordsSolution, wordsAnswer);
 
     let aligned = this.alignWords(wordsSolution, wordsAnswer);
-    console.log(aligned);
-
     let spaces = this.getSpaces(aligned.words1);
 
     let words = [];
@@ -281,74 +276,95 @@
    * @return {object} Object containing two new arrays.
    */
   Dictation.Sentence.prototype.alignWords = function (words1, words2) {
-    if (words1.length === words2.length) {
-      return {
-        "words1": words1,
-        "words2": words2
-      };
-    }
-
     words2 = words2.map(function (word) {
       return (word === '') ? undefined : word;
     });
 
-    let diff = words2.length - words1.length;
-    for (let i = 0; i < diff; i++) {
-      words1.push(undefined);
+    let master = words1.slice(0);
+
+    for (let i = 0; i < words1.length; i++) {
+      master.push(undefined);
     }
 
-    let master = (words1.length >= words2.length) ? words1 : words2;
-    let slave = (words1.length >= words2.length) ? words2 : words1;
-
-    console.log(master, slave);
-
-    let slaveNew = [];
+    let slave = [];
     for (let i = 0; i < master.length; i++) {
-      slaveNew.push(undefined);
+      slave.push(undefined);
     }
 
     let posEnd = master.length-1;
-    for (let i = slave.length-1; i >= 0; i--) {
-      let destination = master.lastIndexOf(slave[i]);
+    for (let i = words2.length-1; i >= 0; i--) {
+      let destination = master.lastIndexOf(words2[i]);
 
       if (destination < 0) {
         destination = posEnd;
-        // TODO: We could possibly re-align those non-matches after
-        //       we have set everything else. Could be moved to the
-        //       best fitting master word (Levenshtein) in between the
-        //       surrounding other slave words
       }
       else {
-        destination = Math.min(destination, posEnd);
+        // Push the word forward if there's another one later
+        if (words2.slice(0, Math.max(0, i-1)).indexOf(words2[i]) !== -1) {
+          destination = posEnd;
+        }
+        else {
+          destination = Math.min(destination, posEnd);
+        }
       }
 
-      slaveNew[destination] = slave[i];
+      slave[destination] = words2[i];
       posEnd = destination - 1;
       if (posEnd === -1) {
         for (let j = 0; j < i; j++) {
-          slaveNew.unshift(undefined);
+          slave.unshift(undefined);
         }
         posEnd = 0;
       }
     }
 
     // Someone might have added wrong words at the beginning
-    diff = slaveNew.length - master.length;
+    let diff = slave.length - master.length;
     for(let i = 0; i < diff; i++) {
       master.unshift(undefined);
     }
 
-    // Remove clutter that may appear when the answer is weird and longer that the solution
-    for (let i = words1.length-1; i > 0; i--) {
-      if (words1[i] === undefined && slaveNew[i] === undefined) {
-        words1.splice(i,1);
-        slaveNew.splice(i,1);
+    // Clean up
+    for (let i = master.length-1; i >= 0; i--) {
+      // Move those words up that still have not found a partner and have spaces
+      if (master[i] === undefined && slave[i] !== undefined && slave[i-1] === undefined) {
+        let pos = 1;
+        while(i-pos > 0 && slave[i-pos] === undefined) {
+          pos++;
+        }
+        let destination = master.slice(i-pos+1, i).lastIndexOf(slave[i]);
+        if (destination !== -1) {
+            slave[i-pos+1+destination] = slave[i];
+            slave[i] = undefined;
+        }
+      }
+
+      // TODO: Should also be best fitting afterwards (Levenshtein).
+      if (master[i] !== undefined && slave[i] !== undefined && slave[i-1] === undefined && i > 0) {
+        let pos = 1;
+        while(i-pos > 0 && slave[i-pos] === undefined) {
+          pos++;
+        }
+        let range = master.slice(i-pos+1, i);
+        for(let j = i-pos+1; j < i; j++) {
+          if (H5P.TextUtilities.areSimilar(master[j], slave[i])) {
+            slave[j] = slave[i];
+            slave[i] = undefined;
+            break;
+          }
+        }
+      }
+
+      // Remove clutter
+      if (master[i] === undefined && slave[i] === undefined) {
+        master.splice(i, 1);
+        slave.splice(i, 1);
       }
     }
 
     return {
-      "words1": words1,
-      "words2": slaveNew
+      "words1": master,
+      "words2": slave
     };
   };
 
