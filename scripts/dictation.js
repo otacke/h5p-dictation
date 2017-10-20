@@ -173,16 +173,39 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   Dictation.prototype.buildSolutions = function (results) {
+    console.log(results);
+    let that = this;
     // TODO: Change CSS (border to wrapper, etc.)
     let output = [];
     results.forEach(function (result) {
       let sentence = '';
-      result.texts.forEach(function (text, index) {
+      result.words.forEach(function (word, index) {
         // TODO: element + styling according to type
-        sentence += text.solution;
+
+        if (word.type === 'wrong') {
+          sentence += '<span class="h5p-' + 'added' +'">';
+          sentence += word.answer;
+          sentence += '</span>';
+          sentence += '<span class="h5p-' + 'wrong' +'">';
+          sentence += word.solution;
+          sentence += '</span>';
+        }
+        else {
+          sentence += '<span class="h5p-' + word.type +'">';
+          sentence += (word.solution !== undefined) ? word.solution : word.answer;
+          sentence += '</span>';
+        }
         sentence += result.spaces[index];
       });
+      let div = document.createElement('div');
+      div.innerHTML = sentence;
+
       output.push(sentence);
+      // TODO: remove
+      let foo = document.getElementsByClassName('h5p-dictation')[0];
+      console.log(foo);
+      foo.appendChild(div);
+      that.trigger('resize');
     });
     return output;
   };

@@ -95,3 +95,35 @@
   content: "\f00d";
   color: #b71c1c;
 }
+
+.h5p-dictation .h5p-added {
+  background-color: #f7d0d0;
+  border: 1px solid #f7d0d0;
+  color: #b71c1c;
+  text-decoration: line-through;
+}
+
+.h5p-dictation .h5p-missing {
+  background-color: #f7d0d0;
+  border: 1px solid #f7d0d0;
+  color: #b71c1c;
+}
+
+.h5p-dictation .h5p-wrong {
+  background-color: #f7d0d0;
+  border: 1px solid #f7d0d0;
+  color: #b71c1c;
+}
+
+/* TODO: Match colors with H5P defaults? */
+.h5p-dictation .h5p-typo {
+  background-color: #f7d0f7;
+  border: 1px solid #f7d0f7;
+  color: #b7b71c;
+}
+
+.h5p-dictation .h5p-match {
+  /* background: #9dd8bb; */
+  /* border: 1px solid #9dd8bb; */
+  color: #255c41;
+}
