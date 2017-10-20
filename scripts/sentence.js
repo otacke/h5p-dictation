@@ -195,11 +195,12 @@
   /**
    * Strip punctuation from a sentence.
    * @param {array|string} words - Words of a sentence.
-   * @return {array} Words without punctuation.
+   * @return {array|string} Words without punctuation.
    */
   Dictation.Sentence.prototype.stripPunctuation = function (words) {
+    let returnString = false;
     if (typeof words === 'string') {
-      let returnString = true;
+      returnString = true;
       words = [words];
     }
     words = words.map(function (word) {
@@ -213,7 +214,7 @@
     let wordsSolution = this.addDelaturs(this.getCorrectText()).split(' ');
     let answer = this.getText();
     if (this.params.ignorePunctuation) {
-      answer = answer.stripPunctuation();
+      answer = this.stripPunctuation(answer);
     }
     let wordsAnswer = this.addDelaturs(answer).split(' ');
 
@@ -282,7 +283,7 @@
 
     let master = words1.slice(0);
 
-    for (let i = 0; i < words1.length; i++) {
+    for (let i = 0; i < words2.length; i++) {
       master.push(undefined);
     }
 
@@ -345,7 +346,6 @@
         while(i-pos > 0 && slave[i-pos] === undefined) {
           pos++;
         }
-        let range = master.slice(i-pos+1, i);
         for(let j = i-pos+1; j < i; j++) {
           if (H5P.TextUtilities.areSimilar(master[j], slave[i])) {
             slave[j] = slave[i];
