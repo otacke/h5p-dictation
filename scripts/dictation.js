@@ -5,7 +5,7 @@ H5P.Dictation = function ($, Audio, Question) {
   'use strict';
 
   // TODO: xAPI
-  // TODO:
+  // TODO: ARIA
 
   /**
    * @constructor
@@ -96,7 +96,6 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   Dictation.prototype.computeMaxMistakes = function () {
-    let that = this;
     return this.sentences
         .map(function (sentence) {
           return sentence.getMaxMistakes();
@@ -156,7 +155,7 @@ H5P.Dictation = function ($, Audio, Question) {
     let that = this;
     let solutions = this.buildSolutions(this.results);
     solutions.forEach(function (solution, index) {
-      that.sentences[index].setText(solution);
+      that.sentences[index].showSolution(solution);
     });
   };
 
@@ -164,6 +163,7 @@ H5P.Dictation = function ($, Audio, Question) {
     this.sentences.forEach(function (sentence) {
       sentence.reset();
       sentence.enable();
+      sentence.hideSolution();
     });
     this.removeFeedback();
     this.hideButton('try-again');
@@ -173,38 +173,58 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   Dictation.prototype.buildSolutions = function (results) {
-    console.log(results);
     let that = this;
     // TODO: Change CSS (border to wrapper, etc.)
     let output = [];
     results.forEach(function (result) {
       let sentence = '';
       result.words.forEach(function (word, index) {
-        // TODO: element + styling according to type
 
+        // TODO: This can probably be done more elegant ...
         if (word.type === 'wrong') {
+          sentence += '<span class="h5p-wrapper-wrong">';
           sentence += '<span class="h5p-' + 'added' +'">';
           sentence += word.answer;
           sentence += '</span>';
           sentence += '<span class="h5p-' + 'wrong' +'">';
           sentence += word.solution;
           sentence += '</span>';
+          sentence += '</span>';
         }
-        else {
-          sentence += '<span class="h5p-' + word.type +'">';
-          sentence += (word.solution !== undefined) ? word.solution : word.answer;
+        if (word.type === 'added') {
+          sentence += '<span class="h5p-wrapper-wrong">';
+          sentence += '<span class="h5p-' + 'added' +'">';
+          sentence += word.answer;
+          sentence += '</span>';
+          sentence += '</span>';
+        }
+        if (word.type === 'missing') {
+          sentence += '<span class="h5p-wrapper-wrong">';
+          sentence += '<span class="h5p-' + 'missing' +'">';
+          sentence += word.solution;
+          sentence += '</span>';
+          sentence += '</span>';
+        }
+        if (word.type === 'typo') {
+          sentence += '<span class="h5p-wrapper-typo">';
+          sentence += '<span class="h5p-' + 'added' +'">';
+          sentence += word.answer;
+          sentence += '</span>';
+          sentence += '<span class="h5p-' + 'typo' +'">';
+          sentence += word.solution;
+          sentence += '</span>';
+          sentence += '</span>';
+        }
+        if (word.type === 'match') {
+          sentence += '<span class="h5p-wrapper-match">';
+          sentence += '<span class="h5p-' + 'match' +'">';
+          sentence += word.solution;
+          sentence += '</span>';
           sentence += '</span>';
         }
         sentence += result.spaces[index];
       });
-      let div = document.createElement('div');
-      div.innerHTML = sentence;
-
       output.push(sentence);
-      // TODO: remove
-      let foo = document.getElementsByClassName('h5p-dictation')[0];
-      console.log(foo);
-      foo.appendChild(div);
       that.trigger('resize');
     });
     return output;

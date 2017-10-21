@@ -10,6 +10,7 @@
   const AUDIO_WRAPPER = 'h5p-dictation-audio-wrapper';
   const INPUT_WRAPPER = 'h5p-input-wrapper';
   const INPUT_FIELD = 'h5p-text-input';
+  const INPUT_SOLUTION = 'h5p-dictation-solution';
   const HIDE = 'hide'; // TODO: rwname?
 
   // TODO: Make editable
@@ -44,9 +45,15 @@
     // Text input field
     this.inputField = document.createElement('input');
     this.inputField.classList.add(INPUT_FIELD);
+
+    this.inputSolution = document.createElement('div');
+    this.inputSolution.classList.add(INPUT_SOLUTION);
+    this.inputSolution.classList.add(HIDE);
+
     let inputWrapper = document.createElement('div');
     inputWrapper.classList.add(INPUT_WRAPPER);
     inputWrapper.appendChild(this.inputField);
+    inputWrapper.appendChild(this.inputSolution);
     this.content.appendChild(inputWrapper);
   };
 
@@ -99,12 +106,20 @@
    * Set current text in InputField.
    * @param {string} text - Current text.
    */
-  Dictation.Sentence.prototype.setText = function (text) {
+  Dictation.Sentence.prototype.showSolution = function (text) {
     // Sanitization
     if (typeof text !== 'string') {
       return;
     }
-    this.inputField.value = text;
+    this.inputSolution.innerHTML = text;
+    this.inputSolution.classList.remove(HIDE);
+    this.inputField.classList.add(HIDE);
+  };
+
+  Dictation.Sentence.prototype.hideSolution = function () {
+    this.inputSolution.innerHTML = undefined;
+    this.inputSolution.classList.add(HIDE);
+    this.inputField.classList.remove(HIDE);
   };
 
   /**
@@ -179,7 +194,7 @@
   Dictation.Sentence.prototype.getSpaces = function (words) {
     let output = [];
     if (words.length < 2) {
-      return words;
+      return [''];
     }
     words = words.map(function (word) {
       //return (word === undefined) ? '' : word;
