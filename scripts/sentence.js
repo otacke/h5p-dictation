@@ -233,8 +233,6 @@
     }
     let wordsAnswer = this.addDelaturs(answer).split(' ');
 
-    console.log(wordsSolution, wordsAnswer);
-
     let aligned = this.alignWords(wordsSolution, wordsAnswer);
     let spaces = this.getSpaces(aligned.words1);
 
@@ -342,38 +340,42 @@
 
     // Clean up
     for (let i = master.length-1; i >= 0; i--) {
-      // Move those words up that still have not found a partner and have spaces
-      if (master[i] === undefined && slave[i] !== undefined && slave[i-1] === undefined) {
-        let pos = 1;
-        while(i-pos > 0 && slave[i-pos] === undefined) {
-          pos++;
-        }
-        let destination = master.slice(i-pos+1, i).lastIndexOf(slave[i]);
-        if (destination !== -1) {
-            slave[i-pos+1+destination] = slave[i];
-            slave[i] = undefined;
-        }
+      // Remove clutter
+      if (master[i] === undefined && slave[i] === undefined) {
+        master.splice(i, 1);
+        slave.splice(i, 1);
       }
 
-      // TODO: Should also be best fitting afterwards (Levenshtein).
+      // Move those words up that still have not found a partner and have spaces
       if (master[i] !== undefined && slave[i] !== undefined && slave[i-1] === undefined && i > 0) {
         let pos = 1;
         while(i-pos > 0 && slave[i-pos] === undefined) {
           pos++;
         }
         for(let j = i-pos+1; j < i; j++) {
-          if (H5P.TextUtilities.areSimilar(master[j], slave[i])) {
+          if (master[j] === slave[j] || H5P.TextUtilities.areSimilar(master[j], slave[i])) {
             slave[j] = slave[i];
             slave[i] = undefined;
             break;
           }
         }
       }
+    }
 
-      // Remove clutter
-      if (master[i] === undefined && slave[i] === undefined) {
-        master.splice(i, 1);
-        slave.splice(i, 1);
+    // Move those master words up that still have not found a partner and have spaces
+    for (let i = 0; i < master.length; i++) {
+      if (master[i] !== slave[i] && master[i] !== undefined && master[i-1] === undefined && !H5P.TextUtilities.areSimilar(master[i], slave[i])) {
+        let pos = 1;
+        while(i-pos > 0 && master[i-pos] === undefined) {
+          pos++;
+        }
+        for(let j = i-pos; j < i; j++) {
+          if (master[i] === slave[j] || H5P.TextUtilities.areSimilar(master[i], slave[j])) {
+            master[j] = master[i];
+            master[i] = undefined;
+            break;
+          }
+        }
       }
     }
 
