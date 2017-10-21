@@ -194,16 +194,15 @@
   Dictation.Sentence.prototype.getSpaces = function (words) {
     let output = [];
     if (words.length < 2) {
-      return [''];
+      return [false];
     }
     words = words.map(function (word) {
-      //return (word === undefined) ? '' : word;
       return word || '';
     });
     for (let i = 0; i < words.length-1; i++) {
-      output.push((words[i].substr(-1) === DELATUR || words[i+1].substring(0, 1) === DELATUR) ? '' : ' ');
+      output.push(!(words[i].substr(-1) === DELATUR || words[i+1].substring(0, 1) === DELATUR));
     }
-    output.push('');
+    output.push(false);
     return output;
   };
 
@@ -234,6 +233,7 @@
     let wordsAnswer = this.addDelaturs(answer).split(' ');
 
     let aligned = this.alignWords(wordsSolution, wordsAnswer);
+
     let spaces = this.getSpaces(aligned.words1);
 
     let words = [];
@@ -285,6 +285,7 @@
 
   /**
    * Bring two array of words to same length and match the words' positions
+   * There may be a smarter way to do it ...
    * @param {array} words1 - First Array of words.
    * @param {array} words2 - Second Array of words.
    * @return {object} Object containing two new arrays.
@@ -294,90 +295,93 @@
       return (word === '') ? undefined : word;
     });
 
-    let master = words1.slice(0);
+    // Add enough space for additional words in answer
+    let master = words1.map(function(word1) {
+      return Array.apply(null, Array(words2.length)).concat(word1);
+    }).reduce(function(a, b) {
+      return a.concat(b);
+    }, []);
+    master.concat(Array.apply(null, Array(words2.length)));
 
+    // Matches in answer
+    let slave = Array.apply(null, Array(master.length));
+
+    /*
+     * We let all words of the answer slide the solution array from left to right one by one.
+     * We let them stick if a match is found AND there are no identical words in the answer
+     * later on.
+     */
+    let floor = 0;
     for (let i = 0; i < words2.length; i++) {
-      master.push(undefined);
-    }
-
-    let slave = [];
-    for (let i = 0; i < master.length; i++) {
-      slave.push(undefined);
-    }
-
-    let posEnd = master.length-1;
-    for (let i = words2.length-1; i >= 0; i--) {
-      let destination = master.lastIndexOf(words2[i]);
-
-      if (destination < 0) {
-        destination = posEnd;
-      }
-      else {
-        // Push the word forward if there's another one later
-        if (words2.slice(0, Math.max(0, i-1)).indexOf(words2[i]) !== -1) {
-          destination = posEnd;
+      let currentAnswer = words2[i];
+      for (let pos = master.length-1; pos >= floor; pos--) {
+        if (currentAnswer !== undefined && master[pos] === currentAnswer && words2.slice(i+1).indexOf(currentAnswer) === -1 || pos === floor) {
+          slave[pos] = currentAnswer;
+          floor = pos+1;
+          break;
         }
-        else {
-          destination = Math.min(destination, posEnd);
-        }
-      }
-
-      slave[destination] = words2[i];
-      posEnd = destination - 1;
-      if (posEnd === -1) {
-        for (let j = 0; j < i; j++) {
-          slave.unshift(undefined);
-        }
-        posEnd = 0;
       }
     }
 
-    // Someone might have added wrong words at the beginning
-    let diff = slave.length - master.length;
-    for(let i = 0; i < diff; i++) {
-      master.unshift(undefined);
-    }
+    /*
+     * We let all the words that don't have a match yet slide from right to left
+     * as far as possible looking for a match just in case they slided too far
+     */
+    for (let pos = slave.length-1; pos >= 0; pos--) {
+      let currentWord = slave[pos];
 
-    // Clean up
-    for (let i = master.length-1; i >= 0; i--) {
-      // Remove clutter
-      if (master[i] === undefined && slave[i] === undefined) {
-        master.splice(i, 1);
-        slave.splice(i, 1);
-      }
-
-      // Move those words up that still have not found a partner and have spaces
-      if (master[i] !== undefined && slave[i] !== undefined && slave[i-1] === undefined && i > 0) {
-        let pos = 1;
-        while(i-pos > 0 && slave[i-pos] === undefined) {
-          pos++;
-        }
-        for(let j = i-pos+1; j < i; j++) {
-          if (master[j] === slave[j] || H5P.TextUtilities.areSimilar(master[j], slave[i])) {
-            slave[j] = slave[i];
-            slave[i] = undefined;
-            break;
+      if (currentWord !== undefined && currentWord !== master[pos]) {
+        let moves = 0;
+        let posMatch = 0;
+        while (pos + moves + 1 < slave.length && slave[pos + moves + 1] === undefined) {
+          if (master[pos + moves + 1] === currentWord) {
+            posMatch = pos + moves + 1;
           }
+          moves++;
         }
+        slave[posMatch || pos + moves] = currentWord;
+        slave[pos] = undefined;
       }
     }
 
-    // Move those master words up that still have not found a partner and have spaces
-    for (let i = 0; i < master.length; i++) {
-      if (master[i] !== slave[i] && master[i] !== undefined && master[i-1] === undefined && !H5P.TextUtilities.areSimilar(master[i], slave[i])) {
-        let pos = 1;
-        while(i-pos > 0 && master[i-pos] === undefined) {
-          pos++;
-        }
-        for(let j = i-pos; j < i; j++) {
-          if (master[i] === slave[j] || H5P.TextUtilities.areSimilar(master[i], slave[j])) {
-            master[j] = master[i];
-            master[i] = undefined;
-            break;
+    /*
+     * Now we slide the remainders from left to right to finally deal with typos
+     */
+    for (let pos = 0; pos < slave.length; pos++) {
+      let currentWord = slave[pos];
+
+      if (currentWord !== undefined && currentWord !== master[pos]) {
+        let moves = 0;
+        let posMatch = 0;
+        while (pos + moves -1 >= 0 && slave[pos + moves - 1] === undefined) {
+          if (H5P.TextUtilities.areSimilar(master[pos + moves - 1], currentWord)) {
+            posMatch = pos + moves - 1;
           }
+          moves--;
         }
+        slave[posMatch || pos + moves] = currentWord;
+        slave[pos] = undefined;
       }
     }
+
+    // Remove clutter
+    for (let pos = master.length-1; pos >= 0; pos--) {
+      if (master[pos] === undefined && slave[pos] === undefined) {
+        master.splice(pos, 1);
+        slave.splice(pos, 1);
+      }
+    }
+
+    // Finally we can simply interpret adjacent missing/added words as wrong
+    for (let pos = 0; pos < master.length-1; pos++) {
+      if(master[pos] === undefined && slave[pos+1] === undefined) {
+        master[pos] = master[pos+1];
+        master.splice(pos+1, 1);
+        slave.splice(pos+1, 1);
+      }
+    }
+
+    console.log(master, slave);
 
     return {
       "words1": master,

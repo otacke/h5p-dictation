@@ -174,55 +174,51 @@ H5P.Dictation = function ($, Audio, Question) {
 
   Dictation.prototype.buildSolutions = function (results) {
     let that = this;
-    // TODO: Change CSS (border to wrapper, etc.)
     let output = [];
     results.forEach(function (result) {
       let sentence = '';
       result.words.forEach(function (word, index) {
-
         // TODO: This can probably be done more elegant ...
+        let spacer = (result.spaces[index]) ? ' h5p-spacer' : '';
+        if (word.type === 'wrong' || word.type === 'missing' || word.type === 'added') {
+          sentence += '<span class="h5p-wrapper-wrong' + spacer + '">';
+        }
+        else {
+          sentence += '<span class="h5p-wrapper-' + word.type + spacer + '">';
+        }
+
         if (word.type === 'wrong') {
-          sentence += '<span class="h5p-wrapper-wrong">';
           sentence += '<span class="h5p-' + 'added' +'">';
           sentence += word.answer;
           sentence += '</span>';
           sentence += '<span class="h5p-' + 'wrong' +'">';
           sentence += word.solution;
           sentence += '</span>';
-          sentence += '</span>';
         }
         if (word.type === 'added') {
-          sentence += '<span class="h5p-wrapper-wrong">';
           sentence += '<span class="h5p-' + 'added' +'">';
           sentence += word.answer;
           sentence += '</span>';
-          sentence += '</span>';
         }
         if (word.type === 'missing') {
-          sentence += '<span class="h5p-wrapper-wrong">';
           sentence += '<span class="h5p-' + 'missing' +'">';
           sentence += word.solution;
           sentence += '</span>';
-          sentence += '</span>';
         }
         if (word.type === 'typo') {
-          sentence += '<span class="h5p-wrapper-typo">';
           sentence += '<span class="h5p-' + 'added' +'">';
           sentence += word.answer;
           sentence += '</span>';
           sentence += '<span class="h5p-' + 'typo' +'">';
           sentence += word.solution;
           sentence += '</span>';
-          sentence += '</span>';
         }
         if (word.type === 'match') {
-          sentence += '<span class="h5p-wrapper-match">';
           sentence += '<span class="h5p-' + 'match' +'">';
           sentence += word.solution;
           sentence += '</span>';
-          sentence += '</span>';
         }
-        sentence += result.spaces[index];
+        sentence += '</span>';
       });
       output.push(sentence);
       that.trigger('resize');
