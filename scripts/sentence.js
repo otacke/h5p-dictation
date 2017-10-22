@@ -5,7 +5,7 @@
 
   // TODO: Comments
 
-  // CSS Classes:
+  // CSS Classes
   const CONTENT_WRAPPER = 'h5p-sentence';
   const AUDIO_WRAPPER = 'h5p-dictation-audio-wrapper';
   const INPUT_WRAPPER = 'h5p-input-wrapper';
@@ -13,13 +13,19 @@
   const INPUT_SOLUTION = 'h5p-dictation-solution';
   const HIDE = 'hide'; // TODO: rwname?
 
-  // TODO: Make editable
+  // score types
+  const TYPE_ADDED = 'added';
+  const TYPE_MISSING = 'missing';
+  const TYPE_WRONG = 'wrong';
+  const TYPE_MATCH = 'match';
+  const TYPE_TYPO = 'typo';
+
+  // TODO: Make editable?
   const PUNCTUATION = '[.?!,\'\";\\:\\-\\(\\)\/\\+\\-\\*\u201C\u201E]';
   const WORD = '\\w';
 
   // Not visible, but present
-  //TODO: const DELATUR = '\u200C';
-  const DELATUR = '\u00ff';
+  const DELATUR = '\u200C';
 
   Dictation.Sentence = function (params) {
     let that = this;
@@ -60,7 +66,7 @@
   /**
    * Remove delatur symbols.
    * @param {array|string} words - Text to be cleaned.
-   * @return {array} Cleaned words of a text.
+   * @return {array|string} Cleaned words of a text.
    */
   Dictation.Sentence.prototype.removeDelaturs = function (words) {
     let returnString = false;
@@ -180,8 +186,8 @@
    @ @return {string} Text with spaces and symbols.
    */
   Dictation.Sentence.prototype.addDelaturs = function (text) {
-    text = text.replace(new RegExp('('+WORD+')('+PUNCTUATION+')', 'g'), '$1 '+DELATUR+'$2');
-    text = text.replace(new RegExp('('+PUNCTUATION+')('+WORD+')', 'g'), '$1'+DELATUR+' $2');
+    text = text.replace(new RegExp('(' + WORD + ')(' + PUNCTUATION + ')', 'g'), '$1 ' + DELATUR + '$2');
+    text = text.replace(new RegExp('(' + PUNCTUATION + ')(' + WORD + ')', 'g'), '$1' + DELATUR + ' $2');
     return text;
   };
 
@@ -238,32 +244,35 @@
 
     let words = [];
 
-    let mistakes = 0;
+    let score = [];
+    score[TYPE_ADDED] = 0;
+    score[TYPE_MISSING] = 0;
+    score[TYPE_TYPO] = 0;
+    score[TYPE_WRONG] = 0;
+    score[TYPE_MATCH] = 0;
+
     for(let i = 0; i < aligned.words1.length; i++) {
       let solution = aligned.words1[i];
       let answer = aligned.words2[i];
       let type = '';
 
-      // TODO: make constants
       if (solution === undefined) {
-        type = 'added';
-        mistakes++;
+        type = TYPE_ADDED;
       }
       else if (answer === undefined) {
-        type = 'missing';
-        mistakes++;
+        type = TYPE_MISSING;
       }
       else if (answer === solution) {
-        type = 'match';
+        type = TYPE_MATCH;
       }
       else if (H5P.TextUtilities.areSimilar(solution, answer)) {
-        type = 'typo';
-        mistakes++;
+        type = TYPE_TYPO;
       }
       else {
-        type = 'wrong';
-        mistakes++;
+        type = TYPE_WRONG;
       }
+      score[type]++;
+
       words.push({
         "solution": this.removeDelaturs(solution),
         "answer": this.removeDelaturs(answer),
@@ -272,8 +281,13 @@
     }
 
     let output = {
-      "mistakes": {
-        "total": Math.min(mistakes, this.getMaxMistakes())
+      "score": {
+        "added": score[TYPE_ADDED],
+        "missing": score[TYPE_MISSING],
+        "typo": score[TYPE_TYPO],
+        "wrong": score[TYPE_WRONG],
+        "match": score[TYPE_MATCH],
+        "total": Math.min(score[TYPE_ADDED] + score[TYPE_MISSING] + score[TYPE_TYPO] + score[TYPE_WRONG], this.getMaxMistakes())
       },
       "words": words,
       'spaces': spaces
@@ -295,7 +309,7 @@
       return (word === '') ? undefined : word;
     });
 
-    // Add enough space for additional words in answer
+    // Add enough space for additional words in answer to prevent errors by stacking
     let master = words1.map(function(word1) {
       return Array.apply(null, Array(words2.length)).concat(word1);
     }).reduce(function(a, b) {

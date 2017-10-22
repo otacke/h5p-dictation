@@ -114,10 +114,10 @@ H5P.Dictation = function ($, Audio, Question) {
       element.disable();
     });
 
-    // The results basically allow us to punish different mistakes differently,
+    // TODO: The results basically allow us to punish different mistakes differently,
     // e.g. wrong = 1 but typo = 0.5
     let mistakes = this.results.map(function(element) {
-      return element.mistakes.total;
+      return element.score.total;
     }).reduce(function (a, b) {
       return a + b;
     }, 0);
@@ -157,6 +157,7 @@ H5P.Dictation = function ($, Audio, Question) {
     solutions.forEach(function (solution, index) {
       that.sentences[index].showSolution(solution);
     });
+    that.trigger('resize');
   };
 
   Dictation.prototype.reset = function () {
@@ -221,7 +222,6 @@ H5P.Dictation = function ($, Audio, Question) {
         sentence += '</span>';
       });
       output.push(sentence);
-      that.trigger('resize');
     });
     return output;
   };
