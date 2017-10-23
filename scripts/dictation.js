@@ -114,10 +114,11 @@ H5P.Dictation = function ($, Audio, Question) {
       element.disable();
     });
 
-    // TODO: The results basically allow us to punish different mistakes differently,
-    // e.g. wrong = 1 but typo = 0.5
     let mistakes = this.results.map(function(element) {
-      return element.score.total;
+      return element.score.added +
+          element.score.missing +
+          element.score.wrong +
+          that.config.behaviour.typoFactor * element.score.typo;
     }).reduce(function (a, b) {
       return a + b;
     }, 0);
