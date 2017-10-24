@@ -123,6 +123,8 @@ H5P.Dictation = function ($, Audio, Question) {
       return a + b;
     }, 0);
 
+    mistakes = Math.min(mistakes, this.maxMistakes);
+
     let score = Math.floor((this.maxMistakes - mistakes) / this.maxMistakes * 100);
     let textScore = H5P.Question.determineOverallFeedback(
         this.config.overallFeedback, score / 100) // TODO: scoreMastering!
