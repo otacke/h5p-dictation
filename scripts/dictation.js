@@ -28,13 +28,13 @@ H5P.Dictation = function ($, Audio, Question) {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
-    this.extend(this.config, {
-      "behaviour": {
-        "repetitions": Infinity,
-        "mistakesPassing" : 0,
-        "mistakesMastering": 0
-      }
-    });
+    console.log(this.config);
+
+    this.config.behaviour.repetitions = this.config.behaviour.repetitions || Infinity;
+    this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
+    this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
+    this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
+
 
     this.sentences = [];
     this.config.sentences.forEach(function (element) {
@@ -46,6 +46,13 @@ H5P.Dictation = function ($, Audio, Question) {
       }));
     });
     this.maxMistakes = this.computeMaxMistakes();
+
+    this.percentageMastering = (this.maxMistakes - this.config.behaviour.mistakesMastering) / this.maxMistakes;
+    this.percentagePassing = Math.min(this.percentageMastering, (this.maxMistakes - this.config.behaviour.mistakesPassing) / this.maxMistakes);
+
+    console.log(this.config.behaviour.mistakesMastering, this.percentageMastering);
+    console.log(this.config.behaviour.mistakesPassing, this.percentagePassing);
+
   }
 
   // Extends Question
@@ -124,27 +131,22 @@ H5P.Dictation = function ($, Audio, Question) {
     }, 0);
 
     mistakes = Math.min(mistakes, this.maxMistakes);
+    let percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakes) / this.maxMistakes);
 
-    let score = Math.floor((this.maxMistakes - mistakes) / this.maxMistakes * 100);
+    // TODO: We could offer replacement variables here, need to be documented in semantics
     let textScore = H5P.Question.determineOverallFeedback(
-        this.config.overallFeedback, score / 100) // TODO: scoreMastering!
-            .replace('@score', score)
-            .replace('@total', 100); // TODO: scoreMastering!
+        this.config.overallFeedback, Math.round(percentageMistakes / this.percentageMastering));
 
     this.setFeedback(
-        'You have made ' + mistakes + ' mistakes. ' + textScore, // TODO: make feedback parameter
-        score,
-        100); // TODO: scoreMastering!
-
-    // TODO: Think about a good way to score the input, e.g. at max one
-    //       mistake per word, punctuation etc.
-    // TODO: Visualize mistakes
+        'You have made ' + mistakes + ' mistakes. ' + textScore, // TODO: make feedback parameter or remove
+        Math.round(percentageMistakes / this.percentageMastering * 100),
+        this.percentageMastering / this.percentageMastering * 100);
 
     this.hideButton('check-answer');
     if (this.config.behaviour.enableSolution) {
       this.showButton('show-solution');
     }
-    if (score < 100) { // TODO: scoreMastering!
+    if (percentageMistakes < this.percentageMastering) {
       if (this.config.behaviour.enableRetry) {
         this.showButton('try-again');
       }
@@ -229,6 +231,7 @@ H5P.Dictation = function ($, Audio, Question) {
     return output;
   };
 
+  /*s
   Dictation.prototype.extend = function () {
     for(let i = 1; i < arguments.length; i++) {
       for(let key in arguments[i]) {
@@ -245,6 +248,6 @@ H5P.Dictation = function ($, Audio, Question) {
     }
     return arguments[0];
   };
-
+  */
   return Dictation;
 }(H5P.jQuery, H5P.Audio, H5P.Question);

@@ -140,22 +140,22 @@
         "name": "typoFactor",
         "type": "select",
         "label": "Value of typos",
-        "description": "Determine the value of a typographic mistake.",
+        "description": "Determine to which extend typographic mistakes count as a mistake.",
         "options": [
             {
-              "value": 1,
-              "label": "1"
+              "value": 100,
+              "label": "100 %"
             },
             {
-              "value": 0.5,
-              "label": "1/2"
+              "value": 50,
+              "label": "50 %"
             },
             {
               "value": 0,
-              "label": "0"
+              "label": "0 %"
             }
           ],
-        "default": 0.5
+        "default": "50 %"
       },
       {
         "name": "mistakesPassing",
@@ -168,7 +168,7 @@
       {
         "name": "mistakesMastering",
         "type": "number",
-        "label": "Maximum number for mastering",
+        "label": "Maximum mistakes for mastering",
         "description": "Maximum number of mistakes allowed for still mastering",
         "optional": true,
         "min": 0
