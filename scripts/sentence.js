@@ -44,6 +44,7 @@
     this.audio.addEventListener('click', function () {
       that.handleTries();
     });
+
     this.content.appendChild(this.audio);
 
     // TODO: Possibly 2nd sample with slower speed
@@ -300,107 +301,167 @@
   /**
    * Bring two array of words to same length and match the words' positions
    * There may be a smarter way to do it ...
+   *
+   * TODO: There's a lot of redundant code here! Make it nice!
+   *
    * @param {array} words1 - First Array of words.
    * @param {array} words2 - Second Array of words.
    * @return {object} Object containing two new arrays.
    */
   Dictation.Sentence.prototype.alignWords = function (words1, words2) {
-    words2 = words2.map(function (word) {
-      return (word === '') ? undefined : word;
-    });
 
-    // Add enough space for additional words in answer to prevent errors by stacking
-    let master = words1.map(function(word1) {
-      return Array.apply(null, Array(words2.length)).concat(word1);
-    }).reduce(function(a, b) {
-      return a.concat(b);
-    }, []);
-    master.concat(Array.apply(null, Array(words2.length)));
+    let align = function (words1, words2) {
+      words2 = words2.map(function (word) {
+        return (word === '') ? undefined : word;
+      });
 
-    // Matches in answer
-    let slave = Array.apply(null, Array(master.length));
+      // Add enough space for additional words in answer to prevent errors by stacking
+      let master = words1.map(function(word1) {
+        return Array.apply(null, Array(words2.length)).concat(word1);
+      }).reduce(function(a, b) {
+        return a.concat(b);
+      }, []);
+      master = master.concat(Array.apply(null, Array(words2.length)));
 
-    /*
-     * We let all words of the answer slide the solution array from left to right one by one.
-     * We let them stick if a match is found AND there are no identical words in the answer
-     * later on.
-     */
-    let floor = 0;
-    for (let i = 0; i < words2.length; i++) {
-      let currentAnswer = words2[i];
-      for (let pos = master.length-1; pos >= floor; pos--) {
-        if (currentAnswer !== undefined && master[pos] === currentAnswer && words2.slice(i+1).indexOf(currentAnswer) === -1 || pos === floor) {
-          slave[pos] = currentAnswer;
-          floor = pos+1;
-          break;
-        }
-      }
-    }
+      // Matches in answer
+      let slave = Array.apply(null, Array(master.length));
 
-    /*
-     * We let all the words that don't have a match yet slide from right to left
-     * as far as possible looking for a match just in case they slided too far
-     */
-    for (let pos = slave.length-1; pos >= 0; pos--) {
-      let currentWord = slave[pos];
-
-      if (currentWord !== undefined && currentWord !== master[pos]) {
-        let moves = 0;
-        let posMatch = 0;
-        while (pos + moves + 1 < slave.length && slave[pos + moves + 1] === undefined) {
-          if (master[pos + moves + 1] === currentWord) {
-            posMatch = pos + moves + 1;
+      /*
+       * We let all words of the answer slide the solution array from left to right one by one.
+       * We let them stick if a match is found AND there are no identical words in the answer
+       * later on.
+       */
+      let floor = 0;
+      for (let i = 0; i < words2.length; i++) {
+        let currentAnswer = words2[i];
+        for (let pos = master.length-1; pos >= floor; pos--) {
+          if (currentAnswer !== undefined && master[pos] === currentAnswer && words2.slice(i+1).indexOf(currentAnswer) === -1 || pos === floor) {
+            slave[pos] = currentAnswer;
+            floor = pos+1;
+            break;
           }
-          moves++;
         }
-        slave[posMatch || pos + moves] = currentWord;
-        slave[pos] = undefined;
       }
-    }
 
-    /*
-     * Now we slide the remainders from left to right to finally deal with typos
-     */
-    for (let pos = 0; pos < slave.length; pos++) {
-      let currentWord = slave[pos];
+      /*
+       * We let all the words that don't have a match yet slide from right to left
+       * as far as possible looking for a match just in case they slided too far
+       */
+      for (let pos = slave.length-1; pos >= 0; pos--) {
+        let currentWord = slave[pos];
 
-      if (currentWord !== undefined && currentWord !== master[pos]) {
-        let moves = 0;
-        let posMatch = 0;
-        while (pos + moves -1 >= 0 && slave[pos + moves - 1] === undefined) {
-          if (H5P.TextUtilities.areSimilar(master[pos + moves - 1], currentWord)) {
-            posMatch = pos + moves - 1;
+        if (currentWord !== undefined && currentWord !== master[pos]) {
+          let moves = 0;
+          let posMatch = 0;
+          while (pos + moves + 1 < slave.length && slave[pos + moves + 1] === undefined) {
+            if (master[pos + moves + 1] === currentWord) {
+              posMatch = pos + moves + 1;
+            }
+            moves++;
           }
-          moves--;
+          slave[posMatch || pos + moves] = currentWord;
+          slave[pos] = undefined;
         }
-        slave[posMatch || pos + moves] = currentWord;
-        slave[pos] = undefined;
       }
-    }
 
-    // Remove clutter
-    for (let pos = master.length-1; pos >= 0; pos--) {
-      if (master[pos] === undefined && slave[pos] === undefined) {
-        master.splice(pos, 1);
-        slave.splice(pos, 1);
+      /*
+       * Now we slide the remainders from left to right to finally deal with typos
+       */
+      for (let pos = 0; pos < slave.length; pos++) {
+        let currentWord = slave[pos];
+
+        if (currentWord !== undefined && currentWord !== master[pos]) {
+          let moves = 0;
+          let posMatch = 0;
+          while (pos + moves -1 >= 0 && slave[pos + moves - 1] === undefined) {
+            if (H5P.TextUtilities.areSimilar(master[pos + moves - 1], currentWord)) {
+              posMatch = pos + moves - 1;
+            }
+            moves--;
+          }
+          slave[posMatch || pos + moves] = currentWord;
+          slave[pos] = undefined;
+        }
       }
-    }
 
-    // Finally we can simply interpret adjacent missing/added words as wrong
-    for (let pos = 0; pos < master.length-1; pos++) {
-      if(master[pos] === undefined && slave[pos+1] === undefined) {
-        master[pos] = master[pos+1];
-        master.splice(pos+1, 1);
-        slave.splice(pos+1, 1);
+      // Remove clutter
+      for (let pos = master.length-1; pos >= 0; pos--) {
+        if (master[pos] === undefined && slave[pos] === undefined) {
+          master.splice(pos, 1);
+          slave.splice(pos, 1);
+        }
       }
-    }
 
-    console.log(master, slave);
+      // Finally we can simply interpret adjacent missing/added words as wrong
+      for (let pos = 0; pos < master.length-1; pos++) {
+        // We're assuming a left-swipe as previous operation here
+        if(master[pos] === undefined && slave[pos+1] === undefined) {
+          master[pos] = master[pos+1];
+          master.splice(pos+1, 1);
+          slave.splice(pos+1, 1);
+        }
+      }
 
-    return {
-      "words1": master,
-      "words2": slave
+      // Make big clusters =>
+      for (let pos = 0; pos < master.length-1; pos++) {
+        if (slave[pos] === master[pos] && master[pos+1] === undefined) {
+          let moves = 0;
+          let posMatch = 0;
+          while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
+            moves++;
+          }
+
+          if (pos + moves + 1 < master.length && slave.slice(pos + 1, pos + moves + 1).lastIndexOf(slave[pos]) !== -1) {
+            master[pos + moves + 1] = [master[pos]];
+            master[pos] = undefined;
+          }
+        }
+      }
+
+      // Make big clusters <=
+      master.reverse();
+      slave.reverse();
+      for (let pos = 0; pos < master.length-1; pos++) {
+        if (slave[pos] === master[pos] && master[pos+1] === undefined) {
+          let moves = 0;
+          let posMatch = 0;
+          while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
+            moves++;
+          }
+
+          if (pos + moves + 1 < master.length && slave.slice(pos + 1, pos + moves + 1).lastIndexOf(slave[pos]) !== -1) {
+            master[pos + moves + 1] = [master[pos]];
+            master[pos] = undefined;
+          }
+        }
+      }
+      master.reverse();
+      slave.reverse();
+
+      return {"words1": master, "words2": slave};
     };
+
+    // Count the number of matches + typos
+    let count = function(aligned) {
+      let output = 0;
+      aligned.words1.forEach(function(word1, index) {
+        if (word1 === aligned.words2[index] || H5P.TextUtilities.areSimilar(word1, aligned.words2[index])) {
+          output++;
+        }
+      });
+      return output;
+    };
+
+    let aligned1 = align(words1, words2);
+    let aligned2 = align(words1.reverse(), words2.reverse());
+
+    if (count(aligned2) > count(aligned1)) {
+      aligned1 = {"words1": aligned2.words1.reverse(), "words2": aligned2.words2.reverse()};
+    }
+
+    console.log(aligned1.words1, aligned1.words2);
+
+    return aligned1;
   };
 
 })(H5P.jQuery, H5P.Dictation, H5P.Audio);
