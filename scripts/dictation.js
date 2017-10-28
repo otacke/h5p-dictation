@@ -4,8 +4,8 @@ var H5P = H5P || {};
 H5P.Dictation = function ($, Audio, Question) {
   'use strict';
 
-  // TODO: xAPI
   // TODO: ARIA
+  // TODO: CLean up thoroughly!
 
   /**
    * @constructor
@@ -28,6 +28,7 @@ H5P.Dictation = function ($, Audio, Question) {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
+    this.config.behaviour.taskDescription = this.config.behaviour.taskDescription || '';
     this.config.behaviour.repetitions = this.config.behaviour.repetitions || Infinity;
     this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
     this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
@@ -140,7 +141,26 @@ H5P.Dictation = function ($, Audio, Question) {
     if (this.config.behaviour.enableSolution) {
       this.showButton('show-solution');
     }
-    if (percentageMistakes < this.percentageMastering) {
+
+    this.trigger(this.createDictationXAPIEvent('completed'));
+    var xAPIEvent = this.createDictationXAPIEvent('scored');
+    xAPIEvent.setScoredResult(percentageMistakes * 100, this.percentageMastering * 100, this, true,
+        percentageMistakes >= this.percentagePassing);
+    xAPIEvent.data.statement.result.response = this.sentences.map(function (sentence) {
+      return sentence.getText();
+    });
+    this.trigger(xAPIEvent);
+
+    if (percentageMistakes < this.percentagePassing) {
+      this.trigger(this.createDictationXAPIEvent('failed'));
+    }
+    else {
+      this.trigger(this.createDictationXAPIEvent('passed'));
+    }
+    if (percentageMistakes >= this.percentageMastering) {
+      this.trigger(this.createDictationXAPIEvent('mastered'));
+    }
+    else {
       if (this.config.behaviour.enableRetry) {
         this.showButton('try-again');
       }
@@ -225,13 +245,46 @@ H5P.Dictation = function ($, Audio, Question) {
     return output;
   };
 
-  /*s
+  /**
+   * Create an xAPI event for Dictation.
+   * @param {string} verb - Short id of the verb we want to trigger.
+   * @return {H5P.XAPIEvent} Event template.
+   */
+  Dictation.prototype.createDictationXAPIEvent = function (verb) {
+    let xAPIEvent = this.createXAPIEventTemplate(verb);
+    this.extend(
+        xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
+        this.getxAPIDefinition());
+    return xAPIEvent;
+  };
+
+  /**
+   * Get the xAPI definition for the xAPI object.
+   * return {Object} XAPI definition.
+   */
+  Dictation.prototype.getxAPIDefinition = function () {
+    let definition = {};
+    definition.name = {'en-US': 'Dictation'};
+    definition.description = {'en-US': this.config.taskDescription};
+    definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
+    definition.interactionType = 'long-fill-in';
+    definition.correctResponsesPattern = this.sentences.map(function (sentence) {
+      return sentence.getCorrectText();
+    });
+
+    return definition;
+  };
+
+  /**
+   * Extend an array just like JQuery's extend.
+   * @param {Object} arguments - Objects to be merged.
+   * @return {Object} Merged objects.
+   */
   Dictation.prototype.extend = function () {
-    for(let i = 1; i < arguments.length; i++) {
-      for(let key in arguments[i]) {
+    for(var i = 1; i < arguments.length; i++) {
+      for(var key in arguments[i]) {
         if (arguments[i].hasOwnProperty(key)) {
-          if (typeof arguments[0][key] === 'object' &&
-              typeof arguments[i][key] === 'object') {
+          if (typeof arguments[0][key] === 'object' && typeof arguments[i][key] === 'object') {
             this.extend(arguments[0][key], arguments[i][key]);
           }
           else {
@@ -242,6 +295,6 @@ H5P.Dictation = function ($, Audio, Question) {
     }
     return arguments[0];
   };
-  */
+
   return Dictation;
 }(H5P.jQuery, H5P.Audio, H5P.Question);
