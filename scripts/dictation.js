@@ -28,8 +28,6 @@ H5P.Dictation = function ($, Audio, Question) {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
-    console.log(this.config);
-
     this.config.behaviour.repetitions = this.config.behaviour.repetitions || Infinity;
     this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
     this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
@@ -49,10 +47,6 @@ H5P.Dictation = function ($, Audio, Question) {
 
     this.percentageMastering = (this.maxMistakes - this.config.behaviour.mistakesMastering) / this.maxMistakes;
     this.percentagePassing = Math.min(this.percentageMastering, (this.maxMistakes - this.config.behaviour.mistakesPassing) / this.maxMistakes);
-
-    console.log(this.config.behaviour.mistakesMastering, this.percentageMastering);
-    console.log(this.config.behaviour.mistakesPassing, this.percentagePassing);
-
   }
 
   // Extends Question

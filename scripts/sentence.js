@@ -187,7 +187,7 @@
    @ @return {string} Text with spaces and symbols.
    */
   Dictation.Sentence.prototype.addDelaturs = function (text) {
-    text = text.replace(new RegExp('(' + WORD + ')(' + PUNCTUATION + ')', 'g'), '$1 ' + DELATUR + '$2');
+    text = text.replace(new RegExp('(' + WORD + '|^)(' + PUNCTUATION + ')', 'g'), '$1 ' + DELATUR + '$2');
     text = text.replace(new RegExp('(' + PUNCTUATION + ')(' + WORD + ')', 'g'), '$1' + DELATUR + ' $2');
     return text;
   };
@@ -309,7 +309,6 @@
    * @return {object} Object containing two new arrays.
    */
   Dictation.Sentence.prototype.alignWords = function (words1, words2) {
-
     let align = function (words1, words2) {
       words2 = words2.map(function (word) {
         return (word === '') ? undefined : word;
