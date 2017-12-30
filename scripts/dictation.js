@@ -116,7 +116,7 @@ H5P.Dictation = function ($, Audio, Question) {
       element.disable();
     });
 
-    let mistakes = this.results.map(function(element) {
+    let mistakes = this.results.map(function (element) {
       return element.score.added +
           element.score.missing +
           element.score.wrong +
@@ -193,7 +193,6 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   Dictation.prototype.buildSolutions = function (results) {
-    let that = this;
     let output = [];
     results.forEach(function (result) {
       let sentence = '';

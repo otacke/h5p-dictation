@@ -140,7 +140,7 @@
         "name": "typoFactor",
         "type": "select",
         "label": "Value of typos",
-        "description": "Determine to which extend typographic mistakes count as a mistake.",
+        "description": "Determine to which extend typing error count as a mistake.",
         "options": [
             {
               "value": 100,
