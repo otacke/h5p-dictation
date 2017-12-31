@@ -1,7 +1,9 @@
 /* jslint esversion: 6 */
+/* globals: H5P */
+
 var H5P = H5P || {};
 
-H5P.Dictation = function ($, Audio, Question) {
+H5P.Dictation = function (Audio, Question) {
   'use strict';
 
   // TODO: ARIA
@@ -28,12 +30,12 @@ H5P.Dictation = function ($, Audio, Question) {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
+    // Defaults
     this.config.behaviour.taskDescription = this.config.behaviour.taskDescription || '';
     this.config.behaviour.repetitions = this.config.behaviour.repetitions || Infinity;
     this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
     this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
     this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
-
 
     this.sentences = [];
     this.config.sentences.forEach(function (element) {
@@ -44,8 +46,9 @@ H5P.Dictation = function ($, Audio, Question) {
         "ignorePunctuation": that.config.behaviour.ignorePunctuation
       }));
     });
-    this.maxMistakes = this.computeMaxMistakes();
 
+    // Score parameters
+    this.maxMistakes = this.computeMaxMistakes();
     this.percentageMastering = (this.maxMistakes - this.config.behaviour.mistakesMastering) / this.maxMistakes;
     this.percentagePassing = Math.min(this.percentageMastering, (this.maxMistakes - this.config.behaviour.mistakesPassing) / this.maxMistakes);
   }
@@ -97,16 +100,24 @@ H5P.Dictation = function ($, Audio, Question) {
     }, false, {}, {});
   };
 
+  /**
+   * Compute the maximum number of possible mistakes for all sentences.
+   * @return {number} Maximum number of possible mistakes.
+   */
   Dictation.prototype.computeMaxMistakes = function () {
     return this.sentences
-        .map(function (sentence) {
-          return sentence.getMaxMistakes();
-        })
-        .reduce(function (a, b) {
-          return a + b;
-        }, 0);
+      .map(function (sentence) {
+        return sentence.getMaxMistakes();
+      })
+      .reduce(function (a, b) {
+        return a + b;
+      }, 0);
   };
 
+  /**
+   * Show the evaluation for the input in the text input fields.
+   * TODO: Refactoring.
+   */
   Dictation.prototype.showEvaluation = function () {
     let that = this;
     this.results = [];
@@ -118,9 +129,9 @@ H5P.Dictation = function ($, Audio, Question) {
 
     let mistakes = this.results.map(function (element) {
       return element.score.added +
-          element.score.missing +
-          element.score.wrong +
-          that.config.behaviour.typoFactor * element.score.typo;
+        element.score.missing +
+        element.score.wrong +
+        that.config.behaviour.typoFactor * element.score.typo;
     }).reduce(function (a, b) {
       return a + b;
     }, 0);
@@ -133,9 +144,9 @@ H5P.Dictation = function ($, Audio, Question) {
         this.config.overallFeedback, Math.round(percentageMistakes / this.percentageMastering));
 
     this.setFeedback(
-        'You have made ' + mistakes + ' mistakes. ' + textScore, // TODO: make feedback parameter or remove
-        Math.round(percentageMistakes / this.percentageMastering * 100),
-        this.percentageMastering / this.percentageMastering * 100);
+      'You have made ' + mistakes + ' mistakes. ' + textScore, // TODO: make feedback parameter or remove
+      Math.round(percentageMistakes / this.percentageMastering * 100),
+      this.percentageMastering / this.percentageMastering * 100);
 
     this.hideButton('check-answer');
     if (this.config.behaviour.enableSolution) {
@@ -145,7 +156,7 @@ H5P.Dictation = function ($, Audio, Question) {
     this.trigger(this.createDictationXAPIEvent('completed'));
     var xAPIEvent = this.createDictationXAPIEvent('scored');
     xAPIEvent.setScoredResult(percentageMistakes * 100, this.percentageMastering * 100, this, true,
-        percentageMistakes >= this.percentagePassing);
+      percentageMistakes >= this.percentagePassing);
     xAPIEvent.data.statement.result.response = this.sentences.map(function (sentence) {
       return sentence.getText();
     });
@@ -169,6 +180,9 @@ H5P.Dictation = function ($, Audio, Question) {
     this.trigger('resize');
   };
 
+  /**
+   * Show the solution.
+   */
   Dictation.prototype.showSolution = function () {
     // TODO: Should get the DOM to be shown
     let that = this;
@@ -179,6 +193,9 @@ H5P.Dictation = function ($, Audio, Question) {
     that.trigger('resize');
   };
 
+  /**
+   * Reset the task.
+   */
   Dictation.prototype.reset = function () {
     this.sentences.forEach(function (sentence) {
       sentence.reset();
@@ -192,6 +209,11 @@ H5P.Dictation = function ($, Audio, Question) {
     this.trigger('resize');
   };
 
+  /**
+   * Build the solutions.
+   * @param {object} results - Results.
+   * TODO: add sub-objects
+   */
   Dictation.prototype.buildSolutions = function (results) {
     let output = [];
     results.forEach(function (result) {
@@ -252,8 +274,8 @@ H5P.Dictation = function ($, Audio, Question) {
   Dictation.prototype.createDictationXAPIEvent = function (verb) {
     let xAPIEvent = this.createXAPIEventTemplate(verb);
     this.extend(
-        xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
-        this.getxAPIDefinition());
+      xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
+      this.getxAPIDefinition());
     return xAPIEvent;
   };
 
@@ -296,4 +318,4 @@ H5P.Dictation = function ($, Audio, Question) {
   };
 
   return Dictation;
-}(H5P.jQuery, H5P.Audio, H5P.Question);
+}(H5P.Audio, H5P.Question);

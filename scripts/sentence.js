@@ -252,7 +252,7 @@
     score[TYPE_WRONG] = 0;
     score[TYPE_MATCH] = 0;
 
-    for(let i = 0; i < aligned.words1.length; i++) {
+    for (let i = 0; i < aligned.words1.length; i++) {
       let solution = aligned.words1[i];
       let answer = aligned.words2[i];
       let type = '';
