@@ -1,4 +1,5 @@
 /* jslint esversion: 6 */
+/* globals: H5P */
 
 (function ($, Dictation, Audio) {
   'use strict';
@@ -27,6 +28,15 @@
   // Not visible, but present
   const DELATUR = '\u200C';
 
+  /**
+   * Constructor.
+   * @param {object} params - Parameters.
+   * @param {number} params.repetitions - Number of attempts.
+   * @param {boolean} params.ignorePunctuation - If true, punctuation is ignored.
+   * @param {string} params.sentence.text - Correct answer.
+   * @param {string} params.sentence.sample - Path to sound samples.
+   * @param {boolean} params.audioNotSupported - True, if audio is not supported.
+   */
   Dictation.Sentence = function (params) {
     let that = this;
     this.params = params;
@@ -86,6 +96,9 @@
     return (returnString) ? words[0] : words;
   };
 
+  /**
+   * Decrease the number of tries and hide button if necessary.
+   */
   Dictation.Sentence.prototype.handleTries = function () {
     this.triesLeft--;
     if (this.triesLeft === 0) {
@@ -123,6 +136,9 @@
     this.inputField.classList.add(HIDE);
   };
 
+  /**
+   * Hide solution.
+   */
   Dictation.Sentence.prototype.hideSolution = function () {
     this.inputSolution.innerHTML = undefined;
     this.inputSolution.classList.add(HIDE);
@@ -137,6 +153,12 @@
     return this.solution;
   };
 
+  /**
+   * Create H5P.Audio.
+   * @param {string} sample - Path to sound sample.
+   * @param {boolean} audioNotSupported - True, if audio is not supported.
+   * @return {object} DOM element for the sample.
+   */
   Dictation.Sentence.prototype.createAudio = function (sample, audioNotSupported) {
     let that = this;
     let audio;
@@ -145,7 +167,6 @@
     });
 
     if (sample !== undefined) {
-
       let audioDefaults = {
         files: sample,
         audioNotSupported: audioNotSupported
@@ -153,7 +174,7 @@
       audio = new Audio(audioDefaults, that.contentId);
       audio.attach($audioWrapper);
 
-      // Have to stop else audio will take up a socket pending forever in chrome.
+      // Have to stop, else audio will take up a socket pending forever in chrome.
       if (audio.audio && audio.audio.preload) {
         audio.audio.preload = 'none';
       }
@@ -165,18 +186,31 @@
     return $audioWrapper.get(0);
   };
 
+  /**
+   * Get the maximum of possible mistakes.
+   * @return {number} Number of possible mistakes.
+   */
   Dictation.Sentence.prototype.getMaxMistakes = function () {
     return this.mistakesMax;
   };
 
+  /**
+   * Reset the sentences.
+   */
   Dictation.Sentence.prototype.reset = function () {
     this.inputField.value = '';
   };
 
+  /**
+   * Disable the input field.
+   */
   Dictation.Sentence.prototype.disable = function () {
     this.inputField.disabled = true;
   };
 
+  /**
+   * Enable the input field.
+   */
   Dictation.Sentence.prototype.enable = function () {
     this.inputField.disabled = false;
   };
@@ -191,7 +225,6 @@
     text = text.replace(new RegExp('(' + PUNCTUATION + ')(' + WORD + ')', 'g'), '$1' + DELATUR + ' $2');
     return text;
   };
-
 
   /**
    * Get pattern of spaces to add behind aliged array of words.
@@ -230,8 +263,12 @@
     return (returnString) ? words.toString() : words;
   };
 
+  /**
+   * Compute the results for this sentence.
+   * @return {object} Results.
+   */
   Dictation.Sentence.prototype.computeResults = function() {
-    // TODO: strip punctuation
+    // TODO: strip punctuation (still TODO?)
     let wordsSolution = this.addDelaturs(this.getCorrectText()).split(' ');
     let answer = this.getText();
     if (this.params.ignorePunctuation) {
@@ -294,6 +331,7 @@
       'spaces': spaces
     };
 
+    // TODO: Remove when done.
     console.log(output);
     return output;
   };
@@ -458,6 +496,7 @@
       aligned1 = {"words1": aligned2.words1.reverse(), "words2": aligned2.words2.reverse()};
     }
 
+    // TODO: Remove when done.
     console.log(aligned1.words1, aligned1.words2);
 
     return aligned1;
