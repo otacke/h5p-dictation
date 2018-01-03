@@ -7,7 +7,7 @@ H5P.Dictation = function (Audio, Question) {
   'use strict';
 
   // TODO: ARIA
-  // TODO: CLean up thoroughly!
+  // TODO: Clean up thoroughly!
 
   /**
    * @constructor
@@ -16,7 +16,7 @@ H5P.Dictation = function (Audio, Question) {
    * @param {string} contentId - ContentId.
    * @param {Object} contentData - contentData.
    */
-  function Dictation(config, contentId, contentData) {
+  function Dictation (config, contentId, contentData) {
     let that = this;
     // Initialize
     if (!config) {
@@ -212,7 +212,7 @@ H5P.Dictation = function (Audio, Question) {
   /**
    * Build the solutions.
    * @param {object} results - Results.
-   * TODO: add sub-objects
+   * @return {array} Array of solutions.
    */
   Dictation.prototype.buildSolutions = function (results) {
     let output = [];
@@ -281,7 +281,7 @@ H5P.Dictation = function (Audio, Question) {
 
   /**
    * Get the xAPI definition for the xAPI object.
-   * return {Object} XAPI definition.
+   * @return {object} XAPI definition.
    */
   Dictation.prototype.getxAPIDefinition = function () {
     let definition = {};
@@ -298,8 +298,8 @@ H5P.Dictation = function (Audio, Question) {
 
   /**
    * Extend an array just like JQuery's extend.
-   * @param {Object} arguments - Objects to be merged.
-   * @return {Object} Merged objects.
+   * @param {object} arguments - Objects to be merged.
+   * @return {object} Merged objects.
    */
   Dictation.prototype.extend = function () {
     for(var i = 1; i < arguments.length; i++) {
