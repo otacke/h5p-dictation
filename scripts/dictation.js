@@ -44,7 +44,7 @@ H5P.Dictation = function (Audio, Question) {
         "audioNotSupported": that.config.audioNotSupported,
         "repetitions": that.config.behaviour.repetitions,
         "ignorePunctuation": that.config.behaviour.ignorePunctuation
-      }));
+      }, that.contentId));
     });
 
     // Score parameters

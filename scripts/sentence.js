@@ -35,11 +35,13 @@
    * @param {boolean} params.ignorePunctuation - If true, punctuation is ignored.
    * @param {string} params.sentence.text - Correct answer.
    * @param {string} params.sentence.sample - Path to sound samples.
-   * @param {boolean} params.audioNotSupported - True, if audio is not supported.
+   * @param {string} params.audioNotSupported - Text to show if audio not supported.
+   * @param {number} id - Content ID.
    */
-  Dictation.Sentence = function (params) {
+  Dictation.Sentence = function (params, id) {
     let that = this;
     this.params = params;
+    this.contentId = id;
     this.triesLeft = params.repetitions;
 
     this.solution = (!params.ignorePunctuation) ? params.sentence.text : this.stripPunctuation(params.sentence.text);
@@ -50,6 +52,7 @@
     this.content.classList.add(CONTENT_WRAPPER);
 
     // Normal audio
+
     this.audio = this.createAudio(params.sentence.sample, params.audioNotSupported);
     this.audio.addEventListener('click', function () {
       that.handleTries();
@@ -156,7 +159,7 @@
   /**
    * Create H5P.Audio.
    * @param {string} sample - Path to sound sample.
-   * @param {boolean} audioNotSupported - True, if audio is not supported.
+   * @param {string} audioNotSupported - Text to show if audio now supported.
    * @return {object} DOM element for the sample.
    */
   Dictation.Sentence.prototype.createAudio = function (sample, audioNotSupported) {
@@ -171,6 +174,7 @@
         files: sample,
         audioNotSupported: audioNotSupported
       };
+
       audio = new Audio(audioDefaults, that.contentId);
       audio.attach($audioWrapper);
 
