@@ -12,7 +12,7 @@
   const INPUT_WRAPPER = 'h5p-input-wrapper';
   const INPUT_FIELD = 'h5p-text-input';
   const INPUT_SOLUTION = 'h5p-dictation-solution';
-  const HIDE = 'hide'; // TODO: rwname?
+  const HIDE = 'hide'; // TODO: rename?
 
   // score types
   const TYPE_ADDED = 'added';
@@ -31,7 +31,7 @@
   /**
    * Constructor.
    * @param {object} params - Parameters.
-   * @param {number} params.repetitions - Number of attempts.
+   * @param {number} params.tries - Number of attempts.
    * @param {boolean} params.ignorePunctuation - If true, punctuation is ignored.
    * @param {string} params.sentence.text - Correct answer.
    * @param {string} params.sentence.sample - Path to sound samples.
@@ -42,7 +42,7 @@
     let that = this;
     this.params = params;
     this.contentId = id;
-    this.triesLeft = params.repetitions;
+    this.triesLeft = params.tries;
 
     this.solution = (!params.ignorePunctuation) ? params.sentence.text : this.stripPunctuation(params.sentence.text);
     this.mistakesMax = this.addDelaturs(this.solution).split(' ').length;
@@ -447,7 +447,8 @@
       for (let pos = 0; pos < master.length-1; pos++) {
         if (slave[pos] === master[pos] && master[pos+1] === undefined) {
           let moves = 0;
-          let posMatch = 0;
+          //TODO: Remove if not necessary
+          //let posMatch = 0;
           while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
             moves++;
           }
@@ -465,7 +466,8 @@
       for (let pos = 0; pos < master.length-1; pos++) {
         if (slave[pos] === master[pos] && master[pos+1] === undefined) {
           let moves = 0;
-          let posMatch = 0;
+          //TODO: Remove if not necessary
+          //remove let posMatch = 0;
           while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
             moves++;
           }

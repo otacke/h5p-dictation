@@ -121,9 +121,9 @@
     "description": "These options will let you control how the task behaves.",
     "fields": [
       {
-        "name": "repetitions",
+        "name": "tries",
         "type": "number",
-        "label": "Maximum repetitions",
+        "label": "Maximum tries",
         "description": "Will limit the number of times the samples for each sentence can be listened to.",
         "optional": true,
         "min": 1

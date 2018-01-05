@@ -32,7 +32,7 @@ H5P.Dictation = function (Audio, Question) {
 
     // Defaults
     this.config.behaviour.taskDescription = this.config.behaviour.taskDescription || '';
-    this.config.behaviour.repetitions = this.config.behaviour.repetitions || Infinity;
+    this.config.behaviour.tries = this.config.behaviour.tries || Infinity;
     this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
     this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
     this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
@@ -42,7 +42,7 @@ H5P.Dictation = function (Audio, Question) {
       that.sentences.push(new H5P.Dictation.Sentence({
         "sentence": element,
         "audioNotSupported": that.config.audioNotSupported,
-        "repetitions": that.config.behaviour.repetitions,
+        "tries": that.config.behaviour.tries,
         "ignorePunctuation": that.config.behaviour.ignorePunctuation
       }, that.contentId));
     });
