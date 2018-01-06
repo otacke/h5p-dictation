@@ -27,10 +27,30 @@
   display: flex;
   align-self: flex-start;
   padding-top: 0.25em;
+  padding-left: 0.25em;
   flex-grow: 1;
 }
 
-.h5p-dictation .h5p-audio-inner .h5p-audio-minimal-button.disabled {
+.h5p-dictation .h5p-audio-minimal-button {
+  border: none;
+  font-weight: normal;
+  padding: 0;
+  font-size: 1em;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+}
+
+.h5p-dictation .h5p-audio-minimal-button:before {
+  font-size: 0.8em;
+  vertical-align: bottom;
+}
+
+.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
+  font-size: 0.6em;
+}
+
+.h5p-dictation .h5p-audio-minimal-button.disabled {
   background: -webkit-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* IE10+ */
