@@ -19,7 +19,6 @@
   const BUTTON_SLOW = 'h5p-audio-minimal-slow';
   const BUTTON_NONE = 'h5p-audio-minimal-none';
 
-
   // score types
   const TYPE_ADDED = 'added';
   const TYPE_MISSING = 'missing';
@@ -60,8 +59,6 @@
     this.content = document.createElement('div');
     this.content.classList.add(CONTENT_WRAPPER);
 
-    // TODO: Could be put in one function.
-
     // Normal audio
     this.audio = this.createAudio(params.sentence.sample, params.audioNotSupported);
     this.content.appendChild(this.audio);
@@ -71,14 +68,17 @@
     else {
       this.button = this.audio.firstChild.firstChild;
     }
+
     // Alternative audio
-    this.audioAlternative = this.createAudio(params.sentence.sampleAlternative, params.audioNotSupported, true);
-    this.content.appendChild(this.audioAlternative);
-    if (this.audioAlternative.firstChild === null) {
-      this.audioAlternative.appendChild(this.getDummyButton());
-    }
-    else {
-      this.buttonAlternative = this.audioAlternative.firstChild.firstChild;
+    if (this.params.hasAlternatives === true) {
+      this.audioAlternative = this.createAudio(params.sentence.sampleAlternative, params.audioNotSupported, true);
+      this.content.appendChild(this.audioAlternative);
+      if (this.audioAlternative.firstChild === null) {
+        this.audioAlternative.appendChild(this.getDummyButton());
+      }
+      else {
+        this.buttonAlternative = this.audioAlternative.firstChild.firstChild;
+      }
     }
 
     // Text input field

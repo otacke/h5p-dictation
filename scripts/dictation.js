@@ -39,13 +39,21 @@ H5P.Dictation = function (Audio, Question) {
     this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
 
     this.sentences = [];
+
+    const hasAlternatives = this.config.sentences.map(function (sentence) {
+      return (sentence.sampleAlternative === undefined) ? false : true;
+    }).reduce(function (a, b) {
+      return a || b;
+    }, false);
+
     this.config.sentences.forEach(function (element) {
       that.sentences.push(new H5P.Dictation.Sentence({
         "sentence": element,
         "audioNotSupported": that.config.audioNotSupported,
         "tries": that.config.behaviour.tries,
         "triesAlternative": that.config.behaviour.triesAlternative,
-        "ignorePunctuation": that.config.behaviour.ignorePunctuation
+        "ignorePunctuation": that.config.behaviour.ignorePunctuation,
+        "hasAlternatives": hasAlternatives
       }, that.contentId));
     });
 
