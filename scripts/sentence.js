@@ -40,7 +40,8 @@
   Dictation.Sentence = function (params, id) {
     this.params = params;
     this.contentId = id;
-    this.triesLeft = params.tries;
+    this.maxTries = params.tries;
+    this.triesLeft = this.maxTries;
 
     this.solution = (!params.ignorePunctuation) ? params.sentence.text : this.stripPunctuation(params.sentence.text);
     this.mistakesMax = this.addDelaturs(this.solution).split(' ').length;
@@ -51,6 +52,8 @@
     // Normal audio
     this.audio = this.createAudio(params.sentence.sample, params.audioNotSupported);
     this.content.appendChild(this.audio);
+
+    this.button = this.audio.firstChild.firstChild;
 
     // TODO: Possibly 2nd sample with slower speed. H5P.Audio should be changed to use SVG instead of fonts
 
@@ -97,10 +100,9 @@
   Dictation.Sentence.prototype.handleTries = function () {
     this.triesLeft--;
     if (this.triesLeft === 0) {
-      const button = this.audio.firstChild.firstChild;
-      button.setAttribute('disabled', 'disabled');
+      this.button.setAttribute('disabled', 'disabled');
       // TODO: Check if there's a default look for disabled buttons within H5P
-      button.classList.add(DISABLED);
+      this.button.classList.add(DISABLED);
     }
   };
 
@@ -202,6 +204,7 @@
    */
   Dictation.Sentence.prototype.reset = function () {
     this.inputField.value = '';
+    this.triesLeft = this.maxTries;
   };
 
   /**
@@ -209,6 +212,8 @@
    */
   Dictation.Sentence.prototype.disable = function () {
     this.inputField.disabled = true;
+    this.button.setAttribute('disabled', 'disabled');
+    this.button.classList.add(DISABLED);
   };
 
   /**
@@ -216,6 +221,8 @@
    */
   Dictation.Sentence.prototype.enable = function () {
     this.inputField.disabled = false;
+    this.button.removeAttribute('disabled');
+    this.button.classList.remove(DISABLED);
   };
 
   /**
