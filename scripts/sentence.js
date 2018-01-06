@@ -12,7 +12,8 @@
   const INPUT_WRAPPER = 'h5p-input-wrapper';
   const INPUT_FIELD = 'h5p-text-input';
   const INPUT_SOLUTION = 'h5p-dictation-solution';
-  const HIDE = 'hide'; // TODO: rename?
+  const HIDE = 'hide';
+  const DISABLED = 'disabled';
 
   // score types
   const TYPE_ADDED = 'added';
@@ -54,9 +55,6 @@
     // Normal audio
 
     this.audio = this.createAudio(params.sentence.sample, params.audioNotSupported);
-    this.audio.addEventListener('click', function () {
-      that.handleTries();
-    });
 
     this.content.appendChild(this.audio);
 
@@ -100,12 +98,15 @@
   };
 
   /**
-   * Decrease the number of tries and hide button if necessary.
+   * Decrease the number of tries and disable button if necessary.
    */
   Dictation.Sentence.prototype.handleTries = function () {
     this.triesLeft--;
     if (this.triesLeft === 0) {
-      this.audio.classList.add(HIDE);
+      const button = this.audio.firstChild.firstChild;
+      button.setAttribute('disabled', 'disabled');
+      // TODO: Check if there's a default look for disabled buttons within H5P
+      button.classList.add(DISABLED);
     }
   };
 
@@ -186,6 +187,10 @@
     else {
       $audioWrapper.addClass('hide');
     }
+
+    audio.audio.addEventListener('ended', function () {
+      that.handleTries();
+    });
 
     return $audioWrapper.get(0);
   };
