@@ -4,8 +4,6 @@
 (function ($, Dictation, Audio) {
   'use strict';
 
-  // TODO: Comments
-
   // CSS Classes
   const CONTENT_WRAPPER = 'h5p-sentence';
   const AUDIO_WRAPPER = 'h5p-dictation-audio-wrapper';
@@ -40,7 +38,6 @@
    * @param {number} id - Content ID.
    */
   Dictation.Sentence = function (params, id) {
-    let that = this;
     this.params = params;
     this.contentId = id;
     this.triesLeft = params.tries;
@@ -48,17 +45,14 @@
     this.solution = (!params.ignorePunctuation) ? params.sentence.text : this.stripPunctuation(params.sentence.text);
     this.mistakesMax = this.addDelaturs(this.solution).split(' ').length;
 
-    // TODO: Sanitization
     this.content = document.createElement('div');
     this.content.classList.add(CONTENT_WRAPPER);
 
     // Normal audio
-
     this.audio = this.createAudio(params.sentence.sample, params.audioNotSupported);
-
     this.content.appendChild(this.audio);
 
-    // TODO: Possibly 2nd sample with slower speed
+    // TODO: Possibly 2nd sample with slower speed. H5P.Audio should be changed to use SVG instead of fonts
 
     // Text input field
     this.inputField = document.createElement('input');
@@ -68,7 +62,7 @@
     this.inputSolution.classList.add(INPUT_SOLUTION);
     this.inputSolution.classList.add(HIDE);
 
-    let inputWrapper = document.createElement('div');
+    const inputWrapper = document.createElement('div');
     inputWrapper.classList.add(INPUT_WRAPPER);
     inputWrapper.appendChild(this.inputField);
     inputWrapper.appendChild(this.inputSolution);
@@ -164,14 +158,14 @@
    * @return {object} DOM element for the sample.
    */
   Dictation.Sentence.prototype.createAudio = function (sample, audioNotSupported) {
-    let that = this;
+    const that = this;
     let audio;
-    let $audioWrapper = $('<div>', {
+    const $audioWrapper = $('<div>', {
       'class': AUDIO_WRAPPER
     });
 
     if (sample !== undefined) {
-      let audioDefaults = {
+      const audioDefaults = {
         files: sample,
         audioNotSupported: audioNotSupported
       };
@@ -278,18 +272,16 @@
    */
   Dictation.Sentence.prototype.computeResults = function() {
     // TODO: strip punctuation (still TODO?)
-    let wordsSolution = this.addDelaturs(this.getCorrectText()).split(' ');
+    const wordsSolution = this.addDelaturs(this.getCorrectText()).split(' ');
     let answer = this.getText();
     if (this.params.ignorePunctuation) {
       answer = this.stripPunctuation(answer);
     }
-    let wordsAnswer = this.addDelaturs(answer).split(' ');
+    const wordsAnswer = this.addDelaturs(answer).split(' ');
+    const aligned = this.alignWords(wordsSolution, wordsAnswer);
 
-    let aligned = this.alignWords(wordsSolution, wordsAnswer);
-
-    let spaces = this.getSpaces(aligned.words1);
-
-    let words = [];
+    const spaces = this.getSpaces(aligned.words1);
+    const words = [];
 
     let score = [];
     score[TYPE_ADDED] = 0;
@@ -299,8 +291,8 @@
     score[TYPE_MATCH] = 0;
 
     for (let i = 0; i < aligned.words1.length; i++) {
-      let solution = aligned.words1[i];
-      let answer = aligned.words2[i];
+      const solution = aligned.words1[i];
+      const answer = aligned.words2[i];
       let type = '';
 
       if (solution === undefined) {
@@ -327,7 +319,7 @@
       });
     }
 
-    let output = {
+    const output = {
       "score": {
         "added": score[TYPE_ADDED],
         "missing": score[TYPE_MISSING],
@@ -340,7 +332,7 @@
       'spaces': spaces
     };
 
-    // TODO: Remove when done.
+    // TODO: Remove when done and return directly
     console.log(output);
     return output;
   };
@@ -356,7 +348,7 @@
    * @return {object} Object containing two new arrays.
    */
   Dictation.Sentence.prototype.alignWords = function (words1, words2) {
-    let align = function (words1, words2) {
+    const align = function (words1, words2) {
       words2 = words2.map(function (word) {
         return (word === '') ? undefined : word;
       });
@@ -370,7 +362,7 @@
       master = master.concat(Array.apply(null, Array(words2.length)));
 
       // Matches in answer
-      let slave = Array.apply(null, Array(master.length));
+      const slave = Array.apply(null, Array(master.length));
 
       /*
        * We let all words of the answer slide the solution array from left to right one by one.
@@ -379,7 +371,7 @@
        */
       let floor = 0;
       for (let i = 0; i < words2.length; i++) {
-        let currentAnswer = words2[i];
+        const currentAnswer = words2[i];
         for (let pos = master.length-1; pos >= floor; pos--) {
           if (currentAnswer !== undefined && master[pos] === currentAnswer && words2.slice(i+1).indexOf(currentAnswer) === -1 || pos === floor) {
             slave[pos] = currentAnswer;
@@ -394,7 +386,7 @@
        * as far as possible looking for a match just in case they slided too far
        */
       for (let pos = slave.length-1; pos >= 0; pos--) {
-        let currentWord = slave[pos];
+        const currentWord = slave[pos];
 
         if (currentWord !== undefined && currentWord !== master[pos]) {
           let moves = 0;
@@ -414,7 +406,7 @@
        * Now we slide the remainders from left to right to finally deal with typos
        */
       for (let pos = 0; pos < slave.length; pos++) {
-        let currentWord = slave[pos];
+        const currentWord = slave[pos];
 
         if (currentWord !== undefined && currentWord !== master[pos]) {
           let moves = 0;
@@ -441,7 +433,7 @@
       // Finally we can simply interpret adjacent missing/added words as wrong
       for (let pos = 0; pos < master.length-1; pos++) {
         // We're assuming a left-swipe as previous operation here
-        if(master[pos] === undefined && slave[pos+1] === undefined) {
+        if (master[pos] === undefined && slave[pos+1] === undefined) {
           master[pos] = master[pos+1];
           master.splice(pos+1, 1);
           slave.splice(pos+1, 1);
@@ -452,8 +444,7 @@
       for (let pos = 0; pos < master.length-1; pos++) {
         if (slave[pos] === master[pos] && master[pos+1] === undefined) {
           let moves = 0;
-          //TODO: Remove if not necessary
-          //let posMatch = 0;
+
           while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
             moves++;
           }
@@ -471,8 +462,7 @@
       for (let pos = 0; pos < master.length-1; pos++) {
         if (slave[pos] === master[pos] && master[pos+1] === undefined) {
           let moves = 0;
-          //TODO: Remove if not necessary
-          //remove let posMatch = 0;
+
           while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
             moves++;
           }
@@ -501,7 +491,7 @@
     };
 
     let aligned1 = align(words1, words2);
-    let aligned2 = align(words1.reverse(), words2.reverse());
+    const aligned2 = align(words1.reverse(), words2.reverse());
 
     if (count(aligned2) > count(aligned1)) {
       aligned1 = {"words1": aligned2.words1.reverse(), "words2": aligned2.words2.reverse()};
