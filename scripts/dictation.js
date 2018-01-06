@@ -147,11 +147,12 @@ H5P.Dictation = function (Audio, Question) {
     }, 0);
 
     mistakes = Math.min(mistakes, this.maxMistakes);
+
     let percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakes) / this.maxMistakes);
 
     // TODO: We could offer replacement variables here, need to be documented in semantics
     let textScore = H5P.Question.determineOverallFeedback(
-        this.config.overallFeedback, Math.round(percentageMistakes / this.percentageMastering));
+        this.config.overallFeedback, percentageMistakes / this.percentageMastering);
 
     this.setFeedback(
       'You have made ' + mistakes + ' mistakes. ' + textScore, // TODO: make feedback parameter or remove
