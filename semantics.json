@@ -42,8 +42,16 @@
           "name": "sample",
           "type": "audio",
           "label": "Sound sample",
-          "description": "Sentence in normal speed",
+          "description": "Sentence spoken in normal speed",
           "importance": "medium"
+        },
+        {
+          "name": "sampleAlternative",
+          "type": "audio",
+          "label": "Sound sample slow",
+          "description": "Sentence spoken in slow speed",
+          "importance": "medium",
+          "optional": true
         },
         {
           "name": "text",
@@ -125,6 +133,14 @@
         "type": "number",
         "label": "Maximum tries",
         "description": "Will limit the number of times the samples for each sentence can be listened to.",
+        "optional": true,
+        "min": 1
+      },
+      {
+        "name": "triesAlternative",
+        "type": "number",
+        "label": "Maximum tries for slow speed",
+        "description": "Will limit the number of times the slow samples for each sentence can be listened to.",
         "optional": true,
         "min": 1
       },

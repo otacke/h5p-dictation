@@ -12,6 +12,13 @@
   const INPUT_SOLUTION = 'h5p-dictation-solution';
   const HIDE = 'hide';
   const DISABLED = 'disabled';
+  const INNER_CONTAINER = 'h5p-audio-inner';
+  const BUTTON = 'h5p-audio-minimal-button';
+  const BUTTON_PLAY = 'h5p-audio-minimal-play';
+  const BUTTON_PAUSE = 'h5p-audio-minimal-pause';
+  const BUTTON_SLOW = 'h5p-audio-minimal-slow';
+  const BUTTON_NONE = 'h5p-audio-minimal-none';
+
 
   // score types
   const TYPE_ADDED = 'added';
@@ -30,10 +37,12 @@
   /**
    * Constructor.
    * @param {object} params - Parameters.
-   * @param {number} params.tries - Number of attempts.
+   * @param {number} params.tries - Number of attempts for sample.
+   * @param {number} params.triesAlternative - Number of attempts for alternative sample.
    * @param {boolean} params.ignorePunctuation - If true, punctuation is ignored.
    * @param {string} params.sentence.text - Correct answer.
-   * @param {string} params.sentence.sample - Path to sound samples.
+   * @param {string} params.sentence.sample - Path to sound sample.
+   * @param {string} params.sentence.sampleAlternatives - Path to alternative sound sample.
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
    * @param {number} id - Content ID.
    */
@@ -41,7 +50,9 @@
     this.params = params;
     this.contentId = id;
     this.maxTries = params.tries;
+    this.maxTriesAlternative = params.triesAlternative;
     this.triesLeft = this.maxTries;
+    this.triesLeftAlternative = this.maxTriesAlternative;
 
     this.solution = (!params.ignorePunctuation) ? params.sentence.text : this.stripPunctuation(params.sentence.text);
     this.mistakesMax = this.addDelaturs(this.solution).split(' ').length;
@@ -49,13 +60,26 @@
     this.content = document.createElement('div');
     this.content.classList.add(CONTENT_WRAPPER);
 
+    // TODO: Could be put in one function.
+
     // Normal audio
     this.audio = this.createAudio(params.sentence.sample, params.audioNotSupported);
     this.content.appendChild(this.audio);
-
-    this.button = this.audio.firstChild.firstChild;
-
-    // TODO: Possibly 2nd sample with slower speed. H5P.Audio should be changed to use SVG instead of fonts
+    if (this.audio.firstChild === null) {
+      this.audio.appendChild(this.getDummyButton());
+    }
+    else {
+      this.button = this.audio.firstChild.firstChild;
+    }
+    // Alternative audio
+    this.audioAlternative = this.createAudio(params.sentence.sampleAlternative, params.audioNotSupported, true);
+    this.content.appendChild(this.audioAlternative);
+    if (this.audioAlternative.firstChild === null) {
+      this.audioAlternative.appendChild(this.getDummyButton());
+    }
+    else {
+      this.buttonAlternative = this.audioAlternative.firstChild.firstChild;
+    }
 
     // Text input field
     this.inputField = document.createElement('input');
@@ -70,6 +94,22 @@
     inputWrapper.appendChild(this.inputField);
     inputWrapper.appendChild(this.inputSolution);
     this.content.appendChild(inputWrapper);
+  };
+
+  /**
+   * Get DOM for dummy button.
+   * @return {object} DOM for dummy button.
+   */
+  Dictation.Sentence.prototype.getDummyButton = function () {
+    const inner2 = document.createElement('div');
+    inner2.classList.add(BUTTON);
+    inner2.classList.add(BUTTON_NONE);
+
+    const inner = document.createElement('div');
+    inner.classList.add(INNER_CONTAINER);
+    inner.appendChild(inner2);
+
+    return inner;
   };
 
   /**
@@ -97,12 +137,22 @@
   /**
    * Decrease the number of tries and disable button if necessary.
    */
-  Dictation.Sentence.prototype.handleTries = function () {
-    this.triesLeft--;
-    if (this.triesLeft === 0) {
-      this.button.setAttribute('disabled', 'disabled');
-      // TODO: Check if there's a default look for disabled buttons within H5P
-      this.button.classList.add(DISABLED);
+  Dictation.Sentence.prototype.handleTries = function (slow) {
+    if (slow === true) {
+      this.triesLeftAlternative--;
+      if (this.triesLeftAlternative === 0) {
+        this.buttonAlternative.setAttribute('disabled', 'disabled');
+        // TODO: Check if there's a default look for disabled buttons within H5P
+        this.buttonAlternative.classList.add(DISABLED);
+      }
+    }
+    else {
+      this.triesLeft--;
+      if (this.triesLeft === 0) {
+        this.button.setAttribute('disabled', 'disabled');
+        // TODO: Check if there's a default look for disabled buttons within H5P
+        this.button.classList.add(DISABLED);
+      }
     }
   };
 
@@ -159,7 +209,7 @@
    * @param {string} audioNotSupported - Text to show if audio now supported.
    * @return {object} DOM element for the sample.
    */
-  Dictation.Sentence.prototype.createAudio = function (sample, audioNotSupported) {
+  Dictation.Sentence.prototype.createAudio = function (sample, audioNotSupported, slow) {
     const that = this;
     let audio;
     const $audioWrapper = $('<div>', {
@@ -175,18 +225,33 @@
       audio = new Audio(audioDefaults, that.contentId);
       audio.attach($audioWrapper);
 
+      if (slow === true) {
+        audio.$audioButton.removeClass(BUTTON_PLAY).addClass(BUTTON_SLOW);
+
+        audio.audio.addEventListener('play', function () {
+          audio.$audioButton.removeClass(BUTTON_SLOW).addClass(BUTTON_PAUSE);
+        });
+
+        audio.audio.addEventListener('pause', function () {
+          audio.$audioButton.removeClass(BUTTON_PAUSE).addClass(BUTTON_SLOW);
+        });
+
+        audio.audio.addEventListener('ended', function () {
+          audio.$audioButton.removeClass(BUTTON_PAUSE).addClass(BUTTON_SLOW);
+          that.handleTries(true);
+        });
+      }
+      else {
+        audio.audio.addEventListener('ended', function () {
+          that.handleTries();
+        });
+      }
+
       // Have to stop, else audio will take up a socket pending forever in chrome.
       if (audio.audio && audio.audio.preload) {
         audio.audio.preload = 'none';
       }
     }
-    else {
-      $audioWrapper.addClass('hide');
-    }
-
-    audio.audio.addEventListener('ended', function () {
-      that.handleTries();
-    });
 
     return $audioWrapper.get(0);
   };
@@ -205,6 +270,7 @@
   Dictation.Sentence.prototype.reset = function () {
     this.inputField.value = '';
     this.triesLeft = this.maxTries;
+    this.triesLeftAlternative = this.maxTriesAlternative;
   };
 
   /**
@@ -212,8 +278,14 @@
    */
   Dictation.Sentence.prototype.disable = function () {
     this.inputField.disabled = true;
-    this.button.setAttribute('disabled', 'disabled');
-    this.button.classList.add(DISABLED);
+    if (this.button !== undefined) {
+      this.button.setAttribute('disabled', 'disabled');
+      this.button.classList.add(DISABLED);
+    }
+    if (this.buttonAlternative !== undefined) {
+      this.buttonAlternative.setAttribute('disabled', 'disabled');
+      this.buttonAlternative.classList.add(DISABLED);
+    }
   };
 
   /**
@@ -221,8 +293,14 @@
    */
   Dictation.Sentence.prototype.enable = function () {
     this.inputField.disabled = false;
-    this.button.removeAttribute('disabled');
-    this.button.classList.remove(DISABLED);
+    if (this.button !== undefined) {
+      this.button.removeAttribute('disabled');
+      this.button.classList.remove(DISABLED);
+    }
+    if (this.buttonAlternative !== undefined) {
+      this.buttonAlternative.removeAttribute('disabled');
+      this.buttonAlternative.classList.remove(DISABLED);
+    }
   };
 
   /**

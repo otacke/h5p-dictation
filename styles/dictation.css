@@ -46,8 +46,21 @@
   vertical-align: bottom;
 }
 
+.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-none {
+  background: none;
+  cursor: default;
+}
+
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
   font-size: 0.6em;
+}
+
+.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-slow:before {
+  content: "\f0e4";
+}
+
+.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
+  content: "\f04c";
 }
 
 .h5p-dictation .h5p-audio-minimal-button.disabled {

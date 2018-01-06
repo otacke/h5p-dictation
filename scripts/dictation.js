@@ -33,6 +33,7 @@ H5P.Dictation = function (Audio, Question) {
     // Defaults
     this.config.behaviour.taskDescription = this.config.behaviour.taskDescription || '';
     this.config.behaviour.tries = this.config.behaviour.tries || Infinity;
+    this.config.behaviour.triesAlternative = this.config.behaviour.triesAlternative || Infinity;
     this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
     this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
     this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
@@ -43,6 +44,7 @@ H5P.Dictation = function (Audio, Question) {
         "sentence": element,
         "audioNotSupported": that.config.audioNotSupported,
         "tries": that.config.behaviour.tries,
+        "triesAlternative": that.config.behaviour.triesAlternative,
         "ignorePunctuation": that.config.behaviour.ignorePunctuation
       }, that.contentId));
     });
