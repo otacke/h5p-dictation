@@ -34,7 +34,7 @@ H5P.Dictation = function (Audio, Question) {
     this.config.behaviour.taskDescription = this.config.behaviour.taskDescription || '';
     this.config.behaviour.tries = this.config.behaviour.tries || Infinity;
     this.config.behaviour.triesAlternative = this.config.behaviour.triesAlternative || Infinity;
-    this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
+    this.config.behaviour.typoFactor = parseInt(this.config.behaviour.typoFactor) / 100;
     this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
     this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
 
@@ -166,6 +166,8 @@ H5P.Dictation = function (Audio, Question) {
       .map(function (element) {
         return element.score.match;
       }).reduce(sum, 0);
+
+    console.log('TYPOFACTOR: ', that.config.behaviour.typoFactor);
 
     let mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
     mistakesTotal = Math.min(mistakesTotal, this.maxMistakes);
