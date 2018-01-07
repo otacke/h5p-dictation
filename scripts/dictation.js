@@ -17,7 +17,7 @@ H5P.Dictation = function (Audio, Question) {
    * @param {Object} contentData - contentData.
    */
   function Dictation (config, contentId, contentData) {
-    let that = this;
+    const that = this;
     // Initialize
     if (!config) {
       return;
@@ -76,7 +76,7 @@ H5P.Dictation = function (Audio, Question) {
     this.setIntroduction(this.config.taskDescription);
 
     // Build content
-    let content = document.createElement('div');
+    const content = document.createElement('div');
     this.sentences.forEach(function (element) {
       content.appendChild(element.getContent());
     });
@@ -92,7 +92,7 @@ H5P.Dictation = function (Audio, Question) {
    * Add all the buttons that shall be passed to H5P.Question
    */
   Dictation.prototype.addButtons = function () {
-    let that = this;
+    const that = this;
 
     // Show solution button
     that.addButton('show-solution', that.config.showSolution, function () {
@@ -129,7 +129,7 @@ H5P.Dictation = function (Audio, Question) {
    * TODO: Refactoring.
    */
   Dictation.prototype.showEvaluation = function () {
-    let that = this;
+    const that = this;
     this.results = [];
     this.sentences.forEach(function (element) {
       let currentResult = element.computeResults();
@@ -137,39 +137,39 @@ H5P.Dictation = function (Audio, Question) {
       element.disable();
     });
 
-    let sum = function (a, b) {
+    const sum = function (a, b) {
       return a + b;
     };
 
-    let mistakesAdded = this.results.map(function (element) {
+    const mistakesAdded = this.results.map(function (element) {
         return element.score.added;
     }).reduce(sum, 0);
 
-    let mistakesMissing = this.results.map(function (element) {
+    const mistakesMissing = this.results.map(function (element) {
         return element.score.missing;
     }).reduce(sum, 0);
 
-    let mistakesWrong = this.results.map(function (element) {
+    const mistakesWrong = this.results.map(function (element) {
         return element.score.wrong;
     }).reduce(sum, 0);
 
-    let mistakesTypo = this.results.map(function (element) {
+    const mistakesTypo = this.results.map(function (element) {
         return element.score.typo;
     }).reduce(sum, 0);
 
     let mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
     mistakesTotal = Math.min(mistakesTotal, this.maxMistakes);
 
-    let percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakesTotal) / this.maxMistakes);
+    const percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakesTotal) / this.maxMistakes);
 
-    let generalFeedback = (this.config.generalFeedback || '')
+    const generalFeedback = (this.config.generalFeedback || '')
       .replace('@added', mistakesAdded)
       .replace('@missing', mistakesMissing)
       .replace('@wrong', mistakesWrong)
       .replace('@typo', mistakesTypo)
       .replace('@total', mistakesTotal);
 
-    let textScore = H5P.Question.determineOverallFeedback(
+    const textScore = H5P.Question.determineOverallFeedback(
         this.config.overallFeedback, percentageMistakes / this.percentageMastering);
 
     this.setFeedback(
@@ -214,8 +214,8 @@ H5P.Dictation = function (Audio, Question) {
    */
   Dictation.prototype.showSolution = function () {
     // TODO: Should get the DOM to be shown
-    let that = this;
-    let solutions = this.buildSolutions(this.results);
+    const that = this;
+    const solutions = this.buildSolutions(this.results);
     solutions.forEach(function (solution, index) {
       that.sentences[index].showSolution(solution);
     });
@@ -244,12 +244,12 @@ H5P.Dictation = function (Audio, Question) {
    * @return {array} Array of solutions.
    */
   Dictation.prototype.buildSolutions = function (results) {
-    let output = [];
+    const output = [];
     results.forEach(function (result) {
       let sentence = '';
       result.words.forEach(function (word, index) {
         // TODO: This can probably be done more elegant ...
-        let spacer = (result.spaces[index]) ? ' h5p-spacer' : '';
+        const spacer = (result.spaces[index]) ? ' h5p-spacer' : '';
         if (word.type === 'wrong' || word.type === 'missing' || word.type === 'added') {
           sentence += '<span class="h5p-wrapper-wrong' + spacer + '">';
         }
@@ -301,7 +301,7 @@ H5P.Dictation = function (Audio, Question) {
    * @return {H5P.XAPIEvent} Event template.
    */
   Dictation.prototype.createDictationXAPIEvent = function (verb) {
-    let xAPIEvent = this.createXAPIEventTemplate(verb);
+    const xAPIEvent = this.createXAPIEventTemplate(verb);
     this.extend(
       xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
       this.getxAPIDefinition());
@@ -313,7 +313,7 @@ H5P.Dictation = function (Audio, Question) {
    * @return {object} XAPI definition.
    */
   Dictation.prototype.getxAPIDefinition = function () {
-    let definition = {};
+    const definition = {};
     definition.name = {'en-US': 'Dictation'};
     definition.description = {'en-US': this.config.taskDescription};
     definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
@@ -331,8 +331,8 @@ H5P.Dictation = function (Audio, Question) {
    * @return {object} Merged objects.
    */
   Dictation.prototype.extend = function () {
-    for(var i = 1; i < arguments.length; i++) {
-      for(var key in arguments[i]) {
+    for (let i = 1; i < arguments.length; i++) {
+      for (let key in arguments[i]) {
         if (arguments[i].hasOwnProperty(key)) {
           if (typeof arguments[0][key] === 'object' && typeof arguments[i][key] === 'object') {
             this.extend(arguments[0][key], arguments[i][key]);
