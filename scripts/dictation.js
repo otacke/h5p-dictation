@@ -137,25 +137,43 @@ H5P.Dictation = function (Audio, Question) {
       element.disable();
     });
 
-    let mistakes = this.results.map(function (element) {
-      return element.score.added +
-        element.score.missing +
-        element.score.wrong +
-        that.config.behaviour.typoFactor * element.score.typo;
-    }).reduce(function (a, b) {
+    let sum = function (a, b) {
       return a + b;
-    }, 0);
+    };
 
-    mistakes = Math.min(mistakes, this.maxMistakes);
+    let mistakesAdded = this.results.map(function (element) {
+        return element.score.added;
+    }).reduce(sum, 0);
 
-    let percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakes) / this.maxMistakes);
+    let mistakesMissing = this.results.map(function (element) {
+        return element.score.missing;
+    }).reduce(sum, 0);
 
-    // TODO: We could offer replacement variables here, need to be documented in semantics
+    let mistakesWrong = this.results.map(function (element) {
+        return element.score.wrong;
+    }).reduce(sum, 0);
+
+    let mistakesTypo = this.results.map(function (element) {
+        return element.score.typo;
+    }).reduce(sum, 0);
+
+    let mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
+    mistakesTotal = Math.min(mistakesTotal, this.maxMistakes);
+
+    let percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakesTotal) / this.maxMistakes);
+
+    let generalFeedback = (this.config.generalFeedback || '')
+      .replace('@added', mistakesAdded)
+      .replace('@missing', mistakesMissing)
+      .replace('@wrong', mistakesWrong)
+      .replace('@typo', mistakesTypo)
+      .replace('@total', mistakesTotal);
+
     let textScore = H5P.Question.determineOverallFeedback(
         this.config.overallFeedback, percentageMistakes / this.percentageMastering);
 
     this.setFeedback(
-      'You have made ' + mistakes + ' mistakes. ' + textScore, // TODO: make feedback parameter or remove
+      (generalFeedback + ' ' + textScore).trim(),
       Math.round(percentageMistakes / this.percentageMastering * 100),
       this.percentageMastering / this.percentageMastering * 100);
 
