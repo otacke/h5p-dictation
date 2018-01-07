@@ -117,25 +117,32 @@
 }
 
 /* Solution markers */
-.h5p-dictation .h5p-added {
+.h5p-dictation .h5p-answer-added,
+.h5p-dictation .h5p-answer-wrong,
+.h5p-dictation .h5p-answer-typo {
   text-decoration: line-through;
 }
-.h5p-dictation .h5p-missing {
+.h5p-dictation .h5p-answer-missing,
+.h5p-dictation .h5p-answer-match {
 }
-.h5p-dictation .h5p-wrong {
+.h5p-dictation .h5p-solution-added,
+.h5p-dictation .h5p-solution-wrong,
+.h5p-dictation .h5p-solution-typo,
+.h5p-dictation .h5p-solution-missing,
+.h5p-dictation .h5p-solution-match {
 }
-.h5p-dictation .h5p-typo {
-}
-.h5p-dictation .h5p-match {
-}
-.h5p-dictation .h5p-wrapper-wrong {
+.h5p-dictation .h5p-wrapper-wrong,
+.h5p-dictation .h5p-wrapper-missing,
+.h5p-dictation .h5p-wrapper-added {
   background-color: #f7d0d0;
   border: 1px solid #f7d0d0;
   color: #b71c1c;
   margin-top: 0.1875em;
   margin-bottom: 0.1875em;
 }
-.h5p-dictation .h5p-wrapper-wrong:after {
+.h5p-dictation .h5p-wrapper-wrong:after,
+.h5p-dictation .h5p-wrapper-missing:after,
+.h5p-dictation .h5p-wrapper-added:after {
   padding-left: 0.25em;
   right: 0.5em;
   top: 0;

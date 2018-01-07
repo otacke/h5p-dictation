@@ -132,7 +132,7 @@ H5P.Dictation = function (Audio, Question) {
     const that = this;
     this.results = [];
     this.sentences.forEach(function (element) {
-      let currentResult = element.computeResults();
+      const currentResult = element.computeResults();
       that.results.push(currentResult);
       element.disable();
     });
@@ -141,21 +141,26 @@ H5P.Dictation = function (Audio, Question) {
       return a + b;
     };
 
-    const mistakesAdded = this.results.map(function (element) {
+    const mistakesAdded = this.results
+      .map(function (element) {
         return element.score.added;
-    }).reduce(sum, 0);
+      })
+      .reduce(sum, 0);
 
-    const mistakesMissing = this.results.map(function (element) {
+    const mistakesMissing = this.results
+      .map(function (element) {
         return element.score.missing;
-    }).reduce(sum, 0);
+      }).reduce(sum, 0);
 
-    const mistakesWrong = this.results.map(function (element) {
+    const mistakesWrong = this.results
+      .map(function (element) {
         return element.score.wrong;
-    }).reduce(sum, 0);
+      }).reduce(sum, 0);
 
-    const mistakesTypo = this.results.map(function (element) {
+    const mistakesTypo = this.results
+      .map(function (element) {
         return element.score.typo;
-    }).reduce(sum, 0);
+      }).reduce(sum, 0);
 
     let mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
     mistakesTotal = Math.min(mistakesTotal, this.maxMistakes);
@@ -170,7 +175,7 @@ H5P.Dictation = function (Audio, Question) {
       .replace('@total', mistakesTotal);
 
     const textScore = H5P.Question.determineOverallFeedback(
-        this.config.overallFeedback, percentageMistakes / this.percentageMastering);
+      this.config.overallFeedback, percentageMistakes / this.percentageMastering);
 
     this.setFeedback(
       (generalFeedback + ' ' + textScore).trim(),
@@ -213,7 +218,6 @@ H5P.Dictation = function (Audio, Question) {
    * Show the solution.
    */
   Dictation.prototype.showSolution = function () {
-    // TODO: Should get the DOM to be shown
     const that = this;
     const solutions = this.buildSolutions(this.results);
     solutions.forEach(function (solution, index) {
@@ -239,58 +243,37 @@ H5P.Dictation = function (Audio, Question) {
   };
 
   /**
-   * Build the solutions.
-   * @param {object} results - Results.
-   * @return {array} Array of solutions.
+   * Build the solution for one sentence's results.
+   * @param {Object} results - Results.
+   * @param {Object} results.score - Scores.
+   * @param {number} results.score.added - Number of added words added.
+   * @param {number} results.score.missing - Number of words missing.
+   * @param {number} results.score.typo - Number of words with typing errors.
+   * @param {number} results.score.wrong - Number of wrong words.
+   * @param {number} results.score.match - Number of mathes.
+   * @param {Object[]} results.words - Words.
+   * @param {string} results.words[].answer - Answer given.
+   * @param {string} results.words[].solution - Correct word.
+   * @param {string} results.words[].type - Type of mistake or match.
+   * @param {Boolean[]} results.spaces - Spaces for gaps between words.
+   * @return {Array} Array of solutions.
    */
   Dictation.prototype.buildSolutions = function (results) {
     const output = [];
     results.forEach(function (result) {
-      let sentence = '';
+      let correction = '';
       result.words.forEach(function (word, index) {
-        // TODO: This can probably be done more elegant ...
         const spacer = (result.spaces[index]) ? ' h5p-spacer' : '';
-        if (word.type === 'wrong' || word.type === 'missing' || word.type === 'added') {
-          sentence += '<span class="h5p-wrapper-wrong' + spacer + '">';
+        correction += '<span class="h5p-wrapper-' + word.type + spacer + '">';
+        if (word.type === 'wrong' || word.type === 'added' || word.type === 'typo') {
+          correction += '<span class="h5p-answer-' + word.type + '">' + word.answer + '</span>';
         }
-        else {
-          sentence += '<span class="h5p-wrapper-' + word.type + spacer + '">';
+        if (word.type !== 'added') {
+          correction += '<span class="h5p-solution-' + word.type +'">' + word.solution + '</span>';
         }
-
-        if (word.type === 'wrong') {
-          sentence += '<span class="h5p-' + 'added' +'">';
-          sentence += word.answer;
-          sentence += '</span>';
-          sentence += '<span class="h5p-' + 'wrong' +'">';
-          sentence += word.solution;
-          sentence += '</span>';
-        }
-        if (word.type === 'added') {
-          sentence += '<span class="h5p-' + 'added' +'">';
-          sentence += word.answer;
-          sentence += '</span>';
-        }
-        if (word.type === 'missing') {
-          sentence += '<span class="h5p-' + 'missing' +'">';
-          sentence += word.solution;
-          sentence += '</span>';
-        }
-        if (word.type === 'typo') {
-          sentence += '<span class="h5p-' + 'added' +'">';
-          sentence += word.answer;
-          sentence += '</span>';
-          sentence += '<span class="h5p-' + 'typo' +'">';
-          sentence += word.solution;
-          sentence += '</span>';
-        }
-        if (word.type === 'match') {
-          sentence += '<span class="h5p-' + 'match' +'">';
-          sentence += word.solution;
-          sentence += '</span>';
-        }
-        sentence += '</span>';
+        correction += '</span>';
       });
-      output.push(sentence);
+      output.push(correction);
     });
     return output;
   };
