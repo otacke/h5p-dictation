@@ -162,6 +162,11 @@ H5P.Dictation = function (Audio, Question) {
         return element.score.typo;
       }).reduce(sum, 0);
 
+    const matches = this.results
+      .map(function (element) {
+        return element.score.match;
+      }).reduce(sum, 0);
+
     let mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
     mistakesTotal = Math.min(mistakesTotal, this.maxMistakes);
 
@@ -172,7 +177,8 @@ H5P.Dictation = function (Audio, Question) {
       .replace('@missing', mistakesMissing)
       .replace('@wrong', mistakesWrong)
       .replace('@typo', mistakesTypo)
-      .replace('@total', mistakesTotal);
+      .replace('@total', mistakesTotal)
+      .replace('@matches', matches);
 
     const textScore = H5P.Question.determineOverallFeedback(
       this.config.overallFeedback, percentageMistakes / this.percentageMastering);

@@ -208,6 +208,15 @@
     ]
   },
   {
+    "name": "generalFeedback",
+    "type": "text",
+    "label": "General feedback",
+    "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+    "importance": "low",
+    "default": "You have made @total mistake(s).",
+    "common": true
+  },
+  {
     "name": "checkAnswer",
     "type": "text",
     "label": "Text for \"Check\" button",
