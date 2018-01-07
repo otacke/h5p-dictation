@@ -67,6 +67,7 @@
   background: -webkit-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* IE10+ */
+  color: #e9e9e4;
 }
 
 .h5p-dictation .h5p-dictation-solution {
