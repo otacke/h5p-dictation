@@ -167,8 +167,6 @@ H5P.Dictation = function (Audio, Question) {
         return element.score.match;
       }).reduce(sum, 0);
 
-    console.log('TYPOFACTOR: ', that.config.behaviour.typoFactor);
-
     let mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
     mistakesTotal = Math.min(mistakesTotal, this.maxMistakes);
 
