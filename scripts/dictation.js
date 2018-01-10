@@ -167,10 +167,10 @@ H5P.Dictation = function (Audio, Question) {
         return element.score.match;
       }).reduce(sum, 0);
 
-    let mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
-    mistakesTotal = Math.min(mistakesTotal, this.maxMistakes);
+    const mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
+    const mistakesTrimmed = Math.min(mistakesTotal, this.maxMistakes);
 
-    const percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakesTotal) / this.maxMistakes);
+    const percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakesTrimmed) / this.maxMistakes);
 
     const generalFeedback = (this.config.generalFeedback || '')
       .replace('@added', mistakesAdded)
