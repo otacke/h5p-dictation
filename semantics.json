@@ -159,19 +159,19 @@
         "description": "Determine to which extend typing errors count as a mistake.",
         "options": [
             {
-              "value": 100,
+              "value": "100",
               "label": "100 %"
             },
             {
-              "value": 50,
+              "value": "50",
               "label": "50 %"
             },
             {
-              "value": 0,
+              "value": "0",
               "label": "0 %"
             }
           ],
-        "default": "50 %"
+        "default": "100 %"
       },
       {
         "name": "mistakesPassing",
