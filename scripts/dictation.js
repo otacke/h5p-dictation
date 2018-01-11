@@ -34,7 +34,7 @@ H5P.Dictation = function (Audio, Question) {
     this.config.behaviour.taskDescription = this.config.behaviour.taskDescription || '';
     this.config.behaviour.tries = this.config.behaviour.tries || Infinity;
     this.config.behaviour.triesAlternative = this.config.behaviour.triesAlternative || Infinity;
-    this.config.behaviour.typoFactor = parseInt(this.config.behaviour.typoFactor) / 100;
+    this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
     this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
     this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
 
@@ -225,10 +225,12 @@ H5P.Dictation = function (Audio, Question) {
    */
   Dictation.prototype.showSolution = function () {
     const that = this;
+
     const solutions = this.buildSolutions(this.results);
     solutions.forEach(function (solution, index) {
       that.sentences[index].showSolution(solution);
     });
+
     that.trigger('resize');
   };
 
@@ -265,19 +267,34 @@ H5P.Dictation = function (Audio, Question) {
    * @return {Array} Array of solutions.
    */
   Dictation.prototype.buildSolutions = function (results) {
+    // TODO: Refactor
+    // TODO: Fix size of text moving
+
     const output = [];
     results.forEach(function (result) {
-      let correction = '';
+      let correction = document.createElement('span');
       result.words.forEach(function (word, index) {
-        const spacer = (result.spaces[index]) ? ' h5p-spacer' : '';
-        correction += '<span class="h5p-wrapper-' + word.type + spacer + '">';
+        // TODO: Put this into solution
+
+        const wrapper = document.createElement('span');
+        wrapper.classList.add('h5p-wrapper-' + word.type);
+        if (result.spaces[index]) {
+          wrapper.classList.add('h5p-spacer');
+        }
+
         if (word.type === 'wrong' || word.type === 'added' || word.type === 'typo') {
-          correction += '<span class="h5p-answer-' + word.type + '">' + word.answer + '</span>';
+          const answer = document.createElement('span');
+          answer.classList.add('h5p-answer-' + word.type);
+          answer.innerHTML = word.answer;
+          wrapper.appendChild(answer);
         }
         if (word.type !== 'added') {
-          correction += '<span class="h5p-solution-' + word.type +'">' + word.solution + '</span>';
+          const solution = document.createElement('span');
+          solution.classList.add('h5p-solution-' + word.type);
+          solution.innerHTML = word.solution;
+          wrapper.appendChild(solution);
         }
-        correction += '</span>';
+        correction.appendChild(wrapper);
       });
       output.push(correction);
     });

@@ -174,23 +174,23 @@
 
   /**
    * Set current text in InputField.
-   * @param {string} text - Current text.
+   * @param {object} text - Current DOM element with text.
    */
   Dictation.Sentence.prototype.showSolution = function (text) {
-    // Sanitization
-    if (typeof text !== 'string') {
-      return;
+    if (!this.inputSolution.firstChild) {
+      this.inputSolution.appendChild(text);
+      this.inputSolution.classList.remove(HIDE);
+      this.inputField.classList.add(HIDE);
     }
-    this.inputSolution.innerHTML = text;
-    this.inputSolution.classList.remove(HIDE);
-    this.inputField.classList.add(HIDE);
   };
 
   /**
    * Hide solution.
    */
   Dictation.Sentence.prototype.hideSolution = function () {
-    this.inputSolution.innerHTML = undefined;
+    while (this.inputSolution.firstChild) {
+        this.inputSolution.removeChild(this.inputSolution.firstChild);
+    }
     this.inputSolution.classList.add(HIDE);
     this.inputField.classList.remove(HIDE);
   };
