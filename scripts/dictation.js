@@ -271,7 +271,7 @@ H5P.Dictation = function (Audio, Question) {
 
     const output = [];
     results.forEach(function (result) {
-      let correction = document.createElement('span');
+      let correction = [];
       result.words.forEach(function (word, index) {
         // TODO: Put this into solution
 
@@ -293,7 +293,7 @@ H5P.Dictation = function (Audio, Question) {
           solution.innerHTML = word.solution;
           wrapper.appendChild(solution);
         }
-        correction.appendChild(wrapper);
+        correction.push(wrapper);
       });
       output.push(correction);
     });

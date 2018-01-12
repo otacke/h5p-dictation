@@ -177,8 +177,11 @@
    * @param {object} text - Current DOM element with text.
    */
   Dictation.Sentence.prototype.showSolution = function (text) {
+    const that = this;
     if (!this.inputSolution.firstChild) {
-      this.inputSolution.appendChild(text);
+      text.forEach(function (element) {
+        that.inputSolution.appendChild(element);
+      });
       this.inputSolution.classList.remove(HIDE);
       this.inputField.classList.add(HIDE);
     }
