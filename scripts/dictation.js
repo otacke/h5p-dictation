@@ -268,7 +268,6 @@ H5P.Dictation = function (Audio, Question) {
    */
   Dictation.prototype.buildSolutions = function (results) {
     // TODO: Refactor
-    // TODO: Fix size of text moving
 
     const output = [];
     results.forEach(function (result) {

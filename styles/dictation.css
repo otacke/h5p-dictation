@@ -73,7 +73,6 @@
 .h5p-dictation .h5p-dictation-solution {
   display: flex;
   flex-wrap: wrap;
-  line-height: 1em;
   font-family: H5PDroidSans, sans-serif;
   font-size: 1em;
   border-radius: 0.25em;
