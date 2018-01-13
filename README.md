@@ -6,8 +6,5 @@ You can e.g. upload sound samples that contain a recording of someone reading a 
 ## Support me at patreon!
 If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
 
-## Ideas to think about/TODO ...
+## Ideas to think about ...
 - Could be interesting, but the use case might be rather particular for this content type: Audio Recorder widget which would allow to record the reading directly from within H5P/enhance Audio widget. (future option)
-- Clean up the code
-- Add +/- indicators
-- ARIA

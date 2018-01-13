@@ -171,7 +171,7 @@
               "label": "0 %"
             }
           ],
-        "default": "100 %"
+        "default": "50 %"
       },
       {
         "name": "mistakesPassing",

@@ -5,19 +5,22 @@
   'use strict';
 
   // CSS Classes
+  // TODO: Rename constant names, rename css class names
   const CONTENT_WRAPPER = 'h5p-sentence';
   const AUDIO_WRAPPER = 'h5p-dictation-audio-wrapper';
-  const INPUT_WRAPPER = 'h5p-input-wrapper';
-  const INPUT_FIELD = 'h5p-text-input';
-  const INPUT_SOLUTION = 'h5p-dictation-solution';
-  const HIDE = 'hide';
-  const DISABLED = 'disabled';
   const INNER_CONTAINER = 'h5p-audio-inner';
   const BUTTON = 'h5p-audio-minimal-button';
   const BUTTON_PLAY = 'h5p-audio-minimal-play';
   const BUTTON_PAUSE = 'h5p-audio-minimal-pause';
   const BUTTON_SLOW = 'h5p-audio-minimal-slow';
   const BUTTON_NONE = 'h5p-audio-minimal-none';
+  const INPUT_WRAPPER = 'h5p-input-wrapper';
+  const INPUT_FIELD = 'h5p-text-input';
+  const SOLUTION_CONTAINER = 'h5p-solution-container';
+  const SOLUTION_INNER = 'h5p-solution-inner';
+  const SOLUTION_TEXT = 'h5p-solution-text';
+  const HIDE = 'hide';
+  const DISABLED = 'disabled';
 
   // score types
   const TYPE_ADDED = 'added';
@@ -85,15 +88,25 @@
     this.inputField = document.createElement('input');
     this.inputField.classList.add(INPUT_FIELD);
 
-    this.inputSolution = document.createElement('div');
-    this.inputSolution.classList.add(INPUT_SOLUTION);
-    this.inputSolution.classList.add(HIDE);
+    // Solution container
+    this.solutionText = document.createElement('div');
+    this.solutionText.classList.add(SOLUTION_TEXT);
 
-    const inputWrapper = document.createElement('div');
-    inputWrapper.classList.add(INPUT_WRAPPER);
-    inputWrapper.appendChild(this.inputField);
-    inputWrapper.appendChild(this.inputSolution);
-    this.content.appendChild(inputWrapper);
+    const solutionInner = document.createElement('div');
+    solutionInner.classList.add(SOLUTION_INNER);
+    solutionInner.appendChild(this.solutionText);
+
+    this.solutionContainer = document.createElement('div');
+    this.solutionContainer.classList.add(SOLUTION_CONTAINER);
+    this.solutionContainer.classList.add(HIDE);
+    this.solutionContainer.appendChild(solutionInner);
+
+    this.inputWrapper = document.createElement('div');
+    this.inputWrapper.classList.add(INPUT_WRAPPER);
+    this.inputWrapper.appendChild(this.inputField);
+    this.inputWrapper.appendChild(this.solutionContainer);
+
+    this.content.appendChild(this.inputWrapper);
   };
 
   /**
@@ -178,12 +191,12 @@
    */
   Dictation.Sentence.prototype.showSolution = function (text) {
     const that = this;
-    if (!this.inputSolution.firstChild) {
+
+    if (!this.solutionText.firstChild) {
       text.forEach(function (element) {
-        that.inputSolution.appendChild(element);
+        that.solutionText.appendChild(element);
+        that.solutionContainer.classList.remove(HIDE);
       });
-      this.inputSolution.classList.remove(HIDE);
-      this.inputField.classList.add(HIDE);
     }
   };
 
@@ -191,11 +204,10 @@
    * Hide solution.
    */
   Dictation.Sentence.prototype.hideSolution = function () {
-    while (this.inputSolution.firstChild) {
-        this.inputSolution.removeChild(this.inputSolution.firstChild);
+    while (this.solutionText.firstChild) {
+        this.solutionText.removeChild(this.solutionText.firstChild);
     }
-    this.inputSolution.classList.add(HIDE);
-    this.inputField.classList.remove(HIDE);
+    this.solutionContainer.classList.add(HIDE);
   };
 
   /**

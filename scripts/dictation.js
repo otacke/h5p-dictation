@@ -34,7 +34,7 @@ H5P.Dictation = function (Audio, Question) {
     this.config.behaviour.taskDescription = this.config.behaviour.taskDescription || '';
     this.config.behaviour.tries = this.config.behaviour.tries || Infinity;
     this.config.behaviour.triesAlternative = this.config.behaviour.triesAlternative || Infinity;
-    this.config.behaviour.typoFactor = this.config.behaviour.typoFactor / 100;
+    this.config.behaviour.typoFactor = parseInt(this.config.behaviour.typoFactor) / 100;
     this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
     this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
 
@@ -268,13 +268,14 @@ H5P.Dictation = function (Audio, Question) {
    */
   Dictation.prototype.buildSolutions = function (results) {
     // TODO: Refactor
+    const that = this;
+
+    const scorePoints = new H5P.Question.ScorePoints();
 
     const output = [];
     results.forEach(function (result) {
       let correction = [];
       result.words.forEach(function (word, index) {
-        // TODO: Put this into solution
-
         const wrapper = document.createElement('span');
         wrapper.classList.add('h5p-wrapper-' + word.type);
         if (result.spaces[index]) {
@@ -292,6 +293,17 @@ H5P.Dictation = function (Audio, Question) {
           solution.classList.add('h5p-solution-' + word.type);
           solution.innerHTML = word.solution;
           wrapper.appendChild(solution);
+        }
+        // scorePoints
+        if (word.type !== 'match') {
+          const scoreIndicator = scorePoints.getElement(false);
+          if (word.type === 'typo' && that.config.behaviour.typoFactor === 0.5) {
+            scoreIndicator.classList.remove('h5p-question-minus-one');
+            scoreIndicator.classList.add('h5p-question-minus-one-half');
+          }
+          if (word.type !== 'typo' || that.config.behaviour.typoFactor > 0) {
+            wrapper.appendChild(scoreIndicator);
+          }
         }
         correction.push(wrapper);
       });
