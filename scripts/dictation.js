@@ -12,55 +12,66 @@ H5P.Dictation = function (Audio, Question) {
   /**
    * @constructor
    *
-   * @param {Object} config - Config from semantics.json.
+   * @param {Object} params - Params from semantics.json.
    * @param {string} contentId - ContentId.
    * @param {Object} contentData - contentData.
    */
-  function Dictation (config, contentId, contentData) {
+  function Dictation (params, contentId, contentData) {
     const that = this;
     // Initialize
-    if (!config) {
+    if (!params) {
       return;
     }
 
     // Inheritance
     Question.call(this, 'dictation');
 
-    this.config = config;
+    this.params = params;
     this.contentId = contentId;
     this.contentData = contentData || {};
 
+    /*
+     * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry are used by
+     * contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-8} and
+     * {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
+     */
+    this.params.behaviour.enableSolutionsButton = this.params.behaviour.enableSolutionsButton || false;
+    this.params.behaviour.enableRetry = this.params.behaviour.enableRetry || false;
+
     // Defaults
-    this.config.behaviour.taskDescription = this.config.behaviour.taskDescription || '';
-    this.config.behaviour.tries = this.config.behaviour.tries || Infinity;
-    this.config.behaviour.triesAlternative = this.config.behaviour.triesAlternative || Infinity;
-    this.config.behaviour.typoFactor = parseInt(this.config.behaviour.typoFactor) / 100;
-    this.config.behaviour.mistakesPassing = this.config.behaviour.mistakesPassing || 0;
-    this.config.behaviour.mistakesMastering = this.config.behaviour.mistakesMastering || 0;
+    this.params.behaviour.taskDescription = this.params.behaviour.taskDescription || '';
+    this.params.behaviour.tries = this.params.behaviour.tries || Infinity;
+    this.params.behaviour.triesAlternative = this.params.behaviour.triesAlternative || Infinity;
 
     this.sentences = [];
 
-    const hasAlternatives = this.config.sentences.map(function (sentence) {
+    const hasAlternatives = this.params.sentences.map(function (sentence) {
       return (sentence.sampleAlternative === undefined) ? false : true;
     }).reduce(function (a, b) {
       return a || b;
     }, false);
 
-    this.config.sentences.forEach(function (element) {
+    this.params.sentences.forEach(function (element) {
       that.sentences.push(new H5P.Dictation.Sentence({
         "sentence": element,
-        "audioNotSupported": that.config.audioNotSupported,
-        "tries": that.config.behaviour.tries,
-        "triesAlternative": that.config.behaviour.triesAlternative,
-        "ignorePunctuation": that.config.behaviour.ignorePunctuation,
+        "audioNotSupported": that.params.audioNotSupported,
+        "tries": that.params.behaviour.tries,
+        "triesAlternative": that.params.behaviour.triesAlternative,
+        "ignorePunctuation": that.params.behaviour.ignorePunctuation,
         "hasAlternatives": hasAlternatives
       }, that.contentId));
     });
 
     // Score parameters
     this.maxMistakes = this.computeMaxMistakes();
-    this.percentageMastering = (this.maxMistakes - this.config.behaviour.mistakesMastering) / this.maxMistakes;
-    this.percentagePassing = Math.min(this.percentageMastering, (this.maxMistakes - this.config.behaviour.mistakesPassing) / this.maxMistakes);
+    this.params.behaviour.typoFactor = parseInt(this.params.behaviour.typoFactor) / 100;
+    this.params.behaviour.mistakesPassing = Math.min(this.params.behaviour.mistakesPassing || 0, this.maxMistakes);
+    this.params.behaviour.mistakesMastering = Math.min(this.params.behaviour.mistakesMastering || 0, this.maxMistakes);
+    this.percentageMastering = (this.maxMistakes - this.params.behaviour.mistakesMastering) / this.maxMistakes;
+    this.percentagePassing = Math.min(this.percentageMastering, (this.maxMistakes - this.params.behaviour.mistakesPassing) / this.maxMistakes);
+
+    this.percentageMistakes = 0;
+    this.isAnswered = false;
   }
 
   // Extends Question
@@ -72,13 +83,13 @@ H5P.Dictation = function (Audio, Question) {
    */
   Dictation.prototype.registerDomElements = function () {
     // Set optional media
-    var media = this.config.media.type;
+    var media = this.params.media.type;
     if (media && media.library) {
       var type = media.library.split(' ')[0];
       if (type === 'H5P.Image') {
         if (media.params.file) {
           this.setImage(media.params.file.path, {
-            disableImageZooming: this.config.media.disableImageZooming,
+            disableImageZooming: this.params.media.disableImageZooming,
             alt: media.params.alt,
             title: media.params.title
           });
@@ -92,7 +103,7 @@ H5P.Dictation = function (Audio, Question) {
     }
 
     // Register task introduction text
-    this.setIntroduction(this.config.taskDescription);
+    this.setIntroduction(this.params.taskDescription);
 
     // Build content
     const content = document.createElement('div');
@@ -114,18 +125,19 @@ H5P.Dictation = function (Audio, Question) {
     const that = this;
 
     // Show solution button
-    that.addButton('show-solution', that.config.showSolution, function () {
-      that.showSolution();
+    that.addButton('show-solution', that.params.showSolution, function () {
+      that.showSolutions();
     }, false, {}, {});
 
     // Check answer button
-    that.addButton('check-answer', that.config.checkAnswer, function () {
+    that.addButton('check-answer', that.params.checkAnswer, function () {
       that.showEvaluation();
+      that.isAnswered = true;
     }, true, {}, {});
 
     // Retry button
-    that.addButton('try-again', that.config.tryAgain, function () {
-      that.reset();
+    that.addButton('try-again', that.params.tryAgain, function () {
+      that.resetTask();
     }, false, {}, {});
   };
 
@@ -186,12 +198,12 @@ H5P.Dictation = function (Audio, Question) {
         return element.score.match;
       }).reduce(sum, 0);
 
-    const mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.config.behaviour.typoFactor;
+    const mistakesTotal = mistakesAdded + mistakesMissing + mistakesWrong + mistakesTypo * that.params.behaviour.typoFactor;
     const mistakesTrimmed = Math.min(mistakesTotal, this.maxMistakes);
 
-    const percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakesTrimmed) / this.maxMistakes);
+    this.percentageMistakes = Math.min(this.percentageMastering, (this.maxMistakes - mistakesTrimmed) / this.maxMistakes);
 
-    const generalFeedback = (this.config.generalFeedback || '')
+    const generalFeedback = (this.params.generalFeedback || '')
       .replace('@added', mistakesAdded)
       .replace('@missing', mistakesMissing)
       .replace('@wrong', mistakesWrong)
@@ -200,72 +212,36 @@ H5P.Dictation = function (Audio, Question) {
       .replace('@matches', matches);
 
     const textScore = H5P.Question.determineOverallFeedback(
-      this.config.overallFeedback, percentageMistakes / this.percentageMastering);
+      this.params.overallFeedback, this.percentageMistakes / this.percentageMastering);
 
     this.setFeedback(
       (generalFeedback + ' ' + textScore).trim(),
-      Math.round(percentageMistakes / this.percentageMastering * 100),
+      Math.round(this.percentageMistakes / this.percentageMastering * 100),
       this.percentageMastering / this.percentageMastering * 100);
 
     this.hideButton('check-answer');
-    if (this.config.behaviour.enableSolution) {
+    if (this.params.behaviour.enableSolution) {
       this.showButton('show-solution');
     }
 
-    this.trigger(this.createDictationXAPIEvent('completed'));
-    var xAPIEvent = this.createDictationXAPIEvent('scored');
-    xAPIEvent.setScoredResult(percentageMistakes * 100, this.percentageMastering * 100, this, true,
-      percentageMistakes >= this.percentagePassing);
-    xAPIEvent.data.statement.result.response = this.sentences.map(function (sentence) {
-      return sentence.getText();
-    });
-    this.trigger(xAPIEvent);
+    // Trigger xAPI events
+    this.trigger(this.getXAPIAnswerEvent());
 
-    if (percentageMistakes < this.percentagePassing) {
+    if (this.percentageMistakes < this.percentagePassing) {
       this.trigger(this.createDictationXAPIEvent('failed'));
     }
     else {
       this.trigger(this.createDictationXAPIEvent('passed'));
     }
-    if (percentageMistakes >= this.percentageMastering) {
+    if (this.percentageMistakes >= this.percentageMastering) {
       this.trigger(this.createDictationXAPIEvent('mastered'));
     }
     else {
-      if (this.config.behaviour.enableRetry) {
+      if (this.params.behaviour.enableRetry) {
         this.showButton('try-again');
       }
     }
 
-    this.trigger('resize');
-  };
-
-  /**
-   * Show the solution.
-   */
-  Dictation.prototype.showSolution = function () {
-    const that = this;
-
-    const solutions = this.buildSolutions(this.results);
-    solutions.forEach(function (solution, index) {
-      that.sentences[index].showSolution(solution);
-    });
-
-    that.trigger('resize');
-  };
-
-  /**
-   * Reset the task.
-   */
-  Dictation.prototype.reset = function () {
-    this.sentences.forEach(function (sentence) {
-      sentence.reset();
-      sentence.enable();
-      sentence.hideSolution();
-    });
-    this.removeFeedback();
-    this.hideButton('try-again');
-    this.hideButton('show-solution');
-    this.showButton('check-answer');
     this.trigger('resize');
   };
 
@@ -316,11 +292,11 @@ H5P.Dictation = function (Audio, Question) {
         // scorePoints
         if (word.type !== 'match') {
           const scoreIndicator = scorePoints.getElement(false);
-          if (word.type === 'typo' && that.config.behaviour.typoFactor === 0.5) {
+          if (word.type === 'typo' && that.params.behaviour.typoFactor === 0.5) {
             scoreIndicator.classList.remove('h5p-question-minus-one');
             scoreIndicator.classList.add('h5p-question-minus-one-half');
           }
-          if (word.type !== 'typo' || that.config.behaviour.typoFactor > 0) {
+          if (word.type !== 'typo' || that.params.behaviour.typoFactor > 0) {
             wrapper.appendChild(scoreIndicator);
           }
         }
@@ -329,6 +305,106 @@ H5P.Dictation = function (Audio, Question) {
       output.push(correction);
     });
     return output;
+  };
+
+  /**
+   * Determine whether the task has been passed by the user.
+   * @return {boolean} True if user passed or task is not scored.
+   */
+  Dictation.prototype.isPassed = function () {
+    return (this.percentageMistakes >= this.percentagePassing);
+  };
+
+  /**
+   * Check if Dictation has been submitted/input has been given.
+   * @return {boolean} True, if answer was given.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
+   */
+  Dictation.prototype.getAnswerGiven = function () {
+    return this.isAnswered || this.sentences.some(function (sentence) {
+      return sentence.getText().length > 0;
+    });
+  };
+
+  /**
+   * Get latest score.
+   * @return {number} latest score.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
+   */
+  Dictation.prototype.getScore = function () {
+    return this.percentageMistakes * 100;
+  };
+
+  /**
+   * Get maximum possible score.
+   * @return {number} Score necessary for mastering.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
+   */
+  Dictation.prototype.getMaxScore = function () {
+    return this.percentageMastering * 100;
+  };
+
+  /**
+   * Show solution.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
+   */
+  Dictation.prototype.showSolutions = function () {
+    const that = this;
+
+    const solutions = this.buildSolutions(this.results);
+    solutions.forEach(function (solution, index) {
+      that.sentences[index].showSolution(solution);
+    });
+
+    that.trigger('resize');
+  };
+
+  /**
+   * Reset task.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
+   */
+  Dictation.prototype.resetTask = function () {
+    this.sentences.forEach(function (sentence) {
+      sentence.reset();
+      sentence.enable();
+      sentence.hideSolution();
+    });
+    this.removeFeedback();
+    this.hideButton('try-again');
+    this.hideButton('show-solution');
+    this.showButton('check-answer');
+    this.trigger('resize');
+
+    this.percentageMistakes = 0;
+    this.isAnswered = false;
+  };
+
+  /**
+   * Get xAPI data.
+   * @return {Object} xAPI statement.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
+   */
+  Dictation.prototype.getXAPIData = function () {
+    return {
+      statement: this.getXAPIAnswerEvent().data.statement
+    };
+  };
+
+  /**
+   * Build xAPI answer event.
+   * @return {H5P.XAPIEvent} xAPI answer event.
+   */
+  Dictation.prototype.getXAPIAnswerEvent = function () {
+    const xAPIEvent = this.createDictationXAPIEvent('answered');
+
+    xAPIEvent.setScoredResult(this.getScore(), this.getMaxScore(), this, true, this.isPassed());
+    xAPIEvent.data.statement.result.response = this.sentences
+      .map(function (sentence) {
+        return sentence.getText();
+      })
+      .join('[,]');
+
+    return xAPIEvent;
   };
 
   /**
@@ -351,12 +427,14 @@ H5P.Dictation = function (Audio, Question) {
   Dictation.prototype.getxAPIDefinition = function () {
     const definition = {};
     definition.name = {'en-US': 'Dictation'};
-    definition.description = {'en-US': this.config.taskDescription};
+    definition.description = {'en-US': this.params.taskDescription};
     definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
     definition.interactionType = 'long-fill-in';
-    definition.correctResponsesPattern = this.sentences.map(function (sentence) {
-      return sentence.getCorrectText();
-    });
+    definition.correctResponsesPattern = this.sentences
+      .map(function (sentence) {
+        return sentence.getCorrectText();
+      })
+      .join('[,]');
 
     return definition;
   };
