@@ -6,5 +6,15 @@ You can e.g. upload sound samples that contain a recording of someone reading a 
 ## Support me at patreon!
 If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
 
+## TODO before first release
+- Change diff style
+- Add optional image on top
+- Add optional text on top
+- Implement Contract
+- Check ARIA
+- Tidying up
+
 ## Ideas to think about ...
 - Could be interesting, but the use case might be rather particular for this content type: Audio Recorder widget which would allow to record the reading directly from within H5P/enhance Audio widget. (future option)
+- Do we need an option for different diff styles?
+- Automatic speed change? How to balance speed/pitch? 
