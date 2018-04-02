@@ -71,6 +71,25 @@ H5P.Dictation = function (Audio, Question) {
    * Register the DOM elements with H5P.Question.
    */
   Dictation.prototype.registerDomElements = function () {
+    // Set optional media
+    var media = this.config.media.type;
+    if (media && media.library) {
+      var type = media.library.split(' ')[0];
+      if (type === 'H5P.Image') {
+        if (media.params.file) {
+          this.setImage(media.params.file.path, {
+            disableImageZooming: this.config.media.disableImageZooming,
+            alt: media.params.alt,
+            title: media.params.title
+          });
+        }
+      }
+      else if (type === 'H5P.Video') {
+        if (media.params.sources) {
+          this.setVideo(media);
+        }
+      }
+    }
 
     // Register task introduction text
     this.setIntroduction(this.config.taskDescription);
