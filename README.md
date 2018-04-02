@@ -8,13 +8,10 @@ If you like what I do, please consider to become my supporter at patreon: https:
 
 ## TODO before first release
 - Change diff style
-- Add optional image on top
-- Add optional text on top
-- Implement Contract
 - Check ARIA
-- Tidying up
+- Tidy up
 
 ## Ideas to think about ...
 - Could be interesting, but the use case might be rather particular for this content type: Audio Recorder widget which would allow to record the reading directly from within H5P/enhance Audio widget. (future option)
 - Do we need an option for different diff styles?
-- Automatic speed change? How to balance speed/pitch? 
+- Automatic speed change? How to balance speed/pitch?
