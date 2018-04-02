@@ -284,5 +284,21 @@
     "importance": "low",
     "common": true,
     "default": "Your browser does not support this audio."
+  },
+  {
+    "name": "ariaPlay",
+    "type": "text",
+    "label": "Play button (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "Play"
+  },
+  {
+    "name": "ariaPlaySlowly",
+    "type": "text",
+    "label": "Play slowly button (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "Play slowly"
   }
 ]

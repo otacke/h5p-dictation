@@ -46,6 +46,8 @@
    * @param {string} params.sentence.sample - Path to sound sample.
    * @param {string} params.sentence.sampleAlternatives - Path to alternative sound sample.
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
+   * @param {string} params.ariaPlay - Readspeaker text for "Play".
+   * @param {string} params.ariaPlaySlowly - Readspeaker text for "Play slowly".
    * @param {number} id - Content ID.
    */
   Dictation.Sentence = function (params, id) {
@@ -242,6 +244,7 @@
 
       if (slow === true) {
         audio.$audioButton.removeClass(BUTTON_PLAY).addClass(BUTTON_SLOW);
+        audio.$audioButton.attr('aria-label', this.params.ariaPlaySlowly);
 
         audio.audio.addEventListener('play', function () {
           audio.$audioButton.removeClass(BUTTON_SLOW).addClass(BUTTON_PAUSE);
@@ -257,6 +260,7 @@
         });
       }
       else {
+        audio.$audioButton.attr('aria-label', this.params.ariaPlay);
         audio.audio.addEventListener('ended', function () {
           that.handleTries();
         });
