@@ -82,6 +82,7 @@ H5P.Dictation = function (Audio, Question) {
    * Register the DOM elements with H5P.Question.
    */
   Dictation.prototype.registerDomElements = function () {
+    const that = this;
     // Set optional media
     var media = this.params.media.type;
     if (media && media.library) {
@@ -116,6 +117,17 @@ H5P.Dictation = function (Audio, Question) {
 
     // Register Buttons
     this.addButtons();
+
+    // Autoplay if set to
+    if (that.params.behaviour.autoplayDelay) {
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          if (that.sentences && that.sentences.length > 0) {
+            that.sentences[0].button.click();
+          }
+        }, that.params.behaviour.autoplayDelay * 1000);
+      });
+    }
   };
 
   /**
