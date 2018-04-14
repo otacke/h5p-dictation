@@ -42,12 +42,16 @@
    * @param {number} params.tries - Number of attempts for sample.
    * @param {number} params.triesAlternative - Number of attempts for alternative sample.
    * @param {boolean} params.ignorePunctuation - If true, punctuation is ignored.
+   * @param {object} params.sentence - Sentence content.
    * @param {string} params.sentence.text - Correct answer.
    * @param {string} params.sentence.sample - Path to sound sample.
    * @param {string} params.sentence.sampleAlternatives - Path to alternative sound sample.
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
-   * @param {string} params.ariaPlay - Readspeaker text for "Play".
-   * @param {string} params.ariaPlaySlowly - Readspeaker text for "Play slowly".
+   * @param {object} params.aria - Readspeaker texts.
+   * @param {string} params.aria.play - Readspeaker text for "Play".
+   * @param {string} params.aria.playSlowly - Readspeaker text for "Play slowly".
+   * @param {string} params.aria.enterText - Readspeaker text for "Enter what you have heard here".
+   * @param {string} params.aria.solution - Readspeaker text for "Solution".
    * @param {number} id - Content ID.
    */
   Dictation.Sentence = function (params, id) {
@@ -88,11 +92,20 @@
 
     // Text input field
     this.inputField = document.createElement('input');
+    this.inputField.setAttribute('aria-label', this.params.aria.enterText);
     this.inputField.classList.add(INPUT_FIELD);
 
     // Solution container
     this.solutionText = document.createElement('div');
+    this.solutionText.setAttribute('tabindex', '0');
+    this.solutionText.setAttribute('role', 'list');
+    this.solutionText.setAttribute('aria-label', this.params.aria.solution.replace(/@number/g, this.params.id));
     this.solutionText.classList.add(SOLUTION_TEXT);
+    this.solutionText.addEventListener('focus', function() {
+      if (this.firstChild) {
+        this.firstChild.setAttribute('tabindex', '0');
+      }
+    });
 
     const solutionInner = document.createElement('div');
     solutionInner.classList.add(SOLUTION_INNER);
@@ -244,8 +257,7 @@
 
       if (slow === true) {
         audio.$audioButton.removeClass(BUTTON_PLAY).addClass(BUTTON_SLOW);
-        audio.$audioButton.attr('aria-label', this.params.ariaPlaySlowly);
-
+        audio.$audioButton.attr('aria-label', this.params.aria.playSlowly);
         audio.audio.addEventListener('play', function () {
           audio.$audioButton.removeClass(BUTTON_SLOW).addClass(BUTTON_PAUSE);
         });
@@ -260,7 +272,7 @@
         });
       }
       else {
-        audio.$audioButton.attr('aria-label', this.params.ariaPlay);
+        audio.$audioButton.attr('aria-label', this.params.aria.play);
         audio.audio.addEventListener('ended', function () {
           that.handleTries();
         });
@@ -605,6 +617,13 @@
     console.log(aligned1.words1, aligned1.words2);
 
     return aligned1;
+  };
+
+  /**
+   * Set focus to the sentence solution
+   */
+  Dictation.Sentence.prototype.focus = function () {
+    this.solutionText.focus();
   };
 
 })(H5P.jQuery, H5P.Dictation, H5P.Audio);

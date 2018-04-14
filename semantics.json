@@ -308,5 +308,158 @@
     "importance": "low",
     "common": true,
     "default": "Play slowly"
+  },
+  {
+    "name": "ariaEnterText",
+    "type": "text",
+    "label": "Enter text field (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "Enter what you have heard."
+  },
+  {
+    "name": "ariaSolution",
+    "type": "text",
+    "label": "Solution (text for readspeakers)",
+    "description": "@number will be replaced by the sentence number",
+    "importance": "low",
+    "common": true,
+    "default": "Solution sentence @number"
+  },
+  {
+    "name": "ariaCorrect",
+    "type": "text",
+    "label": "Correct (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "correct"
+  },
+  {
+    "name": "ariaWrong",
+    "type": "text",
+    "label": "Wrong (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "wrong"
+  },
+  {
+    "name": "ariaTypo",
+    "type": "text",
+    "label": "Small mistake (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "small mistake"
+  },
+  {
+    "name": "ariaMissing",
+    "type": "text",
+    "label": "Missing word or symbol (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "missing"
+  },
+  {
+    "name": "ariaAdded",
+    "type": "text",
+    "label": "Added word or symbol (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "added"
+  },
+  {
+    "name": "ariaPeriod",
+    "type": "text",
+    "label": "Period (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "period"
+  },
+  {
+    "name": "ariaExclamationPoint",
+    "type": "text",
+    "label": "Exclamation point (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "exclamation point"
+  },
+  {
+    "name": "ariaQuestionMark",
+    "type": "text",
+    "label": "Question mark (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "question mark"
+  },
+  {
+    "name": "ariaComma",
+    "type": "text",
+    "label": "Comma (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "comma"
+  },
+  {
+    "name": "ariaSingleQuote",
+    "type": "text",
+    "label": "Single quote (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "single quote"
+  },
+  {
+    "name": "ariaDoubleQuote",
+    "type": "text",
+    "label": "Double quote (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "double quote"
+  },
+  {
+    "name": "ariaColon",
+    "type": "text",
+    "label": "Colon (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "colon"
+  },
+  {
+    "name": "ariaSemicolon",
+    "type": "text",
+    "label": "Semicolon (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "semicolon"
+  },
+  {
+    "name": "ariaPlus",
+    "type": "text",
+    "label": "Plus (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "plus"
+  },
+  {
+    "name": "ariaMinus",
+    "type": "text",
+    "label": "Minus (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "minus"
+  },
+  {
+    "name": "ariaAsterisk",
+    "type": "text",
+    "label": "Asterisk (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "asterisk"
+  },
+  {
+    "name": "ariaForwardSlash",
+    "type": "text",
+    "label": "Forward slash (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "forward slash"
   }
 ]

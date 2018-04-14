@@ -6,7 +6,6 @@ var H5P = H5P || {};
 H5P.Dictation = function (Audio, Question) {
   'use strict';
 
-  // TODO: ARIA
   // TODO: Clean up thoroughly!
 
   /**
@@ -51,14 +50,20 @@ H5P.Dictation = function (Audio, Question) {
       return a || b;
     }, false);
 
-    this.params.sentences.forEach(function (element) {
+    this.params.sentences.forEach(function (element, index) {
       that.sentences.push(new H5P.Dictation.Sentence({
         "sentence": element,
         "audioNotSupported": that.params.audioNotSupported,
         "tries": that.params.behaviour.tries,
         "triesAlternative": that.params.behaviour.triesAlternative,
         "ignorePunctuation": that.params.behaviour.ignorePunctuation,
-        "hasAlternatives": hasAlternatives
+        "hasAlternatives": hasAlternatives,
+        "aria": {
+          "play": that.params.ariaPlay,
+          "playSlowly": that.params.ariaPlaySlowly,
+          "enterText": that.params.ariaEnterText,
+          "solution": that.params.ariaSolution
+        }
       }, that.contentId));
     });
 
@@ -104,7 +109,7 @@ H5P.Dictation = function (Audio, Question) {
     }
 
     // Register task introduction text
-    this.setIntroduction(this.params.taskDescription);
+    this.setIntroduction('<div tabindex="0">' + this.params.taskDescription + '</div>');
 
     // Build content
     const content = document.createElement('div');
@@ -284,10 +289,58 @@ H5P.Dictation = function (Audio, Question) {
       let correction = [];
       result.words.forEach(function (word, index) {
         const wrapper = document.createElement('span');
+        wrapper.setAttribute('tabindex', (index === 0) ? '0' : '-1');
+        wrapper.setAttribute('role', 'listitem');
         wrapper.classList.add('h5p-wrapper-' + word.type);
+        wrapper.addEventListener('focus', function () {
+          this.setAttribute('tabindex', '0');
+        });
+        wrapper.addEventListener('focusout',function () {
+          this.setAttribute('tabindex', '-1');
+        });
+        wrapper.addEventListener('keydown', function (event) {
+          switch (event.keyCode) {
+            case 37:
+              if (this.previousSibling) {
+                this.previousSibling.focus();
+              }
+              break;
+            case 39:
+              if (this.nextSibling) {
+                this.nextSibling.focus();
+              }
+              break;
+          }
+        });
+
         if (result.spaces[index]) {
           wrapper.classList.add('h5p-spacer');
         }
+
+        const ariaLabelType = {
+          match: that.params.ariaCorrect,
+          wrong: that.params.ariaWrong,
+          typo: that.params.ariaTypo,
+          missing: that.params.ariaMissing,
+          added: that.params.ariaAdded
+        };
+
+        var ariaLabel = (word.type === 'missing') ? word.solution : word.answer;
+        ariaLabel = ariaLabel
+          .replace(/\./g, that.params.ariaPeriod)
+          .replace(/!/g, that.params.ariaExclamationPoint)
+          .replace(/\?/g, that.params.ariaQuestionMark)
+          .replace(/,/g, that.params.ariaComma)
+          .replace(/'/g, that.params.ariaSingleQuote)
+          .replace(/["|\u201C|\u201E]/g, that.params.ariaDoubleQuote)
+          .replace(/:/g, that.params.ariaColon)
+          .replace(/;/g, that.params.ariaSemicolon)
+          .replace(/\+/g, that.params.ariaPlus)
+          .replace(/-/g, that.params.ariaMinus)
+          .replace(/\*/g, that.params.ariaAsterisk)
+          .replace(/\//g, that.params.ariaForwardSlash);
+        ariaLabel += '. ' + ariaLabelType[word.type];
+        wrapper.setAttribute('aria-label', ariaLabel);
 
         if (word.type === 'wrong' || word.type === 'added' || word.type === 'typo') {
           const answer = document.createElement('span');
@@ -301,7 +354,6 @@ H5P.Dictation = function (Audio, Question) {
           solution.innerHTML = word.solution;
           wrapper.appendChild(solution);
         }
-        // scorePoints
         if (word.type !== 'match') {
           const scoreIndicator = scorePoints.getElement(false);
           if (word.type === 'typo' && that.params.behaviour.typoFactor === 0.5) {
@@ -312,6 +364,7 @@ H5P.Dictation = function (Audio, Question) {
             wrapper.appendChild(scoreIndicator);
           }
         }
+
         correction.push(wrapper);
       });
       output.push(correction);
@@ -367,7 +420,7 @@ H5P.Dictation = function (Audio, Question) {
     solutions.forEach(function (solution, index) {
       that.sentences[index].showSolution(solution);
     });
-
+    that.sentences[0].focus();
     that.trigger('resize');
   };
 
