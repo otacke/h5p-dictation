@@ -1,6 +1,8 @@
 /* jslint esversion: 6 */
 /* globals: H5P */
 
+var H5P = H5P || {};
+
 (function ($, Dictation, Audio) {
   'use strict';
 
@@ -52,11 +54,9 @@
    * @param {string} params.aria.playSlowly - Readspeaker text for "Play slowly".
    * @param {string} params.aria.enterText - Readspeaker text for "Enter what you have heard here".
    * @param {string} params.aria.solution - Readspeaker text for "Solution".
-   * @param {number} id - Content ID.
    */
-  Dictation.Sentence = function (params, id) {
+  Dictation.Sentence = function (params) {
     this.params = params;
-    this.contentId = id;
     this.maxTries = params.tries;
     this.maxTriesAlternative = params.triesAlternative;
     this.triesLeft = this.maxTries;
@@ -387,7 +387,6 @@
    * @return {object} Results.
    */
   Dictation.Sentence.prototype.computeResults = function() {
-    // TODO: strip punctuation (still TODO?)
     const wordsSolution = this.addDelaturs(this.getCorrectText()).split(' ');
     let answer = this.getText();
     if (this.params.ignorePunctuation) {

@@ -6,7 +6,7 @@ var H5P = H5P || {};
 H5P.Dictation = function (Audio, Question) {
   'use strict';
 
-  // TODO: Clean up thoroughly!
+  // TODO: Clean up the code thoroughly!
 
   /**
    * @constructor
@@ -50,7 +50,7 @@ H5P.Dictation = function (Audio, Question) {
       return a || b;
     }, false);
 
-    this.params.sentences.forEach(function (element, index) {
+    this.params.sentences.forEach(function (element) {
       that.sentences.push(new H5P.Dictation.Sentence({
         "sentence": element,
         "audioNotSupported": that.params.audioNotSupported,
@@ -64,7 +64,7 @@ H5P.Dictation = function (Audio, Question) {
           "enterText": that.params.ariaEnterText,
           "solution": that.params.ariaSolution
         }
-      }, that.contentId));
+      }));
     });
 
     // Score parameters
