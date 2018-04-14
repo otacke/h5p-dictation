@@ -613,6 +613,12 @@
       aligned1 = {"words1": aligned2.words1.reverse(), "words2": aligned2.words2.reverse()};
     }
 
+    // Don't add unnecessary added words as extra mistakes
+    while (aligned1.words1[0] === undefined && aligned1.words2[aligned1.words2.length - 1] === undefined) {
+      aligned1.words1 = aligned1.words1.slice(1);
+      aligned1.words2 = aligned1.words2.slice(0, aligned1.words2.length - 1);
+    }
+
     // TODO: Remove when done.
     console.log(aligned1.words1, aligned1.words2);
 
