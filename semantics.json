@@ -318,6 +318,14 @@
     "default": "Enter what you have heard."
   },
   {
+    "name": "ariaYourResult",
+    "type": "text",
+    "label": "Your result (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "Your result"
+  },
+  {
     "name": "ariaSolution",
     "type": "text",
     "label": "Solution (text for readspeakers)",

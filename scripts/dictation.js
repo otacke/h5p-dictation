@@ -234,7 +234,9 @@ H5P.Dictation = function (Audio, Question) {
     this.setFeedback(
       (generalFeedback + ' ' + textScore).trim(),
       Math.round(this.percentageMistakes / this.percentageMastering * 100),
-      this.percentageMastering / this.percentageMastering * 100);
+      this.percentageMastering / this.percentageMastering * 100,
+      this.params.ariaYourResult
+    );
 
     this.hideButton('check-answer');
     if (this.params.behaviour.enableSolution) {
