@@ -109,7 +109,10 @@ H5P.Dictation = function (Audio, Question) {
     }
 
     // Register task introduction text
-    this.setIntroduction('<div tabindex="0">' + this.params.taskDescription + '</div>');
+    this.introduction = document.createElement('div');
+    this.introduction.setAttribute('tabindex', '0');
+    this.introduction.innerHTML = this.params.taskDescription;
+    this.setIntroduction(this.introduction);
 
     // Build content
     const content = document.createElement('div');
@@ -440,7 +443,7 @@ H5P.Dictation = function (Audio, Question) {
     this.hideButton('try-again');
     this.hideButton('show-solution');
     this.showButton('check-answer');
-    this.trigger('resize');
+    this.introduction.focus();
 
     this.percentageMistakes = 0;
     this.isAnswered = false;
