@@ -64,7 +64,8 @@ H5P.Dictation = function (Audio, Question) {
             "play": that.params.ariaPlay,
             "playSlowly": that.params.ariaPlaySlowly,
             "enterText": that.params.ariaEnterText,
-            "solution": that.params.ariaSolution
+            "solution": that.params.ariaSolution,
+            "sentence": that.params.ariaSentence
           }
         },
         that.contentId)

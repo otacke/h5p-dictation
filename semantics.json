@@ -329,10 +329,17 @@
     "name": "ariaSolution",
     "type": "text",
     "label": "Solution (text for readspeakers)",
-    "description": "@number will be replaced by the sentence number",
     "importance": "low",
     "common": true,
-    "default": "Solution sentence @number"
+    "default": "Solution"
+  },
+  {
+    "name": "ariaSentence",
+    "type": "text",
+    "label": "Sentence (text for readspeakers)",
+    "importance": "low",
+    "common": true,
+    "default": "Sentence"
   },
   {
     "name": "ariaCorrect",

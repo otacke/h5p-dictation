@@ -55,6 +55,7 @@ var H5P = H5P || {};
    * @param {string} params.aria.playSlowly - Readspeaker text for "Play slowly".
    * @param {string} params.aria.enterText - Readspeaker text for "Enter what you have heard here".
    * @param {string} params.aria.solution - Readspeaker text for "Solution".
+   * @param {string} params.aria.sentence - Readspeaker text for "Sentence".
    * @param {number} id - Content ID.
    */
   Dictation.Sentence = function (index, params, id) {
@@ -70,6 +71,8 @@ var H5P = H5P || {};
     this.mistakesMax = this.addDelaturs(this.solution).split(' ').length;
 
     this.content = document.createElement('div');
+    this.content.setAttribute('role', 'group');
+    this.content.setAttribute('aria-label', params.aria.sentence + ' ' + this.index);
     this.content.classList.add(CONTENT_WRAPPER);
 
     // Normal audio
@@ -103,7 +106,7 @@ var H5P = H5P || {};
     this.solutionText = document.createElement('div');
     this.solutionText.setAttribute('tabindex', '0');
     this.solutionText.setAttribute('role', 'list');
-    this.solutionText.setAttribute('aria-label', this.params.aria.solution.replace(/@number/g, this.index));
+    this.solutionText.setAttribute('aria-label', this.params.aria.solution);
     this.solutionText.classList.add(SOLUTION_TEXT);
     this.solutionText.addEventListener('focus', function() {
       if (this.firstChild) {
