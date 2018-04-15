@@ -51,20 +51,24 @@ H5P.Dictation = function (Audio, Question) {
     }, false);
 
     this.params.sentences.forEach(function (element, index) {
-      that.sentences.push(new H5P.Dictation.Sentence({
-        "sentence": element,
-        "audioNotSupported": that.params.audioNotSupported,
-        "tries": that.params.behaviour.tries,
-        "triesAlternative": that.params.behaviour.triesAlternative,
-        "ignorePunctuation": that.params.behaviour.ignorePunctuation,
-        "hasAlternatives": hasAlternatives,
-        "aria": {
-          "play": that.params.ariaPlay,
-          "playSlowly": that.params.ariaPlaySlowly,
-          "enterText": that.params.ariaEnterText,
-          "solution": that.params.ariaSolution
-        }
-      }, index + 1));
+      that.sentences.push(new H5P.Dictation.Sentence(
+        index + 1,
+        {
+          "sentence": element,
+          "audioNotSupported": that.params.audioNotSupported,
+          "tries": that.params.behaviour.tries,
+          "triesAlternative": that.params.behaviour.triesAlternative,
+          "ignorePunctuation": that.params.behaviour.ignorePunctuation,
+          "hasAlternatives": hasAlternatives,
+          "aria": {
+            "play": that.params.ariaPlay,
+            "playSlowly": that.params.ariaPlaySlowly,
+            "enterText": that.params.ariaEnterText,
+            "solution": that.params.ariaSolution
+          }
+        },
+        that.contentId)
+      );
     });
 
     // Score parameters

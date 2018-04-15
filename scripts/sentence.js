@@ -40,6 +40,7 @@ var H5P = H5P || {};
 
   /**
    * Constructor.
+   * @param {number} index - Index of the sentence.
    * @param {object} params - Parameters.
    * @param {number} params.tries - Number of attempts for sample.
    * @param {number} params.triesAlternative - Number of attempts for alternative sample.
@@ -54,11 +55,12 @@ var H5P = H5P || {};
    * @param {string} params.aria.playSlowly - Readspeaker text for "Play slowly".
    * @param {string} params.aria.enterText - Readspeaker text for "Enter what you have heard here".
    * @param {string} params.aria.solution - Readspeaker text for "Solution".
-   * @param {number} index - Index of the sentence.
+   * @param {number} id - Content ID.
    */
-  Dictation.Sentence = function (params, index) {
-    this.params = params;
+  Dictation.Sentence = function (index, params, id) {
     this.index = index;
+    this.params = params;
+    this.contentId = id;
     this.maxTries = params.tries;
     this.maxTriesAlternative = params.triesAlternative;
     this.triesLeft = this.maxTries;
