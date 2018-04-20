@@ -19,6 +19,9 @@
     },
     {
       "path": "scripts/sentence.js"
+    },
+    {
+      "path": "scripts/button.js"
     }
   ],
   "preloadedCss": [

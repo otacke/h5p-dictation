@@ -1,14 +1,12 @@
 .h5p-dictation {
   padding: 0.5em 1em;
 }
-
 .h5p-dictation .h5p-sentence {
   width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: 1em;
 }
-
 .h5p-dictation .h5p-dictation-audio-wrapper {
   display: flex;
   align-self: flex-start;
@@ -18,11 +16,9 @@
   width: 1.5em;
   height: 1.5em;
 }
-
 .h5p-dictation .h5p-dictation-audio-wrapper.hide {
   visibility: hidden;
 }
-
 .h5p-dictation .h5p-input-wrapper {
   display: flex;
   flex-direction: column;
@@ -31,17 +27,14 @@
   padding-left: 0.25em;
   flex-grow: 1;
 }
-
 .h5p-dictation .h5p-solution-container {
   position: relative;
   width: calc(100% - 0.5em);
   left: 0.25em;
 }
-
 .h5p-dictation .h5p-solution-container.hide {
   display: none;
 }
-
 .h5p-dictation .h5p-solution-inner {
   background: #fbfbfb;
   border-bottom: 1px solid #ddd;
@@ -51,20 +44,12 @@
   text-align: left;
   position: relative;
 }
-
-
 .h5p-dictation .h5p-solution-text {
   position: relative;
   z-index: 3;
-  /*
-  overflow: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
-  */
   display: flex;
   flex-wrap: wrap;
 }
-
 .h5p-dictation .h5p-audio-minimal-button {
   border: none;
   font-weight: normal;
@@ -74,54 +59,29 @@
   height: 1.5em;
   line-height: 1.5em;
 }
-
 .h5p-dictation .h5p-audio-minimal-button:before {
   font-size: 0.8em;
   vertical-align: bottom;
 }
-
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-none {
   background: none;
   cursor: default;
 }
-
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
   font-size: 0.6em;
 }
-
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-slow:before {
   content: "\f0e4";
 }
-
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
   content: "\f04c";
 }
-
 .h5p-dictation .h5p-audio-minimal-button.disabled {
   background: -webkit-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* IE10+ */
   color: #e9e9e4;
 }
-
-/*
-.h5p-dictation .h5p-dictation-solution {
-  display: flex;
-  flex-wrap: wrap;
-  line-height: 1em;
-  font-family: H5PDroidSans, sans-serif;
-  font-size: 1em;
-  border-radius: 0.25em;
-  border: 1px solid #a0a0a0;
-  padding: 0 1em 0 0.5em;
-  text-overflow: ellipsis;
-  width: 100%;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  background: #e9e9e4;
-}
-*/
-
 .h5p-dictation .h5p-text-input {
   font-family: H5PDroidSans, sans-serif;
   font-size: 1em;
@@ -138,7 +98,6 @@
 .h5p-dictation .h5p-text-input.hide {
   display: none;
 }
-
 .h5p-dictation .h5p-text-input:focus {
   outline: none;
   box-shadow: 0 0 0.5em 0 #7fb8ff;
@@ -147,7 +106,6 @@
 .h5p-dictation .h5p-text-input:disabled {
   background: #e9e9e4;
 }
-
 /* Solution markers */
 .h5p-dictation .h5p-answer-added,
 .h5p-dictation .h5p-answer-wrong,

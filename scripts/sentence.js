@@ -3,19 +3,11 @@
 
 var H5P = H5P || {};
 
-(function ($, Dictation, Audio) {
+(function ($, Dictation) {
   'use strict';
 
   // CSS Classes
-  // TODO: Rename constant names, rename css class names
   const CONTENT_WRAPPER = 'h5p-sentence';
-  const AUDIO_WRAPPER = 'h5p-dictation-audio-wrapper';
-  const INNER_CONTAINER = 'h5p-audio-inner';
-  const BUTTON = 'h5p-audio-minimal-button';
-  const BUTTON_PLAY = 'h5p-audio-minimal-play';
-  const BUTTON_PAUSE = 'h5p-audio-minimal-pause';
-  const BUTTON_SLOW = 'h5p-audio-minimal-slow';
-  const BUTTON_NONE = 'h5p-audio-minimal-none';
   const INPUT_WRAPPER = 'h5p-input-wrapper';
   const INPUT_FIELD = 'h5p-text-input';
   const SOLUTION_CONTAINER = 'h5p-solution-container';
@@ -31,7 +23,6 @@ var H5P = H5P || {};
   const TYPE_MATCH = 'match';
   const TYPE_TYPO = 'typo';
 
-  // TODO: Make editable?
   const PUNCTUATION = '[.?!,\'\";\\:\\-\\(\\)\/\\+\\-\\*\u201C\u201E]';
   const WORD = '\\w';
 
@@ -40,6 +31,7 @@ var H5P = H5P || {};
 
   /**
    * Constructor.
+   *
    * @param {number} index - Index of the sentence.
    * @param {object} params - Parameters.
    * @param {number} params.tries - Number of attempts for sample.
@@ -56,12 +48,13 @@ var H5P = H5P || {};
    * @param {string} params.aria.enterText - Readspeaker text for "Enter what you have heard here".
    * @param {string} params.aria.solution - Readspeaker text for "Solution".
    * @param {string} params.aria.sentence - Readspeaker text for "Sentence".
-   * @param {number} id - Content ID.
+   * @param {number} id - Content Id.
    */
   Dictation.Sentence = function (index, params, id) {
     this.index = index;
     this.params = params;
     this.contentId = id;
+
     this.maxTries = params.tries;
     this.maxTriesAlternative = params.triesAlternative;
     this.triesLeft = this.maxTries;
@@ -70,31 +63,32 @@ var H5P = H5P || {};
     this.solution = (!params.ignorePunctuation) ? params.sentence.text : this.stripPunctuation(params.sentence.text);
     this.mistakesMax = this.addDelaturs(this.solution).split(' ').length;
 
+    // DOM
     this.content = document.createElement('div');
     this.content.setAttribute('role', 'group');
     this.content.setAttribute('aria-label', params.aria.sentence + ' ' + this.index);
     this.content.classList.add(CONTENT_WRAPPER);
 
     // Normal audio
-    this.audio = this.createAudio(params.sentence.sample, params.audioNotSupported);
-    this.content.appendChild(this.audio);
-    if (this.audio.firstChild === null) {
-      this.audio.appendChild(this.getDummyButton());
-    }
-    else {
-      this.button = this.audio.firstChild.firstChild;
-    }
+    this.buttonPlayNormal = new H5P.Dictation.Button(id, {
+      sample: params.sentence.sample,
+      audioNotSupported: params.audioNotSupported,
+      type: H5P.Dictation.Button.BUTTON_TYPE_NORMAL,
+      maxTries: params.tries,
+      aria: params.aria
+    });
+    this.content.appendChild(this.buttonPlayNormal.getDOM());
 
     // Alternative audio
     if (this.params.hasAlternatives === true) {
-      this.audioAlternative = this.createAudio(params.sentence.sampleAlternative, params.audioNotSupported, true);
-      this.content.appendChild(this.audioAlternative);
-      if (this.audioAlternative.firstChild === null) {
-        this.audioAlternative.appendChild(this.getDummyButton());
-      }
-      else {
-        this.buttonAlternative = this.audioAlternative.firstChild.firstChild;
-      }
+      this.buttonPlaySlow = new H5P.Dictation.Button(id, {
+        sample: params.sentence.sampleAlternative,
+        audioNotSupported: params.audioNotSupported,
+        type: H5P.Dictation.Button.BUTTON_TYPE_SLOW,
+        maxTries: params.triesAlternative,
+        aria: params.aria
+      });
+      this.content.appendChild(this.buttonPlaySlow.getDOM());
     }
 
     // Text input field
@@ -104,24 +98,24 @@ var H5P = H5P || {};
 
     // Solution container
     this.solutionText = document.createElement('div');
-    this.solutionText.setAttribute('tabindex', '0');
-    this.solutionText.setAttribute('role', 'list');
-    this.solutionText.setAttribute('aria-label', this.params.aria.solution);
     this.solutionText.classList.add(SOLUTION_TEXT);
-    this.solutionText.addEventListener('focus', function() {
-      if (this.firstChild) {
-        this.firstChild.setAttribute('tabindex', '0');
+
+    this.solutionInner = document.createElement('div');
+    this.solutionInner.setAttribute('tabindex', '0');
+    this.solutionInner.setAttribute('role', 'list');
+    this.solutionInner.setAttribute('aria-label', this.params.aria.solution);
+    this.solutionInner.addEventListener('focus', function() {
+      if (this.firstChild.firstChild) {
+        this.firstChild.firstChild.setAttribute('tabindex', '0');
       }
     });
-
-    const solutionInner = document.createElement('div');
-    solutionInner.classList.add(SOLUTION_INNER);
-    solutionInner.appendChild(this.solutionText);
+    this.solutionInner.classList.add(SOLUTION_INNER);
+    this.solutionInner.appendChild(this.solutionText);
 
     this.solutionContainer = document.createElement('div');
     this.solutionContainer.classList.add(SOLUTION_CONTAINER);
     this.solutionContainer.classList.add(HIDE);
-    this.solutionContainer.appendChild(solutionInner);
+    this.solutionContainer.appendChild(this.solutionInner);
 
     this.inputWrapper = document.createElement('div');
     this.inputWrapper.classList.add(INPUT_WRAPPER);
@@ -132,31 +126,23 @@ var H5P = H5P || {};
   };
 
   /**
-   * Get DOM for dummy button.
-   * @return {object} DOM for dummy button.
+   * Read first sample.
    */
-  Dictation.Sentence.prototype.getDummyButton = function () {
-    const inner2 = document.createElement('div');
-    inner2.classList.add(BUTTON);
-    inner2.classList.add(BUTTON_NONE);
-
-    const inner = document.createElement('div');
-    inner.classList.add(INNER_CONTAINER);
-    inner.appendChild(inner2);
-
-    return inner;
+  Dictation.Sentence.prototype.read = function () {
+    this.buttonPlayNormal.play();
   };
 
   /**
    * Remove delatur symbols.
+   *
    * @param {array|string} words - Text to be cleaned.
    * @return {array|string} Cleaned words of a text.
    */
   Dictation.Sentence.prototype.removeDelaturs = function (words) {
-    let returnString = false;
+    let wasString = false;
     if (typeof words === 'string') {
       words = [words];
-      returnString = true;
+      wasString = true;
     }
     if (words === undefined) {
       return undefined;
@@ -166,33 +152,12 @@ var H5P = H5P || {};
         return (word === undefined) ? undefined : word.replace(new RegExp(DELATUR, 'g'), '');
       });
     }
-    return (returnString) ? words[0] : words;
-  };
-
-  /**
-   * Decrease the number of tries and disable button if necessary.
-   */
-  Dictation.Sentence.prototype.handleTries = function (slow) {
-    if (slow === true) {
-      this.triesLeftAlternative--;
-      if (this.triesLeftAlternative === 0) {
-        this.buttonAlternative.setAttribute('disabled', 'disabled');
-        // TODO: Check if there's a default look for disabled buttons within H5P
-        this.buttonAlternative.classList.add(DISABLED);
-      }
-    }
-    else {
-      this.triesLeft--;
-      if (this.triesLeft === 0) {
-        this.button.setAttribute('disabled', 'disabled');
-        // TODO: Check if there's a default look for disabled buttons within H5P
-        this.button.classList.add(DISABLED);
-      }
-    }
+    return (wasString) ? words[0] : words;
   };
 
   /**
    * Get content for H5P.Question.
+   *
    * @return {object} DOM elements for content.
    */
   Dictation.Sentence.prototype.getContent = function () {
@@ -201,6 +166,7 @@ var H5P = H5P || {};
 
   /**
    * Get current text in InputField.
+   *
    * @return {string} Current text.
    */
   Dictation.Sentence.prototype.getText = function () {
@@ -209,6 +175,7 @@ var H5P = H5P || {};
 
   /**
    * Set current text in InputField.
+   *
    * @param {object} text - Current DOM element with text.
    */
   Dictation.Sentence.prototype.showSolution = function (text) {
@@ -227,13 +194,14 @@ var H5P = H5P || {};
    */
   Dictation.Sentence.prototype.hideSolution = function () {
     while (this.solutionText.firstChild) {
-        this.solutionText.removeChild(this.solutionText.firstChild);
+      this.solutionText.removeChild(this.solutionText.firstChild);
     }
     this.solutionContainer.classList.add(HIDE);
   };
 
   /**
    * Get correct text.
+   *
    * @return {string} Correct text.
    */
   Dictation.Sentence.prototype.getCorrectText = function () {
@@ -241,61 +209,8 @@ var H5P = H5P || {};
   };
 
   /**
-   * Create H5P.Audio.
-   * @param {string} sample - Path to sound sample.
-   * @param {string} audioNotSupported - Text to show if audio now supported.
-   * @return {object} DOM element for the sample.
-   */
-  Dictation.Sentence.prototype.createAudio = function (sample, audioNotSupported, slow) {
-    const that = this;
-    let audio;
-    const $audioWrapper = $('<div>', {
-      'class': AUDIO_WRAPPER
-    });
-
-    if (sample !== undefined) {
-      const audioDefaults = {
-        files: sample,
-        audioNotSupported: audioNotSupported
-      };
-
-      audio = new Audio(audioDefaults, that.contentId);
-      audio.attach($audioWrapper);
-
-      if (slow === true) {
-        audio.$audioButton.removeClass(BUTTON_PLAY).addClass(BUTTON_SLOW);
-        audio.$audioButton.attr('aria-label', this.params.aria.playSlowly);
-        audio.audio.addEventListener('play', function () {
-          audio.$audioButton.removeClass(BUTTON_SLOW).addClass(BUTTON_PAUSE);
-        });
-
-        audio.audio.addEventListener('pause', function () {
-          audio.$audioButton.removeClass(BUTTON_PAUSE).addClass(BUTTON_SLOW);
-        });
-
-        audio.audio.addEventListener('ended', function () {
-          audio.$audioButton.removeClass(BUTTON_PAUSE).addClass(BUTTON_SLOW);
-          that.handleTries(true);
-        });
-      }
-      else {
-        audio.$audioButton.attr('aria-label', this.params.aria.play);
-        audio.audio.addEventListener('ended', function () {
-          that.handleTries();
-        });
-      }
-
-      // Have to stop, else audio will take up a socket pending forever in chrome.
-      if (audio.audio && audio.audio.preload) {
-        audio.audio.preload = 'none';
-      }
-    }
-
-    return $audioWrapper.get(0);
-  };
-
-  /**
    * Get the maximum of possible mistakes.
+   *
    * @return {number} Number of possible mistakes.
    */
   Dictation.Sentence.prototype.getMaxMistakes = function () {
@@ -307,8 +222,8 @@ var H5P = H5P || {};
    */
   Dictation.Sentence.prototype.reset = function () {
     this.inputField.value = '';
-    this.triesLeft = this.maxTries;
-    this.triesLeftAlternative = this.maxTriesAlternative;
+    this.buttonPlayNormal.reset();
+    this.buttonPlaySlow.reset();
   };
 
   /**
@@ -316,14 +231,8 @@ var H5P = H5P || {};
    */
   Dictation.Sentence.prototype.disable = function () {
     this.inputField.disabled = true;
-    if (this.button !== undefined) {
-      this.button.setAttribute('disabled', 'disabled');
-      this.button.classList.add(DISABLED);
-    }
-    if (this.buttonAlternative !== undefined) {
-      this.buttonAlternative.setAttribute('disabled', 'disabled');
-      this.buttonAlternative.classList.add(DISABLED);
-    }
+    this.buttonPlayNormal.disable();
+    this.buttonPlaySlow.disable();
   };
 
   /**
@@ -331,18 +240,13 @@ var H5P = H5P || {};
    */
   Dictation.Sentence.prototype.enable = function () {
     this.inputField.disabled = false;
-    if (this.button !== undefined) {
-      this.button.removeAttribute('disabled');
-      this.button.classList.remove(DISABLED);
-    }
-    if (this.buttonAlternative !== undefined) {
-      this.buttonAlternative.removeAttribute('disabled');
-      this.buttonAlternative.classList.remove(DISABLED);
-    }
+    this.buttonPlayNormal.enable();
+    this.buttonPlaySlow.enable();
   };
 
   /**
    * Add spaces + delatur symbols between text and punctuation.
+   *
    * @param {string} text - Text to enter spaces + symbols.
    @ @return {string} Text with spaces and symbols.
    */
@@ -354,8 +258,9 @@ var H5P = H5P || {};
 
   /**
    * Get pattern of spaces to add behind aliged array of words.
-   * @param {array} words - Words to get spaces for.
-   * @return {array} Spaces.
+   *
+   * @param {object[]} words - Words to get spaces for.
+   * @return {object[]} Spaces.
    */
   Dictation.Sentence.prototype.getSpaces = function (words) {
     let output = [];
@@ -374,8 +279,9 @@ var H5P = H5P || {};
 
   /**
    * Strip punctuation from a sentence.
-   * @param {array|string} words - Words of a sentence.
-   * @return {array|string} Words without punctuation.
+   *
+   * @param {object[]|string} words - Words of a sentence.
+   * @return {object[]|string} Words without punctuation.
    */
   Dictation.Sentence.prototype.stripPunctuation = function (words) {
     let returnString = false;
@@ -391,6 +297,7 @@ var H5P = H5P || {};
 
   /**
    * Compute the results for this sentence.
+   *
    * @return {object} Results.
    */
   Dictation.Sentence.prototype.computeResults = function() {
@@ -601,8 +508,13 @@ var H5P = H5P || {};
       return {"words1": master, "words2": slave};
     };
 
-    // Count the number of matches + typos
-    let count = function(aligned) {
+    /**
+     * Count the number of matches + typos.
+     *
+     * @param {object} aligned - Aligned words.
+     * @return {number} Number of matches and typos.
+     */
+    const count = function(aligned) {
       let output = 0;
       aligned.words1.forEach(function(word1, index) {
         if (word1 === aligned.words2[index] || H5P.TextUtilities.areSimilar(word1, aligned.words2[index])) {
@@ -619,7 +531,7 @@ var H5P = H5P || {};
       aligned1 = {"words1": aligned2.words1.reverse(), "words2": aligned2.words2.reverse()};
     }
 
-    // Don't add unnecessary added words as extra mistakes
+    // Don't add unnecessary added words without a counterpart as extra mistakes
     while (aligned1.words1[0] === undefined && aligned1.words2[aligned1.words2.length - 1] === undefined) {
       aligned1.words1 = aligned1.words1.slice(1);
       aligned1.words2 = aligned1.words2.slice(0, aligned1.words2.length - 1);
@@ -632,10 +544,11 @@ var H5P = H5P || {};
   };
 
   /**
-   * Set focus to the sentence solution
+   * Set focus to the sentence solution.
    */
-  Dictation.Sentence.prototype.focus = function () {
-    this.solutionText.focus();
+  Dictation.Sentence.prototype.focusSolution = function () {
+    this.solutionInner.focus();
+    this.solutionInner.classList.add('11');
   };
 
-})(H5P.jQuery, H5P.Dictation, H5P.Audio);
+})(H5P.jQuery, H5P.Dictation);
