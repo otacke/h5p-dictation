@@ -222,8 +222,12 @@ var H5P = H5P || {};
    */
   Dictation.Sentence.prototype.reset = function () {
     this.inputField.value = '';
-    this.buttonPlayNormal.reset();
-    this.buttonPlaySlow.reset();
+    if (this.buttonPlayNormal) {
+      this.buttonPlayNormal.reset();
+    }
+    if (this.buttonPlaySlow) {
+      this.buttonPlaySlow.reset();
+    }
   };
 
   /**
@@ -231,8 +235,12 @@ var H5P = H5P || {};
    */
   Dictation.Sentence.prototype.disable = function () {
     this.inputField.disabled = true;
-    this.buttonPlayNormal.disable();
-    this.buttonPlaySlow.disable();
+    if (this.buttonPlayNormal) {
+      this.buttonPlayNormal.disable();
+    }
+    if (this.buttonPlaySlow) {
+      this.buttonPlaySlow.disable();
+    }
   };
 
   /**
@@ -240,8 +248,12 @@ var H5P = H5P || {};
    */
   Dictation.Sentence.prototype.enable = function () {
     this.inputField.disabled = false;
-    this.buttonPlayNormal.enable();
-    this.buttonPlaySlow.enable();
+    if (this.buttonPlayNormal) {
+      this.buttonPlayNormal.enable();
+    }
+    if (this.buttonPlaySlow) {
+      this.buttonPlaySlow.enable();
+    }
   };
 
   /**
