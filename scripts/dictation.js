@@ -36,7 +36,6 @@ H5P.Dictation = function (Audio, Question) {
     this.params.behaviour.enableRetry = this.params.behaviour.enableRetry || false;
 
     // Other defaults
-    this.params.behaviour.taskDescription = this.params.behaviour.taskDescription || '';
     this.params.behaviour.tries = this.params.behaviour.tries || Infinity;
     this.params.behaviour.triesAlternative = this.params.behaviour.triesAlternative || Infinity;
 
@@ -112,10 +111,12 @@ H5P.Dictation = function (Audio, Question) {
     }
 
     // Register task introduction text
-    this.introduction = document.createElement('div');
-    this.introduction.setAttribute('tabindex', '0');
-    this.introduction.innerHTML = this.params.taskDescription;
-    this.setIntroduction(this.introduction);
+    if (this.params.taskDescription) {
+      this.introduction = document.createElement('div');
+      this.introduction.setAttribute('tabindex', '0');
+      this.introduction.innerHTML = this.params.taskDescription;
+      this.setIntroduction(this.introduction);
+    }
 
     // Build content
     const content = document.createElement('div');
@@ -513,7 +514,7 @@ H5P.Dictation = function (Audio, Question) {
   Dictation.prototype.getxAPIDefinition = function () {
     const definition = {};
     definition.name = {'en-US': 'Dictation'};
-    definition.description = {'en-US': this.params.taskDescription};
+    definition.description = {'en-US': this.getTitle()};
     definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
     definition.interactionType = 'long-fill-in';
     definition.correctResponsesPattern = this.sentences
@@ -545,6 +546,16 @@ H5P.Dictation = function (Audio, Question) {
       }
     }
     return arguments[0];
+  };
+
+
+  /**
+   * Get the xAPI definition for the xAPI object.
+   *
+   * @return {object} XAPI definition.
+   */
+  Dictation.prototype.getTitle = function () {
+    return (this.params.taskDescription) ? this.params.taskDescription : 'Dictation';
   };
 
   return Dictation;
