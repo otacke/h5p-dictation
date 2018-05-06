@@ -14,7 +14,6 @@ var H5P = H5P || {};
   const SOLUTION_INNER = 'h5p-solution-inner';
   const SOLUTION_TEXT = 'h5p-solution-text';
   const HIDE = 'hide';
-  const DISABLED = 'disabled';
 
   // score types
   const TYPE_ADDED = 'added';
