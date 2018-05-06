@@ -219,22 +219,6 @@
         "default": "50 %"
       },
       {
-        "name": "mistakesPassing",
-        "type": "number",
-        "label": "Maximum mistakes for passing",
-        "description": "Maximum number of mistakes allowed for still passing",
-        "optional": true,
-        "min": 0
-      },
-      {
-        "name": "mistakesMastering",
-        "type": "number",
-        "label": "Maximum mistakes for mastering",
-        "description": "Maximum number of mistakes allowed for still mastering",
-        "optional": true,
-        "min": 0
-      },
-      {
         "name": "enableRetry",
         "label": "Enable \"Retry\"",
         "type": "boolean",
@@ -256,7 +240,7 @@
     "name": "generalFeedback",
     "type": "text",
     "label": "General feedback",
-    "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+    "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
     "importance": "low",
     "default": "You have made @total mistake(s).",
     "common": true

@@ -161,7 +161,7 @@ var H5P = H5P || {};
   };
 
   /**
-   * Reset the button.
+   * Reset button.
    */
   Dictation.Button.prototype.reset = function () {
     this.triesLeft = this.params.maxTries;
@@ -169,7 +169,7 @@ var H5P = H5P || {};
   };
 
   /**
-   * Enable the button.
+   * Enable button.
    */
   Dictation.Button.prototype.enable = function () {
     if (this.button) {
@@ -179,12 +179,21 @@ var H5P = H5P || {};
   };
 
   /**
-   * Disable the button.
+   * Disable button.
    */
   Dictation.Button.prototype.disable = function () {
     if (this.button) {
       this.button.setAttribute('disabled', 'disabled');
       this.button.classList.add(DISABLED);
+    }
+  };
+
+  /**
+   * Focus button.
+   */
+  Dictation.Button.prototype.focus = function () {
+    if (this.button) {
+      this.button.focus();
     }
   };
 

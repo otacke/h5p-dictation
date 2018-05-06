@@ -218,7 +218,7 @@ var H5P = H5P || {};
   };
 
   /**
-   * Reset the sentences.
+   * Reset sentences.
    */
   Dictation.Sentence.prototype.reset = function () {
     this.inputField.value = '';
@@ -231,7 +231,7 @@ var H5P = H5P || {};
   };
 
   /**
-   * Disable the input field.
+   * Disable input field.
    */
   Dictation.Sentence.prototype.disable = function () {
     this.inputField.disabled = true;
@@ -244,7 +244,7 @@ var H5P = H5P || {};
   };
 
   /**
-   * Enable the input field.
+   * Enable input field.
    */
   Dictation.Sentence.prototype.enable = function () {
     this.inputField.disabled = false;
@@ -253,6 +253,15 @@ var H5P = H5P || {};
     }
     if (this.buttonPlaySlow) {
       this.buttonPlaySlow.enable();
+    }
+  };
+
+  /**
+   * Focus button.
+   */
+  Dictation.Sentence.prototype.focus = function () {
+    if (this.buttonPlayNormal) {
+      this.buttonPlayNormal.focus();
     }
   };
 
