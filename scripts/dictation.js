@@ -47,27 +47,31 @@ H5P.Dictation = function (Audio, Question) {
     });
 
     // Create sentence instances
-    this.params.sentences.forEach(function (element, index) {
-      that.sentences.push(new H5P.Dictation.Sentence(
-        index + 1,
-        {
-          "sentence": element,
-          "audioNotSupported": that.params.audioNotSupported,
-          "tries": that.params.behaviour.tries,
-          "triesAlternative": that.params.behaviour.triesAlternative,
-          "ignorePunctuation": that.params.behaviour.ignorePunctuation,
-          "hasAlternatives": hasAlternatives,
-          "aria": {
-            "play": that.params.ariaPlay,
-            "playSlowly": that.params.ariaPlaySlowly,
-            "enterText": that.params.ariaEnterText,
-            "solution": that.params.ariaSolution,
-            "sentence": that.params.ariaSentence
-          }
-        },
-        that.contentId)
-      );
-    });
+    this.params.sentences = this.params.sentences
+      .filter(function (element) {
+        return (typeof element.text !== 'undefined' && typeof element.sample !== 'undefined');
+      })
+      .forEach(function (element, index) {
+        that.sentences.push(new H5P.Dictation.Sentence(
+          index + 1,
+          {
+            "sentence": element,
+            "audioNotSupported": that.params.audioNotSupported,
+            "tries": that.params.behaviour.tries,
+            "triesAlternative": that.params.behaviour.triesAlternative,
+            "ignorePunctuation": that.params.behaviour.ignorePunctuation,
+            "hasAlternatives": hasAlternatives,
+            "aria": {
+              "play": that.params.ariaPlay,
+              "playSlowly": that.params.ariaPlaySlowly,
+              "enterText": that.params.ariaEnterText,
+              "solution": that.params.ariaSolution,
+              "sentence": that.params.ariaSentence
+            }
+          },
+          that.contentId)
+        );
+      });
 
     // Score parameters
     this.maxMistakes = this.computeMaxMistakes();
@@ -124,21 +128,31 @@ H5P.Dictation = function (Audio, Question) {
       content.appendChild(element.getContent());
     });
 
+    // No content was given
+    if (this.sentences.length === 0) {
+      const message = document.createElement('div');
+      message.classList.add('h5p-dictation-no-content');
+      message.innerHTML = 'I really need at least one sound sample and text for it :-)';
+      content.appendChild(message);
+    }
+
     // Register content
     this.setContent(content);
 
-    // Register Buttons
-    this.addButtons();
+    if (this.sentences.length !== 0) {
+      // Register Buttons
+      this.addButtons();
 
-    // Autoplay the first sample if set to in settings, user feature request
-    if (that.params.behaviour.autoplayDelay) {
-      window.addEventListener('load', function () {
-        setTimeout(function () {
-          if (that.sentences && that.sentences.length > 0) {
-            that.sentences[0].read();
-          }
-        }, that.params.behaviour.autoplayDelay * 1000);
-      });
+      // Autoplay the first sample if set to in settings, user feature request
+      if (that.params.behaviour.autoplayDelay) {
+        window.addEventListener('load', function () {
+          setTimeout(function () {
+            if (that.sentences && that.sentences.length > 0) {
+              that.sentences[0].read();
+            }
+          }, that.params.behaviour.autoplayDelay * 1000);
+        });
+      }
     }
   };
 
