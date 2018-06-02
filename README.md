@@ -15,3 +15,4 @@ If you like what I do, please consider to become my supporter at patreon: https:
 - Do we need an option for different diff styles?
 - Automatic speed change? How to balance speed/pitch?
 - Add option for "drag the words" instead of text input fields? But then the name Dictation might be a little misleading
+- Indicator about how many tries are left
