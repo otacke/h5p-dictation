@@ -7,7 +7,7 @@ You can e.g. upload sound samples that contain a recording of someone reading a 
 If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
 
 ## TODO before first release
-- Change diff style, possibly
+- Implement suggestions at https://h5ptechnology.atlassian.net/browse/HFP-1988
 - Tidy up
 
 ## Ideas to think about ...
