@@ -381,8 +381,6 @@ var H5P = H5P || {};
       'spaces': spaces
     };
 
-    // TODO: Remove when done and return directly
-    console.log(output);
     return output;
   };
 
@@ -556,9 +554,6 @@ var H5P = H5P || {};
       aligned1.words1 = aligned1.words1.slice(1);
       aligned1.words2 = aligned1.words2.slice(0, aligned1.words2.length - 1);
     }
-
-    // TODO: Remove when done.
-    console.log(aligned1.words1, aligned1.words2);
 
     return aligned1;
   };
