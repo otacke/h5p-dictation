@@ -236,9 +236,11 @@ var H5P = H5P || {};
     this.inputField.disabled = true;
     if (this.buttonPlayNormal) {
       this.buttonPlayNormal.disable();
+      this.buttonPlayNormal.resetAudio();
     }
     if (this.buttonPlaySlow) {
       this.buttonPlaySlow.disable();
+      this.buttonPlaySlow.resetAudio();
     }
   };
 

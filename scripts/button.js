@@ -80,6 +80,7 @@ var H5P = H5P || {};
       const audio = new Audio(audioDefaults, id);
       audio.attach($audioWrapper);
       this.button = audio.$audioButton.get(0);
+      this.audio = audio;
 
       if (params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
         audio.$audioButton.removeClass(BUTTON_PLAY).addClass(BUTTON_SLOW);
@@ -211,6 +212,21 @@ var H5P = H5P || {};
     if (this.button) {
       this.button.setAttribute('disabled', 'disabled');
       this.button.classList.add(DISABLED);
+    }
+  };
+
+  /**
+   * Reset audio.
+   */
+  Dictation.Button.prototype.resetAudio = function () {
+    this.audio.audio.load();
+    this.button.classList.remove(BUTTON_PLAY_PAUSED);
+    this.button.classList.remove(BUTTON_PAUSE);
+    if (this.params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
+      this.button.classList.add(BUTTON_SLOW);
+    }
+    else {
+      this.button.classList.add(BUTTON_PLAY);
     }
   };
 
