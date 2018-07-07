@@ -1,3 +1,14 @@
+/* Only used for audio button, could go into H5Picons */
+@font-face {
+  font-family: "H5PDictation";
+  src: url('../fonts/H5PDictation.eot');
+  src: url('../fonts/H5PDictation.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/H5PDictation.woff') format('woff'),
+  url('../fonts/H5PDictation.ttf') format('truetype'),
+  url('../fonts/H5PDictation.svg#H5PInteractiveVideo') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 .h5p-dictation {}
 .h5p-dictation-no-content {
   width: auto;
@@ -73,8 +84,12 @@
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
   font-size: 0.6em;
 }
+.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-slow {
+  font-family: "H5PDictation";
+}
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-slow:before {
-  content: "\f0e4";
+  content: "\e900";
+    font-size: 1em;
 }
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
   content: "\f04c";
