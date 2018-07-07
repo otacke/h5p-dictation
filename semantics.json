@@ -294,6 +294,23 @@
     "default": "Play slowly"
   },
   {
+    "name": "ariaTriesLeft",
+    "type": "text",
+    "label": "Tries left (text for readspeakers and hover text)",
+    "description": "@number will be replaced by the current number of tries left.",
+    "importance": "low",
+    "common": true,
+    "default": "Number of tries left: @number"
+  },
+  {
+    "name": "ariaInfinite",
+    "type": "text",
+    "label": "Infinite (text for readspeakers and hover text)",
+    "importance": "low",
+    "common": true,
+    "default": "infinite"
+  },
+  {
     "name": "ariaEnterText",
     "type": "text",
     "label": "Enter text field (text for readspeakers)",

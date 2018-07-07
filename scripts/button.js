@@ -23,6 +23,8 @@ var H5P = H5P || {};
    * @param {object} params.aria - Readspeaker texts.
    * @param {string} params.aria.play - Readspeaker text for "Play".
    * @param {string} params.aria.playSlowly - Readspeaker text for "Play slowly".
+   * @param {string} params.aria.triesLeft - Readspeaker text for "Number of tries left".
+   * @param {string} params.aria.infinite - Readspeaker text for "infinite".
    * @param {string} params.aria.enterText - Readspeaker text for "Enter what you have heard here".
    * @param {string} params.aria.solution - Readspeaker text for "Solution".
    * @param {string} params.aria.sentence - Readspeaker text for "Sentence".
@@ -39,6 +41,8 @@ var H5P = H5P || {};
     this.params.aria = params.aria || [];
     this.params.aria.play = this.params.aria.play || 'Play';
     this.params.aria.playSlowly = this.params.aria.playSlowly || 'Play slowly';
+    this.params.aria.triesLeft = this.params.aria.triesLeft || 'Number of tries left: @number';
+    this.params.aria.infinite = this.params.aria.infinite || 'infinite';
     this.params.aria.sentence = this.params.aria.sentence || 'Sentence';
     this.params.aria.solution = this.params.aria.solution || 'Solution';
     this.params.aria.enterText = this.params.aria.enterText || 'Enter what you have heard';
@@ -50,9 +54,6 @@ var H5P = H5P || {};
     // Placeholder if Audio could not be created
     if (this.dom.firstChild === null) {
       this.dom.appendChild(this.getDummyButton());
-    }
-    else {
-      this.button = this.dom.firstChild.firstChild;
     }
     this.status = Dictation.Button.STATUS_ENDED;
   };
@@ -77,12 +78,14 @@ var H5P = H5P || {};
       };
       const audio = new Audio(audioDefaults, id);
       audio.attach($audioWrapper);
+      this.button = audio.$audioButton.get(0);
+
       if (params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
         audio.$audioButton.removeClass(BUTTON_PLAY).addClass(BUTTON_SLOW);
-        audio.$audioButton.attr('aria-label', params.aria.playSlowly);
+        this.setLabel(params.aria.playSlowly);
       }
       else {
-        audio.$audioButton.attr('aria-label', params.aria.play);
+        this.setLabel(params.aria.play);
       }
 
       // Event Listener Play
@@ -103,10 +106,14 @@ var H5P = H5P || {};
 
       // Event Listener Ended
       audio.audio.addEventListener('ended', function () {
+        that.handleTries();
         if (params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
           audio.$audioButton.removeClass(BUTTON_PAUSE).addClass(BUTTON_SLOW);
+          that.setLabel(that.params.aria.playSlowly);
         }
-        that.handleTries();
+        else {
+          that.setLabel(that.params.aria.playSlow);
+        }
         that.status = Dictation.Button.STATUS_ENDED;
       });
 
@@ -158,6 +165,18 @@ var H5P = H5P || {};
       this.button.setAttribute('disabled', 'disabled');
       this.button.classList.add(DISABLED);
     }
+  };
+
+  /**
+   * Set the title label and the aria label.
+   *
+   * @param {string} label - The label to set.
+   */
+  Dictation.Button.prototype.setLabel = function (label) {
+    const tries = isFinite(this.triesLeft) ? this.triesLeft : this.params.aria.infinite;
+    const triesLeftLabel = this.params.aria.triesLeft.replace(/@number/g, tries);
+    this.button.setAttribute('aria-label', label + '.' + triesLeftLabel);
+    this.button.setAttribute('title', triesLeftLabel);
   };
 
   /**
