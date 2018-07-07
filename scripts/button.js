@@ -9,6 +9,7 @@ var H5P = H5P || {};
   const AUDIO_WRAPPER = 'h5p-dictation-audio-wrapper';
   const BUTTON = 'h5p-audio-minimal-button';
   const BUTTON_PLAY = 'h5p-audio-minimal-play';
+  const BUTTON_PLAY_PAUSED = 'h5p-audio-minimal-play-paused';
   const BUTTON_PAUSE = 'h5p-audio-minimal-pause';
   const BUTTON_SLOW = 'h5p-audio-minimal-slow';
   const BUTTON_NONE = 'h5p-audio-minimal-none';
@@ -99,7 +100,7 @@ var H5P = H5P || {};
       // Event Listener Pause
       audio.audio.addEventListener('pause', function () {
         if (params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
-          audio.$audioButton.removeClass(BUTTON_PAUSE).addClass(BUTTON_SLOW);
+          audio.$audioButton.removeClass(BUTTON_PAUSE).addClass(BUTTON_PLAY_PAUSED);
         }
         that.status = Dictation.Button.STATUS_PAUSE;
       });
