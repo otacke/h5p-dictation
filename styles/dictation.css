@@ -89,7 +89,7 @@
 }
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-slow:before {
   content: "\e900";
-    font-size: 1em;
+    font-size: 1.1em;
 }
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
   content: "\f04c";
