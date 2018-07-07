@@ -95,6 +95,10 @@ var H5P = H5P || {};
     this.inputField.setAttribute('aria-label', this.params.aria.enterText);
     this.inputField.classList.add(INPUT_FIELD);
 
+    this.inputField = document.createElement('textarea');
+    this.inputField.setAttribute('aria-label', this.params.aria.enterText);
+    this.inputField.classList.add(INPUT_FIELD);
+
     // Solution container
     this.solutionText = document.createElement('div');
     this.solutionText.classList.add(SOLUTION_TEXT);

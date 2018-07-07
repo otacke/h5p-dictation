@@ -112,7 +112,7 @@ var H5P = H5P || {};
           that.setLabel(that.params.aria.playSlowly);
         }
         else {
-          that.setLabel(that.params.aria.playSlow);
+          that.setLabel(that.params.aria.play);
         }
         that.status = Dictation.Button.STATUS_ENDED;
       });
@@ -185,6 +185,12 @@ var H5P = H5P || {};
   Dictation.Button.prototype.reset = function () {
     this.triesLeft = this.params.maxTries;
     this.enable();
+    if (this.params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
+      this.setLabel(this.params.aria.playSlowly);
+    }
+    else {
+      this.setLabel(this.params.aria.play);
+    }
   };
 
   /**
