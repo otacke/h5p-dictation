@@ -1,5 +1,4 @@
-.h5p-dictation {
-}
+.h5p-dictation {}
 .h5p-dictation-no-content {
   width: auto;
   font-size: 1.5em;
@@ -81,9 +80,12 @@
   content: "\f04c";
 }
 .h5p-dictation .h5p-audio-minimal-button.disabled {
-  background: -webkit-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  rgba(177,177,177,1) 0%,rgba(105,105,105,1) 100%); /* IE10+ */
+  background: -webkit-linear-gradient(top, rgba(177, 177, 177, 1) 0%, rgba(105, 105, 105, 1) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(177, 177, 177, 1) 0%, rgba(105, 105, 105, 1) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(177, 177, 177, 1) 0%, rgba(105, 105, 105, 1) 100%);
+  /* IE10+ */
   color: #e9e9e4;
 }
 .h5p-dictation .h5p-text-input {
@@ -111,23 +113,13 @@
   background: #e9e9e4;
 }
 /* Solution markers */
-.h5p-dictation .h5p-answer-added,
-.h5p-dictation .h5p-answer-wrong,
-.h5p-dictation .h5p-answer-typo {
+
+.h5p-dictation .h5p-answer-added, .h5p-dictation .h5p-answer-wrong, .h5p-dictation .h5p-answer-typo {
   text-decoration: line-through;
 }
-.h5p-dictation .h5p-answer-missing,
-.h5p-dictation .h5p-answer-match {
-}
-.h5p-dictation .h5p-solution-added,
-.h5p-dictation .h5p-solution-wrong,
-.h5p-dictation .h5p-solution-typo,
-.h5p-dictation .h5p-solution-missing,
-.h5p-dictation .h5p-solution-match {
-}
-.h5p-dictation .h5p-wrapper-wrong,
-.h5p-dictation .h5p-wrapper-missing,
-.h5p-dictation .h5p-wrapper-added {
+.h5p-dictation .h5p-answer-missing, .h5p-dictation .h5p-answer-match {}
+.h5p-dictation .h5p-solution-added, .h5p-dictation .h5p-solution-wrong, .h5p-dictation .h5p-solution-typo, .h5p-dictation .h5p-solution-missing, .h5p-dictation .h5p-solution-match {}
+.h5p-dictation .h5p-wrapper-wrong, .h5p-dictation .h5p-wrapper-missing, .h5p-dictation .h5p-wrapper-added {
   background-color: #f7d0d0;
   border: 1px solid #f7d0d0;
   color: #b71c1c;
@@ -137,9 +129,7 @@
   padding: 0.15em;
   line-height: 1em;
 }
-.h5p-dictation .h5p-wrapper-wrong:after,
-.h5p-dictation .h5p-wrapper-missing:after,
-.h5p-dictation .h5p-wrapper-added:after {
+.h5p-dictation .h5p-wrapper-wrong:after, .h5p-dictation .h5p-wrapper-missing:after, .h5p-dictation .h5p-wrapper-added:after {
   padding-left: 0.25em;
   right: 0.5em;
   top: 0;
@@ -190,6 +180,7 @@
   margin-right: 0.25em;
 }
 /* This could be part of H5P.Question */
+
 .h5p-question-minus-one-half {
   position: absolute;
   width: 1.923076923em;
