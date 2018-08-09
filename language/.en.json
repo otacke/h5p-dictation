@@ -1,0 +1,245 @@
+{
+  "semantics": [
+    {
+      "label": "Media",
+      "fields": [
+        {
+          "label": "Type",
+          "description": "Optional media to display above the question."
+        },
+        {
+          "label": "Disable image zooming",
+          "showWhen": {
+            "rules": [
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Task description",
+      "description": "Describe your task here.",
+      "placeholder": "Please listen carefully and write what you hear."
+    },
+    {
+      "label": "Sentences",
+      "widgets": [
+        {
+          "label": "Default"
+        }
+      ],
+      "entity": "Sentence",
+      "field": {
+        "label": "Sentence",
+        "fields": [
+          {
+            "label": "Sound sample",
+            "description": "Sentence spoken in normal speed"
+          },
+          {
+            "label": "Sound sample slow",
+            "description": "Sentence spoken in slow speed"
+          },
+          {
+            "label": "Text",
+            "description": "Text that should be written"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Overall Feedback",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Default"
+            }
+          ],
+          "label": "Define custom feedback for any score range",
+          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
+          "entity": "range",
+          "field": {
+            "fields": [
+              {
+                "label": "Score Range"
+              },
+              {},
+              {
+                "label": "Feedback for defined score range",
+                "placeholder": "Fill in the feedback"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
+      "fields": [
+        {
+          "label": "Autoplay delay",
+          "description": "Define how many seconds after loading the first sample should play."
+        },
+        {
+          "label": "Maximum tries",
+          "description": "Will limit the number of times the samples for each sentence can be listened to."
+        },
+        {
+          "label": "Maximum tries for slow speed",
+          "description": "Will limit the number of times the slow samples for each sentence can be listened to."
+        },
+        {
+          "label": "Ignore Punctuation",
+          "description": "If checked, the punctuation will not be considerd for scoring"
+        },
+        {
+          "label": "Value of typos",
+          "description": "Determine to which extend typing errors count as a mistake.",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ],
+          "default": "50 %"
+        },
+        {
+          "label": "Enable \"Retry\""
+        },
+        {
+          "label": "Enable \"Solution\""
+        }
+      ]
+    },
+    {
+      "label": "General feedback",
+      "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+      "default": "You have made @total mistake(s)."
+    },
+    {
+      "label": "Text for \"Check\" button",
+      "default": "Check"
+    },
+    {
+      "label": "Text for \"Retry\" button",
+      "default": "Retry"
+    },
+    {
+      "label": "Text for \"Show solution\" button",
+      "default": "Show solution"
+    },
+    {
+      "label": "Audio not supported message",
+      "default": "Your browser does not support this audio."
+    },
+    {
+      "label": "Play button (text for readspeakers)",
+      "default": "Play"
+    },
+    {
+      "label": "Play slowly button (text for readspeakers)",
+      "default": "Play slowly"
+    },
+    {
+      "label": "Tries left (text for readspeakers and hover text)",
+      "description": "@number will be replaced by the current number of tries left.",
+      "default": "Number of tries left: @number"
+    },
+    {
+      "label": "Infinite (text for readspeakers and hover text)",
+      "default": "infinite"
+    },
+    {
+      "label": "Enter text field (text for readspeakers)",
+      "default": "Enter what you have heard."
+    },
+    {
+      "label": "Your result (text for readspeakers)",
+      "default": "Your result"
+    },
+    {
+      "label": "Solution (text for readspeakers)",
+      "default": "Solution"
+    },
+    {
+      "label": "Sentence (text for readspeakers)",
+      "default": "Sentence"
+    },
+    {
+      "label": "Correct (text for readspeakers)",
+      "default": "correct"
+    },
+    {
+      "label": "Wrong (text for readspeakers)",
+      "default": "wrong"
+    },
+    {
+      "label": "Small mistake (text for readspeakers)",
+      "default": "small mistake"
+    },
+    {
+      "label": "Missing word or symbol (text for readspeakers)",
+      "default": "missing"
+    },
+    {
+      "label": "Added word or symbol (text for readspeakers)",
+      "default": "added"
+    },
+    {
+      "label": "Period (text for readspeakers)",
+      "default": "period"
+    },
+    {
+      "label": "Exclamation point (text for readspeakers)",
+      "default": "exclamation point"
+    },
+    {
+      "label": "Question mark (text for readspeakers)",
+      "default": "question mark"
+    },
+    {
+      "label": "Comma (text for readspeakers)",
+      "default": "comma"
+    },
+    {
+      "label": "Single quote (text for readspeakers)",
+      "default": "single quote"
+    },
+    {
+      "label": "Double quote (text for readspeakers)",
+      "default": "double quote"
+    },
+    {
+      "label": "Colon (text for readspeakers)",
+      "default": "colon"
+    },
+    {
+      "label": "Semicolon (text for readspeakers)",
+      "default": "semicolon"
+    },
+    {
+      "label": "Plus (text for readspeakers)",
+      "default": "plus"
+    },
+    {
+      "label": "Minus (text for readspeakers)",
+      "default": "minus"
+    },
+    {
+      "label": "Asterisk (text for readspeakers)",
+      "default": "asterisk"
+    },
+    {
+      "label": "Forward slash (text for readspeakers)",
+      "default": "forward slash"
+    }
+  ]
+}
