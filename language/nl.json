@@ -1,0 +1,245 @@
+{
+  "semantics": [
+    {
+      "label": "Media",
+      "fields": [
+        {
+          "label": "Type",
+          "description": "De optionele media wordt boven de vraag getoond."
+        },
+        {
+          "label": "Schakel het beeldzoomen uit",
+          "showWhen": {
+            "rules": [
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Taakomschrijving",
+      "description": "Beschrijf hier je taak.",
+      "placeholder": "Luister alsjelieft goed en schrijf op wat je hoort."
+    },
+    {
+      "label": "Zinnen",
+      "widgets": [
+        {
+          "label": "Standaard"
+        }
+      ],
+      "entity": "Zin",
+      "field": {
+        "label": "Zin",
+        "fields": [
+          {
+            "label": "Geluidsvoorbeeld",
+            "description": "De zin gesproken in normale snelheid"
+          },
+          {
+            "label": "Geluidsvoorbeeld langzaam",
+            "description": "De zin gesproken in langzame snelheid"
+          },
+          {
+            "label": "Tekst",
+            "description": "De te schrijven tekst"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Algehele feedback",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Standaard"
+            }
+          ],
+          "label": "Definieer aangepaste feedback voor elke scorereeks",
+          "description": "Druk op de knop \"Voeg scorereeks toe\" om zoveel reeksen toe te voegen als nodig is. Voorbeeld: 0-20% Onvoldoende score, 21-91% Gemiddelde score, 91-100% Uitstekende score!",
+          "entity": "reeks",
+          "field": {
+            "fields": [
+              {
+                "label": "Scorereeks"
+              },
+              {},
+              {
+                "label": "Feedback voor de gedefinieerde scorereeks",
+                "placeholder": "Vul de aangepaste feedback in"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Gedragsinstellingen",
+      "description": "Met deze opties kun je bepalen hoe de taak zich gedraagt.",
+      "fields": [
+        {
+          "label": "Vertraging van het autoplay-systeem",
+          "description": "Definieer hoeveel seconden na het laden van het eerste voorbeeld er moet worden afgespeeld."
+        },
+        {
+          "label": "Maximaal aantal pogingen",
+          "description": "Dit begrenst het aantal maal dat de voorbeelden voor elke zin kunnen worden beluisterd."
+        },
+        {
+          "label": "Maximaal aantal pogingen voor de langzame snelheid",
+          "description": "Dit begrenst het aantal maal dat de langzame voorbeelden voor elke zin kunnen worden beluisterd."
+        },
+        {
+          "label": "Negeer interpunctie",
+          "description": "Indien aangevinkt, worden de leestekens niet in aanmerking genomen bij het bepalen van de score."
+        },
+        {
+          "label": "De waarde van de typefouten",
+          "description": "Bepaal in welke mate typefouten als fout gelden.",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ],
+          "default": "50 %"
+        },
+        {
+          "label": "Schakel \"Opnieuw\" in"
+        },
+        {
+          "label": "Schakel \"Oplossing\" in"
+        }
+      ]
+    },
+    {
+      "label": "Algemene feedback",
+      "description": "Je kunt gebruik maken van meerdere plaatshouders die worden vervangen door het juiste nummer: @matches = aantal overeenkomsten, @total = totaal aantal fouten, @capped = gemaximeerd totaal aantal fouten, @wrong = verkeerde woorden, @added = extra woorden, @missing = ontbrekende woorden, @typo = tikfouten",
+      "default": "Je hebt @total fout(en) gemaakt."
+    },
+    {
+      "label": "Tekst voor de \"Controleer\" -knop",
+      "default": "Controleer"
+    },
+    {
+      "label": "Tekst voor de \"Opnieuw\" -knop",
+      "default": "Opnieuw"
+    },
+    {
+      "label": "Tekst voor de \"Toon oplossing\" -knop",
+      "default": "Toon oplossing"
+    },
+    {
+      "label": "Bericht dat de audio niet wordt ondersteund",
+      "default": "Je browser ondersteunt deze audio niet."
+    },
+    {
+      "label": "Afspelen knop (tekst voor readspeakers)",
+      "default": "Afspelen"
+    },
+    {
+      "label": "Langzaam afspelen knop (tekst voor readspeakers)",
+      "default": "Langzaam afspelen"
+    },
+    {
+      "label": "Resterende pogingen (tekst voor readspeakers en muisover tekst)",
+      "description": "@number wordt vervangen door het huidige aantal resterende pogingen.",
+      "default": "Aantal resterende pogingen: @number"
+    },
+    {
+      "label": "Oneindig (tekst voor readspeakers en muisover tekst)",
+      "default": "oneindig"
+    },
+    {
+      "label": "Tekstveld invoeren (tekst voor readspeakers)",
+      "default": "Voer in wat je hebt gehoord."
+    },
+    {
+      "label": "Je resultaat (tekst voor readspeakers)",
+      "default": "Je resultaat"
+    },
+    {
+      "label": "Oplossing (tekst voor readspeakers)",
+      "default": "Oplossing"
+    },
+    {
+      "label": "Zin (tekst voor readspeakers)",
+      "default": "Zin"
+    },
+    {
+      "label": "Juist (tekst voor readspeakers)",
+      "default": "juist"
+    },
+    {
+      "label": "Onjuist (tekst voor readspeakers)",
+      "default": "onjuist"
+    },
+    {
+      "label": "Kleine fout (tekst voor readspeakers)",
+      "default": "kleine fout"
+    },
+    {
+      "label": "Ontbrekend woord of symbool (tekst voor readspeakers)",
+      "default": "ontbrekend"
+    },
+    {
+      "label": "Toegevoegd woord of symbool (tekst voor readspeakers)",
+      "default": "toegevoegd"
+    },
+    {
+      "label": "Punt (tekst voor readspeakers)",
+      "default": "punt"
+    },
+    {
+      "label": "Uitroepteken (tekst voor readspeakers)",
+      "default": "uitroepteken"
+    },
+    {
+      "label": "Vraagteken (tekst voor readspeakers)",
+      "default": "vraagteken"
+    },
+    {
+      "label": "Komma (tekst voor readspeakers)",
+      "default": "komma"
+    },
+    {
+      "label": "Enkel aanhalingsteken (tekst voor readspeakers)",
+      "default": "enkel aanhalingsteken"
+    },
+    {
+      "label": "Dubbele aanhalingstekens (tekst voor readspeakers)",
+      "default": "dubbele aanhalingstekens"
+    },
+    {
+      "label": "Dubbele punt (tekst voor readspeakers)",
+      "default": "dubbele punt"
+    },
+    {
+      "label": "Puntkomma (tekst voor readspeakers)",
+      "default": "puntkomma"
+    },
+    {
+      "label": "Plus (tekst voor readspeakers)",
+      "default": "plus"
+    },
+    {
+      "label": "Min (tekst voor readspeakers)",
+      "default": "min"
+    },
+    {
+      "label": "Asterisk (tekst voor readspeakers)",
+      "default": "asterisk"
+    },
+    {
+      "label": "Schuine streep naar voren (tekst voor readspeakers)",
+      "default": "schuine streep naar voren"
+    }
+  ]
+}
