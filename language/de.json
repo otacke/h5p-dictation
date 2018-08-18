@@ -1,0 +1,245 @@
+{
+  "semantics": [
+    {
+      "label": "Medien",
+      "fields": [
+        {
+          "label": "Typ",
+          "description": "Medien, die wahlweise oberhalb der Aufgabe angezeigt werden."
+        },
+        {
+          "label": "Bildzoom deaktivieren",
+          "showWhen": {
+            "rules": [
+              {}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Aufgabenbeschreibung",
+      "description": "Beschreibe die Aufgabe hier.",
+      "placeholder": "Bitte höre aufmerksam zu und schreibe, was du hörst."
+    },
+    {
+      "label": "Sätze",
+      "widgets": [
+        {
+          "label": "Voreinstellung"
+        }
+      ],
+      "entity": "Satz",
+      "field": {
+        "label": "Satz",
+        "fields": [
+          {
+            "label": "Tonaufnahme",
+            "description": "Satz im normalen Tempo gesprochen"
+          },
+          {
+            "label": "Tonaufnahme (langsam)",
+            "description": "Satz im langsamen Tempo gesprochen"
+          },
+          {
+            "label": "Text",
+            "description": "Text, der geschrieben werden sollte"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Gesamt-Rückmeldung",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Voreinstellung"
+            }
+          ],
+          "label": "Rückmeldungen für die einzelnen Wertebereiche",
+          "description": "Klicke auf den \"Bereich hinzufügen\"-Button, um so viele Bereiche hinzuzufügen, wie du brauchst. Beispiel: 0-20% Schlechte Punktzahl, 21-91% Durchschnittliche Punktzahl, 91-100% Großartige Punktzahl!",
+          "entity": "Bereich",
+          "field": {
+            "fields": [
+              {
+                "label": "Wertebereich"
+              },
+              {},
+              {
+                "label": "Rückmeldung für den Wertebereich",
+                "placeholder": "Trage die Rückmeldung ein"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Verhaltenseinstellugen",
+      "description": "Diese Optionen legen fest, wie die Aufgabe im Detail funktioniert.",
+      "fields": [
+        {
+          "label": "Verzögerung für automatisches Abspielen",
+          "description": "Lege fest, wie viele Sekunden nach dem Laden die erste Tonaufnahme automatisch abgespielt wird."
+        },
+        {
+          "label": "Maximale Versuchsanzahl",
+          "description": "Begrenzt die Anzahl der Versuche, die man jeweils zum Anhören der Tonaufnahme hat."
+        },
+        {
+          "label": "Maximale Versuchsanzahl für langsames Tempo",
+          "description": "Begrenzt die Anzahl der Versuche, die man jeweils zum Anhören der langsamen Tonaufnahme hat."
+        },
+        {
+          "label": "Zeichensetzung ignorieren",
+          "description": "Wenn gewählt, wird die Zeichensetzung nicht für die Bepunktung berücksichtigt."
+        },
+        {
+          "label": "Wert von kleinen Fehlern",
+          "description": "Lege fest, in welchem Maße kleine Fehler (z. B. Buchstabendreher) berücksichtigt werden.",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ],
+          "default": "50 %"
+        },
+        {
+          "label": "\"Wiederholen\" aktivieren"
+        },
+        {
+          "label": "\"Lösung anzeigen\" aktivieren"
+        }
+      ]
+    },
+    {
+      "label": "Allgemeine Rückmeldung",
+      "description": "Du kannst mehrere Platzhalter verwenden, die durch die eigentliche Anzahl ersetzt werden: @matches = richtige Worte, @total = Fehler insgesamt, @capped = Fehler insgesamt (begrenzt auf die Anzahl der richtigen Worte), @wrong = falsche Worte, @added = hinzugefügte Worte, @missing = fehlende Worte, @typo = kleine Fehler",
+      "default": "Du hast insgesamt @total Fehler gemacht."
+    },
+    {
+      "label": "Beschriftung für den \"Überprüfen\"-Button",
+      "default": "Button"
+    },
+    {
+      "label": "Beschriftung für den \"Wiederholen\"-Button",
+      "default": "Wiederholen"
+    },
+    {
+      "label": "Beschriftung für den \"Lösung zeigen\"-Button",
+      "default": "Lösung zeigen"
+    },
+    {
+      "label": "Hinweis, dass keine Tonaufnahmen abgespielt werden können",
+      "default": "Dein Browser unterstützt diese Tondateie nicht."
+    },
+    {
+      "label": "Abspiel-Button (Text für Read-Speaker)",
+      "default": "Abspielen"
+    },
+    {
+      "label": "Langsam-Abspiel-Button (Text für Read-Speaker)",
+      "default": "Langsam abspielen"
+    },
+    {
+      "label": "Verbleibende Versuche (Text für Read-Speaker und Tooltips)",
+      "description": "@number wird durch die aktuelle Anzahl verbleibender Versuche ersetzt.",
+      "default": "Verbleibende Versuche: @number"
+    },
+    {
+      "label": "Unendlich (Text für Read-Speaker und Tooltips)",
+      "default": "undendlich"
+    },
+    {
+      "label": "Eingabefeld (Text für Read-Speaker)",
+      "default": "Gib ein, was du gehört hast."
+    },
+    {
+      "label": "Dein Ergebnis (Text für Read-Speaker)",
+      "default": "Dein Ergebnis"
+    },
+    {
+      "label": "Lösung (Text für Read-Speaker)",
+      "default": "Lösung"
+    },
+    {
+      "label": "Satz (Text für Read-Speaker)",
+      "default": "Satz"
+    },
+    {
+      "label": "Richtig (Text für Read-Speaker)",
+      "default": "richtig"
+    },
+    {
+      "label": "Falsch (Text für Read-Speaker)",
+      "default": "falsch"
+    },
+    {
+      "label": "Kleiner Fehler (Text für Read-Speaker)",
+      "default": "Kleiner Fehler"
+    },
+    {
+      "label": "Fehlendes Wort oder Zeichen (Text für Read-Speaker)",
+      "default": "fehlt"
+    },
+    {
+      "label": "Hinzugefügtes Wort oder Zeichen (Text für Read-Speaker)",
+      "default": "hinzugefügt"
+    },
+    {
+      "label": "Punkt (Text für Read-Speaker)",
+      "default": "Punkt"
+    },
+    {
+      "label": "Ausrufezeichen (Text für Read-Speaker)",
+      "default": "Ausrufezeichen"
+    },
+    {
+      "label": "Fragezeichen (Text für Read-Speaker)",
+      "default": "Fragezeichen"
+    },
+    {
+      "label": "Komma (Text für Read-Speaker)",
+      "default": "Komma"
+    },
+    {
+      "label": "Anführungszeichen einfach (Text für Read-Speaker)",
+      "default": "Anführungszeichen"
+    },
+    {
+      "label": "Anführungszeichen (Text für Read-Speaker)",
+      "default": "Anführungszeichen"
+    },
+    {
+      "label": "Doppelpunkt (Text für Read-Speaker)",
+      "default": "Doppelpunkt"
+    },
+    {
+      "label": "Semikolon (Text für Read-Speaker)",
+      "default": "Semikolon"
+    },
+    {
+      "label": "Plus (Text für Read-Speaker)",
+      "default": "Plus"
+    },
+    {
+      "label": "Minus (Text für Read-Speaker)",
+      "default": "Minus"
+    },
+    {
+      "label": "Sternchen (Text für Read-Speaker)",
+      "default": "Sternchen"
+    },
+    {
+      "label": "Schrägstrich (Text für Read-Speaker)",
+      "default": "Schrägstrich"
+    }
+  ]
+}
