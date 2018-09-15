@@ -16,3 +16,4 @@ If you like what I do, please consider to become my supporter at patreon: https:
 - Automatic speed change? How to balance speed/pitch?
 - Add option for "drag the words" instead of text input fields? But then the name Dictation might be a little misleading
 - Indicator about how many tries are left
+- Use the full featured audio player and marks to jump to? Could be useful for sound samples containing more than one sample.
