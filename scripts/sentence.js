@@ -103,7 +103,7 @@ var H5P = H5P || {};
     this.solutionInner.setAttribute('tabindex', '0');
     this.solutionInner.setAttribute('role', 'list');
     this.solutionInner.setAttribute('aria-label', this.params.aria.solution);
-    this.solutionInner.addEventListener('focus', function() {
+    this.solutionInner.addEventListener('focus', function () {
       if (this.firstChild.firstChild) {
         this.firstChild.firstChild.setAttribute('tabindex', '0');
       }
@@ -322,7 +322,7 @@ var H5P = H5P || {};
    *
    * @return {object} Results.
    */
-  Dictation.Sentence.prototype.computeResults = function() {
+  Dictation.Sentence.prototype.computeResults = function () {
     const wordsSolution = this.addDelaturs(this.getCorrectText()).split(' ');
     let answer = this.getText();
     if (this.params.ignorePunctuation) {
@@ -403,9 +403,9 @@ var H5P = H5P || {};
       });
 
       // Add enough space for additional words in answer to prevent errors by stacking
-      let master = words1.map(function(word1) {
+      let master = words1.map(function (word1) {
         return Array.apply(null, Array(words2.length)).concat(word1);
-      }).reduce(function(a, b) {
+      }).reduce(function (a, b) {
         return a.concat(b);
       }, []);
       master = master.concat(Array.apply(null, Array(words2.length)));
@@ -534,9 +534,9 @@ var H5P = H5P || {};
      * @param {object} aligned - Aligned words.
      * @return {number} Number of matches and typos.
      */
-    const count = function(aligned) {
+    const count = function (aligned) {
       let output = 0;
-      aligned.words1.forEach(function(word1, index) {
+      aligned.words1.forEach(function (word1, index) {
         if (word1 === aligned.words2[index] || H5P.TextUtilities.areSimilar(word1, aligned.words2[index])) {
           output++;
         }

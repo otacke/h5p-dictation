@@ -16,7 +16,7 @@ H5P.Dictation = function (Audio, Question) {
    * @param {string} contentId - ContentId.
    * @param {Object} contentData - contentData.
    */
-  function Dictation (params, contentId, contentData) {
+  function Dictation(params, contentId, contentData) {
     const that = this;
     // Initialize
     if (!params) {
