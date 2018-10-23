@@ -219,7 +219,9 @@ var H5P = H5P || {};
    * Reset audio.
    */
   Dictation.Button.prototype.resetAudio = function () {
-    this.audio.audio.load();
+    if (this.audio && this.audio.audio && this.audio.audio.load) {
+      this.audio.audio.load();
+    }
     this.button.classList.remove(BUTTON_PLAY_PAUSED);
     this.button.classList.remove(BUTTON_PAUSE);
     if (this.params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
