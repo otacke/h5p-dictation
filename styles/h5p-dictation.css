@@ -1,11 +1,7 @@
 /* Only used for audio button, could go into H5Picons */
 @font-face {
   font-family: "H5PDictation";
-  src: url('../fonts/H5PDictation.eot');
-  src: url('../fonts/H5PDictation.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/H5PDictation.woff') format('woff'),
-  url('../fonts/H5PDictation.ttf') format('truetype'),
-  url('../fonts/H5PDictation.svg#H5PInteractiveVideo') format('svg');
+  src:  url('../fonts/H5PDictation.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
