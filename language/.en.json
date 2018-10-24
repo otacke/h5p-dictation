@@ -80,10 +80,6 @@
       "description": "These options will let you control how the task behaves.",
       "fields": [
         {
-          "label": "Autoplay delay",
-          "description": "Define how many seconds after loading the first sample should play."
-        },
-        {
           "label": "Maximum tries",
           "description": "Will limit the number of times the samples for each sentence can be listened to."
         },

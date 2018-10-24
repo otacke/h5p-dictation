@@ -80,10 +80,6 @@
       "description": "Diese Optionen legen fest, wie die Aufgabe im Detail funktioniert.",
       "fields": [
         {
-          "label": "Verzögerung für automatisches Abspielen",
-          "description": "Lege fest, wie viele Sekunden nach dem Laden die erste Tonaufnahme automatisch abgespielt wird."
-        },
-        {
           "label": "Maximale Versuchsanzahl",
           "description": "Begrenzt die Anzahl der Versuche, die man jeweils zum Anhören der Tonaufnahme hat."
         },

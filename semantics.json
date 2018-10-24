@@ -166,14 +166,6 @@
     "description": "These options will let you control how the task behaves.",
     "fields": [
       {
-        "name": "autoplayDelay",
-        "type": "number",
-        "label": "Autoplay delay",
-        "description": "Define how many seconds after loading the first sample should play.",
-        "optional": true,
-        "min": 0
-      },
-      {
         "name": "tries",
         "type": "number",
         "label": "Maximum tries",

@@ -143,17 +143,6 @@ H5P.Dictation = function (Audio, Question) {
     if (this.sentences.length !== 0) {
       // Register Buttons
       this.addButtons();
-
-      // Autoplay the first sample if set to in settings, user feature request
-      if (that.params.behaviour.autoplayDelay) {
-        window.addEventListener('load', function () {
-          setTimeout(function () {
-            if (that.sentences && that.sentences.length > 0) {
-              that.sentences[0].read();
-            }
-          }, that.params.behaviour.autoplayDelay * 1000);
-        });
-      }
     }
   };
 

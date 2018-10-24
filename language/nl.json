@@ -80,10 +80,6 @@
       "description": "Met deze opties kun je bepalen hoe de taak zich gedraagt.",
       "fields": [
         {
-          "label": "Vertraging van het autoplay-systeem",
-          "description": "Definieer hoeveel seconden na het laden van het eerste voorbeeld er moet worden afgespeeld."
-        },
-        {
           "label": "Maximaal aantal pogingen",
           "description": "Dit begrenst het aantal maal dat de voorbeelden voor elke zin kunnen worden beluisterd."
         },
