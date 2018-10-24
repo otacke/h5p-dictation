@@ -307,11 +307,15 @@ H5P.Dictation = function (Audio, Question) {
     wrapper.addEventListener('keydown', function (event) {
       switch (event.keyCode) {
         case 37: // Left
+        case 38: // Top
+          event.preventDefault();
           if (this.previousSibling) {
             this.previousSibling.focus();
           }
           break;
         case 39: // Right
+        case 40: // Down
+          event.preventDefault();
           if (this.nextSibling) {
             this.nextSibling.focus();
           }
