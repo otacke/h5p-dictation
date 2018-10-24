@@ -1,8 +1,3 @@
-/* jslint esversion: 6 */
-/* globals: H5P */
-
-var H5P = H5P || {};
-
 (function ($, Dictation, Audio) {
   'use strict';
 

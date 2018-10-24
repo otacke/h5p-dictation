@@ -1,8 +1,3 @@
-/* jslint esversion: 6 */
-/* globals: H5P */
-
-var H5P = H5P || {};
-
 H5P.Dictation = function (Audio, Question) {
   'use strict';
 
@@ -95,9 +90,9 @@ H5P.Dictation = function (Audio, Question) {
    */
   Dictation.prototype.registerDomElements = function () {
     // Set optional media
-    var media = this.params.media.type;
+    const media = this.params.media.type;
     if (media && media.library) {
-      var type = media.library.split(' ')[0];
+      const type = media.library.split(' ')[0];
       if (type === 'H5P.Image') {
         if (media.params.file) {
           this.setImage(media.params.file.path, {
@@ -330,7 +325,8 @@ H5P.Dictation = function (Audio, Question) {
       missing: this.params.a11y.ariaMissing,
       added: this.params.a11y.ariaAdded
     };
-    var ariaLabel = (word.type === 'missing') ? word.solution : word.answer;
+
+    let ariaLabel = (word.type === 'missing') ? word.solution : word.answer;
     ariaLabel = ariaLabel
       .replace(/\./g, this.params.a11y.ariaPeriod)
       .replace(/!/g, this.params.a11y.ariaExclamationPoint)
