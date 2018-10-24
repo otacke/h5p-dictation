@@ -281,21 +281,21 @@
     "importance": "low",
     "fields": [
       {
-        "name": "ariaPlay",
+        "name": "play",
         "type": "text",
         "label": "Play button",
         "importance": "low",
         "default": "Play"
       },
       {
-        "name": "ariaPlaySlowly",
+        "name": "playSlowly",
         "type": "text",
         "label": "Play slowly button",
         "importance": "low",
         "default": "Play slowly"
       },
       {
-        "name": "ariaTriesLeft",
+        "name": "triesLeft",
         "type": "text",
         "label": "Tries left (text for readspeakers and hover text)",
         "description": "@number will be replaced by the current number of tries left.",
@@ -303,154 +303,154 @@
         "default": "Number of tries left: @number"
       },
       {
-        "name": "ariaInfinite",
+        "name": "infinite",
         "type": "text",
         "label": "Infinite (text for readspeakers and hover text)",
         "importance": "low",
         "default": "infinite"
       },
       {
-        "name": "ariaEnterText",
+        "name": "enterText",
         "type": "text",
         "label": "Enter text field",
         "importance": "low",
         "default": "Enter what you have heard."
       },
       {
-        "name": "ariaYourResult",
+        "name": "yourResult",
         "type": "text",
         "label": "Your result",
         "importance": "low",
         "default": "Your result"
       },
       {
-        "name": "ariaSolution",
+        "name": "solution",
         "type": "text",
         "label": "Solution",
         "importance": "low",
         "default": "Solution"
       },
       {
-        "name": "ariaSentence",
+        "name": "sentence",
         "type": "text",
         "label": "Sentence",
         "importance": "low",
         "default": "Sentence"
       },
       {
-        "name": "ariaCorrect",
+        "name": "correct",
         "type": "text",
         "label": "Correct",
         "importance": "low",
         "default": "correct"
       },
       {
-        "name": "ariaWrong",
+        "name": "wrong",
         "type": "text",
         "label": "Wrong",
         "importance": "low",
         "default": "wrong"
       },
       {
-        "name": "ariaTypo",
+        "name": "typo",
         "type": "text",
         "label": "Small mistake",
         "importance": "low",
         "default": "small mistake"
       },
       {
-        "name": "ariaMissing",
+        "name": "missing",
         "type": "text",
         "label": "Missing word or symbol",
         "importance": "low",
         "default": "missing"
       },
       {
-        "name": "ariaAdded",
+        "name": "added",
         "type": "text",
         "label": "Added word or symbol",
         "importance": "low",
         "default": "added"
       },
       {
-        "name": "ariaPeriod",
+        "name": "period",
         "type": "text",
         "label": "Period",
         "importance": "low",
         "default": "period"
       },
       {
-        "name": "ariaExclamationPoint",
+        "name": "exclamationPoint",
         "type": "text",
         "label": "Exclamation point",
         "importance": "low",
         "default": "exclamation point"
       },
       {
-        "name": "ariaQuestionMark",
+        "name": "questionMark",
         "type": "text",
         "label": "Question mark",
         "importance": "low",
         "default": "question mark"
       },
       {
-        "name": "ariaComma",
+        "name": "comma",
         "type": "text",
         "label": "Comma",
         "importance": "low",
         "default": "comma"
       },
       {
-        "name": "ariaSingleQuote",
+        "name": "singleQuote",
         "type": "text",
         "label": "Single quote",
         "importance": "low",
         "default": "single quote"
       },
       {
-        "name": "ariaDoubleQuote",
+        "name": "doubleQuote",
         "type": "text",
         "label": "Double quote",
         "importance": "low",
         "default": "double quote"
       },
       {
-        "name": "ariaColon",
+        "name": "colon",
         "type": "text",
         "label": "Colon",
         "importance": "low",
         "default": "colon"
       },
       {
-        "name": "ariaSemicolon",
+        "name": "semicolon",
         "type": "text",
         "label": "Semicolon",
         "importance": "low",
         "default": "semicolon"
       },
       {
-        "name": "ariaPlus",
+        "name": "plus",
         "type": "text",
         "label": "Plus",
         "importance": "low",
         "default": "plus"
       },
       {
-        "name": "ariaMinus",
+        "name": "minus",
         "type": "text",
         "label": "Minus",
         "importance": "low",
         "default": "minus"
       },
       {
-        "name": "ariaAsterisk",
+        "name": "asterisk",
         "type": "text",
         "label": "Asterisk",
         "importance": "low",
         "default": "asterisk"
       },
       {
-        "name": "ariaForwardSlash",
+        "name": "forwardSlash",
         "type": "text",
         "label": "Forward slash",
         "importance": "low",

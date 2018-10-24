@@ -60,13 +60,13 @@ H5P.Dictation = function (Audio, Question) {
             "ignorePunctuation": that.params.behaviour.ignorePunctuation,
             "hasAlternatives": hasAlternatives,
             "a11y": {
-              "play": that.params.a11y.ariaPlay,
-              "playSlowly": that.params.a11y.ariaPlaySlowly,
-              "enterText": that.params.a11y.ariaEnterText,
-              "solution": that.params.a11y.ariaSolution,
-              "sentence": that.params.a11y.ariaSentence,
-              "triesLeft": that.params.a11y.ariaTriesLeft,
-              "infinite": that.params.a11y.ariaInfinite
+              "play": that.params.a11y.play,
+              "playSlowly": that.params.a11y.playSlowly,
+              "enterText": that.params.a11y.enterText,
+              "solution": that.params.a11y.solution,
+              "sentence": that.params.a11y.sentence,
+              "triesLeft": that.params.a11y.triesLeft,
+              "infinite": that.params.a11y.infinite
             }
           },
           that.contentId)
@@ -231,7 +231,7 @@ H5P.Dictation = function (Audio, Question) {
       (generalFeedback + ' ' + textScore).trim(),
       this.getScore(),
       this.getMaxScore(),
-      this.params.a11y.ariaYourResult
+      this.params.a11y.yourResult
     );
     this.hideButton('check-answer');
     if (this.params.behaviour.enableSolution) {
@@ -319,27 +319,27 @@ H5P.Dictation = function (Audio, Question) {
 
     // ARIA
     const ariaLabelType = {
-      match: this.params.a11y.ariaCorrect,
-      wrong: this.params.a11y.ariaWrong,
-      typo: this.params.a11y.ariaTypo,
-      missing: this.params.a11y.ariaMissing,
-      added: this.params.a11y.ariaAdded
+      match: this.params.a11y.correct,
+      wrong: this.params.a11y.wrong,
+      typo: this.params.a11y.typo,
+      missing: this.params.a11y.missing,
+      added: this.params.a11y.added
     };
 
     let ariaLabel = (word.type === 'missing') ? word.solution : word.answer;
     ariaLabel = ariaLabel
-      .replace(/\./g, this.params.a11y.ariaPeriod)
-      .replace(/!/g, this.params.a11y.ariaExclamationPoint)
-      .replace(/\?/g, this.params.a11y.ariaQuestionMark)
-      .replace(/,/g, this.params.a11y.ariaComma)
-      .replace(/'/g, this.params.a11y.ariaSingleQuote)
-      .replace(/["|\u201C|\u201E]/g, this.params.a11y.ariaDoubleQuote)
-      .replace(/:/g, this.params.a11y.ariaColon)
-      .replace(/;/g, this.params.a11y.ariaSemicolon)
-      .replace(/\+/g, this.params.a11y.ariaPlus)
-      .replace(/-/g, this.params.a11y.ariaMinus)
-      .replace(/\*/g, this.params.a11y.ariaAsterisk)
-      .replace(/\//g, this.params.a11y.ariaForwardSlash);
+      .replace(/\./g, this.params.a11y.period)
+      .replace(/!/g, this.params.a11y.exclamationPoint)
+      .replace(/\?/g, this.params.a11y.questionMark)
+      .replace(/,/g, this.params.a11y.comma)
+      .replace(/'/g, this.params.a11y.singleQuote)
+      .replace(/["|\u201C|\u201E]/g, this.params.a11y.doubleQuote)
+      .replace(/:/g, this.params.a11y.colon)
+      .replace(/;/g, this.params.a11y.semicolon)
+      .replace(/\+/g, this.params.a11y.plus)
+      .replace(/-/g, this.params.a11y.minus)
+      .replace(/\*/g, this.params.a11y.asterisk)
+      .replace(/\//g, this.params.a11y.forwardSlash);
     ariaLabel += '. ' + ariaLabelType[word.type];
     wrapper.setAttribute('aria-label', ariaLabel);
 
