@@ -237,245 +237,233 @@
     ]
   },
   {
-    "name": "generalFeedback",
-    "type": "text",
-    "label": "General feedback",
-    "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-    "importance": "low",
-    "default": "You have made @total mistake(s).",
-    "common": true
-  },
-  {
-    "name": "checkAnswer",
-    "type": "text",
-    "label": "Text for \"Check\" button",
-    "importance": "low",
-    "default": "Check",
-    "common": true
-  },
-  {
-    "name": "tryAgain",
-    "label": "Text for \"Retry\" button",
-    "type": "text",
-    "importance": "low",
-    "default": "Retry",
-    "common": true
-  },
-  {
-    "name": "showSolution",
-    "type": "text",
-    "label": "Text for \"Show solution\" button",
-    "importance": "low",
-    "default": "Show solution",
-    "common" : true
-  },
-  {
-    "name": "audioNotSupported",
-    "type": "text",
-    "label": "Audio not supported message",
-    "importance": "low",
+    "name": "l10n",
+    "type": "group",
     "common": true,
-    "default": "Your browser does not support this audio."
+    "label": "User interface",
+    "importance": "low",
+    "fields": [
+      {
+        "name": "generalFeedback",
+        "type": "text",
+        "label": "General feedback",
+        "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+        "importance": "low",
+        "default": "You have made @total mistake(s)."
+      },
+      {
+        "name": "checkAnswer",
+        "type": "text",
+        "label": "Text for \"Check\" button",
+        "importance": "low",
+        "default": "Check"
+      },
+      {
+        "name": "tryAgain",
+        "label": "Text for \"Retry\" button",
+        "type": "text",
+        "importance": "low",
+        "default": "Retry"
+      },
+      {
+        "name": "showSolution",
+        "type": "text",
+        "label": "Text for \"Show solution\" button",
+        "importance": "low",
+        "default": "Show solution"
+      },
+      {
+        "name": "audioNotSupported",
+        "type": "text",
+        "label": "Audio not supported message",
+        "importance": "low",
+        "default": "Your browser does not support this audio."
+      }
+    ]
   },
   {
-    "name": "ariaPlay",
-    "type": "text",
-    "label": "Play button (text for readspeakers)",
-    "importance": "low",
+    "name": "a11y",
+    "type": "group",
     "common": true,
-    "default": "Play"
-  },
-  {
-    "name": "ariaPlaySlowly",
-    "type": "text",
-    "label": "Play slowly button (text for readspeakers)",
+    "label": "Readspeaker",
     "importance": "low",
-    "common": true,
-    "default": "Play slowly"
-  },
-  {
-    "name": "ariaTriesLeft",
-    "type": "text",
-    "label": "Tries left (text for readspeakers and hover text)",
-    "description": "@number will be replaced by the current number of tries left.",
-    "importance": "low",
-    "common": true,
-    "default": "Number of tries left: @number"
-  },
-  {
-    "name": "ariaInfinite",
-    "type": "text",
-    "label": "Infinite (text for readspeakers and hover text)",
-    "importance": "low",
-    "common": true,
-    "default": "infinite"
-  },
-  {
-    "name": "ariaEnterText",
-    "type": "text",
-    "label": "Enter text field (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "Enter what you have heard."
-  },
-  {
-    "name": "ariaYourResult",
-    "type": "text",
-    "label": "Your result (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "Your result"
-  },
-  {
-    "name": "ariaSolution",
-    "type": "text",
-    "label": "Solution (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "Solution"
-  },
-  {
-    "name": "ariaSentence",
-    "type": "text",
-    "label": "Sentence (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "Sentence"
-  },
-  {
-    "name": "ariaCorrect",
-    "type": "text",
-    "label": "Correct (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "correct"
-  },
-  {
-    "name": "ariaWrong",
-    "type": "text",
-    "label": "Wrong (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "wrong"
-  },
-  {
-    "name": "ariaTypo",
-    "type": "text",
-    "label": "Small mistake (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "small mistake"
-  },
-  {
-    "name": "ariaMissing",
-    "type": "text",
-    "label": "Missing word or symbol (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "missing"
-  },
-  {
-    "name": "ariaAdded",
-    "type": "text",
-    "label": "Added word or symbol (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "added"
-  },
-  {
-    "name": "ariaPeriod",
-    "type": "text",
-    "label": "Period (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "period"
-  },
-  {
-    "name": "ariaExclamationPoint",
-    "type": "text",
-    "label": "Exclamation point (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "exclamation point"
-  },
-  {
-    "name": "ariaQuestionMark",
-    "type": "text",
-    "label": "Question mark (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "question mark"
-  },
-  {
-    "name": "ariaComma",
-    "type": "text",
-    "label": "Comma (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "comma"
-  },
-  {
-    "name": "ariaSingleQuote",
-    "type": "text",
-    "label": "Single quote (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "single quote"
-  },
-  {
-    "name": "ariaDoubleQuote",
-    "type": "text",
-    "label": "Double quote (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "double quote"
-  },
-  {
-    "name": "ariaColon",
-    "type": "text",
-    "label": "Colon (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "colon"
-  },
-  {
-    "name": "ariaSemicolon",
-    "type": "text",
-    "label": "Semicolon (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "semicolon"
-  },
-  {
-    "name": "ariaPlus",
-    "type": "text",
-    "label": "Plus (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "plus"
-  },
-  {
-    "name": "ariaMinus",
-    "type": "text",
-    "label": "Minus (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "minus"
-  },
-  {
-    "name": "ariaAsterisk",
-    "type": "text",
-    "label": "Asterisk (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "asterisk"
-  },
-  {
-    "name": "ariaForwardSlash",
-    "type": "text",
-    "label": "Forward slash (text for readspeakers)",
-    "importance": "low",
-    "common": true,
-    "default": "forward slash"
+    "fields": [
+      {
+        "name": "ariaPlay",
+        "type": "text",
+        "label": "Play button",
+        "importance": "low",
+        "default": "Play"
+      },
+      {
+        "name": "ariaPlaySlowly",
+        "type": "text",
+        "label": "Play slowly button",
+        "importance": "low",
+        "default": "Play slowly"
+      },
+      {
+        "name": "ariaTriesLeft",
+        "type": "text",
+        "label": "Tries left (text for readspeakers and hover text)",
+        "description": "@number will be replaced by the current number of tries left.",
+        "importance": "low",
+        "default": "Number of tries left: @number"
+      },
+      {
+        "name": "ariaInfinite",
+        "type": "text",
+        "label": "Infinite (text for readspeakers and hover text)",
+        "importance": "low",
+        "default": "infinite"
+      },
+      {
+        "name": "ariaEnterText",
+        "type": "text",
+        "label": "Enter text field",
+        "importance": "low",
+        "default": "Enter what you have heard."
+      },
+      {
+        "name": "ariaYourResult",
+        "type": "text",
+        "label": "Your result",
+        "importance": "low",
+        "default": "Your result"
+      },
+      {
+        "name": "ariaSolution",
+        "type": "text",
+        "label": "Solution",
+        "importance": "low",
+        "default": "Solution"
+      },
+      {
+        "name": "ariaSentence",
+        "type": "text",
+        "label": "Sentence",
+        "importance": "low",
+        "default": "Sentence"
+      },
+      {
+        "name": "ariaCorrect",
+        "type": "text",
+        "label": "Correct",
+        "importance": "low",
+        "default": "correct"
+      },
+      {
+        "name": "ariaWrong",
+        "type": "text",
+        "label": "Wrong",
+        "importance": "low",
+        "default": "wrong"
+      },
+      {
+        "name": "ariaTypo",
+        "type": "text",
+        "label": "Small mistake",
+        "importance": "low",
+        "default": "small mistake"
+      },
+      {
+        "name": "ariaMissing",
+        "type": "text",
+        "label": "Missing word or symbol",
+        "importance": "low",
+        "default": "missing"
+      },
+      {
+        "name": "ariaAdded",
+        "type": "text",
+        "label": "Added word or symbol",
+        "importance": "low",
+        "default": "added"
+      },
+      {
+        "name": "ariaPeriod",
+        "type": "text",
+        "label": "Period",
+        "importance": "low",
+        "default": "period"
+      },
+      {
+        "name": "ariaExclamationPoint",
+        "type": "text",
+        "label": "Exclamation point",
+        "importance": "low",
+        "default": "exclamation point"
+      },
+      {
+        "name": "ariaQuestionMark",
+        "type": "text",
+        "label": "Question mark",
+        "importance": "low",
+        "default": "question mark"
+      },
+      {
+        "name": "ariaComma",
+        "type": "text",
+        "label": "Comma",
+        "importance": "low",
+        "default": "comma"
+      },
+      {
+        "name": "ariaSingleQuote",
+        "type": "text",
+        "label": "Single quote",
+        "importance": "low",
+        "default": "single quote"
+      },
+      {
+        "name": "ariaDoubleQuote",
+        "type": "text",
+        "label": "Double quote",
+        "importance": "low",
+        "default": "double quote"
+      },
+      {
+        "name": "ariaColon",
+        "type": "text",
+        "label": "Colon",
+        "importance": "low",
+        "default": "colon"
+      },
+      {
+        "name": "ariaSemicolon",
+        "type": "text",
+        "label": "Semicolon",
+        "importance": "low",
+        "default": "semicolon"
+      },
+      {
+        "name": "ariaPlus",
+        "type": "text",
+        "label": "Plus",
+        "importance": "low",
+        "default": "plus"
+      },
+      {
+        "name": "ariaMinus",
+        "type": "text",
+        "label": "Minus",
+        "importance": "low",
+        "default": "minus"
+      },
+      {
+        "name": "ariaAsterisk",
+        "type": "text",
+        "label": "Asterisk",
+        "importance": "low",
+        "default": "asterisk"
+      },
+      {
+        "name": "ariaForwardSlash",
+        "type": "text",
+        "label": "Forward slash",
+        "importance": "low",
+        "default": "forward slash"
+      }
+    ]
   }
 ]

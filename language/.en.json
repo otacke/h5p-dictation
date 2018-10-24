@@ -120,126 +120,136 @@
       ]
     },
     {
-      "label": "General feedback",
-      "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-      "default": "You have made @total mistake(s)."
+      "label": "User interface",
+      "fields": [
+        {
+          "label": "General feedback",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have made @total mistake(s)."
+        },
+        {
+          "label": "Text for \"Check\" button",
+          "default": "Check"
+        },
+        {
+          "label": "Text for \"Retry\" button",
+          "default": "Retry"
+        },
+        {
+          "label": "Text for \"Show solution\" button",
+          "default": "Show solution"
+        },
+        {
+          "label": "Audio not supported message",
+          "default": "Your browser does not support this audio."
+        }
+      ]
     },
     {
-      "label": "Text for \"Check\" button",
-      "default": "Check"
-    },
-    {
-      "label": "Text for \"Retry\" button",
-      "default": "Retry"
-    },
-    {
-      "label": "Text for \"Show solution\" button",
-      "default": "Show solution"
-    },
-    {
-      "label": "Audio not supported message",
-      "default": "Your browser does not support this audio."
-    },
-    {
-      "label": "Play button (text for readspeakers)",
-      "default": "Play"
-    },
-    {
-      "label": "Play slowly button (text for readspeakers)",
-      "default": "Play slowly"
-    },
-    {
-      "label": "Tries left (text for readspeakers and hover text)",
-      "description": "@number will be replaced by the current number of tries left.",
-      "default": "Number of tries left: @number"
-    },
-    {
-      "label": "Infinite (text for readspeakers and hover text)",
-      "default": "infinite"
-    },
-    {
-      "label": "Enter text field (text for readspeakers)",
-      "default": "Enter what you have heard."
-    },
-    {
-      "label": "Your result (text for readspeakers)",
-      "default": "Your result"
-    },
-    {
-      "label": "Solution (text for readspeakers)",
-      "default": "Solution"
-    },
-    {
-      "label": "Sentence (text for readspeakers)",
-      "default": "Sentence"
-    },
-    {
-      "label": "Correct (text for readspeakers)",
-      "default": "correct"
-    },
-    {
-      "label": "Wrong (text for readspeakers)",
-      "default": "wrong"
-    },
-    {
-      "label": "Small mistake (text for readspeakers)",
-      "default": "small mistake"
-    },
-    {
-      "label": "Missing word or symbol (text for readspeakers)",
-      "default": "missing"
-    },
-    {
-      "label": "Added word or symbol (text for readspeakers)",
-      "default": "added"
-    },
-    {
-      "label": "Period (text for readspeakers)",
-      "default": "period"
-    },
-    {
-      "label": "Exclamation point (text for readspeakers)",
-      "default": "exclamation point"
-    },
-    {
-      "label": "Question mark (text for readspeakers)",
-      "default": "question mark"
-    },
-    {
-      "label": "Comma (text for readspeakers)",
-      "default": "comma"
-    },
-    {
-      "label": "Single quote (text for readspeakers)",
-      "default": "single quote"
-    },
-    {
-      "label": "Double quote (text for readspeakers)",
-      "default": "double quote"
-    },
-    {
-      "label": "Colon (text for readspeakers)",
-      "default": "colon"
-    },
-    {
-      "label": "Semicolon (text for readspeakers)",
-      "default": "semicolon"
-    },
-    {
-      "label": "Plus (text for readspeakers)",
-      "default": "plus"
-    },
-    {
-      "label": "Minus (text for readspeakers)",
-      "default": "minus"
-    },
-    {
-      "label": "Asterisk (text for readspeakers)",
-      "default": "asterisk"
-    },
-    {
-      "label": "Forward slash (text for readspeakers)",
-      "default": "forward slash"
+      "label": "Readspeaker",
+      "fields": [
+        {
+          "label": "Play button",
+          "default": "Play"
+        },
+        {
+          "label": "Play slowly button",
+          "default": "Play slowly"
+        },
+        {
+          "label": "Tries left (text for readspeakers and hover text)",
+          "description": "@number will be replaced by the current number of tries left.",
+          "default": "Number of tries left: @number"
+        },
+        {
+          "label": "Infinite (text for readspeakers and hover text)",
+          "default": "infinite"
+        },
+        {
+          "label": "Enter text field",
+          "default": "Enter what you have heard."
+        },
+        {
+          "label": "Your result",
+          "default": "Your result"
+        },
+        {
+          "label": "Solution",
+          "default": "Solution"
+        },
+        {
+          "label": "Sentence",
+          "default": "Sentence"
+        },
+        {
+          "label": "Correct",
+          "default": "correct"
+        },
+        {
+          "label": "Wrong",
+          "default": "wrong"
+        },
+        {
+          "label": "Small mistake",
+          "default": "small mistake"
+        },
+        {
+          "label": "Missing word or symbol",
+          "default": "missing"
+        },
+        {
+          "label": "Added word or symbol",
+          "default": "added"
+        },
+        {
+          "label": "Period",
+          "default": "period"
+        },
+        {
+          "label": "Exclamation point",
+          "default": "exclamation point"
+        },
+        {
+          "label": "Question mark",
+          "default": "question mark"
+        },
+        {
+          "label": "Comma",
+          "default": "comma"
+        },
+        {
+          "label": "Single quote",
+          "default": "single quote"
+        },
+        {
+          "label": "Double quote",
+          "default": "double quote"
+        },
+        {
+          "label": "Colon",
+          "default": "colon"
+        },
+        {
+          "label": "Semicolon",
+          "default": "semicolon"
+        },
+        {
+          "label": "Plus",
+          "default": "plus"
+        },
+        {
+          "label": "Minus",
+          "default": "minus"
+        },
+        {
+          "label": "Asterisk",
+          "default": "asterisk"
+        },
+        {
+          "label": "Forward slash",
+          "default": "forward slash"
+        }
+      ]
     }
   ]
 }

@@ -120,126 +120,136 @@
       ]
     },
     {
-      "label": "Algemene feedback",
-      "description": "Je kunt gebruik maken van meerdere plaatshouders die worden vervangen door het juiste nummer: @matches = aantal overeenkomsten, @total = totaal aantal fouten, @capped = gemaximeerd totaal aantal fouten, @wrong = verkeerde woorden, @added = extra woorden, @missing = ontbrekende woorden, @typo = tikfouten",
-      "default": "Je hebt @total fout(en) gemaakt."
+      "label": "Gebruikersomgeving",
+      "fields": [
+        {
+          "label": "Algemene feedback",
+          "description": "Je kunt gebruik maken van meerdere plaatshouders die worden vervangen door het juiste nummer: @matches = aantal overeenkomsten, @total = totaal aantal fouten, @capped = gemaximeerd totaal aantal fouten, @wrong = verkeerde woorden, @added = extra woorden, @missing = ontbrekende woorden, @typo = tikfouten",
+          "default": "Je hebt @total fout(en) gemaakt."
+        },
+        {
+          "label": "Tekst voor de \"Controleer\" -knop",
+          "default": "Controleer"
+        },
+        {
+          "label": "Tekst voor de \"Opnieuw\" -knop",
+          "default": "Opnieuw"
+        },
+        {
+          "label": "Tekst voor de \"Toon oplossing\" -knop",
+          "default": "Toon oplossing"
+        },
+        {
+          "label": "Bericht dat de audio niet wordt ondersteund",
+          "default": "Je browser ondersteunt deze audio niet."
+        }
+      ]
     },
     {
-      "label": "Tekst voor de \"Controleer\" -knop",
-      "default": "Controleer"
-    },
-    {
-      "label": "Tekst voor de \"Opnieuw\" -knop",
-      "default": "Opnieuw"
-    },
-    {
-      "label": "Tekst voor de \"Toon oplossing\" -knop",
-      "default": "Toon oplossing"
-    },
-    {
-      "label": "Bericht dat de audio niet wordt ondersteund",
-      "default": "Je browser ondersteunt deze audio niet."
-    },
-    {
-      "label": "Afspelen knop (tekst voor readspeakers)",
-      "default": "Afspelen"
-    },
-    {
-      "label": "Langzaam afspelen knop (tekst voor readspeakers)",
-      "default": "Langzaam afspelen"
-    },
-    {
-      "label": "Resterende pogingen (tekst voor readspeakers en muisover tekst)",
-      "description": "@number wordt vervangen door het huidige aantal resterende pogingen.",
-      "default": "Aantal resterende pogingen: @number"
-    },
-    {
-      "label": "Oneindig (tekst voor readspeakers en muisover tekst)",
-      "default": "oneindig"
-    },
-    {
-      "label": "Tekstveld invoeren (tekst voor readspeakers)",
-      "default": "Voer in wat je hebt gehoord."
-    },
-    {
-      "label": "Je resultaat (tekst voor readspeakers)",
-      "default": "Je resultaat"
-    },
-    {
-      "label": "Oplossing (tekst voor readspeakers)",
-      "default": "Oplossing"
-    },
-    {
-      "label": "Zin (tekst voor readspeakers)",
-      "default": "Zin"
-    },
-    {
-      "label": "Juist (tekst voor readspeakers)",
-      "default": "juist"
-    },
-    {
-      "label": "Onjuist (tekst voor readspeakers)",
-      "default": "onjuist"
-    },
-    {
-      "label": "Kleine fout (tekst voor readspeakers)",
-      "default": "kleine fout"
-    },
-    {
-      "label": "Ontbrekend woord of symbool (tekst voor readspeakers)",
-      "default": "ontbrekend"
-    },
-    {
-      "label": "Toegevoegd woord of symbool (tekst voor readspeakers)",
-      "default": "toegevoegd"
-    },
-    {
-      "label": "Punt (tekst voor readspeakers)",
-      "default": "punt"
-    },
-    {
-      "label": "Uitroepteken (tekst voor readspeakers)",
-      "default": "uitroepteken"
-    },
-    {
-      "label": "Vraagteken (tekst voor readspeakers)",
-      "default": "vraagteken"
-    },
-    {
-      "label": "Komma (tekst voor readspeakers)",
-      "default": "komma"
-    },
-    {
-      "label": "Enkel aanhalingsteken (tekst voor readspeakers)",
-      "default": "enkel aanhalingsteken"
-    },
-    {
-      "label": "Dubbele aanhalingstekens (tekst voor readspeakers)",
-      "default": "dubbele aanhalingstekens"
-    },
-    {
-      "label": "Dubbele punt (tekst voor readspeakers)",
-      "default": "dubbele punt"
-    },
-    {
-      "label": "Puntkomma (tekst voor readspeakers)",
-      "default": "puntkomma"
-    },
-    {
-      "label": "Plus (tekst voor readspeakers)",
-      "default": "plus"
-    },
-    {
-      "label": "Min (tekst voor readspeakers)",
-      "default": "min"
-    },
-    {
-      "label": "Asterisk (tekst voor readspeakers)",
-      "default": "asterisk"
-    },
-    {
-      "label": "Schuine streep naar voren (tekst voor readspeakers)",
-      "default": "schuine streep naar voren"
+      "label": "Readspeakers",
+      "fields": [
+        {
+          "label": "Afspelen knop",
+          "default": "Afspelen"
+        },
+        {
+          "label": "Langzaam afspelen knop",
+          "default": "Langzaam afspelen"
+        },
+        {
+          "label": "Resterende pogingen (tekst voor readspeakers en muisover tekst)",
+          "description": "@number wordt vervangen door het huidige aantal resterende pogingen.",
+          "default": "Aantal resterende pogingen: @number"
+        },
+        {
+          "label": "Oneindig (tekst voor readspeakers en muisover tekst)",
+          "default": "oneindig"
+        },
+        {
+          "label": "Tekstveld invoeren",
+          "default": "Voer in wat je hebt gehoord."
+        },
+        {
+          "label": "Je resultaat",
+          "default": "Je resultaat"
+        },
+        {
+          "label": "Oplossing",
+          "default": "Oplossing"
+        },
+        {
+          "label": "Zin",
+          "default": "Zin"
+        },
+        {
+          "label": "Juist",
+          "default": "juist"
+        },
+        {
+          "label": "Onjuist",
+          "default": "onjuist"
+        },
+        {
+          "label": "Kleine fout",
+          "default": "kleine fout"
+        },
+        {
+          "label": "Ontbrekend woord of symbool",
+          "default": "ontbrekend"
+        },
+        {
+          "label": "Toegevoegd woord of symbool",
+          "default": "toegevoegd"
+        },
+        {
+          "label": "Punt",
+          "default": "punt"
+        },
+        {
+          "label": "Uitroepteken",
+          "default": "uitroepteken"
+        },
+        {
+          "label": "Vraagteken",
+          "default": "vraagteken"
+        },
+        {
+          "label": "Komma",
+          "default": "komma"
+        },
+        {
+          "label": "Enkel aanhalingsteken",
+          "default": "enkel aanhalingsteken"
+        },
+        {
+          "label": "Dubbele aanhalingstekens",
+          "default": "dubbele aanhalingstekens"
+        },
+        {
+          "label": "Dubbele punt",
+          "default": "dubbele punt"
+        },
+        {
+          "label": "Puntkomma",
+          "default": "puntkomma"
+        },
+        {
+          "label": "Plus",
+          "default": "plus"
+        },
+        {
+          "label": "Min",
+          "default": "min"
+        },
+        {
+          "label": "Asterisk",
+          "default": "asterisk"
+        },
+        {
+          "label": "Schuine streep naar voren",
+          "default": "schuine streep naar voren"
+        }
+      ]
     }
   ]
 }

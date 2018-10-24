@@ -21,14 +21,14 @@ var H5P = H5P || {};
    *
    * @param {number} id - Content Id.
    * @param {object} params - More params.
-   * @param {object} params.aria - Readspeaker texts.
-   * @param {string} params.aria.play - Readspeaker text for "Play".
-   * @param {string} params.aria.playSlowly - Readspeaker text for "Play slowly".
-   * @param {string} params.aria.triesLeft - Readspeaker text for "Number of tries left".
-   * @param {string} params.aria.infinite - Readspeaker text for "infinite".
-   * @param {string} params.aria.enterText - Readspeaker text for "Enter what you have heard here".
-   * @param {string} params.aria.solution - Readspeaker text for "Solution".
-   * @param {string} params.aria.sentence - Readspeaker text for "Sentence".
+   * @param {object} params.a11y - Readspeaker texts.
+   * @param {string} params.a11y.play - Readspeaker text for "Play".
+   * @param {string} params.a11y.playSlowly - Readspeaker text for "Play slowly".
+   * @param {string} params.a11y.triesLeft - Readspeaker text for "Number of tries left".
+   * @param {string} params.a11y.infinite - Readspeaker text for "infinite".
+   * @param {string} params.a11y.enterText - Readspeaker text for "Enter what you have heard here".
+   * @param {string} params.a11y.solution - Readspeaker text for "Solution".
+   * @param {string} params.a11y.sentence - Readspeaker text for "Sentence".
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
    * @param {number} params.tries - Maximum number of tries before disabling button;
    * @param {string} params.sample - Path to sound sample.
@@ -39,14 +39,14 @@ var H5P = H5P || {};
 
     // Sanitization
     this.params.audioNotSupported = this.params.audioNotSupported || "Your browser does not support this audio.";
-    this.params.aria = params.aria || [];
-    this.params.aria.play = this.params.aria.play || 'Play';
-    this.params.aria.playSlowly = this.params.aria.playSlowly || 'Play slowly';
-    this.params.aria.triesLeft = this.params.aria.triesLeft || 'Number of tries left: @number';
-    this.params.aria.infinite = this.params.aria.infinite || 'infinite';
-    this.params.aria.sentence = this.params.aria.sentence || 'Sentence';
-    this.params.aria.solution = this.params.aria.solution || 'Solution';
-    this.params.aria.enterText = this.params.aria.enterText || 'Enter what you have heard';
+    this.params.a11y = params.a11y || [];
+    this.params.a11y.play = this.params.a11y.play || 'Play';
+    this.params.a11y.playSlowly = this.params.a11y.playSlowly || 'Play slowly';
+    this.params.a11y.triesLeft = this.params.a11y.triesLeft || 'Number of tries left: @number';
+    this.params.a11y.infinite = this.params.a11y.infinite || 'infinite';
+    this.params.a11y.sentence = this.params.a11y.sentence || 'Sentence';
+    this.params.a11y.solution = this.params.a11y.solution || 'Solution';
+    this.params.a11y.enterText = this.params.a11y.enterText || 'Enter what you have heard';
     this.params.type = this.params.type || Dictation.Button.BUTTON_TYPE_NORMAL;
 
     this.triesLeft = this.params.maxTries;
@@ -84,10 +84,10 @@ var H5P = H5P || {};
 
       if (params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
         audio.$audioButton.removeClass(BUTTON_PLAY).addClass(BUTTON_SLOW);
-        this.setLabel(params.aria.playSlowly);
+        this.setLabel(params.a11y.playSlowly);
       }
       else {
-        this.setLabel(params.aria.play);
+        this.setLabel(params.a11y.play);
       }
 
       // Event Listener Play
@@ -111,10 +111,10 @@ var H5P = H5P || {};
         that.handleTries();
         if (params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
           audio.$audioButton.removeClass(BUTTON_PAUSE).addClass(BUTTON_SLOW);
-          that.setLabel(that.params.aria.playSlowly);
+          that.setLabel(that.params.a11y.playSlowly);
         }
         else {
-          that.setLabel(that.params.aria.play);
+          that.setLabel(that.params.a11y.play);
         }
         that.status = Dictation.Button.STATUS_ENDED;
       });
@@ -175,8 +175,8 @@ var H5P = H5P || {};
    * @param {string} label - The label to set.
    */
   Dictation.Button.prototype.setLabel = function (label) {
-    const tries = isFinite(this.triesLeft) ? this.triesLeft : this.params.aria.infinite;
-    const triesLeftLabel = this.params.aria.triesLeft.replace(/@number/g, tries);
+    const tries = isFinite(this.triesLeft) ? this.triesLeft : this.params.a11y.infinite;
+    const triesLeftLabel = this.params.a11y.triesLeft.replace(/@number/g, tries);
     this.button.setAttribute('aria-label', label + '.' + triesLeftLabel);
     this.button.setAttribute('title', triesLeftLabel);
   };
@@ -188,10 +188,10 @@ var H5P = H5P || {};
     this.triesLeft = this.params.maxTries;
     this.enable();
     if (this.params.type === Dictation.Button.BUTTON_TYPE_SLOW) {
-      this.setLabel(this.params.aria.playSlowly);
+      this.setLabel(this.params.a11y.playSlowly);
     }
     else {
-      this.setLabel(this.params.aria.play);
+      this.setLabel(this.params.a11y.play);
     }
   };
 

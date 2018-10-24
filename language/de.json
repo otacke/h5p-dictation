@@ -120,126 +120,136 @@
       ]
     },
     {
-      "label": "Allgemeine Rückmeldung",
-      "description": "Du kannst mehrere Platzhalter verwenden, die durch die eigentliche Anzahl ersetzt werden: @matches = richtige Worte, @total = Fehler insgesamt, @capped = Fehler insgesamt (begrenzt auf die Anzahl der richtigen Worte), @wrong = falsche Worte, @added = hinzugefügte Worte, @missing = fehlende Worte, @typo = kleine Fehler",
-      "default": "Du hast insgesamt @total Fehler gemacht."
+      "label": "Bedienoberfläche",
+      "fields": [
+        {
+          "label": "Allgemeine Rückmeldung",
+          "description": "Du kannst mehrere Platzhalter verwenden, die durch die eigentliche Anzahl ersetzt werden: @matches = richtige Worte, @total = Fehler insgesamt, @capped = Fehler insgesamt (begrenzt auf die Anzahl der richtigen Worte), @wrong = falsche Worte, @added = hinzugefügte Worte, @missing = fehlende Worte, @typo = kleine Fehler",
+          "default": "Du hast insgesamt @total Fehler gemacht."
+        },
+        {
+          "label": "Beschriftung für den \"Überprüfen\"-Button",
+          "default": "Button"
+        },
+        {
+          "label": "Beschriftung für den \"Wiederholen\"-Button",
+          "default": "Wiederholen"
+        },
+        {
+          "label": "Beschriftung für den \"Lösung zeigen\"-Button",
+          "default": "Lösung zeigen"
+        },
+        {
+          "label": "Hinweis, dass keine Tonaufnahmen abgespielt werden können",
+          "default": "Dein Browser unterstützt diese Tondateie nicht."
+        }
+      ]
     },
     {
-      "label": "Beschriftung für den \"Überprüfen\"-Button",
-      "default": "Button"
-    },
-    {
-      "label": "Beschriftung für den \"Wiederholen\"-Button",
-      "default": "Wiederholen"
-    },
-    {
-      "label": "Beschriftung für den \"Lösung zeigen\"-Button",
-      "default": "Lösung zeigen"
-    },
-    {
-      "label": "Hinweis, dass keine Tonaufnahmen abgespielt werden können",
-      "default": "Dein Browser unterstützt diese Tondateie nicht."
-    },
-    {
-      "label": "Abspiel-Button (Text für Read-Speaker)",
-      "default": "Abspielen"
-    },
-    {
-      "label": "Langsam-Abspiel-Button (Text für Read-Speaker)",
-      "default": "Langsam abspielen"
-    },
-    {
-      "label": "Verbleibende Versuche (Text für Read-Speaker und Tooltips)",
-      "description": "@number wird durch die aktuelle Anzahl verbleibender Versuche ersetzt.",
-      "default": "Verbleibende Versuche: @number"
-    },
-    {
-      "label": "Unendlich (Text für Read-Speaker und Tooltips)",
-      "default": "undendlich"
-    },
-    {
-      "label": "Eingabefeld (Text für Read-Speaker)",
-      "default": "Gib ein, was du gehört hast."
-    },
-    {
-      "label": "Dein Ergebnis (Text für Read-Speaker)",
-      "default": "Dein Ergebnis"
-    },
-    {
-      "label": "Lösung (Text für Read-Speaker)",
-      "default": "Lösung"
-    },
-    {
-      "label": "Satz (Text für Read-Speaker)",
-      "default": "Satz"
-    },
-    {
-      "label": "Richtig (Text für Read-Speaker)",
-      "default": "richtig"
-    },
-    {
-      "label": "Falsch (Text für Read-Speaker)",
-      "default": "falsch"
-    },
-    {
-      "label": "Kleiner Fehler (Text für Read-Speaker)",
-      "default": "Kleiner Fehler"
-    },
-    {
-      "label": "Fehlendes Wort oder Zeichen (Text für Read-Speaker)",
-      "default": "fehlt"
-    },
-    {
-      "label": "Hinzugefügtes Wort oder Zeichen (Text für Read-Speaker)",
-      "default": "hinzugefügt"
-    },
-    {
-      "label": "Punkt (Text für Read-Speaker)",
-      "default": "Punkt"
-    },
-    {
-      "label": "Ausrufezeichen (Text für Read-Speaker)",
-      "default": "Ausrufezeichen"
-    },
-    {
-      "label": "Fragezeichen (Text für Read-Speaker)",
-      "default": "Fragezeichen"
-    },
-    {
-      "label": "Komma (Text für Read-Speaker)",
-      "default": "Komma"
-    },
-    {
-      "label": "Anführungszeichen einfach (Text für Read-Speaker)",
-      "default": "Anführungszeichen"
-    },
-    {
-      "label": "Anführungszeichen (Text für Read-Speaker)",
-      "default": "Anführungszeichen"
-    },
-    {
-      "label": "Doppelpunkt (Text für Read-Speaker)",
-      "default": "Doppelpunkt"
-    },
-    {
-      "label": "Semikolon (Text für Read-Speaker)",
-      "default": "Semikolon"
-    },
-    {
-      "label": "Plus (Text für Read-Speaker)",
-      "default": "Plus"
-    },
-    {
-      "label": "Minus (Text für Read-Speaker)",
-      "default": "Minus"
-    },
-    {
-      "label": "Sternchen (Text für Read-Speaker)",
-      "default": "Sternchen"
-    },
-    {
-      "label": "Schrägstrich (Text für Read-Speaker)",
-      "default": "Schrägstrich"
+      "label": "Read-Speaker",
+      "fields": [
+        {
+          "label": "Abspiel-Button",
+          "default": "Abspielen"
+        },
+        {
+          "label": "Langsam-Abspiel-Button",
+          "default": "Langsam abspielen"
+        },
+        {
+          "label": "Verbleibende Versuche (Text für Read-Speaker und Tooltips)",
+          "description": "@number wird durch die aktuelle Anzahl verbleibender Versuche ersetzt.",
+          "default": "Verbleibende Versuche: @number"
+        },
+        {
+          "label": "Unendlich (Text für Read-Speaker und Tooltips)",
+          "default": "undendlich"
+        },
+        {
+          "label": "Eingabefeld",
+          "default": "Gib ein, was du gehört hast."
+        },
+        {
+          "label": "Dein Ergebnis",
+          "default": "Dein Ergebnis"
+        },
+        {
+          "label": "Lösung",
+          "default": "Lösung"
+        },
+        {
+          "label": "Satz",
+          "default": "Satz"
+        },
+        {
+          "label": "Richtig",
+          "default": "richtig"
+        },
+        {
+          "label": "Falsch",
+          "default": "falsch"
+        },
+        {
+          "label": "Kleiner Fehler",
+          "default": "Kleiner Fehler"
+        },
+        {
+          "label": "Fehlendes Wort oder Zeichen",
+          "default": "fehlt"
+        },
+        {
+          "label": "Hinzugefügtes Wort oder Zeichen",
+          "default": "hinzugefügt"
+        },
+        {
+          "label": "Punkt",
+          "default": "Punkt"
+        },
+        {
+          "label": "Ausrufezeichen",
+          "default": "Ausrufezeichen"
+        },
+        {
+          "label": "Fragezeichen",
+          "default": "Fragezeichen"
+        },
+        {
+          "label": "Komma",
+          "default": "Komma"
+        },
+        {
+          "label": "Anführungszeichen einfach",
+          "default": "Anführungszeichen"
+        },
+        {
+          "label": "Anführungszeichen",
+          "default": "Anführungszeichen"
+        },
+        {
+          "label": "Doppelpunkt",
+          "default": "Doppelpunkt"
+        },
+        {
+          "label": "Semikolon",
+          "default": "Semikolon"
+        },
+        {
+          "label": "Plus",
+          "default": "Plus"
+        },
+        {
+          "label": "Minus",
+          "default": "Minus"
+        },
+        {
+          "label": "Sternchen",
+          "default": "Sternchen"
+        },
+        {
+          "label": "Schrägstrich",
+          "default": "Schrägstrich"
+        }
+      ]
     }
   ]
 }

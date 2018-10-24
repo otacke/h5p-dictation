@@ -39,12 +39,12 @@
    * @param {string} params.sentence.sample - Path to sound sample.
    * @param {string} params.sentence.sampleAlternatives - Path to alternative sound sample.
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
-   * @param {object} params.aria - Readspeaker texts.
-   * @param {string} params.aria.play - Readspeaker text for "Play".
-   * @param {string} params.aria.playSlowly - Readspeaker text for "Play slowly".
-   * @param {string} params.aria.enterText - Readspeaker text for "Enter what you have heard here".
-   * @param {string} params.aria.solution - Readspeaker text for "Solution".
-   * @param {string} params.aria.sentence - Readspeaker text for "Sentence".
+   * @param {object} params.a11y - Readspeaker texts.
+   * @param {string} params.a11y.play - Readspeaker text for "Play".
+   * @param {string} params.a11y.playSlowly - Readspeaker text for "Play slowly".
+   * @param {string} params.a11y.enterText - Readspeaker text for "Enter what you have heard here".
+   * @param {string} params.a11y.solution - Readspeaker text for "Solution".
+   * @param {string} params.a11y.sentence - Readspeaker text for "Sentence".
    * @param {number} id - Content Id.
    */
   Dictation.Sentence = function (index, params, id) {
@@ -63,7 +63,7 @@
     // DOM
     this.content = document.createElement('div');
     this.content.setAttribute('role', 'group');
-    this.content.setAttribute('aria-label', params.aria.sentence + ' ' + this.index);
+    this.content.setAttribute('aria-label', params.a11y.sentence + ' ' + this.index);
     this.content.classList.add(CONTENT_WRAPPER);
 
     // Normal audio
@@ -72,7 +72,7 @@
       audioNotSupported: params.audioNotSupported,
       type: H5P.Dictation.Button.BUTTON_TYPE_NORMAL,
       maxTries: params.tries,
-      aria: params.aria
+      a11y: params.a11y
     });
     this.content.appendChild(this.buttonPlayNormal.getDOM());
 
@@ -83,14 +83,14 @@
         audioNotSupported: params.audioNotSupported,
         type: H5P.Dictation.Button.BUTTON_TYPE_SLOW,
         maxTries: params.triesAlternative,
-        aria: params.aria
+        a11y: params.a11y
       });
       this.content.appendChild(this.buttonPlaySlow.getDOM());
     }
 
     // Text input field
     this.inputField = document.createElement('input');
-    this.inputField.setAttribute('aria-label', this.params.aria.enterText);
+    this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
     this.inputField.classList.add(INPUT_FIELD);
 
     // Solution container
@@ -100,7 +100,7 @@
     this.solutionInner = document.createElement('div');
     this.solutionInner.setAttribute('tabindex', '0');
     this.solutionInner.setAttribute('role', 'list');
-    this.solutionInner.setAttribute('aria-label', this.params.aria.solution);
+    this.solutionInner.setAttribute('aria-label', this.params.a11y.solution);
     this.solutionInner.addEventListener('focus', function () {
       if (this.firstChild.firstChild) {
         this.firstChild.firstChild.setAttribute('tabindex', '0');
