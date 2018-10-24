@@ -94,7 +94,6 @@ H5P.Dictation = function (Audio, Question) {
    * Register the DOM elements with H5P.Question.
    */
   Dictation.prototype.registerDomElements = function () {
-    const that = this;
     // Set optional media
     var media = this.params.media.type;
     if (media && media.library) {
@@ -301,7 +300,7 @@ H5P.Dictation = function (Audio, Question) {
     wrapper.addEventListener('focus', function () {
       this.setAttribute('tabindex', '0');
     });
-    wrapper.addEventListener('focusout',function () {
+    wrapper.addEventListener('focusout', function () {
       this.setAttribute('tabindex', '-1');
     });
     wrapper.addEventListener('keydown', function (event) {
