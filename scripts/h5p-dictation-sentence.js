@@ -174,7 +174,7 @@
   /**
    * Set current text in InputField.
    *
-   * @param {object} text - Current DOM element with text.
+   * @param {object} result - Current DOM element with words.
    */
   Dictation.Sentence.prototype.showSolution = function (text) {
     const that = this;

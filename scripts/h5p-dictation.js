@@ -7,9 +7,9 @@ H5P.Dictation = function (Audio, Question) {
   /**
    * @constructor
    *
-   * @param {Object} params - Params from semantics.json.
+   * @param {object} params - Params from semantics.json.
    * @param {string} contentId - ContentId.
-   * @param {Object} contentData - contentData.
+   * @param {object} contentData - contentData.
    */
   function Dictation(params, contentId, contentData) {
     const that = this;
@@ -459,7 +459,7 @@ H5P.Dictation = function (Audio, Question) {
   /**
    * Get xAPI data.
    *
-   * @return {Object} xAPI statement.
+   * @return {object} xAPI statement.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
   Dictation.prototype.getXAPIData = function () {
