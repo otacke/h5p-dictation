@@ -122,6 +122,11 @@
     return $audioWrapper.get(0);
   };
 
+  /**
+   * Get Button DOM.
+   *
+   * @return {object} Button DOM.
+   */
   Dictation.Button.prototype.getDOM = function () {
     return this.dom;
   };

@@ -47,6 +47,7 @@ H5P.Dictation = function (Audio, Question) {
     // Create sentence instances
     this.params.sentences = this.params.sentences
       .filter(function (element) {
+        // Strip incomplete sentences
         return (typeof element.text !== 'undefined' && typeof element.sample !== 'undefined');
       })
       .forEach(function (element, index) {
@@ -166,6 +167,7 @@ H5P.Dictation = function (Audio, Question) {
    * @return {number} Maximum number of possible mistakes.
    */
   Dictation.prototype.computeMaxMistakes = function () {
+    // Sum up maximum scores of all sentences
     return this.sentences
       .map(function (sentence) {
         return sentence.getMaxMistakes();
@@ -188,7 +190,7 @@ H5P.Dictation = function (Audio, Question) {
       element.disable();
     });
 
-    // Combine the scores of all sentences
+    // Sum up the scores of all sentences
     const score = this.results
       .map(function (element) {
         return element.score;
@@ -409,7 +411,6 @@ H5P.Dictation = function (Audio, Question) {
     }
     return arguments[0];
   };
-
 
   /**
    * Get the xAPI definition for the xAPI object.
