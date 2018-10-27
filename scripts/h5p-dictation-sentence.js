@@ -96,17 +96,18 @@
     // Solution container
     this.solutionText = document.createElement('div');
     this.solutionText.classList.add(SOLUTION_TEXT);
-    this.solutionText.setAttribute('tabindex', '0');
-    this.solutionText.setAttribute('role', 'list');
-    this.solutionText.setAttribute('aria-label', this.params.a11y.solution);
-    this.solutionText.addEventListener('focus', function () {
-      if (this.firstChild) {
-        this.firstChild.setAttribute('tabindex', '0');
-      }
-    });
+    this.solutionText.setAttribute('role', 'presentation');
 
     this.solutionInner = document.createElement('div');
+    this.solutionInner.setAttribute('tabindex', '0');
+    this.solutionInner.setAttribute('role', 'list');
+    this.solutionInner.setAttribute('aria-label', this.params.a11y.solution);
     this.solutionInner.classList.add(SOLUTION_INNER);
+    this.solutionInner.addEventListener('focus', function () {
+      if (this.firstChild.firstChild) {
+        this.firstChild.firstChild.setAttribute('tabindex', '0');
+      }
+    });
     this.solutionInner.appendChild(this.solutionText);
 
     this.solutionContainer = document.createElement('div');
@@ -562,7 +563,7 @@
    * Set focus to the sentence solution.
    */
   Dictation.Sentence.prototype.focusSolution = function () {
-    this.solutionText.focus();
+    this.solutionInner.focus();
   };
 
 })(H5P.jQuery, H5P.Dictation);
