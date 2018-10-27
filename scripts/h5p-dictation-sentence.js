@@ -172,15 +172,146 @@
   };
 
   /**
+   * Build the solution for the sentence's results.
+   * @param {object} result - Result.
+   * @param {object} result.score - Scores.
+   * @param {number} result.score.added - Number of added words added.
+   * @param {number} result.score.missing - Number of words missing.
+   * @param {number} result.score.typo - Number of words with typing errors.
+   * @param {number} result.score.wrong - Number of wrong words.
+   * @param {number} result.score.match - Number of mathes.
+   * @param {object[]} result.words - Words.
+   * @param {string} result.words[].answer - Answer given.
+   * @param {string} result.words[].solution - Correct word.
+   * @param {string} result.words[].type - Type of mistake or match.
+   * @param {boolean[]} result.spaces - Spaces for gaps between words.
+   * @return {object[]} solution.
+   */
+  Dictation.Sentence.prototype.buildSolution = function (result) {
+    const that = this;
+
+    const solution = [];
+    result.words.forEach(function (word, index) {
+      solution.push(that.buildWordWrapper(index, word, result));
+    });
+
+    return solution;
+  };
+
+  /**
+   * Build wrapper for single word of a solution.
+   *
+   * @param {number} index -Tabindex for ARIA.
+   * @param {object} word - Word information.
+   * @param {string} word.type - Status about missing, typo, ...
+   * @param {string} word.solution - Correct spelling of the word.
+   * @param {string} word.answer -
+   * @param {object} result - Result data.
+   */
+  Dictation.Sentence.prototype.buildWordWrapper = function (index, word, result) {
+    // General stuff
+    const wrapper = document.createElement('span');
+    wrapper.classList.add('h5p-wrapper-' + word.type);
+    if (result.spaces[index]) {
+      wrapper.classList.add('h5p-spacer');
+    }
+    wrapper.setAttribute('tabindex', (index === 0) ? '0' : '-1');
+    wrapper.setAttribute('role', 'listitem');
+
+    // Listeners
+    wrapper.addEventListener('focus', function () {
+      this.setAttribute('tabindex', '0');
+    });
+    wrapper.addEventListener('focusout', function () {
+      this.setAttribute('tabindex', '-1');
+    });
+    wrapper.addEventListener('keydown', function (event) {
+      switch (event.keyCode) {
+        case 37: // Left
+        // intentional fallthrough
+        case 38: // Top
+          event.preventDefault();
+          if (this.previousSibling) {
+            this.previousSibling.focus();
+          }
+          break;
+        case 39: // Right
+        // intentional fallthrough
+        case 40: // Down
+          event.preventDefault();
+          if (this.nextSibling) {
+            this.nextSibling.focus();
+          }
+          break;
+      }
+    });
+
+    // ARIA
+    const ariaLabelType = {
+      match: this.params.a11y.correct,
+      wrong: this.params.a11y.wrong,
+      typo: this.params.a11y.typo,
+      missing: this.params.a11y.missing,
+      added: this.params.a11y.added
+    };
+
+    let ariaLabel = (word.type === 'missing') ? word.solution : word.answer;
+    ariaLabel = ariaLabel
+      .replace(/\./g, this.params.a11y.period)
+      .replace(/!/g, this.params.a11y.exclamationPoint)
+      .replace(/\?/g, this.params.a11y.questionMark)
+      .replace(/,/g, this.params.a11y.comma)
+      .replace(/'/g, this.params.a11y.singleQuote)
+      .replace(/["|\u201C|\u201E]/g, this.params.a11y.doubleQuote)
+      .replace(/:/g, this.params.a11y.colon)
+      .replace(/;/g, this.params.a11y.semicolon)
+      .replace(/\+/g, this.params.a11y.plus)
+      .replace(/-/g, this.params.a11y.minus)
+      .replace(/\*/g, this.params.a11y.asterisk)
+      .replace(/\//g, this.params.a11y.forwardSlash);
+    ariaLabel += '. ' + ariaLabelType[word.type];
+    wrapper.setAttribute('aria-label', ariaLabel);
+
+    // ScorePoints
+    const scorePoints = new H5P.Question.ScorePoints();
+    if (word.type === 'wrong' || word.type === 'added' || word.type === 'typo') {
+      const answer = document.createElement('span');
+      answer.classList.add('h5p-answer-' + word.type);
+      answer.innerHTML = word.answer;
+      wrapper.appendChild(answer);
+    }
+    if (word.type !== 'added') {
+      const solution = document.createElement('span');
+      solution.classList.add('h5p-solution-' + word.type);
+      solution.innerHTML = word.solution;
+      wrapper.appendChild(solution);
+    }
+    if (word.type !== 'match') {
+      const scoreIndicator = scorePoints.getElement(false);
+      if (word.type === 'typo' && this.params.typoFactor === 0.5) {
+        scoreIndicator.classList.remove('h5p-question-minus-one');
+        scoreIndicator.classList.add('h5p-question-minus-one-half');
+      }
+      if (word.type !== 'typo' || this.params.typoFactor > 0) {
+        wrapper.appendChild(scoreIndicator);
+      }
+    }
+
+    return wrapper;
+  };
+
+  /**
    * Set current text in InputField.
    *
    * @param {object} result - Current DOM element with words.
    */
-  Dictation.Sentence.prototype.showSolution = function (text) {
+  Dictation.Sentence.prototype.showSolution = function (result) {
     const that = this;
 
+    const solutionElements = this.buildSolution(result);
+
     if (!this.solutionText.firstChild) {
-      text.forEach(function (element) {
+      solutionElements.forEach(function (element) {
         that.solutionText.appendChild(element);
         that.solutionContainer.classList.remove(HIDE);
       });
