@@ -301,6 +301,7 @@ H5P.Dictation = function (Audio, Question) {
     wrapper.addEventListener('keydown', function (event) {
       switch (event.keyCode) {
         case 37: // Left
+        // intentional fallthrough
         case 38: // Top
           event.preventDefault();
           if (this.previousSibling) {
@@ -308,6 +309,7 @@ H5P.Dictation = function (Audio, Question) {
           }
           break;
         case 39: // Right
+        // intentional fallthrough
         case 40: // Down
           event.preventDefault();
           if (this.nextSibling) {
