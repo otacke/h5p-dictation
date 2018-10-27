@@ -48,6 +48,8 @@
    * @param {number} id - Content Id.
    */
   Dictation.Sentence = function (index, params, id) {
+    const that = this;
+
     this.index = index;
     this.params = params;
     this.contentId = id;
@@ -104,8 +106,9 @@
     this.solutionInner.setAttribute('aria-label', this.params.a11y.solution);
     this.solutionInner.classList.add(SOLUTION_INNER);
     this.solutionInner.addEventListener('focus', function () {
-      if (this.firstChild.firstChild) {
-        this.firstChild.firstChild.setAttribute('tabindex', '0');
+      const wordElement = that.wordMarked || that.solutionText.firstChild;
+      if (wordElement) {
+        wordElement.setAttribute('tabindex', '0');
       }
     });
     this.solutionInner.appendChild(this.solutionText);
@@ -209,6 +212,8 @@
    * @param {object} result - Result data.
    */
   Dictation.Sentence.prototype.buildWordWrapper = function (index, word, result) {
+    const that = this;
+
     // General stuff
     const wrapper = document.createElement('span');
     wrapper.classList.add('h5p-wrapper-' + word.type);
@@ -219,11 +224,12 @@
     wrapper.setAttribute('role', 'listitem');
 
     // Listeners
-    wrapper.addEventListener('focus', function () {
-      this.setAttribute('tabindex', '0');
+    wrapper.addEventListener('focus', function (event) {
+      that.wordMarked = event.target;
+      event.target.setAttribute('tabindex', '0');
     });
-    wrapper.addEventListener('focusout', function () {
-      this.setAttribute('tabindex', '-1');
+    wrapper.addEventListener('focusout', function (event) {
+      event.target.setAttribute('tabindex', '-1');
     });
     wrapper.addEventListener('keydown', function (event) {
       switch (event.keyCode) {
@@ -231,16 +237,16 @@
         // intentional fallthrough
         case 38: // Top
           event.preventDefault();
-          if (this.previousSibling) {
-            this.previousSibling.focus();
+          if (event.target.previousSibling) {
+            event.target.previousSibling.focus();
           }
           break;
         case 39: // Right
         // intentional fallthrough
         case 40: // Down
           event.preventDefault();
-          if (this.nextSibling) {
-            this.nextSibling.focus();
+          if (event.target.nextSibling) {
+            event.target.nextSibling.focus();
           }
           break;
       }
