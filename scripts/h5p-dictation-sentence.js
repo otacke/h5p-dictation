@@ -20,7 +20,7 @@
   const TYPE_MATCH = 'match';
   const TYPE_TYPO = 'typo';
 
-  const PUNCTUATION = '[.?!,\'\";\\:\\-\\(\\)\/\\+\\-\\*\u201C\u201E]';
+  const PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C\u201E]';
   const WORD = '\\w';
 
   // Not visible, but present
@@ -59,7 +59,8 @@
     this.triesLeft = this.maxTries;
     this.triesLeftAlternative = this.maxTriesAlternative;
 
-    this.solution = (!params.ignorePunctuation) ? params.sentence.text : this.stripPunctuation(params.sentence.text);
+    this.solution = this.htmlDecode(params.sentence.text);
+    this.solution = (!params.ignorePunctuation) ? this.solution : this.stripPunctuation(this.solution);
     this.mistakesMax = this.addDelaturs(this.solution).split(' ').length;
 
     // DOM
@@ -507,9 +508,12 @@
       returnString = true;
       words = [words];
     }
+
+    const punctuation = new RegExp(PUNCTUATION, 'g');
     words = words.map(function (word) {
-      return word.replace(new RegExp(PUNCTUATION, 'g'), '');
+      return word.replace(punctuation, '');
     });
+
     return (returnString) ? words.toString() : words;
   };
 
@@ -754,6 +758,16 @@
     }
 
     return aligned1;
+  };
+
+  /**
+   * Retrieve true string from HTML encoded string
+   * @param {string} input - Input string.
+   * @return {string} Output string.
+   */
+  Dictation.Sentence.prototype.htmlDecode = function (input) {
+    var dparser = new DOMParser().parseFromString(input, 'text/html');
+    return dparser.documentElement.textContent;
   };
 
   /**
