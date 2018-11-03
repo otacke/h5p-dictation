@@ -101,16 +101,16 @@
     this.solutionText.setAttribute('role', 'list');
     this.solutionText.setAttribute('aria-label', this.params.a11y.solution);
     this.solutionText.setAttribute('tabindex', '0');
-
-    this.solutionInner = document.createElement('div');
-    this.solutionInner.setAttribute('role', 'presentation');
-    this.solutionInner.classList.add(SOLUTION_INNER);
-    this.solutionInner.addEventListener('focus', function () {
+    this.solutionText.addEventListener('focus', function () {
       const wordElement = that.wordMarked || that.solutionText.firstChild;
       if (wordElement) {
         wordElement.setAttribute('tabindex', '0');
       }
     });
+
+    this.solutionInner = document.createElement('div');
+    this.solutionInner.setAttribute('role', 'presentation');
+    this.solutionInner.classList.add(SOLUTION_INNER);
     this.solutionInner.appendChild(this.solutionText);
 
     this.solutionContainer = document.createElement('div');
