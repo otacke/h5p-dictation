@@ -15,17 +15,13 @@
   },
   "preloadedJs": [
     {
-      "path": "scripts/h5p-dictation.js"
-    },
-    {
-      "path": "scripts/h5p-dictation-sentence.js"
-    },
-    {
-      "path": "scripts/h5p-dictation-button.js"
+      "path": "dist/h5p-dictation.js"
     }
   ],
   "preloadedCss": [
-    {"path": "styles/h5p-dictation.css" }
+    {
+      "path": "dist/h5p-dictation.css"
+    }
   ],
   "preloadedDependencies": [
     {
