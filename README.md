@@ -6,9 +6,26 @@ You can e.g. upload sound samples that contain a recording of someone reading a 
 ## Support me at patreon!
 If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
 
+## Building H5P Dictation
+If you downloaded the source code and want to build the distribution files, you can use the build scripts ...
+
+### Install dependencies
+```bash
+npm install
+```
+
+### Build project for production
+```bash
+npm run build
+```
+
+### Build continuously when developing
+```bash
+npm run watch
+```
+
 ## TODO before first release
 - Implement suggestions at https://h5ptechnology.atlassian.net/browse/HFP-1988
-- Tidy up
 
 ## Ideas to think about ...
 - Could be interesting, but the use case might be rather particular for this content type: Audio Recorder widget which would allow to record the reading directly from within H5P/enhance Audio widget. (future option)
