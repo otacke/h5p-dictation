@@ -44,6 +44,9 @@ H5P.Dictation = function (Audio, Question) {
       return (sentence.sampleAlternative !== undefined);
     });
 
+    // Proper format
+    this.params.behaviour.typoFactor = parseInt(this.params.behaviour.typoFactor) / 100;
+
     // Create sentence instances
     this.params.sentences = this.params.sentences
       .filter(function (element) {
@@ -69,7 +72,6 @@ H5P.Dictation = function (Audio, Question) {
 
     // Score parameters
     this.maxMistakes = this.computeMaxMistakes();
-    this.params.behaviour.typoFactor = parseInt(this.params.behaviour.typoFactor) / 100;
 
     this.mistakesCapped = 0;
     this.isAnswered = false;

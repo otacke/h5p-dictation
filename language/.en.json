@@ -178,6 +178,10 @@
           "default": "Sentence"
         },
         {
+          "label": "Item",
+          "default": "Item"
+        },
+        {
           "label": "Correct",
           "default": "correct"
         },
@@ -196,6 +200,18 @@
         {
           "label": "Added word or symbol",
           "default": "added"
+        },
+        {
+          "label": "Correct solution",
+          "default": "Should have been"
+        },
+        {
+          "label": "Point",
+          "default": "point"
+        },
+        {
+          "label": "Points",
+          "default": "points"
         },
         {
           "label": "Period",

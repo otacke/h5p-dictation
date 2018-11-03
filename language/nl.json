@@ -178,6 +178,10 @@
           "default": "Zin"
         },
         {
+          "label": "Item",
+          "default": "Item"
+        },
+        {
           "label": "Juist",
           "default": "juist"
         },
@@ -196,6 +200,18 @@
         {
           "label": "Toegevoegd woord of symbool",
           "default": "toegevoegd"
+        },
+        {
+          "label": "Correct solution",
+          "default": "Should have been"
+        },
+        {
+          "label": "Point",
+          "default": "point"
+        },
+        {
+          "label": "Points",
+          "default": "points"
         },
         {
           "label": "Punt",

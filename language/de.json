@@ -178,6 +178,10 @@
           "default": "Satz"
         },
         {
+          "label": "Satzteil",
+          "default": "Satzteil"
+        },
+        {
           "label": "Richtig",
           "default": "richtig"
         },
@@ -198,7 +202,19 @@
           "default": "hinzugefügt"
         },
         {
+          "label": "Richtige Lösung",
+          "default": "Richtig wäre gewesen"
+        },
+        {
           "label": "Punkt",
+          "default": "Punkt"
+        },
+        {
+          "label": "Punkte",
+          "default": "Punkte"
+        },
+        {
+          "label": "Punkt (Satzzeichen)",
           "default": "Punkt"
         },
         {

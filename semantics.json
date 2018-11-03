@@ -338,6 +338,13 @@
         "default": "Sentence"
       },
       {
+        "name": "item",
+        "type": "text",
+        "label": "Item",
+        "importance": "low",
+        "default": "Item"
+      },
+      {
         "name": "correct",
         "type": "text",
         "label": "Correct",
@@ -371,6 +378,27 @@
         "label": "Added word or symbol",
         "importance": "low",
         "default": "added"
+      },
+      {
+        "name": "shouldHaveBeen",
+        "type": "text",
+        "label": "CorrectSolution",
+        "importance": "low",
+        "default": "Should have been"
+      },
+      {
+        "name": "point",
+        "type": "text",
+        "label": "Point",
+        "importance": "low",
+        "default": "point"
+      },
+      {
+        "name": "points",
+        "type": "text",
+        "label": "Points",
+        "importance": "low",
+        "default": "points"
       },
       {
         "name": "period",

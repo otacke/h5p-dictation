@@ -252,31 +252,11 @@
       }
     });
 
-    // ARIA
-    const ariaLabelType = {
-      match: this.params.a11y.correct,
-      wrong: this.params.a11y.wrong,
-      typo: this.params.a11y.typo,
-      missing: this.params.a11y.missing,
-      added: this.params.a11y.added
-    };
-
-    let ariaLabel = (word.type === 'missing') ? word.solution : word.answer;
-    ariaLabel = ariaLabel
-      .replace(/\./g, this.params.a11y.period)
-      .replace(/!/g, this.params.a11y.exclamationPoint)
-      .replace(/\?/g, this.params.a11y.questionMark)
-      .replace(/,/g, this.params.a11y.comma)
-      .replace(/'/g, this.params.a11y.singleQuote)
-      .replace(/["|\u201C|\u201E]/g, this.params.a11y.doubleQuote)
-      .replace(/:/g, this.params.a11y.colon)
-      .replace(/;/g, this.params.a11y.semicolon)
-      .replace(/\+/g, this.params.a11y.plus)
-      .replace(/-/g, this.params.a11y.minus)
-      .replace(/\*/g, this.params.a11y.asterisk)
-      .replace(/\//g, this.params.a11y.forwardSlash);
-    ariaLabel += '. ' + ariaLabelType[word.type];
-    wrapper.setAttribute('aria-label', ariaLabel);
+    // Create aria Label
+    const ariaPrefix = this.params.a11y.item + ' ' + (index + 1) + '.';
+    const ariaExplanation = this.createAriaExplanation(word);
+    const ariaScore = this.createAriaScore(word.type);
+    wrapper.setAttribute('aria-label', ariaPrefix + ' ' + ariaExplanation + ' ' + ariaScore);
 
     // ScorePoints
     const scorePoints = new H5P.Question.ScorePoints();
@@ -304,6 +284,86 @@
     }
 
     return wrapper;
+  };
+
+  /**
+   * Create explanation text for aria label.
+   *
+   * @param {object} word Word with type, answer and solution.
+   * @return {string} Explanation text for aria label.
+   */
+  Dictation.Sentence.prototype.createAriaExplanation = function (word) {
+    const ariaLabelType = {
+      match: this.params.a11y.correct,
+      wrong: this.params.a11y.wrong,
+      typo: this.params.a11y.typo,
+      missing: this.params.a11y.missing,
+      added: this.params.a11y.added
+    };
+
+    const answer = this.makeReadable(word.answer);
+    const solution = this.makeReadable(word.solution);
+
+    let ariaExplanation = answer + (answer === '' ? '' : '. ') + ariaLabelType[word.type] + '.';
+    if (word.type === 'wrong' || word.type === 'typo' || word.type === 'missing') {
+      ariaExplanation += ' ' + this.params.a11y.shouldHaveBeen + '. ' + solution + '.';
+    }
+
+    return ariaExplanation;
+  };
+
+  /**
+   * Create aria score text.
+   *
+   * @param {string} type Type of mistake.
+   * @return {string} Aria score text.
+   */
+  Dictation.Sentence.prototype.createAriaScore = function (type) {
+    let ariaScore = -1;
+
+    if (type === 'match') {
+      ariaScore = 0;
+    }
+    else if (type === 'typo') {
+      ariaScore = ariaScore * this.params.typoFactor;
+    }
+    if (ariaScore === 0) {
+      ariaScore = '';
+    }
+    else {
+      const scoreUnit = (ariaScore === -1) ?
+        this.params.a11y.point :
+        this.params.a11y.points;
+      ariaScore = ariaScore + ' ' + scoreUnit + '.';
+    }
+
+    return ariaScore;
+  };
+
+  /**
+   * Replace symbols with a11y readably words.
+   *
+   * @param {string} [text] Text to make readable.
+   * @return {string} Readable text.
+   */
+  Dictation.Sentence.prototype.makeReadable = function (text) {
+    if (text === undefined) {
+      return '';
+    }
+
+    return text
+      .replace(/\./g, this.params.a11y.period)
+      .replace(/!/g, this.params.a11y.exclamationPoint)
+      .replace(/\?/g, this.params.a11y.questionMark)
+      .replace(/,/g, this.params.a11y.comma)
+      .replace(/'/g, this.params.a11y.singleQuote)
+      .replace(/["|\u201C|\u201E]/g, this.params.a11y.doubleQuote)
+      .replace(/:/g, this.params.a11y.colon)
+      .replace(/;/g, this.params.a11y.semicolon)
+      .replace(/\+/g, this.params.a11y.plus)
+      .replace(/-/g, this.params.a11y.minus)
+      .replace(/\*/g, this.params.a11y.asterisk)
+      .replace(/\//g, this.params.a11y.forwardSlash);
   };
 
   /**
