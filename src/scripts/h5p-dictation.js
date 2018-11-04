@@ -36,7 +36,7 @@ class Dictation extends H5P.Question {
     this.sentences = [];
 
     // Relevant for building the DOM later (play slowly button)
-    const hasAlternatives = this.params.sentences.some(sentence => (sentence.sampleAlternative !== undefined));
+    const hasAlternatives = this.params.sentences.some(sentence => sentence.sampleAlternative !== undefined);
 
     // Proper format for percentage
     this.params.behaviour.typoFactor = parseInt(this.params.behaviour.typoFactor) / 100;
@@ -44,7 +44,7 @@ class Dictation extends H5P.Question {
     // Create sentence instances
     this.params.sentences = this.params.sentences
       // Strip incomplete sentences
-      .filter(sentence => (sentence.text !== undefined && sentence.sample !== undefined))
+      .filter(sentence => sentence.text !== undefined && sentence.sample !== undefined)
       .forEach((sentence, index) => {
         this.sentences.push(new Sentence(
           index + 1,
@@ -106,7 +106,9 @@ class Dictation extends H5P.Question {
 
       // Build content
       const content = document.createElement('div');
-      this.sentences.forEach(sentence => content.appendChild(sentence.getDOM()));
+      this.sentences.forEach(sentence => {
+        content.appendChild(sentence.getDOM());
+      });
 
       // No content was given
       if (this.sentences.length === 0) {
@@ -247,7 +249,9 @@ class Dictation extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
      */
     this.showSolutions = () => {
-      this.sentences.forEach((sentence, index) => sentence.showSolution(this.results[index]));
+      this.sentences.forEach((sentence, index) => {
+        sentence.showSolution(this.results[index]);
+      });
 
       // Focus first solution
       this.sentences[0].focusSolution();
