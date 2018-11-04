@@ -9,23 +9,26 @@ If you like what I do, please consider to become my supporter at patreon: https:
 ## Building H5P Dictation
 If you downloaded the source code and want to build the distribution files, you can use the build scripts ...
 
-### Install dependencies
+## Building the distribution files
+Pull or download this archive files and go into the main folder. There run
+
 ```bash
 npm install
 ```
 
-### Build project for production
+to get the required modules. Then build the project using
+
 ```bash
 npm run build
 ```
 
-### Build continuously when developing
+or
+
 ```bash
 npm run watch
 ```
 
-## TODO before first release
-- Implement suggestions at https://h5ptechnology.atlassian.net/browse/HFP-1988
+if you want to modify the code and want to get a fresh build built in the background.
 
 ## Ideas to think about ...
 - Could be interesting, but the use case might be rather particular for this content type: Audio Recorder widget which would allow to record the reading directly from within H5P/enhance Audio widget. (future option)
