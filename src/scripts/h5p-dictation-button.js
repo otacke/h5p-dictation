@@ -163,8 +163,7 @@ class Button {
   handlePlayed() {
     this.triesLeft--;
     if (this.triesLeft === 0) {
-      this.button.setAttribute('disabled', 'disabled');
-      this.button.classList.add(Button.DISABLED);
+      this.disable();
     }
   }
 
