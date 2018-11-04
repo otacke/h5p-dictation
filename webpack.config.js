@@ -49,7 +49,8 @@ const config = {
       },
       {
         test: /\.svg$/,
-        loader: 'url-loader'
+        include: path.join(__dirname, 'src/images'),
+        loader: 'file-loader?name=images/[name].[ext]'
       },
       {
         test: /\.woff$/,
