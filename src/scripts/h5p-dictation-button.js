@@ -178,7 +178,7 @@ class Button {
       this.params.a11y.infinite;
 
     const triesLeftLabel = this.params.a11y.triesLeft.replace(/@number/g, tries);
-    this.button.setAttribute('aria-label', `${label}.${triesLeftLabel}`);
+    this.button.setAttribute('aria-label', `${label}. ${triesLeftLabel}`);
     this.button.setAttribute('title', triesLeftLabel);
   }
 
