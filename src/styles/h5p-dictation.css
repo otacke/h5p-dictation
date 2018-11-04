@@ -99,6 +99,7 @@
   /* IE10+ */
   color: #e9e9e4;
   cursor: inherit;
+  pointer-events: none;
 }
 .h5p-dictation .h5p-text-input {
   font-family: H5PDroidSans, sans-serif;
