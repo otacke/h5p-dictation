@@ -178,8 +178,10 @@ class Button {
       this.params.a11y.infinite;
 
     const triesLeftLabel = this.params.a11y.triesLeft.replace(/@number/g, tries);
-    this.button.setAttribute('aria-label', `${label}. ${triesLeftLabel}`);
-    this.button.setAttribute('title', triesLeftLabel);
+    if (this.button) {
+      this.button.setAttribute('aria-label', `${label}. ${triesLeftLabel}`);
+      this.button.setAttribute('title', triesLeftLabel);
+    }
   }
 
   /**
@@ -225,6 +227,10 @@ class Button {
     }
 
     // Reset button DOM
+    if (!this.button) {
+      return; // No sample for this button
+    }
+
     this.button.classList.remove(Button.BUTTON_PAUSE);
     if (this.params.type === Button.BUTTON_TYPE_SLOW) {
       this.button.classList.add(Button.BUTTON_SLOW);
