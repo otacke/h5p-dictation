@@ -6,9 +6,6 @@ You can e.g. upload sound samples that contain a recording of someone reading a 
 ## Support me at patreon!
 If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
 
-## Building H5P Dictation
-If you downloaded the source code and want to build the distribution files, you can use the build scripts ...
-
 ## Building the distribution files
 Pull or download this archive files and go into the main folder. There run
 
