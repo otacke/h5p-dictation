@@ -332,8 +332,8 @@ class Dictation extends H5P.Question {
      */
     this.getxAPIDefinition = () => {
       const definition = {};
-      definition.name = {'en-US': Dictation.DEFAULT_DESCRIPTION};
-      definition.description = {'en-US': this.getTitle()};
+      definition.name = {'en-US': this.getTitle()};
+      definition.description = {'en-US': this.getDescription()};
       definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
       definition.interactionType = 'long-fill-in';
 
@@ -367,7 +367,7 @@ class Dictation extends H5P.Question {
     };
 
     /**
-     * Get the tasks title.
+     * Get tasks title.
      * @return {string} Title.
      */
     this.getTitle = () => {
@@ -375,10 +375,16 @@ class Dictation extends H5P.Question {
       if (this.contentData && this.contentData.metadata) {
         raw = this.contentData.metadata.title;
       }
-      raw = raw || this.params.taskDescription || Dictation.DEFAULT_DESCRIPTION;
+      raw = raw || Dictation.DEFAULT_DESCRIPTION;
 
       return H5P.createTitle(raw);
     };
+
+    /**
+     * Get tasks description.
+     * @return {string} Description.
+     */
+    this.getDescription = () => this.params.taskDescription || Dictation.DEFAULT_DESCRIPTION;
   }
 }
 
