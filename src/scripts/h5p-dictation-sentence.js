@@ -1,9 +1,9 @@
 import Button from './h5p-dictation-button';
 
+/** Class representing a sentence */
 class Sentence {
   /**
    * @constructor
-   *
    * @param {number} index - Index of the sentence.
    * @param {object} params - Parameters.
    * @param {number} params.tries - Number of attempts for sample.
@@ -42,7 +42,7 @@ class Sentence {
     this.content.setAttribute('aria-label', `${params.a11y.sentence} ${this.index}`);
     this.content.classList.add(Sentence.CONTENT_WRAPPER);
 
-    // Normal audio
+    // Normal audio button
     this.buttonPlayNormal = new Button(id, {
       sample: params.sentence.sample,
       audioNotSupported: params.audioNotSupported,
@@ -52,7 +52,7 @@ class Sentence {
     });
     this.content.appendChild(this.buttonPlayNormal.getDOM());
 
-    // Alternative audio
+    // Alternative audio button
     if (this.params.hasAlternatives === true) {
       this.buttonPlaySlow = new Button(id, {
         sample: params.sentence.sampleAlternative,
@@ -69,7 +69,7 @@ class Sentence {
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
     this.inputField.classList.add(Sentence.INPUT_FIELD);
 
-    // Solution container
+    // Solution words
     this.solutionText = document.createElement('div');
     this.solutionText.classList.add(Sentence.SOLUTION_TEXT);
     this.solutionText.setAttribute('role', 'list');
@@ -82,15 +82,18 @@ class Sentence {
       }
     });
 
+    // Solution sentence
     this.solutionInner = document.createElement('div');
     this.solutionInner.classList.add(Sentence.SOLUTION_INNER);
     this.solutionInner.appendChild(this.solutionText);
 
+    // Solution Container
     this.solutionContainer = document.createElement('div');
     this.solutionContainer.classList.add(Sentence.SOLUTION_CONTAINER);
     this.solutionContainer.classList.add(Sentence.HIDE);
     this.solutionContainer.appendChild(this.solutionInner);
 
+    // Sentence input field and solution
     this.inputWrapper = document.createElement('div');
     this.inputWrapper.classList.add(Sentence.INPUT_WRAPPER);
     this.inputWrapper.appendChild(this.inputField);
@@ -100,75 +103,41 @@ class Sentence {
   }
 
   /**
-   * Read first sample.
-   */
-  read() {
-    this.buttonPlayNormal.play();
-  }
-
-  /**
-   * Remove delatur symbols.
-   *
-   * @param {array|string} words - Text to be cleaned.
-   * @return {array|string} Cleaned words of a text.
-   */
-  removeDelaturs(words) {
-    let wasString = false;
-    if (typeof words === 'string') {
-      words = [words];
-      wasString = true;
-    }
-    if (words === undefined) {
-      return undefined;
-    }
-    else {
-      words = words.map(word => {
-        return (word === undefined) ?
-          undefined :
-          word.replace(new RegExp(Sentence.DELATUR, 'g'), '');
-      });
-    }
-    return (wasString) ? words[0] : words;
-  }
-
-  /**
    * Get content for H5P.Question.
-   *
    * @return {object} DOM elements for content.
    */
-  getContent() {
+  getDOM() {
     return this.content;
   }
 
   /**
    * Get current text in InputField.
-   *
    * @return {string} Current text.
    */
-  getText() {
+  getUserInput() {
     return this.inputField.value;
   }
 
   /**
    * Build the solution for the sentence's results.
-   * @param {object} result - Result.
-   * @param {object} result.score - Scores.
-   * @param {number} result.score.added - Number of added words added.
-   * @param {number} result.score.missing - Number of words missing.
-   * @param {number} result.score.typo - Number of words with typing errors.
-   * @param {number} result.score.wrong - Number of wrong words.
-   * @param {number} result.score.match - Number of mathes.
-   * @param {object[]} result.words - Words.
-   * @param {string} result.words[].answer - Answer given.
-   * @param {string} result.words[].solution - Correct word.
-   * @param {string} result.words[].type - Type of mistake or match.
-   * @param {boolean[]} result.spaces - Spaces for gaps between words.
-   * @return {object[]} solution.
+   * @param {object} result Result.
+   * @param {object} result.score Scores.
+   * @param {number} result.score.added Number of added words added.
+   * @param {number} result.score.missing Number of words missing.
+   * @param {number} result.score.typo Number of words with typing errors.
+   * @param {number} result.score.wrong Number of wrong words.
+   * @param {number} result.score.match Number of mathes.
+   * @param {object[]} result.words Words.
+   * @param {string} result.words[].answer Answer given.
+   * @param {string} result.words[].solution Correct word.
+   * @param {string} result.words[].type Type of mistake or match.
+   * @param {boolean[]} result.spaces Spaces for gaps between words.
+   * @return {object[]} Solution with all every word's DOM element.
    */
-  buildSolution(result) {
+  createSolution(result) {
     const solution = [];
     result.words.forEach((word, index) => {
-      solution.push(this.buildWordWrapper(index, word, result));
+      solution.push(this.createSolutionWordDOM(index, word, result));
     });
 
     return solution;
@@ -176,34 +145,59 @@ class Sentence {
 
   /**
    * Build wrapper for single word of a solution.
-   *
-   * @param {number} index -Tabindex for ARIA.
-   * @param {object} word - Word information.
-   * @param {string} word.type - Status about missing, typo, ...
-   * @param {string} word.solution - Correct spelling of the word.
-   * @param {string} word.answer -
-   * @param {object} result - Result data.
+   * @param {number} index Tabindex for ARIA.
+   * @param {object} word Word information.
+   * @param {string} word.type Status about missing, typo, ...
+   * @param {string} word.solution Correct spelling of the word.
+   * @param {string} word.answer User input for this word.
+   * @param {object} result DOM element for word.
    */
-  buildWordWrapper(index, word, result) {
+  createSolutionWordDOM(index, word, result) {
     // General stuff
-    const wrapper = document.createElement('span');
-    wrapper.classList.add(`h5p-wrapper-${word.type}`);
+    const wordDOM = document.createElement('span');
+    wordDOM.classList.add(`h5p-wrapper-${word.type}`);
     if (result.spaces[index]) {
-      wrapper.classList.add('h5p-spacer');
+      wordDOM.classList.add('h5p-spacer');
     }
-    wrapper.setAttribute('tabindex', (index === 0) ? '0' : '-1');
-    wrapper.setAttribute('role', 'listitem');
+    wordDOM.setAttribute('tabindex', (index === 0) ? '0' : '-1');
+    wordDOM.setAttribute('role', 'listitem');
 
-    // Listeners
-    wrapper.addEventListener('focus', event => {
+    // Add EventListeners
+    this.addSolutionWordListeners(wordDOM);
+
+    // Create aria Label
+    const ariaPrefix = `${this.params.a11y.item} ${index + 1}.`;
+    const ariaExplanation = this.createAriaExplanation(word);
+    const ariaScore = this.createAriaScore(word.type);
+    wordDOM.setAttribute('aria-label', `${ariaPrefix} ${ariaExplanation} ${ariaScore}`);
+
+    // Add explanation to solution
+    this.appendExplanationTo(wordDOM, word);
+
+    return wordDOM;
+  }
+
+  /**
+   * Add EventListeners to solutions's words.
+   * @param {object} Word's DOM element.
+   */
+  addSolutionWordListeners(wordDOM) {
+    // on focus
+    wordDOM.addEventListener('focus', event => {
       this.wordMarked = event.target;
       event.target.setAttribute('tabindex', '0');
     });
-    wrapper.addEventListener('focusout', event => {
+
+    // on focusout
+    wordDOM.addEventListener('focusout', event => {
       event.target.setAttribute('tabindex', '-1');
     });
-    wrapper.addEventListener('keydown', event => {
+
+    // on keydown
+    wordDOM.addEventListener('keydown', event => {
       switch (event.keyCode) {
+
+        // Focus previous solution word
         case 37: // Left
         // intentional fallthrough
         case 38: // Top
@@ -212,6 +206,8 @@ class Sentence {
             event.target.previousSibling.focus();
           }
           break;
+
+        // Focus next solution word
         case 39: // Right
         // intentional fallthrough
         case 40: // Down
@@ -222,44 +218,49 @@ class Sentence {
           break;
       }
     });
+  }
 
-    // Create aria Label
-    const ariaPrefix = `${this.params.a11y.item} ${index + 1}.`;
-    const ariaExplanation = this.createAriaExplanation(word);
-    const ariaScore = this.createAriaScore(word.type);
-    wrapper.setAttribute('aria-label', `${ariaPrefix} ${ariaExplanation} ${ariaScore}`);
-
+  /**
+   * Append explanation to solution.
+   * @param {object} wordDOM Word's DOM element.
+   * @param {object} word Word with type, answer and solution.
+   */
+  appendExplanationTo(wordDOM, word) {
     // ScorePoints
     const scorePoints = new H5P.Question.ScorePoints();
+
+    // Wrong input
     if (word.type === 'wrong' || word.type === 'added' || word.type === 'typo') {
-      const answer = document.createElement('span');
-      answer.classList.add(`h5p-answer-${word.type}`);
-      answer.innerHTML = word.answer;
-      wrapper.appendChild(answer);
-    }
-    if (word.type !== 'added') {
-      const solution = document.createElement('span');
-      solution.classList.add(`h5p-solution-${word.type}`);
-      solution.innerHTML = word.solution;
-      wrapper.appendChild(solution);
-    }
-    if (word.type !== 'match') {
-      const scoreIndicator = scorePoints.getElement(false);
-      if (word.type === 'typo' && this.params.typoFactor === 0.5) {
-        scoreIndicator.classList.remove('h5p-question-minus-one');
-        scoreIndicator.classList.add('h5p-question-minus-one-half');
-      }
-      if (word.type !== 'typo' || this.params.typoFactor > 0) {
-        wrapper.appendChild(scoreIndicator);
-      }
+      const wrongInput = document.createElement('span');
+      wrongInput.classList.add(`h5p-answer-${word.type}`);
+      wrongInput.innerHTML = word.answer;
+      wordDOM.appendChild(wrongInput);
     }
 
-    return wrapper;
+    // Correct solution
+    if (word.type !== 'added') {
+      const correctSolution = document.createElement('span');
+      correctSolution.classList.add(`h5p-solution-${word.type}`);
+      correctSolution.innerHTML = word.solution;
+      wordDOM.appendChild(correctSolution);
+    }
+
+    // Score explanation
+    if (word.type !== 'match') {
+      const scoreExplanation = scorePoints.getElement(false);
+      if (word.type === 'typo' && this.params.typoFactor === 0.5) {
+        scoreExplanation.classList.remove('h5p-question-minus-one');
+        scoreExplanation.classList.add('h5p-question-minus-one-half');
+      }
+
+      if (word.type !== 'typo' || this.params.typoFactor > 0) {
+        wordDOM.appendChild(scoreExplanation);
+      }
+    }
   }
 
   /**
    * Create explanation text for aria label.
-   *
    * @param {object} word Word with type, answer and solution.
    * @return {string} Explanation text for aria label.
    */
@@ -285,7 +286,6 @@ class Sentence {
 
   /**
    * Create aria score text.
-   *
    * @param {string} type Type of mistake.
    * @return {string} Aria score text.
    */
@@ -313,8 +313,7 @@ class Sentence {
 
   /**
    * Replace symbols with a11y readably words.
-   *
-   * @param {string} [text] Text to make readable.
+   * @param {string} [text=''] Text to make readable.
    * @return {string} Readable text.
    */
   makeReadable(text) {
@@ -339,11 +338,11 @@ class Sentence {
 
   /**
    * Set current text in InputField.
-   *
+   * DOM is not created before to make cheating a little more difficult at least.
    * @param {object} result - Current DOM element with words.
    */
   showSolution(result) {
-    const solutionElements = this.buildSolution(result);
+    const solutionElements = this.createSolution(result);
 
     if (!this.solutionText.firstChild) {
       solutionElements.forEach(element => {
@@ -365,7 +364,6 @@ class Sentence {
 
   /**
    * Get correct text.
-   *
    * @return {string} Correct text.
    */
   getCorrectText() {
@@ -374,7 +372,6 @@ class Sentence {
 
   /**
    * Get the maximum of possible mistakes.
-   *
    * @return {number} Number of possible mistakes.
    */
   getMaxMistakes() {
@@ -399,10 +396,12 @@ class Sentence {
    */
   disable() {
     this.inputField.disabled = true;
+
     if (this.buttonPlayNormal) {
       this.buttonPlayNormal.disable();
       this.buttonPlayNormal.resetAudio();
     }
+
     if (this.buttonPlaySlow) {
       this.buttonPlaySlow.disable();
       this.buttonPlaySlow.resetAudio();
@@ -414,9 +413,11 @@ class Sentence {
    */
   enable() {
     this.inputField.disabled = false;
+
     if (this.buttonPlayNormal) {
       this.buttonPlayNormal.enable();
     }
+
     if (this.buttonPlaySlow) {
       this.buttonPlaySlow.enable();
     }
@@ -433,19 +434,51 @@ class Sentence {
 
   /**
    * Add spaces + delatur symbols between text and punctuation.
-   *
+   * Used to mark where a whitespace between punctuation and word needs
+   * to be removed again later.
    * @param {string} text - Text to enter spaces + symbols.
    @ @return {string} Text with spaces and symbols.
    */
   addDelaturs(text) {
-    text = text.replace(new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION})`, 'g'), `$1 ${Sentence.DELATUR}$2`);
-    text = text.replace(new RegExp(`(${Sentence.PUNCTUATION})(${Sentence.WORD})`, 'g'), `$1${Sentence.DELATUR} $2`);
+    text = text.replace(
+      new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION})`, 'g'),
+      `$1 ${Sentence.DELATUR}$2`
+    );
+    text = text.replace(
+      new RegExp(`(${Sentence.PUNCTUATION})(${Sentence.WORD})`, 'g'),
+      `$1${Sentence.DELATUR} $2`
+    );
     return text;
   }
 
   /**
+   * Remove delatur symbols.
+   * @param {array|string} words Text to be cleaned.
+   * @return {array|string} Cleaned words of a text.
+   */
+  removeDelaturs(words) {
+    if (words === undefined) {
+      return;
+    }
+
+    let wasString = false;
+    if (typeof words === 'string') {
+      words = [words];
+      wasString = true;
+    }
+
+    // Replace delatur symbols in array
+    words = words.map(word => {
+      return (word === undefined) ?
+        undefined :
+        word.replace(new RegExp(Sentence.DELATUR, 'g'), '');
+    });
+
+    return (wasString) ? words[0] : words;
+  }
+
+  /**
    * Get pattern of spaces to add behind aliged array of words.
-   *
    * @param {object[]} words - Words to get spaces for.
    * @return {object[]} Spaces.
    */
@@ -456,56 +489,90 @@ class Sentence {
 
     let output = [];
     words = words.map(word => word || '');
-    for (let i = 0; i < words.length-1; i++) {
-      output.push(!(words[i].substr(-1) === Sentence.DELATUR || words[i+1].substring(0, 1) === Sentence.DELATUR));
+
+    for (let i = 0; i < words.length - 1; i++) {
+      // No space if no delatur symbol behind current or in front of next word
+      output.push(!(words[i].substr(-1) === Sentence.DELATUR || words[i + 1].substring(0, 1) === Sentence.DELATUR));
     }
-    output.push(false);
+    output.push(false); // No space after text
 
     return output;
   }
 
   /**
    * Strip punctuation from a sentence.
-   *
    * @param {object[]|string} words - Words of a sentence.
    * @return {object[]|string} Words without punctuation.
    */
   stripPunctuation(words) {
-    let returnString = false;
+    let wasString = false;
     if (typeof words === 'string') {
-      returnString = true;
+      wasString = true;
       words = [words];
     }
 
     const punctuation = new RegExp(Sentence.PUNCTUATION, 'g');
     words = words.map(word => word.replace(punctuation, ''));
 
-    return (returnString) ? words.toString() : words;
+    return (wasString) ? words.toString() : words;
   }
 
   /**
    * Compute the results for this sentence.
-   *
    * @return {object} Results.
    */
   computeResults() {
+    // Mark positons where spaces can be removed later
     const wordsSolution = this.addDelaturs(this.getCorrectText()).split(' ');
-    let answer = this.getText();
+
+    let input = this.getUserInput();
     if (this.params.ignorePunctuation) {
-      answer = this.stripPunctuation(answer);
+      input = this.stripPunctuation(input);
     }
-    const wordsAnswer = this.addDelaturs(answer).split(' ');
-    const aligned = this.alignWords(wordsSolution, wordsAnswer);
 
+    // Mark positons where spaces can be removed later
+    const wordsInput = this.addDelaturs(input).split(' ');
+
+    // Compute diff between correct solution and user input
+    const aligned = this.alignWords(wordsSolution, wordsInput);
+
+    // Spaces to pass with results
     const spaces = this.getSpaces(aligned.words1);
-    const words = [];
 
-    let score = [];
-    score[Sentence.TYPE_ADDED] = 0;
-    score[Sentence.TYPE_MISSING] = 0;
-    score[Sentence.TYPE_TYPO] = 0;
-    score[Sentence.TYPE_WRONG] = 0;
-    score[Sentence.TYPE_MATCH] = 0;
+    // Compute total score and explanation for each word
+    const scoreNWords = this.computeScore(aligned);
+    const score = scoreNWords.scoreTotal;
+    const words = scoreNWords.words;
+
+    return {
+      "score": {
+        "added": score[Sentence.TYPE_ADDED],
+        "missing": score[Sentence.TYPE_MISSING],
+        "typo": score[Sentence.TYPE_TYPO],
+        "wrong": score[Sentence.TYPE_WRONG],
+        "match": score[Sentence.TYPE_MATCH],
+        "total": Math.min(score[Sentence.TYPE_ADDED] +
+          score[Sentence.TYPE_MISSING] +
+          score[Sentence.TYPE_TYPO] +
+          score[Sentence.TYPE_WRONG], this.getMaxMistakes())
+      },
+      "words": words,
+      'spaces': spaces
+    };
+  }
+
+  /**
+   * Compute total score and explanation for each word.
+   * @param {object} aligned Word by word comparison of input and solution.
+   */
+  computeScore(aligned) {
+    const words = [];
+    let scoreTotal = [];
+    scoreTotal[Sentence.TYPE_ADDED] = 0;
+    scoreTotal[Sentence.TYPE_MISSING] = 0;
+    scoreTotal[Sentence.TYPE_TYPO] = 0;
+    scoreTotal[Sentence.TYPE_WRONG] = 0;
+    scoreTotal[Sentence.TYPE_MATCH] = 0;
 
     for (let i = 0; i < aligned.words1.length; i++) {
       const solution = aligned.words1[i];
@@ -527,7 +594,7 @@ class Sentence {
       else {
         type = Sentence.TYPE_WRONG;
       }
-      score[type]++;
+      scoreTotal[type]++;
 
       words.push({
         "solution": this.removeDelaturs(solution),
@@ -536,30 +603,24 @@ class Sentence {
       });
     }
 
-    const output = {
-      "score": {
-        "added": score[Sentence.TYPE_ADDED],
-        "missing": score[Sentence.TYPE_MISSING],
-        "typo": score[Sentence.TYPE_TYPO],
-        "wrong": score[Sentence.TYPE_WRONG],
-        "match": score[Sentence.TYPE_MATCH],
-        "total": Math.min(score[Sentence.TYPE_ADDED] +
-          score[Sentence.TYPE_MISSING] +
-          score[Sentence.TYPE_TYPO] +
-          score[Sentence.TYPE_WRONG], this.getMaxMistakes())
-      },
-      "words": words,
-      'spaces': spaces
+    return {
+      scoreTotal: scoreTotal,
+      words: words
     };
-
-    return output;
   }
 
   /**
-   * Bring two array of words to same length and match the words' positions
-   * There may be a smarter way to do it ...
+   * Bring two arrays of words to same length and match the words' positions
+   * There may be a smarter way to do it, but it works well.
    *
-   * TODO: There's a lot of redundant code here! Make it nice!
+   * The idea behind the algorithm is to add as many gaps between each solution
+   * word as there are words in the input. Afterwards, the input words are shaken
+   * left and right multiple times with decreasing strictness for finding
+   * matches in the solution. Afterwords, all gaps that appear at the same
+   * position of the input and the solution can be removed.
+   *
+   * TODO: This needs to be boiled down. It's long, there's redundant code,
+   * but I am too scared to touch it without having tests in place first.
    *
    * @param {array} words1 - First Array of words.
    * @param {array} words2 - Second Array of words.
@@ -569,13 +630,15 @@ class Sentence {
     const align = (words1, words2) => {
       words2 = words2.map(word => (word === '') ? undefined : word);
 
-      // Add enough space for additional words in answer to prevent errors by stacking
-      let master = words1.map(word1 => {
-        return Array.apply(null, Array(words2.length)).concat(word1);
-      }).reduce((a, b) => a.concat(b), []);
+      // Add words2.length empty gaps in front of and behind every word
+      let master = words1
+        .map(word1 => {
+          return Array.apply(null, Array(words2.length)).concat(word1);
+        })
+        .reduce((a, b) => a.concat(b), []);
       master = master.concat(Array.apply(null, Array(words2.length)));
 
-      // Matches in answer
+      // Create empty duplicate of same length
       const slave = Array.apply(null, Array(master.length));
 
       /*
@@ -583,13 +646,18 @@ class Sentence {
        * We let them stick if a match is found AND there are no identical words in the answer
        * later on.
        */
-      let floor = 0;
+      let floor = 0; // Lower boundary
+
       for (let i = 0; i < words2.length; i++) {
-        const currentAnswer = words2[i];
-        for (let pos = master.length-1; pos >= floor; pos--) {
-          if (currentAnswer !== undefined && master[pos] === currentAnswer && words2.slice(i+1).indexOf(currentAnswer) === -1 || pos === floor) {
-            slave[pos] = currentAnswer;
-            floor = pos+1;
+        const currentInput = words2[i];
+
+        for (let pos = master.length - 1; pos >= floor; pos--) {
+          const matchFound = currentInput !== undefined && currentInput === master[pos];
+          const noIdenticalWords = words2.slice(i + 1).indexOf(currentInput) === -1;
+
+          if (matchFound && noIdenticalWords || pos === floor) {
+            slave[pos] = currentInput;
+            floor = pos + 1;
             break;
           }
         }
@@ -599,18 +667,20 @@ class Sentence {
        * We let all the words that don't have a match yet slide from right to left
        * as far as possible looking for a match just in case they slided too far
        */
-      for (let pos = slave.length-1; pos >= 0; pos--) {
+      for (let pos = slave.length - 1; pos >= 0; pos--) {
         const currentWord = slave[pos];
 
         if (currentWord !== undefined && currentWord !== master[pos]) {
           let moves = 0;
           let posMatch = 0;
+
           while (pos + moves + 1 < slave.length && slave[pos + moves + 1] === undefined) {
             if (master[pos + moves + 1] === currentWord) {
               posMatch = pos + moves + 1;
             }
             moves++;
           }
+
           slave[posMatch || pos + moves] = currentWord;
           slave[pos] = undefined;
         }
@@ -625,19 +695,22 @@ class Sentence {
         if (currentWord !== undefined && currentWord !== master[pos]) {
           let moves = 0;
           let posMatch = 0;
-          while (pos + moves -1 >= 0 && slave[pos + moves - 1] === undefined) {
+
+          while (pos + moves - 1 >= 0 && slave[pos + moves - 1] === undefined) {
             if (H5P.TextUtilities.areSimilar(master[pos + moves - 1], currentWord)) {
               posMatch = pos + moves - 1;
             }
+
             moves--;
           }
+
           slave[posMatch || pos + moves] = currentWord;
           slave[pos] = undefined;
         }
       }
 
-      // Remove clutter
-      for (let pos = master.length-1; pos >= 0; pos--) {
+      // Remove clutter aka gaps at same position in both array
+      for (let pos = master.length - 1; pos >= 0; pos--) {
         if (master[pos] === undefined && slave[pos] === undefined) {
           master.splice(pos, 1);
           slave.splice(pos, 1);
@@ -645,17 +718,17 @@ class Sentence {
       }
 
       // Finally we can simply interpret adjacent missing/added words as wrong
-      for (let pos = 0; pos < master.length-1; pos++) {
+      for (let pos = 0; pos < master.length - 1; pos++) {
         // We're assuming a left-swipe as previous operation here
-        if (master[pos] === undefined && slave[pos+1] === undefined) {
-          master[pos] = master[pos+1];
-          master.splice(pos+1, 1);
-          slave.splice(pos+1, 1);
+        if (master[pos] === undefined && slave[pos + 1] === undefined) {
+          master[pos] = master[pos + 1];
+          master.splice(pos + 1, 1);
+          slave.splice(pos + 1, 1);
         }
       }
 
       // Make big clusters =>
-      for (let pos = 0; pos < master.length-1; pos++) {
+      for (let pos = 0; pos < master.length - 1; pos++) {
         if (slave[pos] === master[pos] && master[pos+1] === undefined) {
           let moves = 0;
 
@@ -673,8 +746,8 @@ class Sentence {
       // Make big clusters <=
       master.reverse();
       slave.reverse();
-      for (let pos = 0; pos < master.length-1; pos++) {
-        if (slave[pos] === master[pos] && master[pos+1] === undefined) {
+      for (let pos = 0; pos < master.length - 1; pos++) {
+        if (slave[pos] === master[pos] && master[pos + 1] === undefined) {
           let moves = 0;
 
           while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
@@ -695,25 +768,28 @@ class Sentence {
 
     /**
      * Count the number of matches + typos.
-     *
-     * @param {object} aligned - Aligned words.
+     * @param {object} aligned Aligned words.
      * @return {number} Number of matches and typos.
      */
     const count = (aligned) => {
       let output = 0;
+
+      // Check for exact match or similar match
       aligned.words1.forEach((word1, index) => {
         if (word1 === aligned.words2[index] || H5P.TextUtilities.areSimilar(word1, aligned.words2[index])) {
           output++;
         }
       });
+
       return output;
     };
 
+    // The order of the words makes a difference when shaking. We return the best match
     let aligned1 = align(words1, words2);
     const aligned2 = align(words1.reverse(), words2.reverse());
 
     if (count(aligned2) > count(aligned1)) {
-      aligned1 = {"words1": aligned2.words1.reverse(), "words2": aligned2.words2.reverse()};
+      aligned1 = {'words1': aligned2.words1.reverse(), 'words2': aligned2.words2.reverse()};
     }
 
     // Don't add unnecessary added words without a counterpart as extra mistakes
@@ -726,8 +802,8 @@ class Sentence {
   }
 
   /**
-   * Retrieve true string from HTML encoded string
-   * @param {string} input - Input string.
+   * Retrieve true string from HTML encoded string.
+   * @param {string} input Input string.
    * @return {string} Output string.
    */
   htmlDecode(input) {
@@ -744,25 +820,39 @@ class Sentence {
 }
 
 // CSS Classes
+/** @constant {string} */
 Sentence.CONTENT_WRAPPER = 'h5p-sentence';
+/** @constant {string} */
 Sentence.INPUT_WRAPPER = 'h5p-input-wrapper';
+/** @constant {string} */
 Sentence.INPUT_FIELD = 'h5p-text-input';
+/** @constant {string} */
 Sentence.SOLUTION_CONTAINER = 'h5p-solution-container';
+/** @constant {string} */
 Sentence.SOLUTION_INNER = 'h5p-solution-inner';
+/** @constant {string} */
 Sentence.SOLUTION_TEXT = 'h5p-solution-text';
+/** @constant {string} */
 Sentence.HIDE = 'hide';
 
 // Score types
+/** @constant {string} */
 Sentence.TYPE_ADDED = 'added';
+/** @constant {string} */
 Sentence.TYPE_MISSING = 'missing';
+/** @constant {string} */
 Sentence.TYPE_WRONG = 'wrong';
+/** @constant {string} */
 Sentence.TYPE_MATCH = 'match';
+/** @constant {string} */
 Sentence.TYPE_TYPO = 'typo';
 
+// Regular expression configuration
+/** @constant {string} */
 Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C\u201E]';
+/** @constant {string} */
 Sentence.WORD = '\\w';
-
-// Not visible, but present
-Sentence.DELATUR = '\u200C';
+/** @constant {string} */
+Sentence.DELATUR = '\u200C'; // Character not visible, but present
 
 export default Sentence;
