@@ -198,11 +198,15 @@ class Dictation extends H5P.Question {
         this.params.overallFeedback, this.getScore() / this.getMaxScore());
 
       // Output via H5P.Question
+      const ariaMessage = this.params.a11y.yourResult
+        .replace('@score', this.getScore())
+        .replace('@total', this.getMaxScore());
+
       this.setFeedback(
         (`${generalFeedback} ${textScore}`).trim(),
         this.getScore(),
         this.getMaxScore(),
-        this.params.a11y.yourResult
+        ariaMessage
       );
 
       // Update buttons

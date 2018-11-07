@@ -167,7 +167,8 @@
         },
         {
           "label": "Je resultaat",
-          "default": "Je resultaat"
+          "description": "@score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
+          "default": "You got @score out of @total points"
         },
         {
           "label": "Oplossing",

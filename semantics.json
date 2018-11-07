@@ -320,8 +320,9 @@
         "name": "yourResult",
         "type": "text",
         "label": "Your result",
+        "description": "@score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
         "importance": "low",
-        "default": "Your result"
+        "default": "You got @score out of @total points"
       },
       {
         "name": "solution",

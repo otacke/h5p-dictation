@@ -167,7 +167,8 @@
         },
         {
           "label": "Dein Ergebnis",
-          "default": "Dein Ergebnis"
+          "description": "@score wird durch die erreichten Punkte ersetzt. @total wird durch die maximal mögliche Punktzahl ersetzt.",
+          "default": "Du hast @score von @total Punkten"
         },
         {
           "label": "Lösung",
