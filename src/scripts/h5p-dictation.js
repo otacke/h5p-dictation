@@ -99,7 +99,6 @@ class Dictation extends H5P.Question {
       // Register task introduction text
       if (this.params.taskDescription) {
         this.introduction = document.createElement('div');
-        this.introduction.setAttribute('tabindex', '0');
         this.introduction.innerHTML = this.params.taskDescription;
         this.setIntroduction(this.introduction);
       }
@@ -149,6 +148,7 @@ class Dictation extends H5P.Question {
       // Retry button
       this.addButton('try-again', this.params.l10n.tryAgain, () => {
         this.resetTask();
+        this.sentences[0].focus();
       }, false, {}, {});
     };
 
