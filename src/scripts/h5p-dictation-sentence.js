@@ -74,11 +74,35 @@ class Sentence {
     this.solutionText.classList.add(Sentence.SOLUTION_TEXT);
     this.solutionText.setAttribute('role', 'list');
     this.solutionText.setAttribute('aria-label', this.params.a11y.solution);
+    this.solutionText.setAttribute('aria-expanded', 'false');
     this.solutionText.setAttribute('tabindex', '0');
-    this.solutionText.addEventListener('focus', () => {
+    this.solutionText.addEventListener('keydown', (event) => {
+      const currentExpandedState = this.solutionText.getAttribute('aria-expanded');
+      // Retrieve previously marked word
       const wordElement = this.wordMarked || this.solutionText.firstChild;
-      if (wordElement) {
-        wordElement.setAttribute('tabindex', '0');
+
+      switch (event.keyCode) {
+        case 13: // Enter
+        // intentional fallthrough
+        case 32: // Space
+          if (event.target !== event.currentTarget) {
+            // Ignore children
+            break;
+          }
+
+          // Expand/collapse group for ARIA
+          if (currentExpandedState === 'false') {
+            this.solutionText.setAttribute('aria-expanded', 'true');
+            if (wordElement) {
+              // Focus on previously tabbed element
+              wordElement.focus();
+            }
+          }
+          else {
+            this.solutionText.setAttribute('aria-expanded', 'false');
+            wordElement.setAttribute('tabindex', '-1');
+          }
+          break;
       }
     });
 
@@ -159,7 +183,7 @@ class Sentence {
     if (result.spaces[index]) {
       wordDOM.classList.add('h5p-spacer');
     }
-    wordDOM.setAttribute('tabindex', (index === 0) ? '0' : '-1');
+    wordDOM.setAttribute('tabindex', '-1');
     wordDOM.setAttribute('role', 'listitem');
 
     // Add EventListeners
@@ -184,13 +208,9 @@ class Sentence {
   addSolutionWordListeners(wordDOM) {
     // on focus
     wordDOM.addEventListener('focus', event => {
+      // Remember this word had focus
       this.wordMarked = event.target;
       event.target.setAttribute('tabindex', '0');
-    });
-
-    // on focusout
-    wordDOM.addEventListener('focusout', event => {
-      event.target.setAttribute('tabindex', '-1');
     });
 
     // on keydown
@@ -203,6 +223,7 @@ class Sentence {
         case 38: // Top
           event.preventDefault();
           if (event.target.previousSibling) {
+            event.target.setAttribute('tabindex', '-1');
             event.target.previousSibling.focus();
           }
           break;
@@ -388,6 +409,10 @@ class Sentence {
    */
   reset() {
     this.inputField.value = '';
+
+    this.wordMarked = undefined;
+    this.solutionText.setAttribute('aria-expanded', 'false');
+
     if (this.buttonPlayNormal) {
       this.buttonPlayNormal.reset();
     }

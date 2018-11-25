@@ -223,7 +223,6 @@ class Button {
    */
   setUntabbable() {
     if (this.button) {
-      console.log('11');
       this.button.setAttribute('tabindex', '-1');
     }
   }
@@ -233,7 +232,6 @@ class Button {
    */
   setTabbable() {
     if (this.button) {
-      console.log('22');
       this.button.setAttribute('tabindex', '0');
     }
   }
