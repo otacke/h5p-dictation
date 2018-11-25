@@ -219,6 +219,26 @@ class Button {
   }
 
   /**
+   * Remove button from tabindex.
+   */
+  setUntabbable() {
+    if (this.button) {
+      console.log('11');
+      this.button.setAttribute('tabindex', '-1');
+    }
+  }
+
+  /**
+   * Add button to tabindex.
+   */
+  setTabbable() {
+    if (this.button) {
+      console.log('22');
+      this.button.setAttribute('tabindex', '0');
+    }
+  }
+
+  /**
    * Disable button.
    */
   disable() {

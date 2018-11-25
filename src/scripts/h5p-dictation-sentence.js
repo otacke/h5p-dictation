@@ -350,6 +350,8 @@ class Sentence {
         this.solutionContainer.classList.remove(Sentence.HIDE);
       });
     }
+    this.buttonPlayNormal.setUntabbable();
+    this.buttonPlaySlow.setUntabbable();
   }
 
   /**
@@ -360,6 +362,9 @@ class Sentence {
       this.solutionText.removeChild(this.solutionText.firstChild);
     }
     this.solutionContainer.classList.add(Sentence.HIDE);
+
+    this.buttonPlayNormal.setTabbable();
+    this.buttonPlaySlow.setTabbable();
   }
 
   /**
