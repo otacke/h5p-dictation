@@ -234,7 +234,26 @@ class Sentence {
         case 40: // Down
           event.preventDefault();
           if (event.target.nextSibling) {
+            event.target.setAttribute('tabindex', '-1');
             event.target.nextSibling.focus();
+          }
+          break;
+
+        // Focus first solution word
+        case 36: // Home
+          event.preventDefault();
+          if (event.target !== event.target.parentNode.firstChild) {
+            event.target.setAttribute('tabindex', '-1');
+            event.target.parentNode.firstChild.focus();
+          }
+          break;
+
+        // Focus last solution word
+        case 35: // End
+          event.preventDefault();
+          if (event.target !== event.target.parentNode.lastChild) {
+            event.target.setAttribute('tabindex', '-1');
+            event.target.parentNode.lastChild.focus();
           }
           break;
       }
