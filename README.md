@@ -34,5 +34,4 @@ if you want to modify the code and want to get a fresh build built in the backgr
 - Do we need an option for different diff styles?
 - Automatic speed change? How to balance speed/pitch?
 - Add option for "drag the words" instead of text input fields? But then the name Dictation might be a little misleading
-- Indicator about how many tries are left
 - Use the full featured audio player and marks to jump to? Could be useful for sound samples containing more than one sample.
