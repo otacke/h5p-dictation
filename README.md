@@ -1,7 +1,9 @@
 # h5p-dictation
 Let your students train their listening comprehension and spelling skills.
 
-You can e.g. upload sound samples that contain a recording of someone reading a sentence. Students can play these sound samples (n times) and enter what they hear.
+You can add audio samples containing a sentence for dictation and enter the correct transcription. Your students can listen to the samples and enter what they have heard in to a text field. Their answers will be evaluated automatically.
+
+Several options will allow you to control the exercise's difficulty. You can optionally add a second audio sample for a sentence that could hold a version spoken slowly. You can also set a limit for how often a sample can be played, define if punctuation should be relevant for scoring, and decide whether small mistakes like typing errors should be counted as no mistake, a full mistake, or just a half mistake.
 
 ## Support me at patreon!
 If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
