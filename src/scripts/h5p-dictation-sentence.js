@@ -390,8 +390,12 @@ class Sentence {
         this.solutionContainer.classList.remove(Sentence.HIDE);
       });
     }
-    this.buttonPlayNormal.setUntabbable();
-    this.buttonPlaySlow.setUntabbable();
+    if (this.buttonPlayNormal) {
+      this.buttonPlayNormal.setUntabbable();
+    }
+    if (this.buttonPlaySlow) {
+      this.buttonPlaySlow.setUntabbable();
+    }
   }
 
   /**
@@ -403,8 +407,12 @@ class Sentence {
     }
     this.solutionContainer.classList.add(Sentence.HIDE);
 
-    this.buttonPlayNormal.setTabbable();
-    this.buttonPlaySlow.setTabbable();
+    if (this.buttonPlayNormal) {
+      this.buttonPlayNormal.setTabbable();
+    }
+    if (this.buttonPlaySlow) {
+      this.buttonPlaySlow.setTabbable();
+    }
   }
 
   /**
