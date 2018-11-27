@@ -57,8 +57,14 @@
 .h5p-dictation .h5p-solution-text {
   position: relative;
   z-index: 3;
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
+  padding-right: 1.615384615em;
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
+}
+.h5p-dictation .h5p-solution-text.h5p-solution-last-correct {
+  padding-right: 0.5em;
 }
 .h5p-dictation .h5p-audio-minimal-button {
   border: none;

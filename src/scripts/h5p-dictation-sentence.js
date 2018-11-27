@@ -384,6 +384,14 @@ class Sentence {
   showSolution(result) {
     const solutionElements = this.createSolution(result);
 
+    // Adjust padding around text
+    if (solutionElements.length > 0 && result.words[solutionElements.length - 1].type === 'match') {
+      this.solutionText.classList.add('h5p-solution-last-correct');
+    }
+    else {
+      this.solutionText.classList.remove('h5p-solution-last-correct');
+    }
+
     if (!this.solutionText.firstChild) {
       solutionElements.forEach(element => {
         this.solutionText.appendChild(element);
