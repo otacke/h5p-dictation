@@ -105,7 +105,7 @@
               "label": "0 %"
             }
           ],
-          "default": "50 %"
+          "default": "50"
         },
         {
           "label": "Enable \"Retry\""
