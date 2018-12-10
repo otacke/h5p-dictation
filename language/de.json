@@ -8,12 +8,7 @@
           "description": "Medien, die wahlweise oberhalb der Aufgabe angezeigt werden."
         },
         {
-          "label": "Bildzoom deaktivieren",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "label": "Bildzoom deaktivieren"
         }
       ]
     },
@@ -104,8 +99,7 @@
             {
               "label": "0 %"
             }
-          ],
-          "default": "50"
+          ]
         },
         {
           "label": "\"Wiederholen\" aktivieren"

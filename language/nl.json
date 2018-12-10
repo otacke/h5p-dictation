@@ -8,12 +8,7 @@
           "description": "De optionele media wordt boven de vraag getoond."
         },
         {
-          "label": "Schakel het beeldzoomen uit",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "label": "Schakel het beeldzoomen uit"
         }
       ]
     },
@@ -104,8 +99,7 @@
             {
               "label": "0 %"
             }
-          ],
-          "default": "50"
+          ]
         },
         {
           "label": "Schakel \"Opnieuw\" in"
