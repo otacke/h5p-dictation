@@ -26,8 +26,12 @@ class Dictation extends H5P.Question {
      * @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
      * @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
      */
-    this.params.behaviour.enableSolutionsButton = this.params.behaviour.enableSolutionsButton || true;
-    this.params.behaviour.enableRetry = this.params.behaviour.enableRetry || true;
+    this.params.behaviour.enableSolutionsButton = (this.params.behaviour.enableSolutionsButton === undefined) ?
+      true :
+      this.params.behaviour.enableSolutionsButton;
+    this.params.behaviour.enableRetry = (this.params.behaviour.enableRetry === undefined) ?
+      true :
+      this.params.behaviour.enableRetry;
 
     // Other defaults
     this.params.behaviour.tries = this.params.behaviour.tries || Infinity;
