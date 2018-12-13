@@ -219,7 +219,7 @@
         "optional": true
       },
       {
-        "name": "enableSolutionsButton",
+        "name": "enableSolution",
         "label": "Enable \"Show solution\" button",
         "type": "boolean",
         "importance": "low",
