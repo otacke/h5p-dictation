@@ -201,12 +201,12 @@
           "default": "Should have been"
         },
         {
-          "label": "Point",
-          "default": "point"
+          "label": "Punt",
+          "default": "punt"
         },
         {
-          "label": "Points",
-          "default": "points"
+          "label": "Punten",
+          "default": "punten"
         },
         {
           "label": "Punt",
