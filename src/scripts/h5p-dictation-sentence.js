@@ -836,18 +836,18 @@ class Sentence {
      * @param {object} aligned Aligned words.
      * @return {number} Number of matches and typos.
      */
-    const count = (aligned) => {
-      let output = 0;
+    const count = (aligned) => getMatchPattern(aligned)
+      .reduce((stack, current) => stack + (current ? 1 : 0), 0);
 
-      // Check for exact match or similar match
-      aligned.words1.forEach((word1, index) => {
-        if (word1 === aligned.words2[index] || H5P.TextUtilities.areSimilar(word1, aligned.words2[index])) {
-          output++;
-        }
-      });
-
-      return output;
-    };
+    /**
+     * Get match pattern.
+     * @param {object} aligned Aligned words.
+     * @return {boolean[]} Match pattern.
+     */
+    const getMatchPattern = (aligned) => aligned.words1.map((word1, index) =>
+      word1 === aligned.words2[index] ||
+        H5P.TextUtilities.areSimilar(word1, aligned.words2[index]) ||
+        false);
 
     // The order of the words makes a difference when shaking. We return the best match
     let aligned1 = align(words1, words2);
@@ -857,11 +857,23 @@ class Sentence {
       aligned1 = {'words1': aligned2.words1.reverse(), 'words2': aligned2.words2.reverse()};
     }
 
-    // Don't add unnecessary added words without a counterpart as extra mistakes
-    while (aligned1.words1[0] === undefined && aligned1.words2[aligned1.words2.length - 1] === undefined) {
-      aligned1.words1 = aligned1.words1.slice(1);
-      aligned1.words2 = aligned1.words2.slice(0, aligned1.words2.length - 1);
-    }
+    /*
+     * If learners add a lot of wrong words, these can lack a counterpart
+     * in the solution, and clusters between matches can be squeezed together
+     * in order to not count these counterpartless words as mistakes.
+     */
+    const matchPattern = getMatchPattern(aligned1);
+    let lo = -1;
+    let hi = matchPattern.length - 1;
+    do {
+      lo = matchPattern.lastIndexOf(true, hi);
+      while (aligned1.words1[lo + 1] === undefined && aligned1.words2[hi] === undefined) {
+        aligned1.words1.splice(lo + 1, 1);
+        aligned1.words2.splice(hi, 1);
+        hi -= 1;
+      }
+      hi = lo - 1;
+    } while (lo > 0);
 
     return aligned1;
   }
