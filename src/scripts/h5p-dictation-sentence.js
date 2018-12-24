@@ -34,7 +34,7 @@ class Sentence {
 
     this.solution = this.htmlDecode(params.sentence.text);
     this.solution = (!params.ignorePunctuation) ? this.solution : this.stripPunctuation(this.solution);
-    this.mistakesMax = this.addDelaturs(this.solution).split(' ').length;
+    this.mistakesMax = this.addSpaces(this.solution).split(' ').length;
 
     // DOM
     this.content = document.createElement('div');
@@ -159,12 +159,8 @@ class Sentence {
    * @return {object[]} Solution with all every word's DOM element.
    */
   createSolution(result) {
-    const solution = [];
-    result.words.forEach((word, index) => {
-      solution.push(this.createSolutionWordDOM(index, word, result));
-    });
-
-    return solution;
+    return result.words.map((word, index) =>
+      this.createSolutionWordDOM(index, word, result.words.length - 1 !== index));
   }
 
   /**
@@ -174,13 +170,13 @@ class Sentence {
    * @param {string} word.type Status about missing, typo, ...
    * @param {string} word.solution Correct spelling of the word.
    * @param {string} word.answer User input for this word.
-   * @param {object} result DOM element for word.
+   * @param {boolean} [trainingGap=true] True if wrapper should have trailing gap.
    */
-  createSolutionWordDOM(index, word, result) {
+  createSolutionWordDOM(index, word, trailingGap=true) {
     // General stuff
     const wordDOM = document.createElement('span');
     wordDOM.classList.add(`h5p-wrapper-${word.type}`);
-    if (result.spaces[index]) {
+    if (trailingGap) {
       wordDOM.classList.add('h5p-spacer');
     }
     wordDOM.setAttribute('tabindex', '-1');
@@ -498,70 +494,20 @@ class Sentence {
   }
 
   /**
-   * Add spaces + delatur symbols between text and punctuation.
-   * Used to mark where a whitespace between punctuation and word needs
-   * to be removed again later.
-   * @param {string} text - Text to enter spaces + symbols.
+   * Add spaces between text and punctuation.
+   * @param {string} text - Text to add spaces to.
    @ @return {string} Text with spaces and symbols.
    */
-  addDelaturs(text) {
+  addSpaces(text) {
     text = text.replace(
       new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION})`, 'g'),
-      `$1 ${Sentence.DELATUR}$2`
+      `$1 $2`
     );
     text = text.replace(
       new RegExp(`(${Sentence.PUNCTUATION})(${Sentence.WORD})`, 'g'),
-      `$1${Sentence.DELATUR} $2`
+      `$1 $2`
     );
     return text;
-  }
-
-  /**
-   * Remove delatur symbols.
-   * @param {array|string} words Text to be cleaned.
-   * @return {array|string} Cleaned words of a text.
-   */
-  removeDelaturs(words) {
-    if (words === undefined) {
-      return;
-    }
-
-    let wasString = false;
-    if (typeof words === 'string') {
-      words = [words];
-      wasString = true;
-    }
-
-    // Replace delatur symbols in array
-    words = words.map(word => {
-      return (word === undefined) ?
-        undefined :
-        word.replace(new RegExp(Sentence.DELATUR, 'g'), '');
-    });
-
-    return (wasString) ? words[0] : words;
-  }
-
-  /**
-   * Get pattern of spaces to add behind aliged array of words.
-   * @param {object[]} words - Words to get spaces for.
-   * @return {object[]} Spaces.
-   */
-  getSpaces(words) {
-    if (words.length < 2) {
-      return [false];
-    }
-
-    let output = [];
-    words = words.map(word => word || '');
-
-    for (let i = 0; i < words.length - 1; i++) {
-      // No space if no delatur symbol behind current or in front of next word
-      output.push(!(words[i].substr(-1) === Sentence.DELATUR || words[i + 1].substring(0, 1) === Sentence.DELATUR));
-    }
-    output.push(false); // No space after text
-
-    return output;
   }
 
   /**
@@ -587,22 +533,19 @@ class Sentence {
    * @return {object} Results.
    */
   computeResults() {
-    // Mark positons where spaces can be removed later
-    const wordsSolution = this.addDelaturs(this.getCorrectText()).split(' ');
+    // Add spaces to correct text
+    const wordsSolution = this.addSpaces(this.getCorrectText()).split(' ');
 
     let input = this.getUserInput();
     if (this.params.ignorePunctuation) {
       input = this.stripPunctuation(input);
     }
 
-    // Mark positons where spaces can be removed later
-    const wordsInput = this.addDelaturs(input).split(' ');
+    // Add spaces to solution
+    const wordsInput = this.addSpaces(input).split(' ');
 
     // Compute diff between correct solution and user input
     const aligned = this.alignWords(wordsSolution, wordsInput);
-
-    // Spaces to pass with results
-    const spaces = this.getSpaces(aligned.words1);
 
     // Compute total score and explanation for each word
     const scoreNWords = this.computeScore(aligned);
@@ -621,8 +564,7 @@ class Sentence {
           score[Sentence.TYPE_TYPO] +
           score[Sentence.TYPE_WRONG], this.getMaxMistakes())
       },
-      "words": words,
-      'spaces': spaces
+      "words": words
     };
   }
 
@@ -662,9 +604,9 @@ class Sentence {
       scoreTotal[type]++;
 
       words.push({
-        "solution": this.removeDelaturs(solution),
-        "answer": this.removeDelaturs(answer),
-        "type": type
+        'solution': solution,
+        'answer': answer,
+        'type': type
       });
     }
 
@@ -929,7 +871,5 @@ Sentence.TYPE_TYPO = 'typo';
 Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C\u201E]';
 /** @constant {string} */
 Sentence.WORD = '\\w';
-/** @constant {string} */
-Sentence.DELATUR = '\u200C'; // Character not visible, but present
 
 export default Sentence;
