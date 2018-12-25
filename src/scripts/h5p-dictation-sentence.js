@@ -32,8 +32,9 @@ class Sentence {
     this.triesLeft = this.maxTries;
     this.triesLeftAlternative = this.maxTriesAlternative;
 
-    this.solution = this.htmlDecode(params.sentence.text);
+    this.solution = this.htmlDecode(params.sentence.text).trim();
     this.solution = (!params.ignorePunctuation) ? this.solution : this.stripPunctuation(this.solution);
+    this.containsRTL = this.containsRTLCharacters(this.solution);
     this.mistakesMax = this.addSpaces(this.solution).split(' ').length;
 
     // DOM
@@ -79,7 +80,8 @@ class Sentence {
     this.solutionText.addEventListener('keydown', (event) => {
       const currentExpandedState = this.solutionText.getAttribute('aria-expanded');
       // Retrieve previously marked word
-      const wordElement = this.wordMarked || this.solutionText.firstChild;
+      const wordElement = this.wordMarked ||
+        (this.containsRTL ? this.solutionText.lastChild : this.solutionText.firstChild);
 
       switch (event.keyCode) {
         case 13: // Enter
@@ -159,6 +161,11 @@ class Sentence {
    * @return {object[]} Solution with all every word's DOM element.
    */
   createSolution(result) {
+    // Revert order of right-to-left chunks
+    if (this.containsRTL) {
+      result.words = this.revertRTL(result.words);
+    }
+
     return result.words.map((word, index) =>
       this.createSolutionWordDOM(index, word, result.words.length - 1 !== index));
   }
@@ -198,6 +205,40 @@ class Sentence {
   }
 
   /**
+   * Revert order of right-to-left chunks.
+   *
+   * Words can be mixed as right-to-left and left-to-right, and the
+   * parsed input from the text field will have a different order than the
+   * displayed words. The right-to-left chunks are reversed here.
+   *
+   * @param {object[]} words Words object.
+   * @param {string} word.solution Word to test.
+   * @return {object[]} RTL words reordered.
+   */
+  revertRTL(words) {
+    let reversedWords = [];
+    let currentRTL = [];
+
+    // Reverse RTL blocks, keep LTR
+    words.forEach(word => {
+      const isRTL = this.containsRTLCharacters(word.solution);
+      if (isRTL) {
+        currentRTL.push(word);
+      }
+      else {
+        reversedWords = reversedWords.concat(currentRTL.reverse());
+        currentRTL = [];
+        reversedWords.push(word);
+      }
+    });
+    if (currentRTL.length !== 0) {
+      reversedWords = reversedWords.concat(currentRTL.reverse());
+    }
+
+    return reversedWords;
+  }
+
+  /**
    * Add EventListeners to solutions's words.
    * @param {object} Word's DOM element.
    */
@@ -211,6 +252,13 @@ class Sentence {
 
     // on keydown
     wordDOM.addEventListener('keydown', event => {
+      const firstChild = this.containsRTL ?
+        event.target.parentNode.lastChild :
+        event.target.parentNode.firstChild;
+      const lastChild = this.containsRTL ?
+        event.target.parentNode.firstChild :
+        event.target.parentNode.lastChild;
+
       switch (event.keyCode) {
 
         // Focus previous solution word
@@ -238,18 +286,18 @@ class Sentence {
         // Focus first solution word
         case 36: // Home
           event.preventDefault();
-          if (event.target !== event.target.parentNode.firstChild) {
+          if (event.target !== firstChild) {
             event.target.setAttribute('tabindex', '-1');
-            event.target.parentNode.firstChild.focus();
+            firstChild.focus();
           }
           break;
 
         // Focus last solution word
         case 35: // End
           event.preventDefault();
-          if (event.target !== event.target.parentNode.lastChild) {
+          if (event.target !== lastChild) {
             event.target.setAttribute('tabindex', '-1');
-            event.target.parentNode.lastChild.focus();
+            lastChild.focus();
           }
           break;
       }
@@ -507,7 +555,7 @@ class Sentence {
       new RegExp(`(${Sentence.PUNCTUATION})(${Sentence.WORD})`, 'g'),
       `$1 $2`
     );
-    return text;
+    return text.trim();
   }
 
   /**
@@ -542,7 +590,7 @@ class Sentence {
     }
 
     // Add spaces to solution
-    const wordsInput = this.addSpaces(input).split(' ');
+    const wordsInput = input.trim() === '' ? [] : this.addSpaces(input).split(' ');
 
     // Compute diff between correct solution and user input
     const aligned = this.alignWords(wordsSolution, wordsInput);
@@ -831,6 +879,16 @@ class Sentence {
   }
 
   /**
+   * Check for right-to-left characters.
+   *
+   * @param {string} input Input to check for right-to-left characters.
+   * @return {boolean} True, if input contains right-to-left characters.
+   */
+  containsRTLCharacters(input) {
+    return new RegExp('^[^' + Sentence.RTL + ']*?[' + Sentence.RTL + ']').test(input);
+  }
+
+  /**
    * Set focus to the sentence solution.
    */
   focusSolution() {
@@ -868,8 +926,10 @@ Sentence.TYPE_TYPO = 'typo';
 
 // Regular expression configuration
 /** @constant {string} */
-Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C\u201E]';
+Sentence.RTL = '\u0591-\u08FF';
 /** @constant {string} */
-Sentence.WORD = '\\w';
+Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6]';
+/** @constant {string} */
+Sentence.WORD = '\\w|[\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u060B\u060D-\u061E\u0620-\u08FF]';
 
 export default Sentence;
