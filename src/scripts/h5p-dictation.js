@@ -11,7 +11,8 @@ class Dictation extends H5P.Question {
   constructor(params, contentId, contentData) {
     super('dictation');
 
-    Dictation.extend({
+    // Add defaults
+    params = Dictation.extend({
       taskDescription: 'Please listen carefully and write what you hear.',
       behaviour: {
         alternateSolution: 'first',
@@ -62,6 +63,10 @@ class Dictation extends H5P.Question {
         forwardSlash: 'forward slash'
       }
     }, params);
+
+    // TODO: When other functionality needs a minor version bump, rename semantics variable in upgrade script
+    params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
+      true : params.behaviour.enableSolution;
 
     // Initialize
     if (!params) {
