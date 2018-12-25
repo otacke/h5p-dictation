@@ -95,17 +95,17 @@ class Dictation extends H5P.Question {
         this.sentences.push(new Sentence(
           index + 1,
           {
-            "sentence": sentence,
-            "audioNotSupported": this.params.l10n.audioNotSupported,
-            "tries": this.params.behaviour.tries,
-            "triesAlternative": this.params.behaviour.triesAlternative,
-            "ignorePunctuation": this.params.behaviour.ignorePunctuation,
-            "hasAlternatives": hasAlternatives,
-            "a11y": this.params.a11y,
-            "typoFactor": this.params.behaviour.typoFactor,
-            "alternateSolution": this.params.behaviour.alternateSolution,
-            "overrideRTL": this.params.behaviour.overrideRTL,
-            "autosplit": this.params.behaviour.autosplit,
+            sentence: sentence,
+            audioNotSupported: this.params.l10n.audioNotSupported,
+            tries: this.params.behaviour.tries,
+            triesAlternative: this.params.behaviour.triesAlternative,
+            ignorePunctuation: this.params.behaviour.ignorePunctuation,
+            hasAlternatives: hasAlternatives,
+            a11y: this.params.a11y,
+            typoFactor: this.params.behaviour.typoFactor,
+            alternateSolution: this.params.behaviour.alternateSolution,
+            overrideRTL: this.params.behaviour.overrideRTL,
+            autosplit: this.params.behaviour.autosplit,
           },
           this.contentId)
         );
