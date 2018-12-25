@@ -11,6 +11,58 @@ class Dictation extends H5P.Question {
   constructor(params, contentId, contentData) {
     super('dictation');
 
+    Dictation.extend({
+      taskDescription: 'Please listen carefully and write what you hear.',
+      behaviour: {
+        alternateSolution: 'first',
+        enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
+        enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
+        ignorePunctuation: true,
+        tries: Infinity,
+        triesAlternative: Infinity,
+        typoFactor: '50'
+      },
+      l10n: {
+        generalFeedback: 'You have made @total mistake(s).',
+        checkAnswer: 'Check',
+        tryAgain: 'Retry',
+        showSolution: 'Show solution',
+        audioNotSupported: 'Your browser does not support this audio.'
+      },
+      a11y: {
+        play: 'Play',
+        playSlowly: 'Play slowly',
+        triesLeft: 'Number of tries left: @number',
+        infinite: 'infinite',
+        enterText: 'Enter what you have heard.',
+        yourResult: 'You got @score out of @total points',
+        solution: 'Solution',
+        sentence: 'Sentence',
+        item: 'Item',
+        correct: 'correct',
+        wrong: 'wrong',
+        typo: 'small mistake',
+        missing: 'missing',
+        added: 'added',
+        shouldHaveBeen: 'Should have been',
+        or: 'or',
+        point: 'point',
+        points: 'points',
+        period: 'period',
+        exclamationPoint: 'exclamation point',
+        questionMark: 'question mark',
+        comma: 'comma',
+        singleQuote: 'single quote',
+        doubleQuote: 'double quote',
+        colon: 'colon',
+        semicolon: 'semicolon',
+        plus: 'plus',
+        minus: 'minus',
+        asterisk: 'asterisk',
+        forwardSlash: 'forward slash'
+      }
+    }, params);
+
     // Initialize
     if (!params) {
       return;
@@ -19,23 +71,6 @@ class Dictation extends H5P.Question {
     this.params = params;
     this.contentId = contentId;
     this.contentData = contentData || {};
-
-    /*
-     * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry
-     * are used by H5P's question type contract.
-     * @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
-     * @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
-     */
-    this.params.behaviour.enableSolutionsButton = (this.params.behaviour.enableSolution === undefined) ?
-      true :
-      this.params.behaviour.enableSolution;
-    this.params.behaviour.enableRetry = (this.params.behaviour.enableRetry === undefined) ?
-      true :
-      this.params.behaviour.enableRetry;
-
-    // Other defaults
-    this.params.behaviour.tries = this.params.behaviour.tries || Infinity;
-    this.params.behaviour.triesAlternative = this.params.behaviour.triesAlternative || Infinity;
 
     this.sentences = [];
 
@@ -333,7 +368,7 @@ class Dictation extends H5P.Question {
      */
     this.createDictationXAPIEvent = (verb) => {
       const xAPIEvent = this.createXAPIEventTemplate(verb);
-      this.extend(
+      Dictation.extend(
         xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
         this.getxAPIDefinition());
       return xAPIEvent;
@@ -359,27 +394,6 @@ class Dictation extends H5P.Question {
     };
 
     /**
-     * Extend an array just like JQuery's extend.
-     * @param {object} arguments Objects to be merged.
-     * @return {object} Merged objects.
-     */
-    this.extend = function () {
-      for (let i = 1; i < arguments.length; i++) {
-        for (let key in arguments[i]) {
-          if (arguments[i].hasOwnProperty(key)) {
-            if (typeof arguments[0][key] === 'object' && typeof arguments[i][key] === 'object') {
-              this.extend(arguments[0][key], arguments[i][key]);
-            }
-            else {
-              arguments[0][key] = arguments[i][key];
-            }
-          }
-        }
-      }
-      return arguments[0];
-    };
-
-    /**
      * Get tasks title.
      * @return {string} Title.
      */
@@ -398,6 +412,27 @@ class Dictation extends H5P.Question {
      * @return {string} Description.
      */
     this.getDescription = () => this.params.taskDescription || Dictation.DEFAULT_DESCRIPTION;
+  }
+
+  /**
+   * Extend an array just like JQuery's extend.
+   * @param {object} arguments Objects to be merged.
+   * @return {object} Merged objects.
+   */
+  static extend() {
+    for (let i = 1; i < arguments.length; i++) {
+      for (let key in arguments[i]) {
+        if (arguments[i].hasOwnProperty(key)) {
+          if (typeof arguments[0][key] === 'object' && typeof arguments[i][key] === 'object') {
+            this.extend(arguments[0][key], arguments[i][key]);
+          }
+          else {
+            arguments[0][key] = arguments[i][key];
+          }
+        }
+      }
+    }
+    return arguments[0];
   }
 }
 

@@ -225,8 +225,7 @@
             "label": "Show all alternatives"
           }
         ],
-        "default": "first",
-        "state": "new"
+        "default": "first"
       },
       {
         "name": "enableRetry",
@@ -410,8 +409,7 @@
         "type": "text",
         "label": "Or",
         "importance": "low",
-        "default": "or",
-        "state": "new"
+        "default": "or"
       },
       {
         "name": "point",
