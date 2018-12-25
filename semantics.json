@@ -228,6 +228,35 @@
         "default": "first"
       },
       {
+        "name": "overrideRTL",
+        "type": "select",
+        "label": "Writing direction",
+        "description": "Set whether the sentences' language is right-to-left or left-to-right.",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Automatic detection"
+          },
+          {
+            "value": "on",
+            "label": "Right-to-left"
+          },
+          {
+            "value": "off",
+            "label": "Left-to-right"
+          }
+        ],
+        "default": "auto"
+      },
+      {
+        "name": "autosplit",
+        "type": "boolean",
+        "label": "Splitting of characters",
+        "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically.",
+        "importance": "low",
+        "default": true
+      },
+      {
         "name": "enableRetry",
         "label": "Enable \"Retry\"",
         "type": "boolean",

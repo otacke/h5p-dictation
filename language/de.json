@@ -114,6 +114,25 @@
           ]
         },
         {
+          "label": "Schreibrichtung",
+          "description": "Lege fest, ob die Schreibrichtung rechts-nach-links oder links-nach-rechts ist.",
+          "options": [
+            {
+              "label": "Automatisch feststellen"
+            },
+            {
+              "label": "Rechts-nach-links"
+            },
+            {
+              "label": "Links-nach-rechts"
+            }
+          ]
+        },
+        {
+          "label": "Trennen von Schriftzeichen",
+          "description": "Aktiviere diese Option, falls bestimmte Zeichen (z. B. chinesische Schriftzeichen) automatisch in einzelne Wörter getrennt werden sollen."
+        },
+        {
           "label": "\"Wiederholen\" aktivieren"
         },
         {

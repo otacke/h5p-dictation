@@ -16,9 +16,11 @@ class Dictation extends H5P.Question {
       taskDescription: 'Please listen carefully and write what you hear.',
       behaviour: {
         alternateSolution: 'first',
+        autosplit: true,
         enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
         enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
         ignorePunctuation: true,
+        overrideRTL: 'auto',
         tries: Infinity,
         triesAlternative: Infinity,
         typoFactor: '50'
@@ -101,7 +103,9 @@ class Dictation extends H5P.Question {
             "hasAlternatives": hasAlternatives,
             "a11y": this.params.a11y,
             "typoFactor": this.params.behaviour.typoFactor,
-            "alternateSolution": this.params.behaviour.alternateSolution
+            "alternateSolution": this.params.behaviour.alternateSolution,
+            "overrideRTL": this.params.behaviour.overrideRTL,
+            "autosplit": this.params.behaviour.autosplit,
           },
           this.contentId)
         );

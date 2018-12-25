@@ -15,6 +15,8 @@ class Sentence {
    * @param {string} params.sentence.sampleAlternatives - Path to alternative sound sample.
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
    * @param {string} params.alternateSolution - Mode to display alternate solutions.
+   * @param {string} overrideRTL - Override for right-to-left support.
+   * @param {boolean} autosplit - Set auto-splitting for characters.
    * @param {object} params.a11y - Readspeaker texts.
    * @param {string} params.a11y.play - Readspeaker text for "Play".
    * @param {string} params.a11y.playSlowly - Readspeaker text for "Play slowly".
@@ -35,7 +37,9 @@ class Sentence {
 
     this.solution = this.htmlDecode(params.sentence.text).trim();
     this.solution = (!params.ignorePunctuation) ? this.solution : this.stripPunctuation(this.solution);
-    this.containsRTL = this.containsRTLCharacters(this.solution);
+    this.containsRTL = (this.params.overrideRTL === 'auto') ?
+      this.containsRTLCharacters(this.solution) :
+      this.params.overrideRTL === 'on' ? true : false;
     this.mistakesMax = this.addSpaces(this.solution).split(' ').length;
 
     // DOM
@@ -565,20 +569,23 @@ class Sentence {
       `$1 `
     );
 
-    // Space between autosplit characters, e.g. Chinese Han symbols
-    text = text.replace(
-      new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.AUTOSPLIT})`, 'g'),
-      `$1 `
-    );
-    text = text.replace(
-      new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.WORD}|d|${Sentence.PUNCTUATION})`, 'g'),
-      `$1 `
-    );
+    if (this.params.autosplit === true) {
+      // Space between autosplit characters, e.g. Chinese Han symbols
+      text = text.replace(
+        new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.AUTOSPLIT})`, 'g'),
+        `$1 `
+      );
 
-    text = text.replace(
-      new RegExp(`(${Sentence.WORD}|d|${Sentence.PUNCTUATION})(?=${Sentence.AUTOSPLIT})`, 'g'),
-      `$1 `
-    );
+      text = text.replace(
+        new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.WORD}|d|${Sentence.PUNCTUATION})`, 'g'),
+        `$1 `
+      );
+
+      text = text.replace(
+        new RegExp(`(${Sentence.WORD}|d|${Sentence.PUNCTUATION})(?=${Sentence.AUTOSPLIT})`, 'g'),
+        `$1 `
+      );
+    }
 
     return text.trim();
   }
