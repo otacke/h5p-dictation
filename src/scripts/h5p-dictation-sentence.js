@@ -547,14 +547,31 @@ class Sentence {
    @ @return {string} Text with spaces and symbols.
    */
   addSpaces(text) {
+    // Space between punctuation and word
     text = text.replace(
-      new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION})`, 'g'),
-      `$1 $2`
+      new RegExp(`(${Sentence.WORD}|^)(?=${Sentence.PUNCTUATION})`, 'g'),
+      `$1 `
     );
     text = text.replace(
-      new RegExp(`(${Sentence.PUNCTUATION})(${Sentence.WORD})`, 'g'),
-      `$1 $2`
+      new RegExp(`(${Sentence.PUNCTUATION})(?=${Sentence.WORD})`, 'g'),
+      `$1 `
     );
+
+    // Space between autosplit characters, e.g. Chinese Han symbols
+    text = text.replace(
+      new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.AUTOSPLIT})`, 'g'),
+      `$1 `
+    );
+    text = text.replace(
+      new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.WORD}|d|${Sentence.PUNCTUATION})`, 'g'),
+      `$1 `
+    );
+
+    text = text.replace(
+      new RegExp(`(${Sentence.WORD}|d|${Sentence.PUNCTUATION})(?=${Sentence.AUTOSPLIT})`, 'g'),
+      `$1 `
+    );
+
     return text.trim();
   }
 
@@ -928,7 +945,9 @@ Sentence.TYPE_TYPO = 'typo';
 /** @constant {string} */
 Sentence.RTL = '\u0591-\u08FF';
 /** @constant {string} */
-Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6]';
+Sentence.AUTOSPLIT = '[\u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF]';
+/** @constant {string} */
+Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C-\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6\u2026\u2027\u22EF\u3000-\u3002\u3008-\u3011\uFF01\uFF08\uFF09\uFF0C\uFF1A\uFF1B\uFF1F\uFF3B\uFF3D\uFE41\uFE42\uFE4F\uFF5E]';
 /** @constant {string} */
 Sentence.WORD = '\\w|[\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u060B\u060D-\u061E\u0620-\u08FF]';
 
