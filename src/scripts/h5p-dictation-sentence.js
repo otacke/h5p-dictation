@@ -14,6 +14,7 @@ class Sentence {
    * @param {string} params.sentence.sample - Path to sound sample.
    * @param {string} params.sentence.sampleAlternatives - Path to alternative sound sample.
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
+   * @param {string} params.alternateSolution - Mode to display alternate solutions.
    * @param {object} params.a11y - Readspeaker texts.
    * @param {string} params.a11y.play - Readspeaker text for "Play".
    * @param {string} params.a11y.playSlowly - Readspeaker text for "Play slowly".
@@ -180,6 +181,10 @@ class Sentence {
    * @param {boolean} [trainingGap=true] True if wrapper should have trailing gap.
    */
   createSolutionWordDOM(index, word, trailingGap=true) {
+    if (this.params.alternateSolution === 'first') {
+      word.solution = this.splitWordAlternatives(word.solution)[0];
+    }
+
     // General stuff
     const wordDOM = document.createElement('span');
     wordDOM.classList.add(`h5p-wrapper-${word.type}`);
@@ -597,6 +602,23 @@ class Sentence {
   }
 
   /**
+   * Split word into alternatives using | but not \| as delimiter.
+   *
+   * Can be replaced by word.split(/(?<!\\)\|/) as soon as lookbehinds in
+   * regular expressions are commonly available in browsers (mind IE11 though)
+   *
+   * @param {string} word Word to be split.
+   * @param {string[]} Word alternatives.
+   */
+  splitWordAlternatives(word) {
+    const wordReversed = word.split('').reverse().join('');
+    const alternatives = wordReversed.split(/\|(?!\\)/);
+    return alternatives
+      .map(alternative => alternative.split('').reverse().join(''))
+      .reverse();
+  }
+
+  /**
    * Compute the results for this sentence.
    * @return {object} Results.
    */
@@ -702,6 +724,35 @@ class Sentence {
    * @return {object} Object containing two new arrays.
    */
   alignWords(words1, words2) {
+
+    const getMatch = (answer, solution, fuzzy=false) => {
+      let match = undefined;
+
+      if (solution === undefined) {
+        return;
+      }
+
+      // Split alternatives like word.split(/(?<!\\)\|/)
+      const alternatives = this.splitWordAlternatives(solution);
+
+      if (fuzzy) {
+        alternatives.forEach(alternative => {
+          if (H5P.TextUtilities.areSimilar(alternative, answer)) {
+            match = match || alternative;
+          }
+        });
+      }
+      else {
+        alternatives.forEach(alternative => {
+          if (alternative === answer) {
+            match = match || alternative;
+          }
+        });
+      }
+
+      return match;
+    };
+
     const align = (words1, words2) => {
       words2 = words2.map(word => (word === '') ? undefined : word);
 
@@ -727,10 +778,13 @@ class Sentence {
         const currentInput = words2[i];
 
         for (let pos = master.length - 1; pos >= floor; pos--) {
-          const matchFound = currentInput !== undefined && currentInput === master[pos];
+          const match = getMatch(currentInput, master[pos]);
+          const matchFound = currentInput !== undefined && match !== undefined;
+          // const matchFound = currentInput !== undefined && currentInput === master[pos];
           const noIdenticalWords = words2.slice(i + 1).indexOf(currentInput) === -1;
 
           if (matchFound && noIdenticalWords || pos === floor) {
+            master[pos] = match;
             slave[pos] = currentInput;
             floor = pos + 1;
             break;
@@ -749,14 +803,21 @@ class Sentence {
           let moves = 0;
           let posMatch = 0;
 
+          let matchLater = undefined;
           while (pos + moves + 1 < slave.length && slave[pos + moves + 1] === undefined) {
-            if (master[pos + moves + 1] === currentWord) {
+            const match = getMatch(currentWord, master[pos + moves + 1]);
+            if (match !== undefined) {
               posMatch = pos + moves + 1;
+              matchLater = match;
             }
             moves++;
           }
 
           slave[posMatch || pos + moves] = currentWord;
+          if (matchLater !== undefined) {
+            master[posMatch] = matchLater;
+          }
+
           slave[pos] = undefined;
         }
       }
@@ -771,15 +832,21 @@ class Sentence {
           let moves = 0;
           let posMatch = 0;
 
+          let matchLater = undefined;
           while (pos + moves - 1 >= 0 && slave[pos + moves - 1] === undefined) {
-            if (H5P.TextUtilities.areSimilar(master[pos + moves - 1], currentWord)) {
+            const match = getMatch(currentWord, master[pos + moves - 1], true);
+            if (match !== undefined) {
               posMatch = pos + moves - 1;
+              matchLater = match;
             }
 
             moves--;
           }
 
           slave[posMatch || pos + moves] = currentWord;
+          if (matchLater !== undefined) {
+            master[posMatch] = matchLater;
+          }
           slave[pos] = undefined;
         }
       }

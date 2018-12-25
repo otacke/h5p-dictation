@@ -102,6 +102,18 @@
           ]
         },
         {
+          "label": "Darstellung von alternativen Antworten",
+          "description": "Lege fest, welche alternativen Antworten in der Lösung für falsche oder fehlende Wörter angezeigt werden sollen.",
+          "options": [
+            {
+              "label": "Zeige nur die erste Alternative"
+            },
+            {
+              "label": "Zeige alle Alternativen"
+            }
+          ]
+        },
+        {
           "label": "\"Wiederholen\" aktivieren"
         },
         {
@@ -199,6 +211,10 @@
         {
           "label": "Richtige Lösung",
           "default": "Richtig wäre gewesen"
+        },
+        {
+          "label": "Oder",
+          "default": "oder"
         },
         {
           "label": "Punkt",

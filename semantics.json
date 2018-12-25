@@ -211,6 +211,24 @@
         "default": "50"
       },
       {
+        "name": "alternateSolution",
+        "type": "select",
+        "label": "Presentation of alternate solutions",
+        "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
+        "options": [
+          {
+            "value": "first",
+            "label": "Show only first alternative"
+          },
+          {
+            "value": "all",
+            "label": "Show all alternatives"
+          }
+        ],
+        "default": "first",
+        "state": "new"
+      },
+      {
         "name": "enableRetry",
         "label": "Enable \"Retry\"",
         "type": "boolean",
@@ -386,6 +404,14 @@
         "label": "CorrectSolution",
         "importance": "low",
         "default": "Should have been"
+      },
+      {
+        "name": "or",
+        "type": "text",
+        "label": "Or",
+        "importance": "low",
+        "default": "or",
+        "state": "new"
       },
       {
         "name": "point",

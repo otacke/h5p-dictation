@@ -60,7 +60,8 @@ class Dictation extends H5P.Question {
             "ignorePunctuation": this.params.behaviour.ignorePunctuation,
             "hasAlternatives": hasAlternatives,
             "a11y": this.params.a11y,
-            "typoFactor": this.params.behaviour.typoFactor
+            "typoFactor": this.params.behaviour.typoFactor,
+            "alternateSolution": this.params.behaviour.alternateSolution
           },
           this.contentId)
         );

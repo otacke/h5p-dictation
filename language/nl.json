@@ -102,6 +102,18 @@
           ]
         },
         {
+          "label": "Presentation of alternate solutions",
+          "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
+          "options": [
+            {
+              "label": "Show only first alternative"
+            },
+            {
+              "label": "Show all alternatives"
+            }
+          ]
+        },
+        {
           "label": "Schakel \"Opnieuw\" in"
         },
         {
@@ -199,6 +211,10 @@
         {
           "label": "Correct solution",
           "default": "Should have been"
+        },
+        {
+          "label": "Of",
+          "default": "of"
         },
         {
           "label": "Punt",
