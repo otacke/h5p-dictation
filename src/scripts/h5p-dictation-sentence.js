@@ -405,13 +405,16 @@ class Sentence {
       return '';
     }
 
+    // Account for alternatives
+    text = this.splitWordAlternatives(text).join(` ${this.params.a11y.or} `);
+
     return text
       .replace(/\./g, this.params.a11y.period)
       .replace(/!/g, this.params.a11y.exclamationPoint)
       .replace(/\?/g, this.params.a11y.questionMark)
       .replace(/,/g, this.params.a11y.comma)
       .replace(/'/g, this.params.a11y.singleQuote)
-      .replace(/["|\u201C|\u201E]/g, this.params.a11y.doubleQuote)
+      .replace(/["\u201C\u201E]/g, this.params.a11y.doubleQuote)
       .replace(/:/g, this.params.a11y.colon)
       .replace(/;/g, this.params.a11y.semicolon)
       .replace(/\+/g, this.params.a11y.plus)
