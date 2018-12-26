@@ -367,7 +367,12 @@ class Sentence {
     };
 
     const answer = this.makeReadable(word.answer);
-    const solution = this.makeReadable(word.solution);
+
+    // Account for use of \|
+    const solutionText = (word.type === 'match' && word.type === 'typo') ?
+      this.splitWordAlternatives(word.solution).join(` ${this.params.a11y.or} `) :
+      word.solution;
+    const solution = this.makeReadable(solutionText);
 
     let ariaExplanation = `${answer}${answer === '' ? '' : '. '}${ariaLabelType[word.type]}.`;
     if (word.type === 'wrong' || word.type === 'typo' || word.type === 'missing') {
@@ -413,9 +418,6 @@ class Sentence {
     if (text === undefined) {
       return '';
     }
-
-    // Account for alternatives
-    text = this.splitWordAlternatives(text).join(` ${this.params.a11y.or} `);
 
     return text
       .replace(/\./g, this.params.a11y.period)
