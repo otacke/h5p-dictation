@@ -8,6 +8,9 @@ Several options will allow you to control the exercise's difficulty. You can opt
 ## Support me at patreon!
 If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
 
+## Example
+!["Sample Content with H5P Dictation"](https://ibin.co/w800/4RMB2pHqVVqr.jpg "Sample Content with H5P Dictation")
+
 ## Building the distribution files
 Pull or download this archive files and go into the main folder. There run
 
