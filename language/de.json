@@ -38,7 +38,7 @@
           },
           {
             "label": "Text",
-            "description": "Text, der geschrieben werden sollte"
+            "description": "Text, der geschrieben werden sollte. Du kannst alternative Schreibweisen zu einem Wort hinzufügen, in dem du eine verticale Linie (|) hinzufügst gefolgt von der Alternative."
           }
         ]
       }
@@ -88,7 +88,7 @@
         },
         {
           "label": "Wert von kleinen Fehlern",
-          "description": "Lege fest, in welchem Maße kleine Fehler (z. B. Buchstabendreher) berücksichtigt werden.",
+          "description": "Lege fest, in welchem Maße kleine Fehler (Wort mit 3-9 Buchstaben: bis zu 1 Fehler, Wort mit mehr als 9 Buchstaben: bis zu 2 Fehler) berücksichtigt werden.",
           "options": [
             {
               "label": "100 %"

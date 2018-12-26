@@ -94,7 +94,7 @@
           "name": "text",
           "type": "text",
           "label": "Text",
-          "description": "Text that should be written",
+          "description": "Text that should be written. You can add alternate spellings to a word by adding a vertical line (|) behind followed by an alternative.",
           "importance": "medium"
         }
       ]
@@ -193,7 +193,7 @@
         "name": "typoFactor",
         "type": "select",
         "label": "Value of typos",
-        "description": "Determine to which extend typing errors count as a mistake.",
+        "description": "Determine to which extent typing errors (word with 3-9 characters: up to 1 mistake, word with more than 9 characters: up to 2 mistakes) count as a real mistake.",
         "options": [
             {
               "value": "100",
