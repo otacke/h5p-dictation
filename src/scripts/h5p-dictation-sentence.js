@@ -185,7 +185,7 @@ class Sentence {
    * @param {boolean} [trainingGap=true] True if wrapper should have trailing gap.
    */
   createSolutionWordDOM(index, word, trailingGap=true) {
-    if (this.params.alternateSolution === 'first') {
+    if (this.params.alternateSolution === 'first' && word.type !== 'match' && word.type !== 'typo') {
       word.solution = this.splitWordAlternatives(word.solution)[0];
     }
 
@@ -621,7 +621,7 @@ class Sentence {
     const wordReversed = word.split('').reverse().join('');
     const alternatives = wordReversed.split(/\|(?!\\)/);
     return alternatives
-      .map(alternative => alternative.split('').reverse().join(''))
+      .map(alternative => alternative.split('').reverse().join('').replace('\\|', '|'))
       .reverse();
   }
 
