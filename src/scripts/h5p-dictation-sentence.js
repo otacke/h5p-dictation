@@ -732,8 +732,18 @@ class Sentence {
    */
   alignWords(words1, words2) {
 
+    /**
+     * Get match pattern.
+     * @param {object} aligned Aligned words.
+     * @return {boolean[]} Match pattern.
+     */
+    const getMatchPattern = (aligned) => aligned.words1.map((word1, index) =>
+      word1 === aligned.words2[index] ||
+        H5P.TextUtilities.areSimilar(word1, aligned.words2[index]) ||
+        false);
+
     const getMatch = (answer, solution, fuzzy=false) => {
-      let match = undefined;
+      let match;
 
       if (solution === undefined) {
         return;
@@ -810,7 +820,7 @@ class Sentence {
           let moves = 0;
           let posMatch = 0;
 
-          let matchLater = undefined;
+          let matchLater;
           while (pos + moves + 1 < slave.length && slave[pos + moves + 1] === undefined) {
             const match = getMatch(currentWord, master[pos + moves + 1]);
             if (match !== undefined) {
@@ -839,7 +849,7 @@ class Sentence {
           let moves = 0;
           let posMatch = 0;
 
-          let matchLater = undefined;
+          let matchLater;
           while (pos + moves - 1 >= 0 && slave[pos + moves - 1] === undefined) {
             const match = getMatch(currentWord, master[pos + moves - 1], true);
             if (match !== undefined) {
@@ -922,16 +932,6 @@ class Sentence {
      */
     const count = (aligned) => getMatchPattern(aligned)
       .reduce((stack, current) => stack + (current ? 1 : 0), 0);
-
-    /**
-     * Get match pattern.
-     * @param {object} aligned Aligned words.
-     * @return {boolean[]} Match pattern.
-     */
-    const getMatchPattern = (aligned) => aligned.words1.map((word1, index) =>
-      word1 === aligned.words2[index] ||
-        H5P.TextUtilities.areSimilar(word1, aligned.words2[index]) ||
-        false);
 
     // The order of the words makes a difference when shaking. We return the best match
     let aligned1 = align(words1, words2);
