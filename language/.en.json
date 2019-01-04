@@ -38,7 +38,7 @@
           },
           {
             "label": "Text",
-            "description": "Text that should be written. You can add alternate spellings to a word by adding a vertical line (|) behind followed by an alternative.",
+            "description": "Text that should be written. You can add alternate spellings to a word by adding a vertical line (|) behind followed by an alternative."
           }
         ]
       }
