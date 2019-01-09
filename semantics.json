@@ -80,7 +80,8 @@
           "type": "audio",
           "label": "Sound sample",
           "description": "Sentence spoken in normal speed",
-          "importance": "medium"
+          "importance": "medium",
+          "widgetExtensions": ["AudioRecorder"]
         },
         {
           "name": "sampleAlternative",
@@ -88,7 +89,8 @@
           "label": "Sound sample slow",
           "description": "Sentence spoken in slow speed",
           "importance": "medium",
-          "optional": true
+          "optional": true,
+          "widgetExtensions": ["AudioRecorder"]
         },
         {
           "name": "text",
