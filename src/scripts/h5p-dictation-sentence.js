@@ -74,8 +74,6 @@ class Sentence {
 
     this.solution = new Solution({
       alternateSolution: this.params.alternateSolution,
-      point: this.params.point,
-      points: this.params.points,
       typoFactor: this.params.typoFactor,
       containsRTL: this.containsRTL,
       a11y: {
@@ -84,6 +82,9 @@ class Sentence {
         typo: this.params.a11y.typo,
         missing: this.params.a11y.missing,
         added: this.params.a11y.added,
+        correct: this.params.a11y.correct,
+        point: this.params.a11y.point,
+        points: this.params.a11y.points,
         item: this.params.a11y.item,
         solution: this.params.a11y.solution,
         or: this.params.a11y.or,
