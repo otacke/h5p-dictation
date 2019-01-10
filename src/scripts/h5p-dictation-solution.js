@@ -362,6 +362,7 @@ class Solution {
    * Reset solution view.
    */
   reset() {
+    this.wordMarked = undefined;
     this.words.setAttribute('aria-expanded', 'false');
   }
 }
