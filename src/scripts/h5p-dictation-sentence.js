@@ -181,7 +181,6 @@ class Sentence {
   reset() {
     this.inputField.value = '';
 
-    this.wordMarked = undefined;
     this.solution.reset();
 
     if (this.buttonPlayNormal) {
