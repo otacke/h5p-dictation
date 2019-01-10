@@ -8,7 +8,7 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 const isDev = (nodeEnv !== 'production');
 
 const config = {
-  mode: 'development',
+  mode: nodeEnv,
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
