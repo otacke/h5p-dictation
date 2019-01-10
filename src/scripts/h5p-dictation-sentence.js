@@ -1,4 +1,6 @@
 import Button from './h5p-dictation-button';
+import Solution from './h5p-dictation-solution';
+import Util from './h5p-dictation-util';
 
 /** Class representing a sentence */
 class Sentence {
@@ -18,11 +20,6 @@ class Sentence {
    * @param {string} overrideRTL - Override for right-to-left support.
    * @param {boolean} autosplit - Set auto-splitting for characters.
    * @param {object} params.a11y - Readspeaker texts.
-   * @param {string} params.a11y.play - Readspeaker text for "Play".
-   * @param {string} params.a11y.playSlowly - Readspeaker text for "Play slowly".
-   * @param {string} params.a11y.enterText - Readspeaker text for "Enter what you have heard here".
-   * @param {string} params.a11y.solution - Readspeaker text for "Solution".
-   * @param {string} params.a11y.sentence - Readspeaker text for "Sentence".
    * @param {number} id - Content Id.
    */
   constructor(index, params, id) {
@@ -35,12 +32,12 @@ class Sentence {
     this.triesLeft = this.maxTries;
     this.triesLeftAlternative = this.maxTriesAlternative;
 
-    this.solution = this.htmlDecode(params.sentence.text).trim();
-    this.solution = (!params.ignorePunctuation) ? this.solution : this.stripPunctuation(this.solution);
+    this.solutionText = Util.htmlDecode(params.sentence.text).trim();
+    this.solutionText = (!params.ignorePunctuation) ? this.solutionText : this.stripPunctuation(this.solutionText);
     this.containsRTL = (this.params.overrideRTL === 'auto') ?
-      this.containsRTLCharacters(this.solution) :
-      this.params.overrideRTL === 'on' ? true : false;
-    this.mistakesMax = this.addSpaces(this.solution).split(' ').length;
+      Util.containsRTLCharacters(this.solutionText) :
+      this.params.overrideRTL === 'on';
+    this.mistakesMax = this.addSpaces(this.solutionText).split(' ').length;
 
     // DOM
     this.content = document.createElement('div');
@@ -75,60 +72,42 @@ class Sentence {
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
     this.inputField.classList.add(Sentence.INPUT_FIELD);
 
-    // Solution words
-    this.solutionText = document.createElement('div');
-    this.solutionText.classList.add(Sentence.SOLUTION_TEXT);
-    this.solutionText.setAttribute('role', 'list');
-    this.solutionText.setAttribute('aria-label', this.params.a11y.solution);
-    this.solutionText.setAttribute('aria-expanded', 'false');
-    this.solutionText.setAttribute('tabindex', '0');
-    this.solutionText.addEventListener('keydown', (event) => {
-      const currentExpandedState = this.solutionText.getAttribute('aria-expanded');
-      // Retrieve previously marked word
-      const wordElement = this.wordMarked ||
-        (this.containsRTL ? this.solutionText.lastChild : this.solutionText.firstChild);
-
-      switch (event.keyCode) {
-        case 13: // Enter
-        // intentional fallthrough
-        case 32: // Space
-          if (event.target !== event.currentTarget) {
-            // Ignore children
-            break;
-          }
-
-          // Expand/collapse group for ARIA
-          if (currentExpandedState === 'false') {
-            this.solutionText.setAttribute('aria-expanded', 'true');
-            if (wordElement) {
-              // Focus on previously tabbed element
-              wordElement.focus();
-            }
-          }
-          else {
-            this.solutionText.setAttribute('aria-expanded', 'false');
-            wordElement.setAttribute('tabindex', '-1');
-          }
-          break;
+    this.solution = new Solution({
+      alternateSolution: this.params.alternateSolution,
+      point: this.params.point,
+      points: this.params.points,
+      typoFactor: this.params.typoFactor,
+      containsRTL: this.containsRTL,
+      a11y: {
+        match: this.params.a11y.correct,
+        wrong: this.params.a11y.wrong,
+        typo: this.params.a11y.typo,
+        missing: this.params.a11y.missing,
+        added: this.params.a11y.added,
+        item: this.params.a11y.item,
+        solution: this.params.a11y.solution,
+        or: this.params.a11y.or,
+        shouldHaveBeen: this.params.a11y.shouldHaveBeen,
+        period: this.params.a11y.period,
+        exclamationPoint: this.params.a11y.exclamationPoint,
+        questionMark: this.params.a11y.questionMark,
+        comma: this.params.a11y.comma,
+        singleQuote: this.params.a11y.singleQuote,
+        doubleQuote: this.params.a11y.doubleQuote,
+        colon: this.params.a11y.colon,
+        semicolon: this.params.a11y.semicolon,
+        plus: this.params.a11y.plus,
+        minus: this.params.a11y.minus,
+        asterisk: this.params.a11y.asterisk,
+        forwardSlash: this.params.a11y.forwardSlash
       }
     });
-
-    // Solution sentence
-    this.solutionInner = document.createElement('div');
-    this.solutionInner.classList.add(Sentence.SOLUTION_INNER);
-    this.solutionInner.appendChild(this.solutionText);
-
-    // Solution Container
-    this.solutionContainer = document.createElement('div');
-    this.solutionContainer.classList.add(Sentence.SOLUTION_CONTAINER);
-    this.solutionContainer.classList.add(Sentence.HIDE);
-    this.solutionContainer.appendChild(this.solutionInner);
 
     // Sentence input field and solution
     this.inputWrapper = document.createElement('div');
     this.inputWrapper.classList.add(Sentence.INPUT_WRAPPER);
     this.inputWrapper.appendChild(this.inputField);
-    this.inputWrapper.appendChild(this.solutionContainer);
+    this.inputWrapper.appendChild(this.solution.getDOM());
 
     this.content.appendChild(this.inputWrapper);
   }
@@ -150,312 +129,13 @@ class Sentence {
   }
 
   /**
-   * Build the solution for the sentence's results.
-   * @param {object} result Result.
-   * @param {object} result.score Scores.
-   * @param {number} result.score.added Number of added words added.
-   * @param {number} result.score.missing Number of words missing.
-   * @param {number} result.score.typo Number of words with typing errors.
-   * @param {number} result.score.wrong Number of wrong words.
-   * @param {number} result.score.match Number of mathes.
-   * @param {object[]} result.words Words.
-   * @param {string} result.words[].answer Answer given.
-   * @param {string} result.words[].solution Correct word.
-   * @param {string} result.words[].type Type of mistake or match.
-   * @param {boolean[]} result.spaces Spaces for gaps between words.
-   * @return {object[]} Solution with all every word's DOM element.
-   */
-  createSolution(result) {
-    // Revert order of right-to-left chunks
-    if (this.containsRTL) {
-      result.words = this.revertRTL(result.words);
-    }
-
-    return result.words.map((word, index) =>
-      this.createSolutionWordDOM(index, word, result.words.length - 1 !== index));
-  }
-
-  /**
-   * Build wrapper for single word of a solution.
-   * @param {number} index Tabindex for ARIA.
-   * @param {object} word Word information.
-   * @param {string} word.type Status about missing, typo, ...
-   * @param {string} word.solution Correct spelling of the word.
-   * @param {string} word.answer User input for this word.
-   * @param {boolean} [trainingGap=true] True if wrapper should have trailing gap.
-   */
-  createSolutionWordDOM(index, word, trailingGap=true) {
-    if (this.params.alternateSolution === 'first' && word.type !== 'match' && word.type !== 'typo') {
-      word.solution = this.splitWordAlternatives(word.solution)[0];
-    }
-
-    // General stuff
-    const wordDOM = document.createElement('span');
-    wordDOM.classList.add(`h5p-wrapper-${word.type}`);
-    if (trailingGap) {
-      wordDOM.classList.add('h5p-spacer');
-    }
-    wordDOM.setAttribute('tabindex', '-1');
-    wordDOM.setAttribute('role', 'listitem');
-
-    // Add EventListeners
-    this.addSolutionWordListeners(wordDOM);
-
-    // Create aria Label
-    const ariaPrefix = `${this.params.a11y.item} ${index + 1}.`;
-    const ariaExplanation = this.createAriaExplanation(word);
-    const ariaScore = this.createAriaScore(word.type);
-    wordDOM.setAttribute('aria-label', `${ariaPrefix} ${ariaExplanation} ${ariaScore}`);
-
-    // Add explanation to solution
-    this.appendExplanationTo(wordDOM, word);
-
-    return wordDOM;
-  }
-
-  /**
-   * Revert order of right-to-left chunks.
-   *
-   * Words can be mixed as right-to-left and left-to-right, and the
-   * parsed input from the text field will have a different order than the
-   * displayed words. The right-to-left chunks are reversed here.
-   *
-   * @param {object[]} words Words object.
-   * @param {string} word.solution Word to test.
-   * @return {object[]} RTL words reordered.
-   */
-  revertRTL(words) {
-    let reversedWords = [];
-    let currentRTL = [];
-
-    // Reverse RTL blocks, keep LTR
-    words.forEach(word => {
-      const isRTL = this.containsRTLCharacters(word.solution);
-      if (isRTL) {
-        currentRTL.push(word);
-      }
-      else {
-        reversedWords = reversedWords.concat(currentRTL.reverse());
-        currentRTL = [];
-        reversedWords.push(word);
-      }
-    });
-    if (currentRTL.length !== 0) {
-      reversedWords = reversedWords.concat(currentRTL.reverse());
-    }
-
-    return reversedWords;
-  }
-
-  /**
-   * Add EventListeners to solutions's words.
-   * @param {object} Word's DOM element.
-   */
-  addSolutionWordListeners(wordDOM) {
-    // on focus
-    wordDOM.addEventListener('focus', event => {
-      // Remember this word had focus
-      this.wordMarked = event.target;
-      event.target.setAttribute('tabindex', '0');
-    });
-
-    // on keydown
-    wordDOM.addEventListener('keydown', event => {
-      const firstChild = this.containsRTL ?
-        event.target.parentNode.lastChild :
-        event.target.parentNode.firstChild;
-      const lastChild = this.containsRTL ?
-        event.target.parentNode.firstChild :
-        event.target.parentNode.lastChild;
-
-      switch (event.keyCode) {
-
-        // Focus previous solution word
-        case 37: // Left
-        // intentional fallthrough
-        case 38: // Top
-          event.preventDefault();
-          if (event.target.previousSibling) {
-            event.target.setAttribute('tabindex', '-1');
-            event.target.previousSibling.focus();
-          }
-          break;
-
-        // Focus next solution word
-        case 39: // Right
-        // intentional fallthrough
-        case 40: // Down
-          event.preventDefault();
-          if (event.target.nextSibling) {
-            event.target.setAttribute('tabindex', '-1');
-            event.target.nextSibling.focus();
-          }
-          break;
-
-        // Focus first solution word
-        case 36: // Home
-          event.preventDefault();
-          if (event.target !== firstChild) {
-            event.target.setAttribute('tabindex', '-1');
-            firstChild.focus();
-          }
-          break;
-
-        // Focus last solution word
-        case 35: // End
-          event.preventDefault();
-          if (event.target !== lastChild) {
-            event.target.setAttribute('tabindex', '-1');
-            lastChild.focus();
-          }
-          break;
-      }
-    });
-  }
-
-  /**
-   * Append explanation to solution.
-   * @param {object} wordDOM Word's DOM element.
-   * @param {object} word Word with type, answer and solution.
-   */
-  appendExplanationTo(wordDOM, word) {
-    // ScorePoints
-    const scorePoints = new H5P.Question.ScorePoints();
-
-    // Wrong input
-    if (word.type === 'wrong' || word.type === 'added' || word.type === 'typo') {
-      const wrongInput = document.createElement('span');
-      wrongInput.classList.add(`h5p-answer-${word.type}`);
-      wrongInput.innerHTML = word.answer;
-      wordDOM.appendChild(wrongInput);
-    }
-
-    // Correct solution
-    if (word.type !== 'added') {
-      const correctSolution = document.createElement('span');
-      correctSolution.classList.add(`h5p-solution-${word.type}`);
-      correctSolution.innerHTML = word.solution;
-      wordDOM.appendChild(correctSolution);
-    }
-
-    // Score explanation
-    if (word.type !== 'match') {
-      const scoreExplanation = scorePoints.getElement(false);
-      if (word.type === 'typo' && this.params.typoFactor === 0.5) {
-        scoreExplanation.classList.remove('h5p-question-minus-one');
-        scoreExplanation.classList.add('h5p-question-minus-one-half');
-      }
-
-      if (word.type !== 'typo' || this.params.typoFactor > 0) {
-        wordDOM.appendChild(scoreExplanation);
-      }
-    }
-  }
-
-  /**
-   * Create explanation text for aria label.
-   * @param {object} word Word with type, answer and solution.
-   * @return {string} Explanation text for aria label.
-   */
-  createAriaExplanation(word) {
-    const ariaLabelType = {
-      match: this.params.a11y.correct,
-      wrong: this.params.a11y.wrong,
-      typo: this.params.a11y.typo,
-      missing: this.params.a11y.missing,
-      added: this.params.a11y.added
-    };
-
-    const answer = this.makeReadable(word.answer);
-
-    // Account for use of \|
-    const solutionText = (word.type === 'match' && word.type === 'typo') ?
-      this.splitWordAlternatives(word.solution).join(` ${this.params.a11y.or} `) :
-      word.solution;
-    const solution = this.makeReadable(solutionText);
-
-    let ariaExplanation = `${answer}${answer === '' ? '' : '. '}${ariaLabelType[word.type]}.`;
-    if (word.type === 'wrong' || word.type === 'typo' || word.type === 'missing') {
-      ariaExplanation += ` ${this.params.a11y.shouldHaveBeen}. ${solution}.`;
-    }
-
-    return ariaExplanation;
-  }
-
-  /**
-   * Create aria score text.
-   * @param {string} type Type of mistake.
-   * @return {string} Aria score text.
-   */
-  createAriaScore(type) {
-    let ariaScore = -1;
-
-    if (type === 'match') {
-      ariaScore = 0;
-    }
-    else if (type === 'typo') {
-      ariaScore = ariaScore * this.params.typoFactor;
-    }
-    if (ariaScore === 0) {
-      ariaScore = '';
-    }
-    else {
-      const scoreUnit = (ariaScore === -1) ?
-        this.params.a11y.point :
-        this.params.a11y.points;
-      ariaScore = `${ariaScore} ${scoreUnit}.`;
-    }
-
-    return ariaScore;
-  }
-
-  /**
-   * Replace symbols with a11y readably words.
-   * @param {string} [text=''] Text to make readable.
-   * @return {string} Readable text.
-   */
-  makeReadable(text) {
-    if (text === undefined) {
-      return '';
-    }
-
-    return text
-      .replace(/\./g, this.params.a11y.period)
-      .replace(/!/g, this.params.a11y.exclamationPoint)
-      .replace(/\?/g, this.params.a11y.questionMark)
-      .replace(/,/g, this.params.a11y.comma)
-      .replace(/'/g, this.params.a11y.singleQuote)
-      .replace(/["\u201C\u201E]/g, this.params.a11y.doubleQuote)
-      .replace(/:/g, this.params.a11y.colon)
-      .replace(/;/g, this.params.a11y.semicolon)
-      .replace(/\+/g, this.params.a11y.plus)
-      .replace(/-/g, this.params.a11y.minus)
-      .replace(/\*/g, this.params.a11y.asterisk)
-      .replace(/\//g, this.params.a11y.forwardSlash);
-  }
-
-  /**
    * Set current text in InputField.
    * DOM is not created before to make cheating a little more difficult at least.
    * @param {object} result - Current DOM element with words.
    */
   showSolution(result) {
-    const solutionElements = this.createSolution(result);
+    this.solution.show(result);
 
-    // Adjust padding around text
-    if (solutionElements.length > 0 && result.words[solutionElements.length - 1].type === 'match') {
-      this.solutionText.classList.add('h5p-solution-last-correct');
-    }
-    else {
-      this.solutionText.classList.remove('h5p-solution-last-correct');
-    }
-
-    if (!this.solutionText.firstChild) {
-      solutionElements.forEach(element => {
-        this.solutionText.appendChild(element);
-        this.solutionContainer.classList.remove(Sentence.HIDE);
-      });
-    }
     if (this.buttonPlayNormal) {
       this.buttonPlayNormal.setUntabbable();
     }
@@ -468,10 +148,7 @@ class Sentence {
    * Hide solution.
    */
   hideSolution() {
-    while (this.solutionText.firstChild) {
-      this.solutionText.removeChild(this.solutionText.firstChild);
-    }
-    this.solutionContainer.classList.add(Sentence.HIDE);
+    this.solution.hide();
 
     if (this.buttonPlayNormal) {
       this.buttonPlayNormal.setTabbable();
@@ -486,7 +163,7 @@ class Sentence {
    * @return {string} Correct text.
    */
   getCorrectText() {
-    return this.solution;
+    return this.solutionText;
   }
 
   /**
@@ -504,7 +181,7 @@ class Sentence {
     this.inputField.value = '';
 
     this.wordMarked = undefined;
-    this.solutionText.setAttribute('aria-expanded', 'false');
+    this.solution.reset();
 
     if (this.buttonPlayNormal) {
       this.buttonPlayNormal.reset();
@@ -965,30 +642,10 @@ class Sentence {
   }
 
   /**
-   * Retrieve true string from HTML encoded string.
-   * @param {string} input Input string.
-   * @return {string} Output string.
-   */
-  htmlDecode(input) {
-    var dparser = new DOMParser().parseFromString(input, 'text/html');
-    return dparser.documentElement.textContent;
-  }
-
-  /**
-   * Check for right-to-left characters.
-   *
-   * @param {string} input Input to check for right-to-left characters.
-   * @return {boolean} True, if input contains right-to-left characters.
-   */
-  containsRTLCharacters(input) {
-    return new RegExp('^[^' + Sentence.RTL + ']*?[' + Sentence.RTL + ']').test(input);
-  }
-
-  /**
    * Set focus to the sentence solution.
    */
   focusSolution() {
-    this.solutionText.focus();
+    this.solution.focus();
   }
 }
 
@@ -999,14 +656,6 @@ Sentence.CONTENT_WRAPPER = 'h5p-sentence';
 Sentence.INPUT_WRAPPER = 'h5p-input-wrapper';
 /** @constant {string} */
 Sentence.INPUT_FIELD = 'h5p-text-input';
-/** @constant {string} */
-Sentence.SOLUTION_CONTAINER = 'h5p-solution-container';
-/** @constant {string} */
-Sentence.SOLUTION_INNER = 'h5p-solution-inner';
-/** @constant {string} */
-Sentence.SOLUTION_TEXT = 'h5p-solution-text';
-/** @constant {string} */
-Sentence.HIDE = 'hide';
 
 // Score types
 /** @constant {string} */
@@ -1021,8 +670,6 @@ Sentence.TYPE_MATCH = 'match';
 Sentence.TYPE_TYPO = 'typo';
 
 // Regular expression configuration
-/** @constant {string} */
-Sentence.RTL = '\u0591-\u08FF';
 /** @constant {string} */
 Sentence.AUTOSPLIT = '[\u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF]';
 /** @constant {string} */

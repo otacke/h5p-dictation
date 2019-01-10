@@ -1,4 +1,5 @@
 import Sentence from './h5p-dictation-sentence';
+import Util from './h5p-dictation-util';
 
 /** Class for dictation interaction */
 class Dictation extends H5P.Question {
@@ -12,7 +13,7 @@ class Dictation extends H5P.Question {
     super('dictation');
 
     // Add defaults
-    params = Dictation.extend({
+    params = Util.extend({
       taskDescription: 'Please listen carefully and write what you hear.',
       behaviour: {
         alternateSolution: 'first',
@@ -377,7 +378,7 @@ class Dictation extends H5P.Question {
      */
     this.createDictationXAPIEvent = (verb) => {
       const xAPIEvent = this.createXAPIEventTemplate(verb);
-      Dictation.extend(
+      Util.extend(
         xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
         this.getxAPIDefinition());
       return xAPIEvent;
@@ -421,27 +422,6 @@ class Dictation extends H5P.Question {
      * @return {string} Description.
      */
     this.getDescription = () => this.params.taskDescription || Dictation.DEFAULT_DESCRIPTION;
-  }
-
-  /**
-   * Extend an array just like JQuery's extend.
-   * @param {object} arguments Objects to be merged.
-   * @return {object} Merged objects.
-   */
-  static extend() {
-    for (let i = 1; i < arguments.length; i++) {
-      for (let key in arguments[i]) {
-        if (arguments[i].hasOwnProperty(key)) {
-          if (typeof arguments[0][key] === 'object' && typeof arguments[i][key] === 'object') {
-            this.extend(arguments[0][key], arguments[i][key]);
-          }
-          else {
-            arguments[0][key] = arguments[i][key];
-          }
-        }
-      }
-    }
-    return arguments[0];
   }
 }
 
