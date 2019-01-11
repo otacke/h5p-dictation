@@ -103,7 +103,7 @@ class Solution {
    */
   createSolutionWordDOM(index, word, trailingGap=true) {
     if (this.params.alternateSolution === 'first' && word.type !== 'match' && word.type !== 'typo') {
-      word.solution = this.splitWordAlternatives(word.solution)[0];
+      word.solution = Util.splitWordAlternatives(word.solution)[0];
     }
 
     // General stuff
@@ -214,7 +214,7 @@ class Solution {
 
     // Account for use of \|
     const solutionText = (word.type === 'match' && word.type === 'typo') ?
-      this.splitWordAlternatives(word.solution).join(` ${this.params.a11y.or} `) :
+      Util.splitWordAlternatives(word.solution).join(` ${this.params.a11y.or} `) :
       word.solution;
     const solution = this.makeReadable(solutionText);
 

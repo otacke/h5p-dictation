@@ -66,6 +66,23 @@ class Util {
   }
 
   /**
+   * Split word into alternatives using | but not \| as delimiter.
+   *
+   * Can be replaced by word.split(/(?<!\\)\|/) as soon as lookbehinds in
+   * regular expressions are commonly available in browsers (mind IE11 though)
+   *
+   * @param {string} word Word to be split.
+   * @param {string[]} Word alternatives.
+   */
+  static splitWordAlternatives(word) {
+    const wordReversed = word.split('').reverse().join('');
+    const alternatives = wordReversed.split(/\|(?!\\)/);
+    return alternatives
+      .map(alternative => alternative.split('').reverse().join('').replace('\\|', '|'))
+      .reverse();
+  }
+
+  /**
    * Check for right-to-left characters.
    *
    * @param {string} input Input to check for right-to-left characters.
