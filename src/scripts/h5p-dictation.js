@@ -76,7 +76,7 @@ class Dictation extends H5P.Question {
       return;
     }
 
-    this.params = params;
+    this.params = H5P.jQuery.extend(true, params);
     this.contentId = contentId;
     this.contentData = contentData || {};
 
