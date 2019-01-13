@@ -29,6 +29,10 @@
         "label": "Zin",
         "fields": [
           {
+            "label": "Description",
+            "description": "You can optionally put a simple description above the text input field, useful e.g. for dialogues."
+          },
+          {
             "label": "Geluidsvoorbeeld",
             "description": "De zin gesproken in normale snelheid"
           },

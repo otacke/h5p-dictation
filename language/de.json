@@ -29,6 +29,10 @@
         "label": "Satz",
         "fields": [
           {
+            "label": "Beschreibung",
+            "description": "Du kannst optional eine einfache Beschreibung für das Texteingabefeld eingeben, z. B. für Dialoge."
+          },
+          {
             "label": "Tonaufnahme",
             "description": "Satz im normalen Tempo gesprochen"
           },

@@ -14,8 +14,22 @@
 .h5p-dictation .h5p-sentence {
   width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 1em;
+}
+.h5p-dictation .h5p-sentence-interaction {
+  width: 100%;
+}
+.h5p-dictation .h5p-sentence-description {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.h5p-dictation .h5p-sentence-description.h5p-sentence-description-one-button {
+  padding-left: 2.875em;
+}
+.h5p-dictation .h5p-sentence-description.h5p-sentence-description-two-buttons {
+  padding-left: 5.5em;
 }
 .h5p-dictation .h5p-dictation-audio-wrapper {
   display: flex;

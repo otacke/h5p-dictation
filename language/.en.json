@@ -29,6 +29,10 @@
         "label": "Sentence",
         "fields": [
           {
+            "label": "Description",
+            "description": "You can optionally put a simple description above the text input field, useful e.g. for dialogues."
+          },
+          {
             "label": "Sound sample",
             "description": "Sentence spoken in normal speed"
           },

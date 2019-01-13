@@ -76,6 +76,14 @@
       "label": "Sentence",
       "fields": [
         {
+          "name": "description",
+          "type": "text",
+          "label": "Description",
+          "description": "You can optionally put a simple description above the text input field, useful e.g. for dialogues.",
+          "importance": "medium",
+          "optional": true
+        },
+        {
           "name": "sample",
           "type": "audio",
           "label": "Sound sample",

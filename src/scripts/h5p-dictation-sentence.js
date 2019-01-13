@@ -32,6 +32,7 @@ class Sentence {
     this.triesLeft = this.maxTries;
     this.triesLeftAlternative = this.maxTriesAlternative;
 
+    this.params.sentence.description = Util.htmlDecode(this.params.sentence.description || '').trim();
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
     this.solutionText = (!params.ignorePunctuation) ? this.solutionText : this.stripPunctuation(this.solutionText);
     this.containsRTL = (this.params.overrideRTL === 'auto') ?
@@ -45,6 +46,14 @@ class Sentence {
     this.content.setAttribute('aria-label', `${params.a11y.sentence} ${this.index}`);
     this.content.classList.add(Sentence.CONTENT_WRAPPER);
 
+    // Description (optional)
+    const contentDescription = document.createElement('div');
+    contentDescription.classList.add(Sentence.CONTENT_DESCRIPTION);
+    contentDescription.innerHTML = this.params.sentence.description;
+
+    const contentInteraction = document.createElement('div');
+    contentInteraction.classList.add(Sentence.CONTENT_INTERACTION);
+
     // Normal audio button
     this.buttonPlayNormal = new Button(id, {
       sample: params.sentence.sample,
@@ -53,7 +62,7 @@ class Sentence {
       maxTries: params.tries,
       a11y: params.a11y
     });
-    this.content.appendChild(this.buttonPlayNormal.getDOM());
+    contentInteraction.appendChild(this.buttonPlayNormal.getDOM());
 
     // Alternative audio button
     if (this.params.hasAlternatives === true) {
@@ -64,8 +73,14 @@ class Sentence {
         maxTries: params.triesAlternative,
         a11y: params.a11y
       });
-      this.content.appendChild(this.buttonPlaySlow.getDOM());
+      contentInteraction.appendChild(this.buttonPlaySlow.getDOM());
+
     }
+
+    contentDescription.classList.add((this.params.hasAlternatives === true) ?
+      Sentence.CONTENT_DESCRIPTION_TWO_BUTTONS :
+      Sentence.CONTENT_DESCRIPTION_ONE_BUTTON
+    );
 
     // Text input field
     this.inputField = document.createElement('input');
@@ -109,8 +124,10 @@ class Sentence {
     this.inputWrapper.classList.add(Sentence.INPUT_WRAPPER);
     this.inputWrapper.appendChild(this.inputField);
     this.inputWrapper.appendChild(this.solution.getDOM());
+    contentInteraction.appendChild(this.inputWrapper);
 
-    this.content.appendChild(this.inputWrapper);
+    this.content.appendChild(contentDescription);
+    this.content.appendChild(contentInteraction);
   }
 
   /**
@@ -635,6 +652,14 @@ class Sentence {
 // CSS Classes
 /** @constant {string} */
 Sentence.CONTENT_WRAPPER = 'h5p-sentence';
+/** @constant {string} */
+Sentence.CONTENT_DESCRIPTION = 'h5p-sentence-description';
+/** @constant {string} */
+Sentence.CONTENT_DESCRIPTION_ONE_BUTTON = 'h5p-sentence-description-one-button';
+/** @constant {string} */
+Sentence.CONTENT_DESCRIPTION_TWO_BUTTONS = 'h5p-sentence-description-two-buttons';
+/** @constant {string} */
+Sentence.CONTENT_INTERACTION = 'h5p-sentence-interaction';
 /** @constant {string} */
 Sentence.INPUT_WRAPPER = 'h5p-input-wrapper';
 /** @constant {string} */
