@@ -87,8 +87,8 @@
           "description": "Will limit the number of times the slow samples for each sentence can be listened to."
         },
         {
-          "label": "Ignore Punctuation",
-          "description": "If checked, the punctuation will not be considerd for scoring"
+          "label": "Ignore Punctuation marks",
+          "description": "If checked, punctuation marks will not be considerd for scoring"
         },
         {
           "label": "Value of typos",

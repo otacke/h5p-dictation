@@ -194,8 +194,8 @@
       {
         "name": "ignorePunctuation",
         "type": "boolean",
-        "label": "Ignore Punctuation",
-        "description": "If checked, the punctuation will not be considerd for scoring",
+        "label": "Ignore Punctuation marks",
+        "description": "If checked, punctuation marks will not be considerd for scoring",
         "optional": false,
         "default": true
       },
