@@ -421,7 +421,7 @@ class Sentence {
         H5P.TextUtilities.areSimilar(word1, aligned.words2[index]) ||
         false);
 
-    const getMatch = (answer, solution, fuzzy=false) => {
+    const getMatch = (answer, solution, fuzzy = false) => {
       let match;
 
       if (solution === undefined) {
@@ -567,7 +567,7 @@ class Sentence {
 
       // Make big clusters =>
       for (let pos = 0; pos < master.length - 1; pos++) {
-        if (slave[pos] === master[pos] && master[pos+1] === undefined) {
+        if (slave[pos] === master[pos] && master[pos + 1] === undefined) {
           let moves = 0;
 
           while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {

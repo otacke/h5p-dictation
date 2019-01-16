@@ -101,7 +101,7 @@ class Solution {
    * @param {string} word.answer User input for this word.
    * @param {boolean} [trainingGap=true] True if wrapper should have trailing gap.
    */
-  createSolutionWordDOM(index, word, trailingGap=true) {
+  createSolutionWordDOM(index, word, trailingGap = true) {
     if (this.params.alternateSolution === 'first' && word.type !== 'match' && word.type !== 'typo') {
       word.solution = Util.splitWordAlternatives(word.solution)[0];
     }
