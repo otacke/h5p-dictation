@@ -4,6 +4,7 @@ reports
 tests
 dev
 src
+.eslintrc.json
 .idea
 .git
 .babelrc
