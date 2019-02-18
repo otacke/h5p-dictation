@@ -91,6 +91,10 @@
           "description": "Indien aangevinkt, worden de leestekens niet in aanmerking genomen bij het bepalen van de score."
         },
         {
+          "label": "Custom typo display",
+          "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
+        },
+        {
           "label": "De waarde van de typefouten",
           "description": "Bepaal in welke mate typefouten (word with 3-9 characters: up to 1 mistake, word with more than 9 characters: up to 2 mistakes) als fout gelden.",
           "options": [

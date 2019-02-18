@@ -108,7 +108,14 @@ class Solution {
 
     // General stuff
     const wordDOM = document.createElement('span');
-    wordDOM.classList.add(`h5p-wrapper-${word.type}`);
+    if (this.params.customTypoDisplay === false && word.type === 'typo') {
+      // Use "mistake" style instead of "typo style"
+      wordDOM.classList.add(`h5p-wrapper-wrong`);
+    }
+    else {
+      wordDOM.classList.add(`h5p-wrapper-${word.type}`);
+    }
+
     if (trailingGap) {
       wordDOM.classList.add('h5p-spacer');
     }

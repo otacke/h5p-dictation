@@ -200,6 +200,14 @@
         "default": true
       },
       {
+        "name": "customTypoDisplay",
+        "type": "boolean",
+        "label": "Custom typo display",
+        "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes.",
+        "default": true,
+        "optional": false
+      },
+      {
         "name": "typoFactor",
         "type": "select",
         "label": "Value of typos",

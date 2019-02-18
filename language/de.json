@@ -91,6 +91,10 @@
           "description": "Wenn gewählt, wird die Zeichensetzung nicht für die Bepunktung berücksichtigt."
         },
         {
+          "label": "Eigene visuelle Darstellung von kleinen Fehlern",
+          "description": "Wenn gewählt, werden kleine Fehler in einem eigenen Stil dargestellt statt wie normale Fehler."
+        },
+        {
           "label": "Wert von kleinen Fehlern",
           "description": "Lege fest, in welchem Maße kleine Fehler (Wort mit 3-9 Buchstaben: bis zu 1 Fehler, Wort mit mehr als 9 Buchstaben: bis zu 2 Fehler) berücksichtigt werden.",
           "options": [

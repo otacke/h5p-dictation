@@ -89,6 +89,7 @@ class Sentence {
 
     this.solution = new Solution({
       alternateSolution: this.params.alternateSolution,
+      customTypoDisplay: this.params.customTypoDisplay,
       typoFactor: this.params.typoFactor,
       containsRTL: this.containsRTL,
       a11y: {

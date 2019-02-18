@@ -24,6 +24,7 @@ class Dictation extends H5P.Question {
         overrideRTL: 'auto',
         tries: Infinity,
         triesAlternative: Infinity,
+        customTypoDisplay: true,
         typoFactor: '50'
       },
       l10n: {
@@ -103,6 +104,7 @@ class Dictation extends H5P.Question {
             ignorePunctuation: this.params.behaviour.ignorePunctuation,
             hasAlternatives: hasAlternatives,
             a11y: this.params.a11y,
+            customTypoDisplay: this.params.behaviour.customTypoDisplay,
             typoFactor: this.params.behaviour.typoFactor,
             alternateSolution: this.params.behaviour.alternateSolution,
             overrideRTL: this.params.behaviour.overrideRTL,
