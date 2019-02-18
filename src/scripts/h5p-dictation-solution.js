@@ -213,7 +213,7 @@ class Solution {
     const answer = this.makeReadable(word.answer);
 
     // Account for use of \|
-    const solutionText = (word.type === 'match' && word.type === 'typo') ?
+    const solutionText = (word.type === 'match' || word.type === 'typo') ?
       Util.splitWordAlternatives(word.solution).join(` ${this.params.a11y.or} `) :
       word.solution;
     const solution = this.makeReadable(solutionText);
