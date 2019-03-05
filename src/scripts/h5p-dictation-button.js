@@ -267,6 +267,7 @@ class Button {
     }
 
     this.button.classList.remove(Button.BUTTON_PAUSE);
+    this.button.classList.remove(Button.BUTTON_PLAY_PAUSED);
     if (this.params.type === Button.BUTTON_TYPE_SLOW) {
       this.button.classList.add(Button.BUTTON_SLOW);
     }
@@ -304,6 +305,8 @@ Button.AUDIO_WRAPPER = 'h5p-dictation-audio-wrapper';
 Button.BUTTON = 'h5p-audio-minimal-button';
 /** @constant {string} */
 Button.BUTTON_PLAY = 'h5p-audio-minimal-play';
+/** @constant {string} */
+Button.BUTTON_PLAY_PAUSED = 'h5p-audio-minimal-play-paused';
 /** @constant {string} */
 Button.BUTTON_PAUSE = 'h5p-audio-minimal-pause';
 /** @constant {string} */

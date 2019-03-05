@@ -32,7 +32,7 @@ class Sentence {
     this.triesLeft = this.maxTries;
     this.triesLeftAlternative = this.maxTriesAlternative;
 
-    this.params.sentence.description = Util.htmlDecode(this.params.sentence.description || '').trim();
+    this.params.sentence.description = (this.params.sentence.description || '').trim();
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
     this.solutionText = (!params.ignorePunctuation) ? this.solutionText : this.stripPunctuation(this.solutionText);
     this.containsRTL = (this.params.overrideRTL === 'auto') ?

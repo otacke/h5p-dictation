@@ -185,6 +185,7 @@ class Dictation extends H5P.Question {
       // Show solution button
       this.addButton('show-solution', this.params.l10n.showSolution, () => {
         this.showSolutions();
+        this.hideButton('show-solution');
       }, false, {}, {});
 
       // Check answer button
