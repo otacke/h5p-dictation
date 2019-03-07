@@ -42,13 +42,13 @@
           },
           {
             "label": "Text",
-            "description": "Text, der geschrieben werden sollte. Du kannst alternative Schreibweisen zu einem Wort hinzufügen, in dem du eine verticale Linie (|) hinzufügst gefolgt von der Alternative."
+            "description": "Text, der geschrieben werden sollte. Du kannst alternative Schreibweisen zu einem Wort hinzufügen, in dem du eine vertikale Linie (|) hinzufügst, gefolgt von der Alternative."
           }
         ]
       }
     },
     {
-      "label": "Gesamt-Rückmeldung",
+      "label": "Allgemeine Rückmeldung",
       "fields": [
         {
           "widgets": [
@@ -56,17 +56,17 @@
               "label": "Voreinstellung"
             }
           ],
-          "label": "Rückmeldungen für die einzelnen Wertebereiche",
+          "label": "Lege Rückmeldungen für einzelne Punktebereiche fest",
           "description": "Klicke auf den \"Bereich hinzufügen\"-Button, um so viele Bereiche hinzuzufügen, wie du brauchst. Beispiel: 0-20% Schlechte Punktzahl, 21-91% Durchschnittliche Punktzahl, 91-100% Großartige Punktzahl!",
           "entity": "Bereich",
           "field": {
             "fields": [
               {
-                "label": "Wertebereich"
+                "label": "Punktebereich"
               },
               {},
               {
-                "label": "Rückmeldung für den Wertebereich",
+                "label": "Rückmeldung für jeweiligen Punktebereich",
                 "placeholder": "Trage die Rückmeldung ein"
               }
             ]
@@ -92,7 +92,7 @@
         },
         {
           "label": "Eigene visuelle Darstellung von kleinen Fehlern",
-          "description": "Wenn gewählt, werden kleine Fehler in einem eigenen Stil dargestellt statt wie normale Fehler."
+          "description": "Wenn gewählt, werden kleine Fehler in einem eigenen Stil dargestellt, um sie von normalen Fehler zu differenzieren."
         },
         {
           "label": "Wert von kleinen Fehlern",
@@ -144,7 +144,7 @@
           "label": "\"Wiederholen\" aktivieren"
         },
         {
-          "label": "\"Lösung anzeigen\"-Knopf aktivieren"
+          "label": "\"Lösung anzeigen\" ermöglichen"
         }
       ]
     },
@@ -157,25 +157,25 @@
           "default": "Du hast insgesamt @total Fehler gemacht."
         },
         {
-          "label": "Beschriftung für den \"Überprüfen\"-Button",
-          "default": "Button"
+          "label": "Beschriftung des \"Überprüfen\"-Buttons",
+          "default": "Überprüfen"
         },
         {
-          "label": "Beschriftung für den \"Wiederholen\"-Button",
+          "label": "Beschriftung des \"Wiederholen\"-Buttons",
           "default": "Wiederholen"
         },
         {
-          "label": "Beschriftung für den \"Lösung zeigen\"-Button",
-          "default": "Lösung zeigen"
+          "label": "Beschriftung des \"Lösung anzeigen\"-Buttons",
+          "default": "Lösung anzeigen"
         },
         {
           "label": "Hinweis, dass keine Tonaufnahmen abgespielt werden können",
-          "default": "Dein Browser unterstützt diese Tondateie nicht."
+          "default": "Dein Browser unterstützt diese Tondatei nicht."
         }
       ]
     },
     {
-      "label": "Read-Speaker",
+      "label": "Vorlesewerkzeug (Barrierefreiheit)",
       "fields": [
         {
           "label": "Abspiel-Button",
@@ -186,13 +186,13 @@
           "default": "Langsam abspielen"
         },
         {
-          "label": "Verbleibende Versuche (Text für Read-Speaker und Tooltips)",
+          "label": "Verbleibende Versuche (Text für Vorlesewerkzeuge und Tooltips)",
           "description": "@number wird durch die aktuelle Anzahl verbleibender Versuche ersetzt.",
           "default": "Verbleibende Versuche: @number"
         },
         {
-          "label": "Unendlich (Text für Read-Speaker und Tooltips)",
-          "default": "undendlich"
+          "label": "Unendlich (Text für Vorlesewerkzeuge und Tooltips)",
+          "default": "unendlich"
         },
         {
           "label": "Eingabefeld",
