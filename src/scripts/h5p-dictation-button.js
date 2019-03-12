@@ -63,17 +63,6 @@ class Button {
 
       this.button = audio.$audioButton.get(0);
 
-      /*
-       * Not using disabled attribute to block key presses on disabled button,
-       * because it will implicitly set tabindex = -1 and confuse ChromeVox nav
-       * Clicks handled using "pointer-events: none" in stylesheet.
-       */
-      this.button.addEventListener('keypress', event => {
-        if (!this.isEnabled()) {
-          event.preventDefault();
-        }
-      });
-
       this.audio = audio;
 
       if (params.type === Button.BUTTON_TYPE_SLOW) {
@@ -214,7 +203,7 @@ class Button {
    */
   enable() {
     if (this.button) {
-      this.button.classList.remove(Button.DISABLED);
+      this.audio.enable();
     }
   }
 
@@ -241,7 +230,7 @@ class Button {
    */
   disable() {
     if (this.button) {
-      this.button.classList.add(Button.DISABLED);
+      this.audio.disable();
     }
   }
 
@@ -250,7 +239,11 @@ class Button {
    * @return {boolean} True, if enabled.
    */
   isEnabled() {
-    return this.button && !this.button.classList.contains(Button.DISABLED);
+    if (!this.button) {
+      return false;
+    }
+
+    return this.audio.isEnabled();
   }
 
   /**
@@ -315,7 +308,5 @@ Button.BUTTON_SLOW = 'h5p-audio-minimal-slow';
 Button.BUTTON_NONE = 'h5p-audio-minimal-none';
 /** @constant {string} */
 Button.INNER_CONTAINER = 'h5p-audio-inner';
-/** @constant {string} */
-Button.DISABLED = 'disabled';
 
 export default Button;
