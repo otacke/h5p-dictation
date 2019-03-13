@@ -83,6 +83,23 @@ class Dictation extends H5P.Question {
 
     this.sentences = [];
 
+    /*
+     * IE11 doesn't support wavs. Remove samples. Generic checking when audios
+     * are created would make code way more complicated given how it's written.
+     */
+    if (!!window.MSInputMethodContext && !!document.documentMode) {
+      this.params.sentences.forEach((sentence, index) => {
+        if (sentence.sample && sentence.sample[0].mime === 'audio/x-wav') {
+          console.warn(`${this.params.a11y.sentence} ${index + 1}: ${this.params.l10n.audioNotSupported}`);
+          delete sentence.sample;
+        }
+        if (sentence.sampleAlternative && sentence.sampleAlternative[0].mime === 'audio/x-wav') {
+          console.warn(`${this.params.a11y.sentence} ${index + 1}: ${this.params.l10n.audioNotSupported}`);
+          delete sentence.sampleAlternative;
+        }
+      });
+    }
+
     // Relevant for building the DOM later (play slowly button)
     const hasAlternatives = this.params.sentences.some(sentence => sentence.sampleAlternative !== undefined);
 
