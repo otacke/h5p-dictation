@@ -14,7 +14,9 @@ class Dictation extends H5P.Question {
 
     // Add defaults
     params = Util.extend({
+      media: {},
       taskDescription: 'Please listen carefully and write what you hear.',
+      sentences: [],
       behaviour: {
         alternateSolution: 'first',
         autosplit: true,
