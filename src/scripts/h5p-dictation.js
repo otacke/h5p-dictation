@@ -411,18 +411,46 @@ class Dictation extends H5P.Question {
      * @return {object} XAPI definition.
      */
     this.getxAPIDefinition = () => {
+      const placeholders = this.sentences.map(sentence => sentence.getXAPIDescription()).join('');
+
       const definition = {};
       definition.name = {'en-US': this.getTitle()};
-      definition.description = {'en-US': this.getDescription()};
+      definition.description = {'en-US': `${this.getDescription()}${placeholders}`};
       definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
       definition.interactionType = 'long-fill-in';
-
-      // Concatenate all correct solutions
-      definition.correctResponsesPattern = this.sentences
-        .map(sentence => sentence.getCorrectText())
-        .join('[,]');
+      definition.correctResponsesPattern = this.buildxAPICRP();
 
       return definition;
+    };
+
+    /**
+     * Build correct responses pattern from sentences.
+     *
+     * This may not be completely true, because we can't sensibly compile all
+     * possible answers for a sentence if we accept small mistakes.
+     *
+     * @return {object[]} Correct responses pattern.
+     */
+    this.buildxAPICRP = () => {
+      let sentences = this.sentences.map(sentence => sentence.getCorrectText(true));
+
+      sentences = sentences.map(sentence => {
+        let variations = [''];
+        sentence.forEach(word => {
+          word = word.split('|');
+          variations = Util.buildCombinations(word, variations, ' ');
+        });
+        return variations;
+      });
+
+      let crp = [''];
+      sentences.forEach(sentence => {
+        crp = Util.buildCombinations(sentence, crp, '[,]');
+      });
+
+      crp = crp.map(response => `{case_matters=true}${response}`);
+
+      return crp;
     };
 
     /**

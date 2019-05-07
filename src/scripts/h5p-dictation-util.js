@@ -91,6 +91,27 @@ class Util {
   static containsRTLCharacters(input) {
     return new RegExp('^[^' + Util.RTL + ']*?[' + Util.RTL + ']').test(input);
   }
+
+  /**
+   * Combine all possible combinations of strings from two sets.
+   *
+   * ['a', 'b', 'c'] and ['d', 'e'] become ['a d', 'a e', 'b d', 'b e', 'c d', 'c e']
+   *
+   * @param {object[]} words1 First set of strings.
+   * @param {object[]} words2 Second set of strings.
+   * @param {string} [delimiter=' '] Delimiter between each string.
+   */
+  static buildCombinations(words1, words2, delimiter = ' ') {
+    const result = [];
+
+    words1.forEach(word1 => {
+      result.push(
+        ...words2.map(word2 => (word2 === '') ? word1 : `${word2}${delimiter}${word1}`)
+      );
+    });
+
+    return result;
+  }
 }
 
 // Regular expression configuration
