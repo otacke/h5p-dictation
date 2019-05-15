@@ -203,7 +203,7 @@ class Button {
    */
   enable() {
     if (this.button) {
-      this.audio.enable();
+      this.audio.enableToggleButton();
     }
   }
 
@@ -230,7 +230,7 @@ class Button {
    */
   disable() {
     if (this.button) {
-      this.audio.disable();
+      this.audio.disableToggleButton();
     }
   }
 
