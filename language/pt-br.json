@@ -1,0 +1,305 @@
+{
+  "semantics": [
+    {
+      "label": "Média",
+      "fields": [
+        {
+          "label": "Tipo",
+          "description": "Mídia opcional para exibir acima da pergunta."
+        },
+        {
+          "label": "Desativar zoom da imagem"
+        }
+      ]
+    },
+    {
+      "label": "Descrição da tarefa",
+      "description": "Descreve sua tarefa aqui.",
+      "placeholder": "Por favor escute cuidadosamente e escreva o que ouvir."
+    },
+    {
+      "label": "Frases",
+      "widgets": [
+        {
+          "label": "Default"
+        }
+      ],
+      "entity": "Frase",
+      "field": {
+        "label": "Frase",
+        "fields": [
+          {
+            "label": "Descrição",
+            "description": "Como opção, você pode colocar uma descrição simples acima do campo de entrada de texto, útil para diálogos, por exemplo."
+          },
+          {
+            "label": "Amostra de som",
+            "description": "Frase falada em velocidade normal"
+          },
+          {
+            "label": "Amostra de som lenta",
+            "description": "Frase falada em velocidade lenta"
+          },
+          {
+            "label": "Texto",
+            "description": "Texto que deve ser escrito. Você pode adicionar grafias alternativas a uma palavra adicionando uma linha vertical (|) atrás seguida por uma alternativa."
+          }
+        ]
+      }
+    },
+    {
+      "label": "Feedback Geral",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Padrão"
+            }
+          ],
+          "label": "Definir feedback personalizado para qualquer intervalo de pontuação",
+          "description": "Clique no botão \"Adicionar intervalo \" para adicionar quantos intervalos forem necessários. Exemplo: 0-20% Pontuação ruim, 21-91% Pontuação média, 91-100% Pontuação máxima!",
+          "entity": "alcance",
+          "field": {
+            "fields": [
+              {
+                "label": "Faixa de pontuação"
+              },
+              {},
+              {
+                "label": "Feedback para intervalo de pontuação definido",
+                "placeholder": "Preencha o feedback"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Configurações comportamentais",
+      "description": "These options will let you control how the task behaves.",
+      "fields": [
+        {
+          "label": "Maximum tries",
+          "description": "Will limit the number of times the samples for each sentence can be listened to."
+        },
+        {
+          "label": "Maximum tries for slow speed",
+          "description": "Will limit the number of times the slow samples for each sentence can be listened to."
+        },
+        {
+          "label": "Ignore Punctuation marks",
+          "description": "If checked, punctuation marks will not be considerd for scoring."
+        },
+        {
+          "label": "Custom typo display",
+          "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
+        },
+        {
+          "label": "Value of typos",
+          "description": "Determine to which extent typing errors (word with 3-9 characters: up to 1 mistake, word with more than 9 characters: up to 2 mistakes) count as a real mistake.",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ]
+        },
+        {
+          "label": "Presentation of alternate solutions",
+          "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
+          "options": [
+            {
+              "label": "Show only first alternative"
+            },
+            {
+              "label": "Show all alternatives"
+            }
+          ]
+        },
+        {
+          "label": "Writing direction",
+          "description": "Set whether the sentences' language is right-to-left or left-to-right.",
+          "options": [
+            {
+              "label": "Automatic detection"
+            },
+            {
+              "label": "Right-to-left"
+            },
+            {
+              "label": "Left-to-right"
+            }
+          ]
+        },
+        {
+          "label": "Splitting of characters",
+          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+        },
+        {
+          "label": "Enable \"Retry\""
+        },
+        {
+          "label": "Enable \"Show solution\" button"
+        }
+      ]
+    },
+    {
+      "label": "User interface",
+      "fields": [
+        {
+          "label": "General feedback",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have made @total mistake(s)."
+        },
+        {
+          "label": "Text for \"Check\" button",
+          "default": "Check"
+        },
+        {
+          "label": "Text for \"Retry\" button",
+          "default": "Retry"
+        },
+        {
+          "label": "Text for \"Show solution\" button",
+          "default": "Show solution"
+        },
+        {
+          "label": "Audio not supported message",
+          "default": "Your browser does not support this audio."
+        }
+      ]
+    },
+    {
+      "label": "Readspeaker",
+      "fields": [
+        {
+          "label": "Play button",
+          "default": "Play"
+        },
+        {
+          "label": "Play slowly button",
+          "default": "Play slowly"
+        },
+        {
+          "label": "Tries left (text for readspeakers and hover text)",
+          "description": "@number will be replaced by the current number of tries left.",
+          "default": "Number of tries left: @number"
+        },
+        {
+          "label": "Infinite (text for readspeakers and hover text)",
+          "default": "infinite"
+        },
+        {
+          "label": "Enter text field",
+          "default": "Enter what you have heard."
+        },
+        {
+          "label": "Your result",
+          "description": "@score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
+          "default": "You got @score out of @total points"
+        },
+        {
+          "label": "Solução",
+          "default": "solução"
+        },
+        {
+          "label": "Frase",
+          "default": "frase"
+        },
+        {
+          "label": "Item",
+          "default": "item"
+        },
+        {
+          "label": "Correto",
+          "default": "correto"
+        },
+        {
+          "label": "Incorreto",
+          "default": "incorreto"
+        },
+        {
+          "label": "Pequeno erro",
+          "default": "pequeno erro"
+        },
+        {
+          "label": "Palavra ou símbolo faltando",
+          "default": "faltando"
+        },
+        {
+          "label": "Adicionado palavra ou símbolo",
+          "default": "adicionado"
+        },
+        {
+          "label": "Solução correta",
+          "default": "Deveria ter sido"
+        },
+        {
+          "label": "Ou",
+          "default": "ou"
+        },
+        {
+          "label": "Ponto",
+          "default": "ponto"
+        },
+        {
+          "label": "Pontos",
+          "default": "pontos"
+        },
+        {
+          "label": "Período",
+          "default": "período"
+        },
+        {
+          "label": "Ponto de exclamação",
+          "default": "ponto de exclamação"
+        },
+        {
+          "label": "Ponto de interrogação",
+          "default": "ponto de interrogação"
+        },
+        {
+          "label": "Vírgula",
+          "default": "vírgula"
+        },
+        {
+          "label": "Aspas simples",
+          "default": "aspas simples"
+        },
+        {
+          "label": "Aspas duplas",
+          "default": "aspas duplas"
+        },
+        {
+          "label": "Dois pontos",
+          "default": "dois pontos"
+        },
+        {
+          "label": "Ponto e virgula",
+          "default": "ponto e virgula"
+        },
+        {
+          "label": "Mais",
+          "default": "mais"
+        },
+        {
+          "label": "Menos",
+          "default": "menos"
+        },
+        {
+          "label": "Asterisco",
+          "default": "asterisco"
+        },
+        {
+          "label": "Barra invertida",
+          "default": "barra invertida"
+        }
+      ]
+    }
+  ]
+}
