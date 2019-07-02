@@ -21,7 +21,7 @@
       "label": "Frases",
       "widgets": [
         {
-          "label": "Default"
+          "label": "Padrão"
         }
       ],
       "entity": "Frase",
@@ -76,27 +76,27 @@
     },
     {
       "label": "Configurações comportamentais",
-      "description": "These options will let you control how the task behaves.",
+      "description": "Essas opções permitem controlar como a tarefa se comporta.",
       "fields": [
         {
-          "label": "Maximum tries",
-          "description": "Will limit the number of times the samples for each sentence can be listened to."
+          "label": "Tentativas máximas",
+          "description": "Limitará o número de vezes que as amostras de cada sentença podem ser ouvidas."
         },
         {
-          "label": "Maximum tries for slow speed",
-          "description": "Will limit the number of times the slow samples for each sentence can be listened to."
+          "label": "Tentativas máximas para velocidade lenta",
+          "description": "Limitará o número de vezes que as amostras lentas de cada sentença podem ser ouvidas."
         },
         {
-          "label": "Ignore Punctuation marks",
-          "description": "If checked, punctuation marks will not be considerd for scoring."
+          "label": "Ignorar marcas de pontuação",
+          "description": "Se marcada, os sinais de pontuação não serão considerados para pontuação."
         },
         {
-          "label": "Custom typo display",
-          "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
+          "label": "Exibição de erro de digitação personalizada",
+          "description": "Se marcada, os erros de digitação serão exibidos em um estilo personalizado, distinguindo-os de erros claros."
         },
         {
-          "label": "Value of typos",
-          "description": "Determine to which extent typing errors (word with 3-9 characters: up to 1 mistake, word with more than 9 characters: up to 2 mistakes) count as a real mistake.",
+          "label": "Valor dos erros de digitação",
+          "description": "Determine em que medida os erros de digitação (palavra com 3-9 caracteres: até 1 erro, palavra com mais de 9 caracteres: até 2 erros) contam como um erro real.",
           "options": [
             {
               "label": "100 %"
@@ -110,98 +110,98 @@
           ]
         },
         {
-          "label": "Presentation of alternate solutions",
-          "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
+          "label": "Apresentação de soluções alternativas",
+          "description": "Defina quais alternativas devem ser apresentadas para palavras erradas ou ausentes na solução.",
           "options": [
             {
-              "label": "Show only first alternative"
+              "label": "Mostrar apenas a primeira alternativa"
             },
             {
-              "label": "Show all alternatives"
+              "label": "Mostrar todas as alternativas"
             }
           ]
         },
         {
-          "label": "Writing direction",
-          "description": "Set whether the sentences' language is right-to-left or left-to-right.",
+          "label": "Direção de escrita",
+          "description": "Defina se o idioma das frases é da direita para a esquerda ou da esquerda para a direita.",
           "options": [
             {
-              "label": "Automatic detection"
+              "label": "Detecção automática"
             },
             {
-              "label": "Right-to-left"
+              "label": "Direita para esquerda"
             },
             {
-              "label": "Left-to-right"
+              "label": "Esquerda para a direita"
             }
           ]
         },
         {
-          "label": "Splitting of characters",
-          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+          "label": "Divisão de caracteres",
+          "description": "Ative se caracteres específicos (por exemplo, caracteres Han chineses) devem ser divididos em palavras separadas automaticamente."
         },
         {
-          "label": "Enable \"Retry\""
+          "label": "Ativar \"Repetir\""
         },
         {
-          "label": "Enable \"Show solution\" button"
+          "label": "Ativar o botão \"Mostrar solução\""
         }
       ]
     },
     {
-      "label": "User interface",
+      "label": "Interface de usuário",
       "fields": [
         {
-          "label": "General feedback",
-          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-          "default": "You have made @total mistake(s)."
+          "label": "Feedback geral",
+          "description": "Você pode usar vários espaços reservados que serão substituídos pelo número adequado: @matches = número de correspondências, @total = total de erros, @capped = total de erros limitados, @wrong = palavras incorretas, @added = palavras adicionais, @missing = missing palavras, @typo = erros de digitação",
+          "default": "Você cometeu @total erro(s)."
         },
         {
-          "label": "Text for \"Check\" button",
-          "default": "Check"
+          "label": "Texto para o botão \"Verificar\"",
+          "default": "Verificar"
         },
         {
-          "label": "Text for \"Retry\" button",
-          "default": "Retry"
+          "label": "Texto para o botão \"Repetir\"",
+          "default": "Tente novamente"
         },
         {
-          "label": "Text for \"Show solution\" button",
-          "default": "Show solution"
+          "label": "Texto para o botão \"Mostrar solução\"",
+          "default": "Mostrar solução"
         },
         {
-          "label": "Audio not supported message",
-          "default": "Your browser does not support this audio."
+          "label": "Mensagem de áudio não suportada",
+          "default": "Seu navegador não suporta este áudio."
         }
       ]
     },
     {
-      "label": "Readspeaker",
+      "label": "Alto-falante",
       "fields": [
         {
-          "label": "Play button",
-          "default": "Play"
+          "label": "Botão Reproduzir",
+          "default": "Reproduzir"
         },
         {
-          "label": "Play slowly button",
-          "default": "Play slowly"
+          "label": "Botão reproduzir pausadamente",
+          "default": "Reproduzir pausadamente"
         },
         {
-          "label": "Tries left (text for readspeakers and hover text)",
-          "description": "@number will be replaced by the current number of tries left.",
-          "default": "Number of tries left: @number"
+          "label": "Tentativas restantes (texto para leitura e texto flutuante)",
+          "description": "Tentativas restantes (texto para leitura e texto flutuante) @number será substituído pelo número atual de tentativas restantes.",
+          "default": "Número de tentativas restantes: @number"
         },
         {
-          "label": "Infinite (text for readspeakers and hover text)",
-          "default": "infinite"
+          "label": "Infinito (texto para leitura e texto flutuante)",
+          "default": "Infinito"
         },
         {
-          "label": "Enter text field",
-          "default": "Enter what you have heard."
+          "label": "Campo de texto de digitação",
+          "default": "Digite o que você ouviu."
         },
         {
-          "label": "Your result",
-          "description": "@score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
-          "default": "You got @score out of @total points"
+          "label": "Seu resultado",
+          "description": "@score será substituído pelo número de pontos. @total será substituído pelo máximo de pontos possíveis.",
+          "default": "Você tem @score de @total de pontos"
         },
         {
           "label": "Solução",
