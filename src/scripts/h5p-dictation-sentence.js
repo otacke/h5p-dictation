@@ -21,16 +21,15 @@ class Sentence {
    * @param {boolean} autosplit - Set auto-splitting for characters.
    * @param {object} params.a11y - Readspeaker texts.
    * @param {number} id - Content Id.
+   * @param {object} previousState - PreviousState.
    */
-  constructor(index, params, id) {
+  constructor(index, params, id, previousState = {}) {
     this.index = index;
     this.params = params;
     this.contentId = id;
 
     this.maxTries = params.tries;
     this.maxTriesAlternative = params.triesAlternative;
-    this.triesLeft = this.maxTries;
-    this.triesLeftAlternative = this.maxTriesAlternative;
 
     this.params.sentence.description = (this.params.sentence.description || '').trim();
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
@@ -55,24 +54,32 @@ class Sentence {
     contentInteraction.classList.add(Sentence.CONTENT_INTERACTION);
 
     // Normal audio button
-    this.buttonPlayNormal = new Button(id, {
-      sample: params.sentence.sample,
-      audioNotSupported: params.audioNotSupported,
-      type: Button.BUTTON_TYPE_NORMAL,
-      maxTries: params.tries,
-      a11y: params.a11y
-    });
+    this.buttonPlayNormal = new Button(
+      id,
+      {
+        sample: params.sentence.sample,
+        audioNotSupported: params.audioNotSupported,
+        type: Button.BUTTON_TYPE_NORMAL,
+        maxTries: params.tries,
+        a11y: params.a11y
+      },
+      previousState.buttonPlayNormal
+    );
     contentInteraction.appendChild(this.buttonPlayNormal.getDOM());
 
     // Alternative audio button
     if (this.params.hasAlternatives === true) {
-      this.buttonPlaySlow = new Button(id, {
-        sample: params.sentence.sampleAlternative,
-        audioNotSupported: params.audioNotSupported,
-        type: Button.BUTTON_TYPE_SLOW,
-        maxTries: params.triesAlternative,
-        a11y: params.a11y
-      });
+      this.buttonPlaySlow = new Button(
+        id,
+        {
+          sample: params.sentence.sampleAlternative,
+          audioNotSupported: params.audioNotSupported,
+          type: Button.BUTTON_TYPE_SLOW,
+          maxTries: params.triesAlternative,
+          a11y: params.a11y
+        },
+        previousState.buttonPlaySlow
+      );
       contentInteraction.appendChild(this.buttonPlaySlow.getDOM());
 
     }
@@ -86,6 +93,9 @@ class Sentence {
     this.inputField = document.createElement('input');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
     this.inputField.classList.add(Sentence.INPUT_FIELD);
+    if (previousState.userInput) {
+      this.inputField.value = previousState.userInput;
+    }
 
     this.solution = new Solution({
       alternateSolution: this.params.alternateSolution,
@@ -184,6 +194,18 @@ class Sentence {
    */
   getCorrectText(asArray = false) {
     return (asArray) ? this.addSpaces(this.solutionText).split(' ') : this.solutionText;
+  }
+
+  /**
+   * Get current state.
+   * @return {object} current State.
+   */
+  getCurrentState() {
+    return {
+      userInput: this.getUserInput(),
+      buttonPlayNormal: (this.buttonPlayNormal) ? this.buttonPlayNormal.getCurrentState() : undefined,
+      buttonPlaySlow: (this.buttonPlaySlow) ? this.buttonPlaySlow.getCurrentState() : undefined
+    };
   }
 
   /**

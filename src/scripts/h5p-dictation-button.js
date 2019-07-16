@@ -16,9 +16,11 @@ class Button {
    * @param {number} params.tries Maximum number of tries before disabling button;
    * @param {string} params.sample Path to sound sample.
    * @param {number} params.type Type of the sample (0 = normal, 1 = slow);
+   * @param {object} previousState PreviousState.
    */
-  constructor(id, params) {
+  constructor(id, params, previousState = {}) {
     this.params = params;
+    this.previousState = previousState;
 
     // Sanitization
     this.params.audioNotSupported = this.params.audioNotSupported || "Your browser does not support this audio.";
@@ -32,7 +34,7 @@ class Button {
     this.params.a11y.enterText = this.params.a11y.enterText || 'Enter what you have heard';
     this.params.type = this.params.type || Button.BUTTON_TYPE_NORMAL;
 
-    this.triesLeft = this.params.maxTries;
+    this.triesLeft = (typeof previousState.triesLeft !== 'undefined') ? previousState.triesLeft : this.params.maxTries;
 
     this.dom = this.createAudioDOM(id, this.params);
     // Placeholder if Audio could not be created
@@ -58,7 +60,13 @@ class Button {
         audioNotSupported: params.audioNotSupported
       };
 
-      const audio = new H5P.Audio(audioDefaults, id);
+      const audio = new H5P.Audio(
+        audioDefaults,
+        id,
+        {
+          previousState: this.previousState.audio
+        }
+      );
       audio.attach($audioWrapper);
 
       this.button = audio.$audioButton.get(0);
@@ -73,6 +81,17 @@ class Button {
       }
       else {
         this.setLabel(params.a11y.play);
+      }
+
+      // Set from previous state
+      if (this.triesLeft < 1) {
+        this.audio.disableToggleButton();
+      }
+
+      // Set from previous state
+      if (this.previousState.audio && this.previousState.audio.currentTime !== 0) {
+        this.status = Button.STATUS_PAUSE;
+        audio.$audioButton.addClass(Button.BUTTON_PLAY_PAUSED);
       }
 
       // Event Listener Play
@@ -189,6 +208,11 @@ class Button {
    */
   reset() {
     this.triesLeft = this.params.maxTries;
+    if (this.audio) {
+      this.audio.seekTo(0);
+    }
+    this.status = Button.STATUS_ENDED;
+
     this.enable();
     if (this.params.type === Button.BUTTON_TYPE_SLOW) {
       this.setLabel(this.params.a11y.playSlowly);
@@ -267,6 +291,17 @@ class Button {
     else {
       this.button.classList.add(Button.BUTTON_PLAY);
     }
+  }
+
+  /**
+   * Get current state.
+   * @return {object} Current state.
+   */
+  getCurrentState() {
+    return {
+      audio: (this.audio) ? this.audio.getCurrentState() : undefined,
+      triesLeft: this.triesLeft
+    };
   }
 
   /**

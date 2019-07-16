@@ -13,7 +13,7 @@ class Dictation extends H5P.Question {
     super('dictation');
 
     // Add defaults
-    params = Util.extend({
+    this.params = Util.extend({
       media: {},
       taskDescription: 'Please listen carefully and write what you hear.',
       sentences: [],
@@ -79,7 +79,6 @@ class Dictation extends H5P.Question {
       return;
     }
 
-    this.params = H5P.jQuery.extend(true, params);
     this.contentId = contentId;
     this.contentData = contentData || {};
 
@@ -113,6 +112,11 @@ class Dictation extends H5P.Question {
       // Strip incomplete sentences
       .filter(sentence => sentence.text !== undefined && sentence.sample !== undefined)
       .forEach((sentence, index) => {
+        // Get previous state
+        const previousState = (this.contentData.previousState && this.contentData.previousState.length >= index + 1) ?
+          this.contentData.previousState[index] :
+          undefined;
+
         this.sentences.push(new Sentence(
           index + 1,
           {
@@ -129,7 +133,8 @@ class Dictation extends H5P.Question {
             overrideRTL: this.params.behaviour.overrideRTL,
             autosplit: this.params.behaviour.autosplit,
           },
-          this.contentId)
+          this.contentId,
+          previousState)
         );
       });
 
@@ -451,6 +456,14 @@ class Dictation extends H5P.Question {
       crp = crp.map(response => `{case_matters=true}${response}`);
 
       return crp;
+    };
+
+    /**
+     * Get current state.
+     * @return {Object} Current state.
+     */
+    this.getCurrentState = () => {
+      return this.sentences.map(sentence => sentence.getCurrentState());
     };
 
     /**
