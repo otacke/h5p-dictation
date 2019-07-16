@@ -210,11 +210,11 @@ class Dictation extends H5P.Question {
       // Check answer button
       this.addButton('check-answer', this.params.l10n.checkAnswer, () => {
         this.showEvaluation();
+        this.isAnswered = true;
         this.triggerXAPI();
         if (this.params.behaviour.enableRetry && !this.isPassed()) {
           this.showButton('try-again');
         }
-        this.isAnswered = true;
       }, true, {}, {});
 
       // Retry button
