@@ -91,6 +91,9 @@ class Sentence {
 
     // Text input field
     this.inputField = document.createElement('input');
+    this.inputField.setAttribute('spellcheck', 'false');
+    this.inputField.setAttribute('autocorrect', 'off');
+    this.inputField.setAttribute('autocapitalize', 'off');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
     this.inputField.classList.add(Sentence.INPUT_FIELD);
     if (previousState.userInput) {
