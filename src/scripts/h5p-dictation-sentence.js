@@ -32,6 +32,9 @@ class Sentence {
     this.maxTriesAlternative = params.triesAlternative;
 
     this.params.sentence.description = (this.params.sentence.description || '').trim();
+    this.params.callbacks = this.params.callbacks || {};
+    this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
+
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
     this.solutionText = (!params.ignorePunctuation) ? this.solutionText : this.stripPunctuation(this.solutionText);
     this.containsRTL = (this.params.overrideRTL === 'auto') ?
@@ -61,7 +64,12 @@ class Sentence {
         audioNotSupported: params.audioNotSupported,
         type: Button.BUTTON_TYPE_NORMAL,
         maxTries: params.tries,
-        a11y: params.a11y
+        a11y: params.a11y,
+        callbacks: {
+          playAudio: (button) => {
+            this.params.callbacks.playAudio(button);
+          }
+        }
       },
       previousState.buttonPlayNormal
     );
@@ -76,7 +84,12 @@ class Sentence {
           audioNotSupported: params.audioNotSupported,
           type: Button.BUTTON_TYPE_SLOW,
           maxTries: params.triesAlternative,
-          a11y: params.a11y
+          a11y: params.a11y,
+          callbacks: {
+            playAudio: (button) => {
+              this.params.callbacks.playAudio(button);
+            }
+          }
         },
         previousState.buttonPlaySlow
       );
@@ -276,6 +289,20 @@ class Sentence {
 
     if (this.buttonPlaySlow) {
       this.buttonPlaySlow.enable();
+    }
+  }
+
+  /**
+   * Pause buttons.
+   * @param {Button} [excludeButton] Button to ignore.
+   */
+  pauseButtons(excludeButton) {
+    if (this.buttonPlayNormal && this.buttonPlayNormal !== excludeButton) {
+      this.buttonPlayNormal.pause();
+    }
+
+    if (this.buttonPlaySlow && this.buttonPlaySlow !== excludeButton) {
+      this.buttonPlaySlow.pause();
     }
   }
 

@@ -16,6 +16,8 @@ class Button {
    * @param {number} params.tries Maximum number of tries before disabling button;
    * @param {string} params.sample Path to sound sample.
    * @param {number} params.type Type of the sample (0 = normal, 1 = slow);
+   * @param {object} params.callbacks Callbacks.
+   * @param {function} params.callbacks.playAudio PlayAudio callback.
    * @param {object} previousState PreviousState.
    */
   constructor(id, params, previousState = {}) {
@@ -33,6 +35,8 @@ class Button {
     this.params.a11y.solution = this.params.a11y.solution || 'Solution';
     this.params.a11y.enterText = this.params.a11y.enterText || 'Enter what you have heard';
     this.params.type = this.params.type || Button.BUTTON_TYPE_NORMAL;
+    this.params.callbacks = this.params.callbacks || {};
+    this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
 
     this.triesLeft = (typeof previousState.triesLeft !== 'undefined') ? previousState.triesLeft : this.params.maxTries;
 
@@ -104,6 +108,8 @@ class Button {
         }
 
         this.status = Button.STATUS_PLAYING;
+
+        this.params.callbacks.playAudio(this);
       });
 
       // Event Listener Pause
@@ -173,6 +179,15 @@ class Button {
    */
   play() {
     if (this.status !== Button.STATUS_PLAYING) {
+      this.button.click();
+    }
+  }
+
+  /**
+   * Pause.
+   */
+  pause() {
+    if (this.status === Button.STATUS_PLAYING) {
       this.button.click();
     }
   }

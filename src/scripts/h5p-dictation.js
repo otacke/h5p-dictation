@@ -132,6 +132,11 @@ class Dictation extends H5P.Question {
             alternateSolution: this.params.behaviour.alternateSolution,
             overrideRTL: this.params.behaviour.overrideRTL,
             autosplit: this.params.behaviour.autosplit,
+            callbacks: {
+              playAudio: (button) => {
+                this.handlePlayAudio(button);
+              }
+            }
           },
           this.contentId,
           previousState)
@@ -227,6 +232,16 @@ class Dictation extends H5P.Question {
         this.resetTask();
         this.sentences[0].focus();
       }, false, {}, {});
+    };
+
+    /**
+     * Handle playing audio.
+     * @param {Button} button Calling button.
+     */
+    this.handlePlayAudio = (button) => {
+      this.sentences.forEach(sentence => {
+        sentence.pauseButtons(button);
+      });
     };
 
     /**
