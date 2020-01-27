@@ -38,7 +38,15 @@ class Button {
     this.params.callbacks = this.params.callbacks || {};
     this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
 
-    this.triesLeft = (typeof previousState.triesLeft !== 'undefined') ? previousState.triesLeft : this.params.maxTries;
+    if (typeof previousState.triesLeft === 'undefined') {
+      this.triesLeft = this.params.maxTries;
+    }
+    else if (previousState.triesLeft === null) {
+      this.triesLeft = Infinity;
+    }
+    else {
+      this.triesLeft = previousState.triesLeft;
+    }
 
     this.dom = this.createAudioDOM(id, this.params);
     // Placeholder if Audio could not be created
