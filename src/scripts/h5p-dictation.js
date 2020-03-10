@@ -331,7 +331,7 @@ class Dictation extends H5P.Question {
      * @return {number} latest score.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
-    this.getScore = () => this.maxMistakes - this.mistakesCapped;
+    this.getScore = () => Math.round(this.maxMistakes - this.mistakesCapped);
 
     /**
      * Get maximum possible score.
