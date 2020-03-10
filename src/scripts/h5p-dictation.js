@@ -402,6 +402,14 @@ class Dictation extends H5P.Question {
     this.getXAPIAnswerEvent = () => {
       const xAPIEvent = this.createDictationXAPIEvent('answered');
 
+      // Set reporting module version if alternative extension is used
+      const definition = xAPIEvent.getVerifiedStatementValue(['object', 'definition']);
+      if (definition.extensions && definition.extensions[Dictation.XAPI_ALTERNATIVE_EXTENSION]) {
+        const context = xAPIEvent.getVerifiedStatementValue(['context']);
+        context.extensions = context.extensions || {};
+        context.extensions[Dictation.XAPI_REPORTING_VERSION_EXTENSION] = Dictation.XAPI_REPORTING_VERSION;
+      }
+
       xAPIEvent.setScoredResult(this.getScore(), this.getMaxScore(), this,
         true, this.isPassed());
 
@@ -438,20 +446,29 @@ class Dictation extends H5P.Question {
       definition.description = {'en-US': `${this.getDescription()}${placeholders}`};
       definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
       definition.interactionType = 'long-fill-in';
-      definition.correctResponsesPattern = this.buildxAPICRP();
+
+      // Use extension to avoid exponentially growing solution space
+      definition.extensions = definition.extensions || {};
+      definition.extensions[Dictation.XAPI_CASE_SENSITIVITY] = true;
+
+      const sentencesVariations = this.buildCorrectSentencesVariations();
+      definition.extensions[Dictation.XAPI_ALTERNATIVE_EXTENSION] = sentencesVariations;
+
+      // Fallback CRP with only first sentence variation
+      definition.correctResponsesPattern = this.buildxAPICRP(sentencesVariations.slice());
 
       return definition;
     };
 
     /**
-     * Build correct responses pattern from sentences.
+     * Build all correct sentence variations.
      *
      * This may not be completely true, because we can't sensibly compile all
      * possible answers for a sentence if we accept small mistakes.
      *
-     * @return {object[]} Correct responses pattern.
+     * @return {object[]} Correct sentence variations.
      */
-    this.buildxAPICRP = () => {
+    this.buildCorrectSentencesVariations = () => {
       let sentences = this.sentences.map(sentence => sentence.getCorrectText(true));
 
       sentences = sentences.map(sentence => {
@@ -463,12 +480,40 @@ class Dictation extends H5P.Question {
         return variations;
       });
 
-      let crp = [''];
-      sentences.forEach(sentence => {
-        crp = Util.buildCombinations(sentence, crp, '[,]');
-      });
+      return sentences;
+    };
 
-      crp = crp.map(response => `{case_matters=true}${response}`);
+    /**
+     * Build correct responses pattern from sentences.
+     *
+     * This may not be completely true, because we can't sensibly compile all
+     * possible answers for a sentence if we accept small mistakes.
+     *
+     * @param {object[]} sentencesVariations Sentences variations.
+     * @param {boolean} [complete=false] If true, will build complete CRP.
+     * @return {object[]} Correct responses pattern.
+     */
+    this.buildxAPICRP = (sentencesVariations, complete = false) => {
+      let crp = [''];
+
+      if (!sentencesVariations) {
+        return crp;
+      }
+
+      if (!complete) {
+        crp = sentencesVariations
+          .map(sentences => sentences[0])
+          .join('[,]');
+        crp = [`{case_matters=true}${crp}`];
+      }
+      else {
+        sentencesVariations.forEach(sentences => {
+          crp = Util.buildCombinations(sentences, crp, '[,]');
+        });
+
+        crp = crp.map(response => `{case_matters=true}${response}`);
+
+      }
 
       return crp;
     };
@@ -505,5 +550,17 @@ class Dictation extends H5P.Question {
 
 /** @constant {string} */
 Dictation.DEFAULT_DESCRIPTION = 'Dictation';
+
+/** @constant {string} */
+Dictation.XAPI_ALTERNATIVE_EXTENSION = 'https://h5p.org/x-api/alternatives';
+
+/** @constant {string} */
+Dictation.XAPI_CASE_SENSITIVITY = 'https://h5p.org/x-api/case-sensitivity';
+
+/** @constant {string} */
+Dictation.XAPI_REPORTING_VERSION_EXTENSION = 'https://h5p.org/x-api/h5p-reporting-version';
+
+/** @constant {string} */
+Dictation.XAPI_REPORTING_VERSION = '1.1.0';
 
 export default Dictation;
