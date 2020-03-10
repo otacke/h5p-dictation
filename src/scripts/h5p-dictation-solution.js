@@ -103,7 +103,7 @@ class Solution {
    */
   createSolutionWordDOM(index, word, trailingGap = true) {
     if (this.params.alternateSolution === 'first' && word.type !== 'match' && word.type !== 'typo') {
-      word.solution = Util.splitWordAlternatives(word.solution)[0];
+      word.solution = word.solution ? Util.splitWordAlternatives(word.solution)[0] : '';
     }
 
     // General stuff
