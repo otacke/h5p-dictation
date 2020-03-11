@@ -233,15 +233,13 @@ class Sentence {
   }
 
   /**
-   * Get the xAPI definition for reporting.
-   * @return {string} xAPI definition for reporting.
+   * Get description text.
+   * @return {string} Description text.
    */
   getXAPIDescription() {
-    const description = (this.params.sentence.description) ?
+    return this.params.sentence.description || '' ?
       `<p>${this.params.sentence.description}</p>` :
       '';
-
-    return `${description}<p>${Sentence.FILL_IN_PLACEHOLDER}</p>`;
   }
 
   /**
@@ -750,10 +748,5 @@ Sentence.AUTOSPLIT = '[\u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF]';
 Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C-\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6\u2026\u2027\u22EF\u3000-\u3002\u3008-\u3011\uFF01\uFF08\uFF09\uFF0C\uFF1A\uFF1B\uFF1F\uFF3B\uFF3D\uFE41\uFE42\uFE4F\uFF5E]';
 /** @constant {string} */
 Sentence.WORD = '\\w|[\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u060B\u060D-\u061E\u0620-\u08FF]';
-
-/** @constant {string}
- * Required to be added to xAPI object description for H5P reporting
- */
-Sentence.FILL_IN_PLACEHOLDER = '__________';
 
 export default Sentence;

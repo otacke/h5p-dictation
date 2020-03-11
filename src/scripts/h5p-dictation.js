@@ -248,15 +248,16 @@ class Dictation extends H5P.Question {
      * Show the evaluation for the input in the text input fields.
      */
     this.showEvaluation = () => {
-      // Get results of all sentences
-      this.results = [];
+      this.computedResults = this.sentences.map(sentence => {
+        return sentence.computeResults();
+      });
+
       this.sentences.forEach(sentence => {
-        this.results.push(sentence.computeResults());
         sentence.disable();
       });
 
       // Sum up the scores of all sentences
-      const scoreTotal = this.results
+      const scoreTotal = this.computedResults
         .map(result => result.score)
         .reduce((a, b) => {
           return {
@@ -346,7 +347,7 @@ class Dictation extends H5P.Question {
      */
     this.showSolutions = () => {
       this.sentences.forEach((sentence, index) => {
-        sentence.showSolution(this.results[index]);
+        sentence.showSolution(this.computedResults[index]);
       });
 
       // Focus first solution
@@ -400,6 +401,10 @@ class Dictation extends H5P.Question {
      * @return {H5P.XAPIEvent} XAPI answer event.
      */
     this.getXAPIAnswerEvent = () => {
+      this.computedResults = this.sentences.map(sentence => {
+        return sentence.computeResults();
+      });
+
       const xAPIEvent = this.createDictationXAPIEvent('answered');
 
       // Set reporting module version if alternative extension is used
@@ -413,10 +418,18 @@ class Dictation extends H5P.Question {
       xAPIEvent.setScoredResult(this.getScore(), this.getMaxScore(), this,
         true, this.isPassed());
 
-      // Concatenate input from sentences
-      xAPIEvent.data.statement.result.response = this.sentences
-        .map(sentence => sentence.getUserInput())
+      const response = this
+        .computedResults.reduce((gaps, sentence) => {
+          return gaps.concat(
+            sentence.words.reduce((answers, word) => {
+              return answers.concat(word.answer || '');
+            }, [])
+          );
+        }, [])
         .join('[,]');
+
+      // Concatenate input from sentences
+      xAPIEvent.data.statement.result.response = response;
 
       return xAPIEvent;
     };
@@ -439,75 +452,75 @@ class Dictation extends H5P.Question {
      * @return {object} XAPI definition.
      */
     this.getxAPIDefinition = () => {
-      const placeholders = this.sentences.map(sentence => sentence.getXAPIDescription()).join('');
+      // We need to build the placeholders dynamically based on user input
+      const placeholders = this.computedResults.reduce((placeholder, result, index) => {
+        const description = this.sentences[index].getXAPIDescription();
+        const sentence = result.words
+          .map(() => {
+            return Dictation.FILL_IN_PLACEHOLDER;
+          })
+          .join(' '); // TODO: Use pattern to put punctuation right
+        return `${placeholder}${description}<p>${sentence}</p>`;
+      }, '');
 
       const definition = {};
       definition.name = {'en-US': this.getTitle()};
       definition.description = {'en-US': `${this.getDescription()}${placeholders}`};
       definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
-      definition.interactionType = 'long-fill-in';
+      definition.interactionType = 'fill-in';
 
       // Use extension to avoid exponentially growing solution space
       definition.extensions = definition.extensions || {};
       definition.extensions[Dictation.XAPI_CASE_SENSITIVITY] = true;
 
-      const sentencesVariations = this.buildCorrectSentencesVariations();
-      definition.extensions[Dictation.XAPI_ALTERNATIVE_EXTENSION] = sentencesVariations;
+      const gapVariations = this.buildCorrectGapVariations();
+      definition.extensions[Dictation.XAPI_ALTERNATIVE_EXTENSION] = gapVariations;
 
-      // Fallback CRP with only first sentence variation
-      definition.correctResponsesPattern = this.buildxAPICRP(sentencesVariations.slice());
+      // Fallback CRP with only first gap variation
+      definition.correctResponsesPattern = this.buildxAPICRP(gapVariations.slice());
 
       return definition;
     };
 
     /**
-     * Build all correct sentence variations.
-     *
-     * This may not be completely true, because we can't sensibly compile all
-     * possible answers for a sentence if we accept small mistakes.
-     *
-     * @return {object[]} Correct sentence variations.
+     * Build all correct gap variations.
+     * @return {object[]} Correct gap variations.
      */
-    this.buildCorrectSentencesVariations = () => {
-      let sentences = this.sentences.map(sentence => sentence.getCorrectText(true));
-
-      sentences = sentences.map(sentence => {
-        let variations = [''];
-        sentence.forEach(word => {
-          word = word.split('|');
-          variations = Util.buildCombinations(word, variations, ' ');
-        });
-        return variations;
-      });
-
-      return sentences;
+    this.buildCorrectGapVariations = () => {
+      return this.computedResults.reduce((gaps, sentence) => {
+        return gaps.concat(
+          sentence.words.map(word => {
+            return word.solution ? word.solution.split('|') : [];
+          })
+        );
+      }, []);
     };
 
     /**
-     * Build correct responses pattern from sentences.
+     * Build correct responses pattern from gaps.
      *
      * This may not be completely true, because we can't sensibly compile all
      * possible answers for a sentence if we accept small mistakes.
      *
-     * @param {object[]} sentencesVariations Sentences variations.
+     * @param {object[]} gapsVariations Sentences gaps.
      * @param {boolean} [complete=false] If true, will build complete CRP.
      * @return {object[]} Correct responses pattern.
      */
-    this.buildxAPICRP = (sentencesVariations, complete = false) => {
+    this.buildxAPICRP = (gapsVariations, complete = false) => {
       let crp = [''];
 
-      if (!sentencesVariations) {
+      if (!gapsVariations) {
         return crp;
       }
 
       if (!complete) {
-        crp = sentencesVariations
+        crp = gapsVariations
           .map(sentences => sentences[0])
           .join('[,]');
         crp = [`{case_matters=true}${crp}`];
       }
       else {
-        sentencesVariations.forEach(sentences => {
+        gapsVariations.forEach(sentences => {
           crp = Util.buildCombinations(sentences, crp, '[,]');
         });
 
@@ -562,5 +575,10 @@ Dictation.XAPI_REPORTING_VERSION_EXTENSION = 'https://h5p.org/x-api/h5p-reportin
 
 /** @constant {string} */
 Dictation.XAPI_REPORTING_VERSION = '1.1.0';
+
+/** @constant {string}
+ * Required to be added to xAPI object description for H5P reporting
+ */
+Dictation.FILL_IN_PLACEHOLDER = '__________';
 
 export default Dictation;
