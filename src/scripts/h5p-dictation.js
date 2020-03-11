@@ -574,7 +574,7 @@ Dictation.XAPI_CASE_SENSITIVITY = 'https://h5p.org/x-api/case-sensitivity';
 Dictation.XAPI_REPORTING_VERSION_EXTENSION = 'https://h5p.org/x-api/h5p-reporting-version';
 
 /** @constant {string} */
-Dictation.XAPI_REPORTING_VERSION = '1.1.0';
+Dictation.XAPI_REPORTING_VERSION = '1.0.0';
 
 /** @constant {string}
  * Required to be added to xAPI object description for H5P reporting
