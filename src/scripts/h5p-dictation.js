@@ -315,7 +315,7 @@ class Dictation extends H5P.Question {
      * Determine whether the task has been passed by the user.
      * @return {boolean} True if user passed or task is not scored.
      */
-    this.isPassed = () => this.mistakesTrimmed === 0;
+    this.isPassed = () => this.mistakesCapped === 0;
 
     /**
      * Check if Dictation has been submitted or input has been given.
