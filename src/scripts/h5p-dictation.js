@@ -71,7 +71,7 @@ class Dictation extends H5P.Question {
     }, params);
 
     // TODO: When other functionality needs a minor version bump, rename semantics variable in upgrade script
-    params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
+    this.params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
       true : params.behaviour.enableSolution;
 
     // Initialize
