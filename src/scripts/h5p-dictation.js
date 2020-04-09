@@ -71,7 +71,7 @@ class Dictation extends H5P.Question {
     }, params);
 
     // TODO: When other functionality needs a minor version bump, rename semantics variable in upgrade script
-    params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
+    this.params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
       true : params.behaviour.enableSolution;
 
     // Initialize
@@ -315,7 +315,7 @@ class Dictation extends H5P.Question {
      * Determine whether the task has been passed by the user.
      * @return {boolean} True if user passed or task is not scored.
      */
-    this.isPassed = () => this.mistakesTrimmed === 0;
+    this.isPassed = () => this.mistakesCapped === 0;
 
     /**
      * Check if Dictation has been submitted or input has been given.

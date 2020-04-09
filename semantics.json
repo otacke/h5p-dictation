@@ -107,7 +107,8 @@
           "type": "text",
           "label": "Text",
           "description": "Text that should be written. You can add alternate spellings to a word by adding a vertical line (|) behind followed by an alternative.",
-          "importance": "medium"
+          "importance": "medium",
+          "maxLength": 1000
         }
       ]
     }
