@@ -5,9 +5,6 @@ You can add audio samples containing a sentence for dictation and enter the corr
 
 Several options will allow you to control the exercise's difficulty. You can optionally add a second audio sample for a sentence that could hold a version spoken slowly. You can also set a limit for how often a sample can be played, define if punctuation should be relevant for scoring, and decide whether small mistakes like typing errors should be counted as no mistake, a full mistake, or just a half mistake.
 
-## Support me at patreon!
-If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
-
 ## Example
 !["Sample Content with H5P Dictation"](https://ibin.co/w800/4RMB2pHqVVqr.jpg "Sample Content with H5P Dictation")
 
