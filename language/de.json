@@ -91,8 +91,8 @@
           "description": "Wenn gewählt, wird die Zeichensetzung nicht für die Bepunktung berücksichtigt."
         },
         {
-          "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+          "label": "Kein-Fehler-Modus",
+          "description": "Wenn gewählt, werden nur korrekte Antworten zur Bepunktung herangezogen. Fehler werden nicht bestraft."
         },
         {
           "label": "Eigene visuelle Darstellung von kleinen Fehlern",
@@ -161,9 +161,9 @@
           "default": "Du hast insgesamt @total Fehler gemacht."
         },
         {
-          "label": "General feedback (zero mistakes mode)",
-          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
+          "label": "Allgemeine Rückmeldung (Kein-Fehler-Modus)",
+          "description": "Du kannst mehrere Platzhalter verwenden, die durch die eigentliche Anzahl ersetzt werden: @matches = richtige Worte, @total = Fehler insgesamt, @wrong = falsche Worte, @added = hinzugefügte Worte, @missing = fehlende Worte, @typo = kleine Fehler",
+          "default": "Du hast @total Wort/Wörter korrekt eingegeben und @typo kleinere Fehler gemacht."
         },
         {
           "label": "Beschriftung des \"Überprüfen\"-Buttons",
