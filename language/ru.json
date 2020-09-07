@@ -91,6 +91,10 @@
           "description": "В случае ошибок пунктуации баллы не снижаются."
         },
         {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+        },
+        {
           "label": "Сообщение об опечатке",
           "description": "При проверке, опечатки будут различаться от ошибок и отображены в обычном стиле."
         },
@@ -155,6 +159,11 @@
           "label": "Общая обратная связь",
           "description": "Вы можете использовать подсказки, которые будут заменены на соответствующую цифру: @matches = количество совпадений, @total = ошибок всего, @wrong = неправильные слова, @added = дополнительные слова, @missing = отсутствующие слова, @typo = опечатки",
           "default": "Ошибок: @total."
+        },
+        {
+          "label": "General feedback (zero mistakes mode)",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
           "label": "Текст для кнопки \"Проверить\" ",

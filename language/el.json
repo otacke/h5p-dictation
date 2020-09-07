@@ -91,6 +91,10 @@
           "description": "Αν επιλεγεί, τα σημεία στίξης δεν θα λαμβάνονται υπόψη κατά τη βαθμολόγηση."
         },
         {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+        },
+        {
           "label": "Ειδική προβολή τυπογραφικών λαθών",
           "description": "Αν επιλεγεί, τα τυπογραφικά λάθη θα προβάλλονται με τρόπο που θα τα διαχωρίζει από τα λάθη ορθογραφίας."
         },
@@ -155,6 +159,11 @@
           "label": "Συνολική ανατροφοδότηση",
           "description": "Μπορείτε να χρησιμοποιήσετε τις εξής μεταβλητές: @matches αριθμός ταυτοποιήσεων, @total συνολικά λάθη, @capped μέγιστα συνολικά λάθη, @wrong λάθος λέξεις, @added πρόσθετες λέξεις, @missing λέξεις που λείπουν, @typo σφάλματα πληκτρολόγησης",
           "default": "Έχεις κάνει συνολικά @total λάθη."
+        },
+        {
+          "label": "General feedback (zero mistakes mode)",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
           "label": "Ετικέτα κουμπιού \"Έλεγχος\"",

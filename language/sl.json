@@ -91,6 +91,10 @@
           "description": "V primeru onemogočene nastavitve se bo v stavkih točkoval tudi vnos ločil."
         },
         {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+        },
+        {
           "label": "Tipkarske napake prikaži ločeno",
           "description": "Omogočena nastavitev bo ločila med tipkarskimi in očitnimi napakami ter jih prikazala ločeno."
         },
@@ -155,6 +159,11 @@
           "label": "Splošna povratna informacija",
           "description": "Na voljo je več spremenljivk: @matches = število ujemanj, @total = število napak, @capped = število delnih napak, @wrong = napačnih besed, @added = dodatnih besed, @missing = manjkajočih besed, @typo = tipkarskih napak",
           "default": "Število napak: @total."
+        },
+        {
+          "label": "General feedback (zero mistakes mode)",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
           "label": "Besedilo za gumb \"Preveri\"",

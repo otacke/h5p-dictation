@@ -91,6 +91,10 @@
           "description": "Kui valitud, siis kirjavahemärke ei võeta hindamisel arvesse."
         },
         {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+        },
+        {
           "label": "Kohandatud trükiveakuva",
           "description": "Kui valitud, siis trükivigu näidatakse kohandatud, ilmselgetest vigadest eristavas stiilis."
         },
@@ -155,6 +159,11 @@
           "label": "Üldine tagasiside",
           "description": "Sa saad kasutada mitmeid kohahoidjaid, mida asendatakse vastavate numbritega: @matches = vastete arv, @total = vigu kokku, @capped = vigade ülempiir kokku, @wrong = valed sõnad, @added = täiendavad sõnad, @missing = puuduvad sõnad, @typo = trükivead",
           "default": "Sa oled teinud @total viga/vea."
+        },
+        {
+          "label": "General feedback (zero mistakes mode)",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
           "label": "Tekst \"Kontrolli\" nupule",

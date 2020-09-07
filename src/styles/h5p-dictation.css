@@ -202,6 +202,7 @@
 }
 /* This could be part of H5P.Question */
 
+.h5p-question-plus-one-half,
 .h5p-question-minus-one-half {
   position: absolute;
   width: 1.923076923em;
@@ -212,6 +213,9 @@
   z-index: 1;
   opacity: 1;
   transition: opacity 150ms linear, transform 150ms linear;
+}
+.h5p-question-plus-one-half {
+  background-image: url(../images/plus-one-half.svg);
 }
 .h5p-question-minus-one-half {
   background-image: url(../images/minus-one-half.svg);

@@ -23,6 +23,7 @@ class Dictation extends H5P.Question {
         enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
         enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
         ignorePunctuation: true,
+        zeroMistakeMode: false,
         overrideRTL: 'auto',
         tries: Infinity,
         triesAlternative: Infinity,
@@ -31,6 +32,7 @@ class Dictation extends H5P.Question {
       },
       l10n: {
         generalFeedback: 'You have made @total mistake(s).',
+        generalFeedbackZeroMistakesMode: 'You have entered @total word(s) correctly and @typo word(s) with minor mistakes.',
         checkAnswer: 'Check',
         tryAgain: 'Retry',
         showSolution: 'Show solution',
@@ -128,6 +130,7 @@ class Dictation extends H5P.Question {
             hasAlternatives: hasAlternatives,
             a11y: this.params.a11y,
             customTypoDisplay: this.params.behaviour.customTypoDisplay,
+            zeroMistakeMode: this.params.behaviour.zeroMistakeMode,
             typoFactor: this.params.behaviour.typoFactor,
             alternateSolution: this.params.behaviour.alternateSolution,
             overrideRTL: this.params.behaviour.overrideRTL,
@@ -278,14 +281,26 @@ class Dictation extends H5P.Question {
       // Number of mistakes shall not be higher than number of words.
       this.mistakesCapped = Math.min(mistakesTotal, this.maxMistakes);
 
-      const generalFeedback = (this.params.l10n.generalFeedback || '')
-        .replace('@added', scoreTotal.added)
-        .replace('@missing', scoreTotal.missing)
-        .replace('@wrong', scoreTotal.wrong)
-        .replace('@typo', scoreTotal.typo)
-        .replace('@matches', scoreTotal.match)
-        .replace('@total', mistakesTotal)
-        .replace('@capped', this.mistakesCapped);
+      let generalFeedback;
+      if (this.params.behaviour.zeroMistakeMode) {
+        generalFeedback = (this.params.l10n.generalFeedbackZeroMistakesMode || '')
+          .replace('@added', scoreTotal.added)
+          .replace('@missing', scoreTotal.missing)
+          .replace('@wrong', scoreTotal.wrong)
+          .replace('@typo', scoreTotal.typo)
+          .replace('@matches', scoreTotal.match)
+          .replace('@total', scoreTotal.match);
+      }
+      else {
+        generalFeedback = (this.params.l10n.generalFeedback || '')
+          .replace('@added', scoreTotal.added)
+          .replace('@missing', scoreTotal.missing)
+          .replace('@wrong', scoreTotal.wrong)
+          .replace('@typo', scoreTotal.typo)
+          .replace('@matches', scoreTotal.match)
+          .replace('@total', mistakesTotal)
+          .replace('@capped', this.mistakesCapped);
+      }
 
       const textScore = H5P.Question.determineOverallFeedback(
         this.params.overallFeedback, this.getScore() / this.getMaxScore());

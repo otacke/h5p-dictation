@@ -91,6 +91,10 @@
           "description": "Se marcada, os sinais de pontuação não serão considerados para pontuação."
         },
         {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+        },
+        {
           "label": "Exibição de erro de digitação personalizada",
           "description": "Se marcada, os erros de digitação serão exibidos em um estilo personalizado, distinguindo-os de erros claros."
         },
@@ -155,6 +159,11 @@
           "label": "Feedback geral",
           "description": "Você pode usar vários espaços reservados que serão substituídos pelo número adequado: @matches = número de correspondências, @total = total de erros, @capped = total de erros limitados, @wrong = palavras incorretas, @added = palavras adicionais, @missing = missing palavras, @typo = erros de digitação",
           "default": "Você cometeu @total erro(s)."
+        },
+        {
+          "label": "General feedback (zero mistakes mode)",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
           "label": "Texto para o botão \"Verificar\"",

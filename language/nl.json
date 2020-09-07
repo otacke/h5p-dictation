@@ -91,6 +91,10 @@
           "description": "Indien aangevinkt, worden de leestekens niet in aanmerking genomen bij het bepalen van de score."
         },
         {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+        },
+        {
           "label": "Custom typo display",
           "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
         },
@@ -155,6 +159,11 @@
           "label": "Algemene feedback",
           "description": "Je kunt gebruik maken van meerdere plaatshouders die worden vervangen door het juiste nummer: @matches = aantal overeenkomsten, @total = totaal aantal fouten, @capped = gemaximeerd totaal aantal fouten, @wrong = verkeerde woorden, @added = extra woorden, @missing = ontbrekende woorden, @typo = tikfouten",
           "default": "Je hebt @total fout(en) gemaakt."
+        },
+        {
+          "label": "General feedback (zero mistakes mode)",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
           "label": "Tekst voor de \"Controleer\" -knop",

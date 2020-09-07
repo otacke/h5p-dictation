@@ -203,6 +203,14 @@
         "default": true
       },
       {
+        "name": "zeroMistakeMode",
+        "type": "boolean",
+        "label": "Zero mistakes mode",
+        "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished.",
+        "default": false,
+        "optional": false
+      },
+      {
         "name": "customTypoDisplay",
         "type": "boolean",
         "label": "Custom typo display",
@@ -309,6 +317,14 @@
         "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
         "importance": "low",
         "default": "You have made @total mistake(s)."
+      },
+      {
+        "name": "generalFeedbackZeroMistakesMode",
+        "type": "text",
+        "label": "General feedback (zero mistakes mode)",
+        "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+        "importance": "low",
+        "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
       },
       {
         "name": "checkAnswer",

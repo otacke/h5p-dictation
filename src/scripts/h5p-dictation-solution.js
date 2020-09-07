@@ -264,19 +264,34 @@ class Solution {
    * @return {string} Aria score text.
    */
   createAriaScore(type) {
-    let ariaScore = -1;
+    let ariaScore;
 
-    if (type === 'match') {
+    if (this.params.zeroMistakeMode) {
       ariaScore = 0;
+
+      if (type === 'match') {
+        ariaScore = 1;
+      }
+      else if (type === 'typo') {
+        ariaScore = (1 - this.params.typoFactor);
+      }
     }
-    else if (type === 'typo') {
-      ariaScore = ariaScore * this.params.typoFactor;
+    else {
+      ariaScore = -1;
+
+      if (type === 'match') {
+        ariaScore = 0;
+      }
+      else if (type === 'typo') {
+        ariaScore = ariaScore * this.params.typoFactor;
+      }
     }
+
     if (ariaScore === 0) {
       ariaScore = '';
     }
     else {
-      const scoreUnit = (ariaScore === -1) ?
+      const scoreUnit = (ariaScore === -1 || ariaScore === 1) ?
         this.params.a11y.point :
         this.params.a11y.points;
       ariaScore = `${ariaScore} ${scoreUnit}.`;
@@ -311,15 +326,32 @@ class Solution {
     }
 
     // Score explanation
-    if (word.type !== 'match') {
-      const scoreExplanation = scorePoints.getElement(false);
-      if (word.type === 'typo' && this.params.typoFactor === 0.5) {
-        scoreExplanation.classList.remove('h5p-question-minus-one');
-        scoreExplanation.classList.add('h5p-question-minus-one-half');
+    if (this.params.zeroMistakeMode) {
+      const scoreExplanation = scorePoints.getElement(true);
+      if (word.type === 'match') {
+        wordDOM.appendChild(scoreExplanation);
       }
 
-      if (word.type !== 'typo' || this.params.typoFactor > 0) {
+      if (word.type === 'typo' && this.params.typoFactor === 0.5) {
+        scoreExplanation.classList.remove('h5p-question-minus-one');
+        scoreExplanation.classList.add('h5p-question-plus-one-half');
+      }
+
+      if (word.type === 'typo' && this.params.typoFactor < 1) {
         wordDOM.appendChild(scoreExplanation);
+      }
+    }
+    else {
+      const scoreExplanation = scorePoints.getElement(false);
+      if (word.type !== 'match') {
+        if (word.type === 'typo' && this.params.typoFactor === 0.5) {
+          scoreExplanation.classList.remove('h5p-question-minus-one');
+          scoreExplanation.classList.add('h5p-question-minus-one-half');
+        }
+
+        if (word.type !== 'typo' || this.params.typoFactor > 0) {
+          wordDOM.appendChild(scoreExplanation);
+        }
       }
     }
   }

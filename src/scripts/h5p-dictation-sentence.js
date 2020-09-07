@@ -115,6 +115,7 @@ class Sentence {
 
     this.solution = new Solution({
       alternateSolution: this.params.alternateSolution,
+      zeroMistakeMode: this.params.zeroMistakeMode,
       customTypoDisplay: this.params.customTypoDisplay,
       typoFactor: this.params.typoFactor,
       containsRTL: this.containsRTL,

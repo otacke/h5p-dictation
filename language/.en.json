@@ -91,6 +91,10 @@
           "description": "If checked, punctuation marks will not be considerd for scoring."
         },
         {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+        },
+        {
           "label": "Custom typo display",
           "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
         },
@@ -155,6 +159,11 @@
           "label": "General feedback",
           "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total mistakes, @capped = capped total mistakes, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
           "default": "You have made @total mistake(s)."
+        },
+        {
+          "label": "General feedback (zero mistakes mode)",
+          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
+          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
           "label": "Text for \"Check\" button",
