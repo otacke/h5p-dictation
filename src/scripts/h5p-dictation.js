@@ -280,7 +280,7 @@ class Dictation extends H5P.Question {
 
       // Number of mistakes shall not be higher than number of words.
       this.mistakesCapped = Math.min(mistakesTotal, this.maxMistakes);
-      this.correctTotal = scoreTotal.match;
+      this.correctTotal = scoreTotal.match + scoreTotal.typo * (1 - this.params.behaviour.typoFactor);
 
       let generalFeedback;
       if (this.params.behaviour.zeroMistakeMode) {
