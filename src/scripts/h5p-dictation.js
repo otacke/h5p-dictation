@@ -280,6 +280,7 @@ class Dictation extends H5P.Question {
 
       // Number of mistakes shall not be higher than number of words.
       this.mistakesCapped = Math.min(mistakesTotal, this.maxMistakes);
+      this.correctTotal = scoreTotal.match;
 
       let generalFeedback;
       if (this.params.behaviour.zeroMistakeMode) {
@@ -347,7 +348,7 @@ class Dictation extends H5P.Question {
      * @return {number} latest score.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
-    this.getScore = () => Math.round(this.maxMistakes - this.mistakesCapped);
+    this.getScore = () => (this.params.behaviour.zeroMistakeMode) ? Math.round(this.correctTotal) : Math.round(this.maxMistakes - this.mistakesCapped);
 
     /**
      * Get maximum possible score.
