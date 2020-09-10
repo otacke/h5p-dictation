@@ -632,7 +632,7 @@ class Sentence {
 
       // Make big clusters =>
       for (let pos = 0; pos < master.length - 1; pos++) {
-        if (slave[pos] === master[pos] && master[pos + 1] === undefined) {
+        if (slave[pos] === master[pos] && master[pos + 1] === undefined && slave[pos] !== slave[pos + 1]) {
           let moves = 0;
 
           while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
@@ -640,7 +640,7 @@ class Sentence {
           }
 
           if (pos + moves + 1 < master.length && slave.slice(pos + 1, pos + moves + 1).lastIndexOf(slave[pos]) !== -1) {
-            master[pos + moves + 1] = [master[pos]];
+            master[pos + moves + 1] = master[pos];
             master[pos] = undefined;
           }
         }
@@ -650,7 +650,7 @@ class Sentence {
       master.reverse();
       slave.reverse();
       for (let pos = 0; pos < master.length - 1; pos++) {
-        if (slave[pos] === master[pos] && master[pos + 1] === undefined) {
+        if (slave[pos] === master[pos] && master[pos + 1] === undefined && slave[pos] !== slave[pos + 1]) {
           let moves = 0;
 
           while (pos + moves + 1 < master.length && master[pos + moves + 1] === undefined) {
@@ -658,7 +658,7 @@ class Sentence {
           }
 
           if (pos + moves + 1 < master.length && slave.slice(pos + 1, pos + moves + 1).lastIndexOf(slave[pos]) !== -1) {
-            master[pos + moves + 1] = [master[pos]];
+            master[pos + moves + 1] = master[pos];
             master[pos] = undefined;
           }
         }
