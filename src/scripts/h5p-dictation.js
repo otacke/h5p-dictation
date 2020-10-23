@@ -72,6 +72,9 @@ class Dictation extends H5P.Question {
       }
     }, params);
 
+    const defaultLanguage = (contentData && contentData.metadata) ? contentData.metadata.defaultLanguage || 'en' : 'en';
+    this.languageTag = Util.formatLanguageCode(defaultLanguage);
+
     // TODO: When other functionality needs a minor version bump, rename semantics variable in upgrade script
     this.params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
       true : params.behaviour.enableSolution;
@@ -480,8 +483,10 @@ class Dictation extends H5P.Question {
       }, '');
 
       const definition = {};
-      definition.name = {'en-US': this.getTitle()};
-      definition.description = {'en-US': `${this.getDescription()}${placeholders}`};
+      definition.name = {};
+      definition.name[this.languageTag] = this.getTitle();
+      definition.description = {};
+      definition.description[this.languageTag] = `${this.getDescription()}${placeholders}`;
       definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
       definition.interactionType = 'fill-in';
 
