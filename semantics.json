@@ -364,6 +364,27 @@
     "importance": "low",
     "fields": [
       {
+        "name": "check",
+        "type": "text",
+        "label": "Assistive technology description for \"Check\" button",
+        "importance": "low",
+        "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+      },
+      {
+        "name": "showSolution",
+        "type": "text",
+        "label": "Assistive technology description for \"Show Solution\" button",
+        "importance": "low",
+        "default": "Show the solution. The task will be marked with its correct solution."
+      },
+      {
+        "name": "retry",
+        "type": "text",
+        "label": "Assistive technology description for \"Retry\" button",
+        "importance": "low",
+        "default": "Retry the task. Reset all responses and start the task over again."
+      },
+      {
         "name": "play",
         "type": "text",
         "label": "Play button",

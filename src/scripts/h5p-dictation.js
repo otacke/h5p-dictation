@@ -39,6 +39,9 @@ class Dictation extends H5P.Question {
         audioNotSupported: 'Your browser does not support this audio.'
       },
       a11y: {
+        check: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
+        showSolution: 'Show the solution. The task will be marked with its correct solution.',
+        retry: 'Retry the task. Reset all responses and start the task over again.',
         play: 'Play',
         playSlowly: 'Play slowly',
         triesLeft: 'Number of tries left: @number',
@@ -221,7 +224,9 @@ class Dictation extends H5P.Question {
       this.addButton('show-solution', this.params.l10n.showSolution, () => {
         this.showSolutions();
         this.hideButton('show-solution');
-      }, false, {}, {});
+      }, false, {
+        'aria-label': this.params.a11y.showSolution
+      }, {});
 
       // Check answer button
       this.addButton('check-answer', this.params.l10n.checkAnswer, () => {
@@ -231,13 +236,17 @@ class Dictation extends H5P.Question {
         if (this.params.behaviour.enableRetry && !this.isPassed()) {
           this.showButton('try-again');
         }
-      }, true, {}, {});
+      }, true, {
+        'aria-label': this.params.a11y.check
+      }, {});
 
       // Retry button
       this.addButton('try-again', this.params.l10n.tryAgain, () => {
         this.resetTask();
         this.sentences[0].focus();
-      }, false, {}, {});
+      }, false, {
+        'aria-label': this.params.a11y.retry
+      }, {});
     };
 
     /**
