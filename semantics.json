@@ -215,7 +215,7 @@
         "type": "boolean",
         "label": "Custom typo display",
         "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes.",
-        "default": true,
+        "default": false,
         "optional": false
       },
       {
@@ -237,7 +237,7 @@
               "label": "0 %"
             }
           ],
-        "default": "50"
+        "default": "100"
       },
       {
         "name": "alternateSolution",

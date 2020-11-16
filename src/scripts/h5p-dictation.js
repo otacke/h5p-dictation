@@ -27,8 +27,8 @@ class Dictation extends H5P.Question {
         overrideRTL: 'auto',
         tries: Infinity,
         triesAlternative: Infinity,
-        customTypoDisplay: true,
-        typoFactor: '50'
+        customTypoDisplay: false,
+        typoFactor: '100'
       },
       l10n: {
         generalFeedback: 'You have made @total mistake(s).',
