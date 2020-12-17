@@ -79,8 +79,10 @@ class Dictation extends H5P.Question {
     this.languageTag = Util.formatLanguageCode(defaultLanguage);
 
     // TODO: When other functionality needs a minor version bump, rename semantics variable in upgrade script
-    this.params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
-      true : params.behaviour.enableSolution;
+    if (typeof this.params.behaviour.enableSolutionsButton === 'undefined') {
+      this.params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
+        true : params.behaviour.enableSolution;
+    }
 
     // Initialize
     if (!params) {
