@@ -1,14 +1,14 @@
 {
   "semantics": [
     {
-      "label": "Medien",
+      "label": "Medium",
       "fields": [
         {
           "label": "Typ",
-          "description": "Medien, die wahlweise oberhalb der Aufgabe angezeigt werden."
+          "description": "Optionales Medium, das über der Frage dargestellt wird."
         },
         {
-          "label": "Bildzoom deaktivieren"
+          "label": "Bild-Zoom deaktivieren"
         }
       ]
     },
@@ -48,7 +48,7 @@
       }
     },
     {
-      "label": "Allgemeine Rückmeldung",
+      "label": "Gesamtrückmeldung",
       "fields": [
         {
           "widgets": [
