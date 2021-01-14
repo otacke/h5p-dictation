@@ -28,7 +28,11 @@ const testCasesStripPunctuation = [
   {string: "John's car broke.", result: "John's car broke"},
   {string: "¿Qué?", result: "Qué"},
   {string: "¿Qué? Hola!", result: "Qué Hola"},
-  {string: "¿Qué? Foo's Hola!", result: "Qué Foo's Hola"}
+  {string: "¿Qué? Foo's Hola!", result: "Qué Foo's Hola"},
+  {string: "a - b", result: "a b"},
+  {string: "a- b", result: "a b"},
+  {string: "a -b", result: "a b"},
+  {string: "a - b – c — d", result: "a b c d"}
 ];
 
 for (let i = 0; i < testCasesStripPunctuation.length; i++) {
