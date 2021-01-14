@@ -36,11 +36,14 @@ class Sentence {
     this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
 
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
-    this.solutionText = (!params.ignorePunctuation) ? this.solutionText : this.stripPunctuation(this.solutionText);
+    this.solutionText = (!params.ignorePunctuation) ? this.solutionText : Sentence.stripPunctuation(this.solutionText);
     this.containsRTL = (this.params.overrideRTL === 'auto') ?
       Util.containsRTLCharacters(this.solutionText) :
       this.params.overrideRTL === 'on';
-    this.mistakesMax = this.addSpaces(this.solutionText).split(' ').length;
+    this.mistakesMax = Sentence.addSpaces(
+      this.solutionText,
+      this.params.autosplit
+    ).split(' ').length;
 
     // DOM
     this.content = document.createElement('div');
@@ -210,7 +213,7 @@ class Sentence {
    * @return {string} Correct text.
    */
   getCorrectText(asArray = false) {
-    return (asArray) ? this.addSpaces(this.solutionText).split(' ') : this.solutionText;
+    return (asArray) ? Sentence.addSpaces(this.solutionText, this.params.autosplit).split(' ') : this.solutionText;
   }
 
   /**
@@ -317,20 +320,20 @@ class Sentence {
   /**
    * Add spaces between text and punctuation.
    * @param {string} text - Text to add spaces to.
-   @ @return {string} Text with spaces and symbols.
+   * @param {object} options - Options.
+   * @param {boolean} autosplit If true, automatically split respective symbols.
+   * @return {string} Text with spaces and symbols.
    */
-  addSpaces(text) {
-    // Space between punctuation and word
-    text = text.replace(
-      new RegExp(`(${Sentence.WORD}|^)(?=${Sentence.PUNCTUATION})`, 'g'),
-      `$1 `
-    );
-    text = text.replace(
-      new RegExp(`(${Sentence.PUNCTUATION})(?=${Sentence.WORD})`, 'g'),
-      `$1 `
-    );
+  static addSpaces(text, options = {}) {
+    // In a sentence like "John's car broke.", the . would be removed, but not the '
+    const wordThenPunctuation = new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION.replace("'", '')})( |$)`, 'g');
+    const punctuationThenWord = new RegExp(`( |^)(${Sentence.PUNCTUATION})(${Sentence.WORD}|$)`, 'g');
 
-    if (this.params.autosplit === true) {
+    text = text
+      .replace(wordThenPunctuation, `$1 $2 `)
+      .replace(punctuationThenWord, ` $2 $3`);
+
+    if (options.autosplit === true) {
       // Space between autosplit characters, e.g. Chinese Han symbols
       text = text.replace(
         new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.AUTOSPLIT})`, 'g'),
@@ -356,15 +359,30 @@ class Sentence {
    * @param {object[]|string} words - Words of a sentence.
    * @return {object[]|string} Words without punctuation.
    */
-  stripPunctuation(words) {
+  static stripPunctuation(words) {
     let wasString = false;
     if (typeof words === 'string') {
       wasString = true;
       words = [words];
     }
 
-    const punctuation = new RegExp(Sentence.PUNCTUATION, 'g');
-    words = words.map(word => word.replace(punctuation, ''));
+    /*
+     * Will remove all punctuation symbols that are not directly enclosed in characters
+     * In a sentence like "John's car broke.", the . would be removed, but not the '
+     */
+    const punctuationStart = new RegExp(`^${Sentence.PUNCTUATION}`);
+    const punctuationEnd = new RegExp(`${Sentence.PUNCTUATION}$`);
+    const punctuationBefore = new RegExp(` ${Sentence.PUNCTUATION}`, 'g');
+    // Special case: "The users' browser", keep the ' here
+    const punctuationAfter = new RegExp(`${Sentence.PUNCTUATION.replace("'", '')} `, 'g');
+
+    words = words.map(word => {
+      return word
+        .replace(punctuationStart, '')
+        .replace(punctuationEnd, '')
+        .replace(punctuationBefore, ' ')
+        .replace(punctuationAfter, ' ');
+    });
 
     return (wasString) ? words.toString() : words;
   }
@@ -375,15 +393,18 @@ class Sentence {
    */
   computeResults() {
     // Add spaces to correct text
-    const wordsSolution = this.addSpaces(this.getCorrectText()).split(' ');
+    const wordsSolution = Sentence.addSpaces(
+      this.getCorrectText(),
+      this.params.autosplit
+    ).split(' ');
 
     let input = this.getUserInput();
     if (this.params.ignorePunctuation) {
-      input = this.stripPunctuation(input);
+      input = Sentence.stripPunctuation(input);
     }
 
     // Add spaces to solution
-    const wordsInput = input.trim() === '' ? [] : this.addSpaces(input).split(' ');
+    const wordsInput = input.trim() === '' ? [] : Sentence.addSpaces(input, this.params.autosplit).split(' ');
 
     // Compute diff between correct solution and user input
     const aligned = this.alignWords(wordsSolution, wordsInput);
@@ -746,8 +767,8 @@ Sentence.TYPE_TYPO = 'typo';
 /** @constant {string} */
 Sentence.AUTOSPLIT = '[\u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF]';
 /** @constant {string} */
-Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u201C-\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6\u2026\u2027\u22EF\u3000-\u3002\u3008-\u3011\uFF01\uFF08\uFF09\uFF0C\uFF1A\uFF1B\uFF1F\uFF3B\uFF3D\uFE41\uFE42\uFE4F\uFF5E]';
+Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u00BF\u201C-\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6\u2026\u2027\u22EF\u3000-\u3002\u3008-\u3011\uFF01\uFF08\uFF09\uFF0C\uFF1A\uFF1B\uFF1F\uFF3B\uFF3D\uFE41\uFE42\uFE4F\uFF5E]';
 /** @constant {string} */
-Sentence.WORD = '\\w|[\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u060B\u060D-\u061E\u0620-\u08FF]';
+Sentence.WORD = '\\w|[\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\u017F\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u060B\u060D-\u061E\u0620-\u08FF]';
 
 export default Sentence;
