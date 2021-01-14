@@ -384,7 +384,7 @@ class Sentence {
         .replace(punctuationAfter, ' ');
     });
 
-    return (wasString) ? words.toString() : words;
+    return (wasString) ? words.toString().replace(/[ ]{2}/g, ' ') : words;
   }
 
   /**
