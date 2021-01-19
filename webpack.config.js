@@ -40,7 +40,7 @@ module.exports = {
         loader: 'babel-loader'
       },
       {
-        test: /\.css$/,
+        test: /\.(s[ac]ss|css)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -48,10 +48,11 @@ module.exports = {
               publicPath: ''
             }
           },
+          { loader: "css-loader" },
           {
-            loader: 'css-loader'
+            loader: "sass-loader"
           }
-        ],
+        ]
       },
       {
         test: /\.svg$/,
