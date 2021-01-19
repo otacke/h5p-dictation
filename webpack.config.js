@@ -1,23 +1,26 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const MinifyPlugin = require("babel-minify-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
-const isDev = (nodeEnv !== 'production');
+const isProd = (nodeEnv === 'production');
 
-const config = {
+module.exports = {
   mode: nodeEnv,
   optimization: {
+    minimize: isProd,
     minimizer: [
-      new OptimizeCSSAssetsPlugin({})
-    ]
+      new TerserPlugin({
+        terserOptions: {
+          compress:{
+            drop_console: true,
+          }
+        }
+      }),
+    ],
   },
   plugins: [
-    new MinifyPlugin({}, {
-      sourceMap: isDev
-    }),
     new MiniCssExtractPlugin({
       filename: 'h5p-dictation.css'
     })
@@ -33,37 +36,37 @@ const config = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['@babel/env']
-        }
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: ''
+            }
+          },
+          {
+            loader: 'css-loader'
+          }
         ],
       },
       {
         test: /\.svg$/,
         include: path.join(__dirname, 'src/images'),
-        loader: 'file-loader?name=images/[name].[ext]'
+        type: 'asset/resource'
       },
       {
         test: /\.woff$/,
         include: path.join(__dirname, 'src/fonts'),
-        loader: 'file-loader?name=fonts/[name].[ext]'
+        type: 'asset/resource'
       }
     ]
   },
   stats: {
     colors: true
-  }
+  },
+  devtool: (isProd) ? undefined : 'eval-cheap-module-source-map'
 };
-
-if (isDev) {
-  config.devtool = 'cheap-module-eval-source-map';
-}
-
-module.exports = config;
