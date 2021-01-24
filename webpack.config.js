@@ -55,7 +55,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.svg$/,
+        test: /\.svg|\.jpg|\.png$/,
         include: path.join(__dirname, 'src/images'),
         type: 'asset/resource'
       },
