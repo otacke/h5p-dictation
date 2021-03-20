@@ -88,7 +88,7 @@
         },
         {
           "label": "Ignore Punctuation marks",
-          "description": "If checked, punctuation marks will not be considerd for scoring."
+          "description": "If checked, punctuation marks will not be considered for scoring."
         },
         {
           "label": "Zero mistakes mode",
