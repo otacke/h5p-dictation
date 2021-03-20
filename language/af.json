@@ -4,8 +4,8 @@
       "label": "Media",
       "fields": [
         {
-          "label": "Tipe",
-          "description": "Verkieslike media om bo die vraag te vertoon."
+          "label": "Soort",
+          "description": "Opsionele media wat bo die vraag vertoon word."
         },
         {
           "label": "Deaktiveer zoomfunksie by prente"
@@ -56,13 +56,13 @@
               "label": "Verstek"
             }
           ],
-          "label": "Bepaal verstekterugvoer vir enige reeks tellings",
-          "description": "Kliek op die \"Voeg reeks by\" knoppie om so veel as moontlik reekse by te voeg. Byvoorbeeld: 0-20% Swak Punt, 21-91% Gemiddelde Punt, 91-100% Uitstekende Punt!",
+          "label": "Bepaal verstekterugvoer vir enige telreeks",
+          "description": "Klik die \"Voeg reeks by\" knoppie by om soveel reekse as wat jy nodig het by te voeg. Byvoorbeeld: 0-20% Swak telling, 21-91% Gemiddelde telling, 91-100% Uitstekende telling!",
           "entity": "reeks",
           "field": {
             "fields": [
               {
-                "label": "Telling reeks"
+                "label": "Telreeks"
               },
               {},
               {
@@ -76,7 +76,7 @@
     },
     {
       "label": "Gedragsinstellings",
-      "description": "Hierdie keuses laat jou beheer hoe die onderskeie take uitgevoer moet word.",
+      "description": "Hierdie keuses laat jou toe om te stel hoe die taak reageer.",
       "fields": [
         {
           "label": "Maksimum probeerslae",
