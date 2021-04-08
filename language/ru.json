@@ -87,6 +87,21 @@
           "description": "Ограничивает количество прослушиваний каждого предложения медленной скорости."
         },
         {
+          "label": "Shuffle sentences",
+          "description": "Define when the sentences should be shuffled.",
+          "options": [
+            {
+              "label": "Never"
+            },
+            {
+              "label": "Once when starting exercise"
+            },
+            {
+              "label": "On every try"
+            }
+          ]
+        },
+        {
           "label": "Игнорировать пунктуацию",
           "description": "В случае ошибок пунктуации баллы не снижаются."
         },

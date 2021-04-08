@@ -87,6 +87,21 @@
           "description": "Cela limite le nombre de fois que les exemples lents peuvent être écoutés pour chaque phrase."
         },
         {
+          "label": "Shuffle sentences",
+          "description": "Define when the sentences should be shuffled.",
+          "options": [
+            {
+              "label": "Never"
+            },
+            {
+              "label": "Once when starting exercise"
+            },
+            {
+              "label": "On every try"
+            }
+          ]
+        },
+        {
           "label": "Ignorer les signes de ponctuation",
           "description": "Si la case est cochée, les signes de ponctuation ne seront pas pris en compte pour la notation."
         },

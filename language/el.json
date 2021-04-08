@@ -87,6 +87,21 @@
           "description": "Θα περιορίσει το πόσες φορές μπορούν να ακουστούν τα δείγματα ήχου για κάθε πρόταση."
         },
         {
+          "label": "Shuffle sentences",
+          "description": "Define when the sentences should be shuffled.",
+          "options": [
+            {
+              "label": "Never"
+            },
+            {
+              "label": "Once when starting exercise"
+            },
+            {
+              "label": "On every try"
+            }
+          ]
+        },
+        {
           "label": "Αγνόηση σημείων στίξης",
           "description": "Αν επιλεγεί, τα σημεία στίξης δεν θα λαμβάνονται υπόψη κατά τη βαθμολόγηση."
         },

@@ -87,6 +87,21 @@
           "description": "Limiteerib, kui mitu korda iga lause aeglaseid heliklippe kuulata saab."
         },
         {
+          "label": "Shuffle sentences",
+          "description": "Define when the sentences should be shuffled.",
+          "options": [
+            {
+              "label": "Never"
+            },
+            {
+              "label": "Once when starting exercise"
+            },
+            {
+              "label": "On every try"
+            }
+          ]
+        },
+        {
           "label": "Eira kirjavahemärke",
           "description": "Kui valitud, siis kirjavahemärke ei võeta hindamisel arvesse."
         },

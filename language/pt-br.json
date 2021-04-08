@@ -87,6 +87,21 @@
           "description": "Limitará o número de vezes que as amostras lentas de cada sentença podem ser ouvidas."
         },
         {
+          "label": "Shuffle sentences",
+          "description": "Define when the sentences should be shuffled.",
+          "options": [
+            {
+              "label": "Never"
+            },
+            {
+              "label": "Once when starting exercise"
+            },
+            {
+              "label": "On every try"
+            }
+          ]
+        },
+        {
           "label": "Ignorar marcas de pontuação",
           "description": "Se marcada, os sinais de pontuação não serão considerados para pontuação."
         },

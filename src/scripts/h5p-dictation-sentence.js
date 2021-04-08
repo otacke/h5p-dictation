@@ -25,6 +25,7 @@ class Sentence {
    */
   constructor(index, params, id, previousState = {}) {
     this.index = index;
+    this.position = index + 1;
     this.params = params;
     this.contentId = id;
 
@@ -48,7 +49,7 @@ class Sentence {
     // DOM
     this.content = document.createElement('div');
     this.content.setAttribute('role', 'group');
-    this.content.setAttribute('aria-label', `${params.a11y.sentence} ${this.index}`);
+    this.content.setAttribute('aria-label', `${this.params.a11y.sentence} ${this.position}`);
     this.content.classList.add(Sentence.CONTENT_WRAPPER);
 
     // Description (optional)
@@ -178,6 +179,15 @@ class Sentence {
   }
 
   /**
+   * Set the sentence's position in DOM.
+   * @param {number} position Position.
+   */
+  setPosition(position) {
+    this.position = position;
+    this.content.setAttribute('aria-label', `${this.params.a11y.sentence} ${this.position}`);
+  }
+
+  /**
    * Set current text in InputField.
    * DOM is not created before to make cheating a little more difficult at least.
    * @param {object} result - Current DOM element with words.
@@ -222,6 +232,7 @@ class Sentence {
    */
   getCurrentState() {
     return {
+      index: this.index, // Original index in semantics
       userInput: this.getUserInput(),
       buttonPlayNormal: (this.buttonPlayNormal) ? this.buttonPlayNormal.getCurrentState() : undefined,
       buttonPlaySlow: (this.buttonPlaySlow) ? this.buttonPlaySlow.getCurrentState() : undefined

@@ -87,6 +87,21 @@
           "description": "Will limit the number of times the slow samples for each sentence can be listened to."
         },
         {
+          "label": "Shuffle sentences",
+          "description": "Define when the sentences should be shuffled.",
+          "options": [
+            {
+              "label": "Never"
+            },
+            {
+              "label": "Once when starting exercise"
+            },
+            {
+              "label": "On every try"
+            }
+          ]
+        },
+        {
           "label": "Ignore Punctuation marks",
           "description": "If checked, punctuation marks will not be considerd for scoring."
         },

@@ -87,6 +87,21 @@
           "description": "Begrenzt die Anzahl der Versuche, die man jeweils zum Anhören der langsamen Tonaufnahme hat."
         },
         {
+          "label": "Sätze mischen",
+          "description": "Lege fest, wann die Sätze gemischt werden sollten.",
+          "options": [
+            {
+              "label": "Nie"
+            },
+            {
+              "label": "Einmalig beim starten der Aufgabe"
+            },
+            {
+              "label": "Bei jedem Versuch"
+            }
+          ]
+        },
+        {
           "label": "Zeichensetzung ignorieren",
           "description": "Wenn gewählt, wird die Zeichensetzung nicht für die Bepunktung berücksichtigt."
         },

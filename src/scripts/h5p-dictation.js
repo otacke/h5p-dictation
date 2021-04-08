@@ -20,6 +20,7 @@ class Dictation extends H5P.Question {
       behaviour: {
         alternateSolution: 'first',
         autosplit: true,
+        shuffleSentences: 'never',
         enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
         enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
         ignorePunctuation: true,
@@ -117,42 +118,51 @@ class Dictation extends H5P.Question {
     // Proper format for percentage
     this.params.behaviour.typoFactor = parseInt(this.params.behaviour.typoFactor) / 100;
 
-    // Create sentence instances
+    // Strip incomplete sentences
     this.params.sentences = this.params.sentences
-      // Strip incomplete sentences
-      .filter(sentence => sentence.text !== undefined && sentence.sample !== undefined)
-      .forEach((sentence, index) => {
-        // Get previous state
-        const previousState = (this.contentData.previousState && this.contentData.previousState.length >= index + 1) ?
-          this.contentData.previousState[index] :
-          undefined;
+      .filter(sentence => sentence.text !== undefined && sentence.sample !== undefined);
 
-        this.sentences.push(new Sentence(
-          index + 1,
-          {
-            sentence: sentence,
-            audioNotSupported: this.params.l10n.audioNotSupported,
-            tries: this.params.behaviour.tries,
-            triesAlternative: this.params.behaviour.triesAlternative,
-            ignorePunctuation: this.params.behaviour.ignorePunctuation,
-            hasAlternatives: hasAlternatives,
-            a11y: this.params.a11y,
-            customTypoDisplay: this.params.behaviour.customTypoDisplay,
-            zeroMistakeMode: this.params.behaviour.zeroMistakeMode,
-            typoFactor: this.params.behaviour.typoFactor,
-            alternateSolution: this.params.behaviour.alternateSolution,
-            overrideRTL: this.params.behaviour.overrideRTL,
-            autosplit: this.params.behaviour.autosplit,
-            callbacks: {
-              playAudio: (button) => {
-                this.handlePlayAudio(button);
-              }
-            }
-          },
-          this.contentId,
-          previousState)
-        );
+    // Set previousState to empty defaults
+    this.previousSentenceStates = [...Array(this.params.sentences.length)];
+
+    // Retrieve previousState
+    if (this.contentData.previousState && Array.isArray(this.contentData.previousState)) {
+      this.contentData.previousState.forEach((state, index) => {
+        if (this.previousSentenceStates.length > index) {
+          state.index = state.index ?? index; // Accept previous states from former versions
+          this.previousSentenceStates[index] = state;
+        }
       });
+    }
+
+    // Create sentence instances
+    this.params.sentences = this.params.sentences.forEach((sentence, index) => {
+      this.sentences.push(new Sentence(
+        index,
+        {
+          sentence: sentence,
+          audioNotSupported: this.params.l10n.audioNotSupported,
+          tries: this.params.behaviour.tries,
+          triesAlternative: this.params.behaviour.triesAlternative,
+          ignorePunctuation: this.params.behaviour.ignorePunctuation,
+          hasAlternatives: hasAlternatives,
+          a11y: this.params.a11y,
+          customTypoDisplay: this.params.behaviour.customTypoDisplay,
+          zeroMistakeMode: this.params.behaviour.zeroMistakeMode,
+          typoFactor: this.params.behaviour.typoFactor,
+          alternateSolution: this.params.behaviour.alternateSolution,
+          overrideRTL: this.params.behaviour.overrideRTL,
+          autosplit: this.params.behaviour.autosplit,
+          callbacks: {
+            playAudio: (button) => {
+              this.handlePlayAudio(button);
+            }
+          }
+        },
+        this.contentId,
+        this.previousSentenceStates.filter(state => state?.index === index).shift()
+      ));
+    });
 
     // Maximum number of possible mistakes for all sentences
     this.maxMistakes = this.sentences
@@ -196,21 +206,28 @@ class Dictation extends H5P.Question {
       }
 
       // Build content
-      const content = document.createElement('div');
-      this.sentences.forEach(sentence => {
-        content.appendChild(sentence.getDOM());
-      });
+      this.content = document.createElement('div');
+      this.content.classList.add('h5p-dictation-sentences');
 
-      // No content was given
-      if (this.sentences.length === 0) {
-        const message = document.createElement('div');
-        message.classList.add('h5p-dictation-no-content');
-        message.innerHTML = 'I really need at least one sound sample and text for it :-)';
-        content.appendChild(message);
+      // Rebuild old order or shuffle sentences if required
+      if (this.contentData.previousState) {
+        const oldOrder = this.previousSentenceStates.reduce((result, current) => {
+          return [...result, current.index];
+        }, []);
+
+        this.reorderSentences(oldOrder);
+      }
+      else {
+        if (this.params.behaviour.shuffleSentences !== 'never') {
+          this.shuffleSentences();
+        }
       }
 
+      // Add sentences
+      this.addSentences();
+
       // Register content
-      this.setContent(content);
+      this.setContent(this.content);
 
       if (this.sentences.length !== 0) {
         // Register Buttons
@@ -249,6 +266,51 @@ class Dictation extends H5P.Question {
       }, false, {
         'aria-label': this.params.a11y.retry
       }, {});
+    };
+
+    /**
+     * Add sentences to DOM.
+     */
+    this.addSentences = () => {
+      // Clean previous sentences
+      this.content.innerHTML = '';
+
+      if (this.sentences.length === 0) {
+        // No content was given
+        const message = document.createElement('div');
+        message.classList.add('h5p-dictation-no-content');
+        message.innerHTML = 'I really need at least one sound sample and text for it :-)';
+        this.content.appendChild(message);
+      }
+      else {
+        // Sentences
+        this.sentences.forEach(sentence => {
+          this.content.appendChild(sentence.getDOM());
+        });
+      }
+    };
+
+    /**
+     * Shuffle sentences.
+     */
+    this.shuffleSentences = () => {
+      this.sentences = Util.shuffleArray(this.sentences);
+      this.sentences.forEach((sentence, index) => {
+        sentence.setPosition(index + 1);
+      });
+    };
+
+    /**
+     * Reorder sentences.
+     * @param {number[]} order Order.
+     */
+    this.reorderSentences = (order) => {
+      const reorderedSentences = [];
+      for (let i = 0; i < order.length; i++) {
+        reorderedSentences.push(this.sentences[order[i]]);
+      }
+
+      this.sentences = reorderedSentences;
     };
 
     /**
@@ -391,6 +453,12 @@ class Dictation extends H5P.Question {
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
      */
     this.resetTask = () => {
+      // Shuffle sentences if they should be
+      if (this.params.behaviour.shuffleSentences === 'onRetry') {
+        this.shuffleSentences();
+        this.addSentences();
+      }
+
       this.sentences.forEach(sentence => {
         sentence.reset();
         sentence.enable();

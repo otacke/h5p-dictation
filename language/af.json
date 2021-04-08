@@ -87,6 +87,21 @@
           "description": "Beperk die aantal kere wat daar na die stadige klankgreep vir elke sin geluister kan word."
         },
         {
+          "label": "Shuffle sentences",
+          "description": "Define when the sentences should be shuffled.",
+          "options": [
+            {
+              "label": "Never"
+            },
+            {
+              "label": "Once when starting exercise"
+            },
+            {
+              "label": "On every try"
+            }
+          ]
+        },
+        {
           "label": "Ignoreer leestekens",
           "description": "Indien gemerk, sal leestekens nie in aanmerking geneem vir punte nie."
         },

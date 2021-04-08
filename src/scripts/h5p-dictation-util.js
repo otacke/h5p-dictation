@@ -137,6 +137,23 @@ class Util {
 
     return languageCode;
   }
+
+  /**
+   * Shuffle array.
+   * @param {object[]} array Array.
+   * @return {object[]} Shuffled array.
+   */
+  static shuffleArray(array) {
+    let j, x, i;
+    for (i = array.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = array[i];
+      array[i] = array[j];
+      array[j] = x;
+    }
+
+    return array;
+  }  
 }
 
 // Regular expression configuration

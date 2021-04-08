@@ -87,6 +87,21 @@
           "description": "Omejitev možnega števila predvajanja upočasnjenega posnetka (za vsak stavek posebej)."
         },
         {
+          "label": "Shuffle sentences",
+          "description": "Define when the sentences should be shuffled.",
+          "options": [
+            {
+              "label": "Never"
+            },
+            {
+              "label": "Once when starting exercise"
+            },
+            {
+              "label": "On every try"
+            }
+          ]
+        },
+        {
           "label": "Ne upoštevaj ločil",
           "description": "V primeru onemogočene nastavitve se bo v stavkih točkoval tudi vnos ločil."
         },
