@@ -87,17 +87,17 @@
           "description": "Limitará el número de veces que pueden ser escuchadas las muestras lentas para cada oración."
         },
         {
-          "label": "Shuffle sentences",
-          "description": "Define when the sentences should be shuffled.",
+          "label": "Barajear oraciones",
+          "description": "Definir cuando las oraciones deberían de ser barajadas.",
           "options": [
             {
-              "label": "Never"
+              "label": "Nunca"
             },
             {
-              "label": "Once when starting exercise"
+              "label": "Una vez cuando inicie el ejercicio"
             },
             {
-              "label": "On every try"
+              "label": "En cada intento"
             }
           ]
         },
@@ -107,7 +107,7 @@
         },
         {
           "label": "Modo de cero errores",
-          "description": "Si se activa, solamente las respuestas correctas serán consideradas para puntaje. Los errores no serán castigados."
+          "description": "Si se activa, solamente las respuestas correctas serán consideradas para puntaje. Los errores no serán penalizados."
         },
         {
           "label": "Visualización de error tipográfico personalizada",
@@ -115,7 +115,7 @@
         },
         {
           "label": "Valor de errores tipográficos",
-          "description": "Determinar hasta que extensión los errores tipográficos (palabra con 3-9 caracteres: hasta 1 error, palabra con más de 9caracteres: hasta 2 errores) cuentan como un error real.",
+          "description": "Determinar hasta que extensión los errores tipográficos (palabra con 3-9 caracteres: hasta 1 error, palabra con más de 9 caracteres: hasta 2 errores) cuentan como un error real.",
           "options": [
             {
               "label": "100 %"
