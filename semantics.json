@@ -223,7 +223,7 @@
         "name": "ignorePunctuation",
         "type": "boolean",
         "label": "Ignore Punctuation marks",
-        "description": "If checked, punctuation marks will not be considerd for scoring.",
+        "description": "If checked, punctuation marks will not be considered for scoring.",
         "optional": false,
         "default": true
       },
