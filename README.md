@@ -29,6 +29,9 @@ npm run watch
 
 if you want to modify the code and want to get a fresh build built in the background.
 
+For more information on how to use those distribution files in H5P, please have a look at 
+https://youtu.be/xEgBJaRUBGg and the H5P developer guide at https://h5p.org/library-development.
+
 ## Ideas to think about ...
 - Do we need an option for different diff styles?
 - Automatic speed change? How to balance speed/pitch?
