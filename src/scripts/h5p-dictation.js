@@ -29,7 +29,8 @@ class Dictation extends H5P.Question {
         tries: Infinity,
         triesAlternative: Infinity,
         customTypoDisplay: false,
-        typoFactor: '100'
+        typoFactor: '100',
+        wordSeparator: ' '
       },
       l10n: {
         generalFeedback: 'You have made @total mistake(s).',
@@ -153,6 +154,7 @@ class Dictation extends H5P.Question {
           alternateSolution: this.params.behaviour.alternateSolution,
           overrideRTL: this.params.behaviour.overrideRTL,
           autosplit: this.params.behaviour.autosplit,
+          wordSeparator: this.params.behaviour.wordSeparator,
           callbacks: {
             playAudio: (button) => {
               this.handlePlayAudio(button);
