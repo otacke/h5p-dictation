@@ -277,6 +277,7 @@ class Sentence {
    */
   reset() {
     this.inputField.value = '';
+    this.oldValue = '';
 
     this.solution.reset();
 
