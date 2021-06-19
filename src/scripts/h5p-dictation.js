@@ -158,6 +158,9 @@ class Dictation extends H5P.Question {
           callbacks: {
             playAudio: (button) => {
               this.handlePlayAudio(button);
+            },
+            onInteracted: () => {
+              this.handleInteracted();
             }
           }
         },
@@ -253,7 +256,7 @@ class Dictation extends H5P.Question {
       this.addButton('check-answer', this.params.l10n.checkAnswer, () => {
         this.showEvaluation();
         this.isAnswered = true;
-        this.triggerXAPI();
+        this.triggerXAPIAnswered();
         if (this.params.behaviour.enableRetry && !this.isPassed()) {
           this.showButton('try-again');
         }
@@ -323,6 +326,13 @@ class Dictation extends H5P.Question {
       this.sentences.forEach(sentence => {
         sentence.pauseButtons(button);
       });
+    };
+
+    /**
+     * Handle user interacted
+     */
+    this.handleInteracted = () => {
+      this.triggerXAPI('interacted');
     };
 
     /**
@@ -492,7 +502,7 @@ class Dictation extends H5P.Question {
     /**
      * Trigger all necessary xAPI events after evaluation. Might become more.
      */
-    this.triggerXAPI = () => {
+    this.triggerXAPIAnswered = () => {
       this.trigger(this.getXAPIAnswerEvent());
     };
 

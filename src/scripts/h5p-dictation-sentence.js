@@ -36,6 +36,7 @@ class Sentence {
     this.params.sentence.description = (this.params.sentence.description || '').trim();
     this.params.callbacks = this.params.callbacks || {};
     this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
+    this.params.callbacks.onInteracted = this.params.callbacks.onInteracted || (() => {});
 
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
     this.solutionText = (!params.ignorePunctuation) ? this.solutionText : Sentence.stripPunctuation(this.solutionText);
@@ -73,7 +74,7 @@ class Sentence {
         a11y: params.a11y,
         callbacks: {
           playAudio: (button) => {
-            this.params.callbacks.playAudio(button);
+            this.handleButtonClicked(button);
           }
         }
       },
@@ -93,7 +94,7 @@ class Sentence {
           a11y: params.a11y,
           callbacks: {
             playAudio: (button) => {
-              this.params.callbacks.playAudio(button);
+              this.handleButtonClicked(button);
             }
           }
         },
@@ -115,9 +116,23 @@ class Sentence {
     this.inputField.setAttribute('autocapitalize', 'off');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
     this.inputField.classList.add(Sentence.INPUT_FIELD);
+
+    // Restore previous state
     if (previousState.userInput) {
       this.inputField.value = previousState.userInput;
+      this.oldValue = this.inputField.value || '';
     }
+    else {
+      this.oldValue = '';
+    }
+
+    // Add interacted listener
+    this.inputField.addEventListener('blur', () => {
+      if (this.oldValue !== this.inputField.value) {
+        this.params.callbacks.onInteracted();
+      }
+      this.oldValue = this.inputField.value;
+    });
 
     this.solution = new Solution({
       alternateSolution: this.params.alternateSolution,
@@ -264,6 +279,7 @@ class Sentence {
    */
   reset() {
     this.inputField.value = '';
+    this.oldValue = '';
 
     this.solution.reset();
 
@@ -319,6 +335,15 @@ class Sentence {
     if (this.buttonPlaySlow && this.buttonPlaySlow !== excludeButton) {
       this.buttonPlaySlow.pause();
     }
+  }
+
+  /**
+   * Handle button clicked.
+   * @param {Button} button Calling button.
+   */
+  handleButtonClicked(button) {
+    this.params.callbacks.playAudio(button);
+    this.params.callbacks.onInteracted();
   }
 
   /**
