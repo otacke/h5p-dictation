@@ -471,7 +471,7 @@ class Sentence {
     
     // In case our wordSeparator is not space, we add spaces between tokens
     if(' ' !== this.params.wordSeparator) {
-      wordsInput = wordsInput.map( (word,i) => i==wordsInput.length-1 ? word : word + ' ');
+      wordsInput = wordsInput.map( (word,i) => i==wordsInput.length-1 ? word : `${word} `);
     }
 
     // Compute diff between correct solution and user input
