@@ -455,15 +455,15 @@ class Sentence {
         alternatives.forEach(alternative => {
           alternative = alternative.trim();
           if(alternative.includes(' ')) {
-            const escapedAlternative = alternative.replaceAll(' ', Sentence.SPACE_ESCAPE);
-            input = input.replaceAll(alternative, escapedAlternative)
+            const escapedAlternative = alternative.replace(/ /g, Sentence.SPACE_ESCAPE);
+            input = input.replaceAll(new RegExp(alternative, 'g'), escapedAlternative)
           }
         });
       });
       
       // And then unescape spaces
-      input = input.replaceAll(" ", this.params.wordSeparator);
-      input = input.replaceAll(Sentence.SPACE_ESCAPE, ' ');
+      input = input.replace(/ /g, this.params.wordSeparator);
+      input = input.replaceAll(new RegExp(Sentence.SPACE_ESCAPE, g), ' ');
     }
 
     // Add spaces to solution and break in parts
