@@ -463,7 +463,7 @@ class Sentence {
       
       // And then unescape spaces
       input = input.replace(/ /g, this.params.wordSeparator);
-      input = input.replace(new RegExp(Sentence.SPACE_ESCAPE, g), ' ');
+      input = input.replace(new RegExp(Sentence.SPACE_ESCAPE, 'g'), ' ');
     }
 
     // Add spaces to solution and break in parts
