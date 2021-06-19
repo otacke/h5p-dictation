@@ -456,14 +456,14 @@ class Sentence {
           alternative = alternative.trim();
           if(alternative.includes(' ')) {
             const escapedAlternative = alternative.replace(/ /g, Sentence.SPACE_ESCAPE);
-            input = input.replaceAll(new RegExp(alternative, 'g'), escapedAlternative)
+            input = input.replace(new RegExp(alternative, 'g'), escapedAlternative)
           }
         });
       });
       
       // And then unescape spaces
       input = input.replace(/ /g, this.params.wordSeparator);
-      input = input.replaceAll(new RegExp(Sentence.SPACE_ESCAPE, g), ' ');
+      input = input.replace(new RegExp(Sentence.SPACE_ESCAPE, g), ' ');
     }
 
     // Add spaces to solution and break in parts
