@@ -454,7 +454,7 @@ class Sentence {
         
         alternatives.forEach(alternative => {
           alternative = alternative.trim();
-          if(alternative.includes(' ')) {
+          if(alternative.indexOf(' ') !== -1) {
             const escapedAlternative = alternative.replace(/ /g, Sentence.SPACE_ESCAPE);
             input = input.replace(new RegExp(alternative, 'g'), escapedAlternative)
           }
