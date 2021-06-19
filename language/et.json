@@ -106,9 +106,13 @@
           "description": "Kui valitud, siis kirjavahemärke ei võeta hindamisel arvesse."
         },
         {
-          "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished.",
+          "label": "Word separator",
+          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
           "default": " "
+        },
+        {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
         },
         {
           "label": "Kohandatud trükiveakuva",
@@ -116,7 +120,18 @@
         },
         {
           "label": "Trükivigade väärtused",
-          "description": "Määra, mis ulatuses trükivead (3-9 tähega sõna: kuni 1 viga, sõna rohkem kui 9 tähega: kuni 2 viga) loevad päris vigadena."
+          "description": "Määra, mis ulatuses trükivead (3-9 tähega sõna: kuni 1 viga, sõna rohkem kui 9 tähega: kuni 2 viga) loevad päris vigadena.",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ]
         },
         {
           "label": "Asenduslahenduste esitus",
@@ -150,22 +165,10 @@
         },
         {
           "label": "Karakterite poolitamine",
-          "description": "Aktiveeri, kui kindlat karakterid (nt Hiina Han karakterid) peaksid olema automaatselt eraldi sõnadeks poolitatud.",
-          "options": [
-            {
-              "label": "Automatic detection"
-            },
-            {
-              "label": "Right-to-left"
-            },
-            {
-              "label": "Left-to-right"
-            }
-          ]
+          "description": "Aktiveeri, kui kindlat karakterid (nt Hiina Han karakterid) peaksid olema automaatselt eraldi sõnadeks poolitatud."
         },
         {
-          "label": "Luba \"Proovi uuesti\"",
-          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+          "label": "Luba \"Proovi uuesti\""
         },
         {
           "label": "Luba \"Näita lahendust\" nupp"

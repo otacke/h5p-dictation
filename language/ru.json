@@ -106,9 +106,13 @@
           "description": "В случае ошибок пунктуации баллы не снижаются."
         },
         {
-          "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished.",
+          "label": "Word separator",
+          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
           "default": " "
+        },
+        {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
         },
         {
           "label": "Сообщение об опечатке",
@@ -116,7 +120,18 @@
         },
         {
           "label": "Количество опечаток",
-          "description": "Установите степень определения опечаток (слово 3-9 характеров: до 1 ошибка, слово с более чем 9 характеров: до 2 ошибок), который будут считаться ошибкой."
+          "description": "Установите степень определения опечаток (слово 3-9 характеров: до 1 ошибка, слово с более чем 9 характеров: до 2 ошибок), который будут считаться ошибкой.",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ]
         },
         {
           "label": "Презентация дополнительных решений",
@@ -150,22 +165,10 @@
         },
         {
           "label": "Разделить характеры",
-          "description": "Включите, если определённые характеры должны автоматически разделяться в отдельные слова.",
-          "options": [
-            {
-              "label": "Automatic detection"
-            },
-            {
-              "label": "Right-to-left"
-            },
-            {
-              "label": "Left-to-right"
-            }
-          ]
+          "description": "Включите, если определённые характеры должны автоматически разделяться в отдельные слова."
         },
         {
-          "label": "Разрешить \"Повторить\"",
-          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+          "label": "Разрешить \"Повторить\""
         },
         {
           "label": "Разрешить кнопку \"Показать решение\" "

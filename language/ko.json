@@ -106,9 +106,13 @@
           "description": "체크된 경우, 구두점은 점수를 매기는 것으로 간주되지 않습니다"
         },
         {
-          "label": "실수 제로 모드",
-          "description": "체크된 경우 정답만 채점을 위해 고려됩니다. 실수에 대해 벌점은 없습니다.",
+          "label": "Word separator",
+          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
           "default": " "
+        },
+        {
+          "label": "실수 제로 모드",
+          "description": "체크된 경우 정답만 채점을 위해 고려됩니다. 실수에 대해 벌점은 없습니다."
         },
         {
           "label": "사용자 정의 오타 표시",
@@ -116,7 +120,18 @@
         },
         {
           "label": "오타의 값",
-          "description": "타자 오류를 어느 정도(3-9자 단어: 최대 1개 실수, 9자 이상 단어: 최대 2개 실수)까지 실수로 간주할 지 결정합니다."
+          "description": "타자 오류를 어느 정도(3-9자 단어: 최대 1개 실수, 9자 이상 단어: 최대 2개 실수)까지 실수로 간주할 지 결정합니다.",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ]
         },
         {
           "label": "대안 답 제시",
@@ -150,22 +165,10 @@
         },
         {
           "label": "문자의 분할",
-          "description": "특정 문자(예: 한자)가 자동으로 별도의 단어로 분할되어야 하는 경우 활성화합니다.",
-          "options": [
-            {
-              "label": "Automatic detection"
-            },
-            {
-              "label": "Right-to-left"
-            },
-            {
-              "label": "Left-to-right"
-            }
-          ]
+          "description": "특정 문자(예: 한자)가 자동으로 별도의 단어로 분할되어야 하는 경우 활성화합니다."
         },
         {
-          "label": "\"Retry\" (재시도) 버튼 활성화",
-          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+          "label": "\"Retry\" (재시도) 버튼 활성화"
         },
         {
           "label": "\"Show solution\" (해답보이기) 버튼 활성화"

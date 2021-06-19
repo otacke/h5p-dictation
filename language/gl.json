@@ -106,9 +106,13 @@
           "description": "Se se marca esta opción, non se terán en conta os signos de puntuación para o resultado."
         },
         {
-          "label": "Modo cero erros",
-          "description": "Se se marca esta opción, so śe terán en conta as respostas para a puntuación. Non se penalizarán os erros.",
+          "label": "Word separator",
+          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
           "default": " "
+        },
+        {
+          "label": "Modo cero erros",
+          "description": "Se se marca esta opción, so śe terán en conta as respostas para a puntuación. Non se penalizarán os erros."
         },
         {
           "label": "Marcado de erros tipográficos personalizado",
@@ -116,7 +120,18 @@
         },
         {
           "label": "Valor dos erros tipográficos",
-          "description": "Determina ata que punto os erros tipográficos contarán como erro real (palabra con 3-9 caracteres: até 1 erro, palabra con máis de 9 caracteres: até 2 erros)."
+          "description": "Determina ata que punto os erros tipográficos contarán como erro real (palabra con 3-9 caracteres: até 1 erro, palabra con máis de 9 caracteres: até 2 erros).",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ]
         },
         {
           "label": "Presentación de solucións alternativas",
@@ -150,22 +165,10 @@
         },
         {
           "label": "División de caracteres",
-          "description": "Activa que os caracteres particulares se dividan en palabras separadas automaticamente (por exemplo, caracteres Han Chineses).",
-          "options": [
-            {
-              "label": "Automatic detection"
-            },
-            {
-              "label": "Right-to-left"
-            },
-            {
-              "label": "Left-to-right"
-            }
-          ]
+          "description": "Activa que os caracteres particulares se dividan en palabras separadas automaticamente (por exemplo, caracteres Han Chineses)."
         },
         {
-          "label": "Activar \"Reintentar\"",
-          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+          "label": "Activar \"Reintentar\""
         },
         {
           "label": "Activar botón \"Amosar solución\""

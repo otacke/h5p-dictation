@@ -106,9 +106,13 @@
           "description": "If checked, punctuation marks will not be considered for scoring."
         },
         {
-          "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished.",
+          "label": "Word separator",
+          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
           "default": " "
+        },
+        {
+          "label": "Zero mistakes mode",
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
         },
         {
           "label": "Custom typo display",
@@ -116,7 +120,18 @@
         },
         {
           "label": "Value of typos",
-          "description": "Determine to which extent typing errors (word with 3-9 characters: up to 1 mistake, word with more than 9 characters: up to 2 mistakes) count as a real mistake."
+          "description": "Determine to which extent typing errors (word with 3-9 characters: up to 1 mistake, word with more than 9 characters: up to 2 mistakes) count as a real mistake.",
+          "options": [
+            {
+              "label": "100 %"
+            },
+            {
+              "label": "50 %"
+            },
+            {
+              "label": "0 %"
+            }
+          ]
         },
         {
           "label": "Presentation of alternate solutions",
@@ -150,22 +165,10 @@
         },
         {
           "label": "Splitting of characters",
-          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically.",
-          "options": [
-            {
-              "label": "Automatic detection"
-            },
-            {
-              "label": "Right-to-left"
-            },
-            {
-              "label": "Left-to-right"
-            }
-          ]
+          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
         },
         {
-          "label": "Enable \"Retry\"",
-          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+          "label": "Enable \"Retry\""
         },
         {
           "label": "Enable \"Show solution\" button"
