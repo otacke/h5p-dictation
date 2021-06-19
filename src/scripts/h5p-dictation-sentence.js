@@ -240,7 +240,7 @@ class Sentence {
    * @return {string} Correct text.
    */
   getCorrectText(asArray = false) {
-    return (asArray) ? Sentence.addSpaces(this.solutionText, this.params.autosplit, this.params.wordSeparator).split(params.wordSeparator) : this.solutionText;
+    return (asArray) ? Sentence.addSpaces(this.solutionText, this.params.autosplit, this.params.wordSeparator).split(this.params.wordSeparator) : this.solutionText;
   }
 
   /**
@@ -362,9 +362,9 @@ class Sentence {
    * @param {boolean} autosplit If true, automatically split respective symbols.
    * @return {string} Text with spaces and symbols.
    */
-  static addSpaces(text, options = {}, wordSeparator=' ') {
+  static addSpaces(text, options = {}, wordSeparator = ' ') {
     // Users with a non default word separator will manually handle all spacing options
-    if(' ' !== wordSeparator)
+    if (' ' !== wordSeparator)
       return text;
 
     // In a sentence like "John's car broke.", the . would be removed, but not the '
@@ -447,16 +447,16 @@ class Sentence {
     }
 
     // In case our wordSeparator is not space, we must replace spaces by the separator
-    if(' ' !== this.params.wordSeparator) {
+    if (' ' !== this.params.wordSeparator) {
       // If we have one alternative with multiple words, we want to escape the spaces
       wordsSolution.forEach( solutionPart => {
         const alternatives = solutionPart.split('|');
         
         alternatives.forEach(alternative => {
           alternative = alternative.trim();
-          if(alternative.indexOf(' ') !== -1) {
+          if (alternative.indexOf(' ') !== -1) {
             const escapedAlternative = alternative.replace(/ /g, Sentence.SPACE_ESCAPE);
-            input = input.replace(new RegExp(alternative, 'g'), escapedAlternative)
+            input = input.replace(new RegExp(alternative, 'g'), escapedAlternative);
           }
         });
       });
@@ -467,11 +467,11 @@ class Sentence {
     }
 
     // Add spaces to solution and break in parts
-    let wordsInput = input.trim() === '' ? [] : Sentence.addSpaces(input, this.params.autosplit, this.params.wordSeparator).split(this.params.wordSeparator).filter(word => word.length>0);
+    let wordsInput = input.trim() === '' ? [] : Sentence.addSpaces(input, this.params.autosplit, this.params.wordSeparator).split(this.params.wordSeparator).filter(word => word.length > 0);
     
     // In case our wordSeparator is not space, we add spaces between tokens
-    if(' ' !== this.params.wordSeparator) {
-      wordsInput = wordsInput.map( (word,i) => i==wordsInput.length-1 ? word : `${word} `);
+    if (' ' !== this.params.wordSeparator) {
+      wordsInput = wordsInput.map( (word, i) => i === wordsInput.length - 1 ? word : `${word} `);
     }
 
     // Compute diff between correct solution and user input
