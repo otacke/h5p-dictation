@@ -107,7 +107,8 @@
         },
         {
           "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished.",
+          "default": " "
         },
         {
           "label": "Ειδική προβολή τυπογραφικών λαθών",
@@ -115,18 +116,7 @@
         },
         {
           "label": "Τυπογραφικά λάθη",
-          "description": "Προσδιορίστε σε ποιο βαθμό τα σφάλματα πληκτρολόγησης (λέξη με 3-9 χαρακτήρες: μέχρι 1 λάθος, λέξη με περισσότερους από 9 χαρακτήρες: μέχρι 2 λάθη) θεωρούνται λάθη ορθογραφίας.",
-          "options": [
-            {
-              "label": "100%"
-            },
-            {
-              "label": "50%"
-            },
-            {
-              "label": "0%"
-            }
-          ]
+          "description": "Προσδιορίστε σε ποιο βαθμό τα σφάλματα πληκτρολόγησης (λέξη με 3-9 χαρακτήρες: μέχρι 1 λάθος, λέξη με περισσότερους από 9 χαρακτήρες: μέχρι 2 λάθη) θεωρούνται λάθη ορθογραφίας."
         },
         {
           "label": "Παρουσίαση εναλλακτικών ορθογραφιών στη λύση",
@@ -137,6 +127,9 @@
             },
             {
               "label": "Παρουσίαση όλων των εναλλακτικών ορθογραφιών"
+            },
+            {
+              "label": "0 %"
             }
           ]
         },
@@ -157,13 +150,28 @@
         },
         {
           "label": "Διαχωρισμός χαρακτήρων",
-          "description": "Ενεργοποιήστε τον στην περίπτωση που συγκεκριμένοι χαρακτήρες (π.χ. κινέζικοι χαρακτήρες Χαν) πρέπει να διαχωρίζονται αυτόματα σε ξεχωριστές λέξεις."
+          "description": "Ενεργοποιήστε τον στην περίπτωση που συγκεκριμένοι χαρακτήρες (π.χ. κινέζικοι χαρακτήρες Χαν) πρέπει να διαχωρίζονται αυτόματα σε ξεχωριστές λέξεις.",
+          "options": [
+            {
+              "label": "Automatic detection"
+            },
+            {
+              "label": "Right-to-left"
+            },
+            {
+              "label": "Left-to-right"
+            }
+          ]
         },
         {
-          "label": "Ενεργοποίηση κουμπιού \"Επανάληψη\""
+          "label": "Ενεργοποίηση κουμπιού \"Επανάληψη\"",
+          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
         },
         {
           "label": "Ενεργοποίηση κουμπιού \"Προβολή λύσης\" "
+        },
+        {
+          "label": "Enable \"Show solution\" button"
         }
       ]
     },

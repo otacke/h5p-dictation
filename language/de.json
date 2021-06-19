@@ -107,7 +107,8 @@
         },
         {
           "label": "Kein-Fehler-Modus",
-          "description": "Wenn gewählt, werden nur korrekte Antworten zur Bepunktung herangezogen. Fehler werden nicht bestraft."
+          "description": "Wenn gewählt, werden nur korrekte Antworten zur Bepunktung herangezogen. Fehler werden nicht bestraft.",
+          "default": " "
         },
         {
           "label": "Eigene visuelle Darstellung von kleinen Fehlern",
@@ -115,18 +116,7 @@
         },
         {
           "label": "Wert von kleinen Fehlern",
-          "description": "Lege fest, in welchem Maße kleine Fehler (Wort mit 3-9 Buchstaben: bis zu 1 Fehler, Wort mit mehr als 9 Buchstaben: bis zu 2 Fehler) berücksichtigt werden.",
-          "options": [
-            {
-              "label": "100 %"
-            },
-            {
-              "label": "50 %"
-            },
-            {
-              "label": "0 %"
-            }
-          ]
+          "description": "Lege fest, in welchem Maße kleine Fehler (Wort mit 3-9 Buchstaben: bis zu 1 Fehler, Wort mit mehr als 9 Buchstaben: bis zu 2 Fehler) berücksichtigt werden."
         },
         {
           "label": "Darstellung von alternativen Antworten",
@@ -137,6 +127,9 @@
             },
             {
               "label": "Zeige alle Alternativen"
+            },
+            {
+              "label": "0 %"
             }
           ]
         },
@@ -157,13 +150,28 @@
         },
         {
           "label": "Trennen von Schriftzeichen",
-          "description": "Aktiviere diese Option, falls bestimmte Zeichen (z. B. chinesische Schriftzeichen) automatisch in einzelne Wörter getrennt werden sollen."
+          "description": "Aktiviere diese Option, falls bestimmte Zeichen (z. B. chinesische Schriftzeichen) automatisch in einzelne Wörter getrennt werden sollen.",
+          "options": [
+            {
+              "label": "Automatic detection"
+            },
+            {
+              "label": "Right-to-left"
+            },
+            {
+              "label": "Left-to-right"
+            }
+          ]
         },
         {
-          "label": "\"Wiederholen\" aktivieren"
+          "label": "\"Wiederholen\" aktivieren",
+          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
         },
         {
           "label": "\"Lösung anzeigen\" ermöglichen"
+        },
+        {
+          "label": "Enable \"Show solution\" button"
         }
       ]
     },

@@ -107,7 +107,8 @@
         },
         {
           "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished.",
+          "default": " "
         },
         {
           "label": "Exibição de erro de digitação personalizada",
@@ -115,18 +116,7 @@
         },
         {
           "label": "Valor dos erros de digitação",
-          "description": "Determine em que medida os erros de digitação (palavra com 3-9 caracteres: até 1 erro, palavra com mais de 9 caracteres: até 2 erros) contam como um erro real.",
-          "options": [
-            {
-              "label": "100 %"
-            },
-            {
-              "label": "50 %"
-            },
-            {
-              "label": "0 %"
-            }
-          ]
+          "description": "Determine em que medida os erros de digitação (palavra com 3-9 caracteres: até 1 erro, palavra com mais de 9 caracteres: até 2 erros) contam como um erro real."
         },
         {
           "label": "Apresentação de soluções alternativas",
@@ -137,6 +127,9 @@
             },
             {
               "label": "Mostrar todas as alternativas"
+            },
+            {
+              "label": "0 %"
             }
           ]
         },
@@ -157,13 +150,28 @@
         },
         {
           "label": "Divisão de caracteres",
-          "description": "Ative se caracteres específicos (por exemplo, caracteres Han chineses) devem ser divididos em palavras separadas automaticamente."
+          "description": "Ative se caracteres específicos (por exemplo, caracteres Han chineses) devem ser divididos em palavras separadas automaticamente.",
+          "options": [
+            {
+              "label": "Automatic detection"
+            },
+            {
+              "label": "Right-to-left"
+            },
+            {
+              "label": "Left-to-right"
+            }
+          ]
         },
         {
-          "label": "Ativar \"Repetir\""
+          "label": "Ativar \"Repetir\"",
+          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
         },
         {
           "label": "Ativar o botão \"Mostrar solução\""
+        },
+        {
+          "label": "Enable \"Show solution\" button"
         }
       ]
     },

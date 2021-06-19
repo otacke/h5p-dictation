@@ -107,7 +107,8 @@
         },
         {
           "label": "Geen foute modus",
-          "description": "Indien gemerk, sal net regte antwoorde vir punte in aanmerking geneem word. Foute sal nie gepenaliseer word nie."
+          "description": "Indien gemerk, sal net regte antwoorde vir punte in aanmerking geneem word. Foute sal nie gepenaliseer word nie.",
+          "default": " "
         },
         {
           "label": "Verstek tikfoutvaansig",
@@ -115,18 +116,7 @@
         },
         {
           "label": "Waarde van tikfoute",
-          "description": "Bepaal tot watter mate tikfoute (woorde met 3-9 karakters: tot en met 1 fout, woorde met meer as nege karakters: tot en met 2 foute) tel as egte foute.",
-          "options": [
-            {
-              "label": "100 %"
-            },
-            {
-              "label": "50 %"
-            },
-            {
-              "label": "0 %"
-            }
-          ]
+          "description": "Bepaal tot watter mate tikfoute (woorde met 3-9 karakters: tot en met 1 fout, woorde met meer as nege karakters: tot en met 2 foute) tel as egte foute."
         },
         {
           "label": "Aanbieding van alternatiewe oplossings",
@@ -137,6 +127,9 @@
             },
             {
               "label": "Wys alle alternatiewe"
+            },
+            {
+              "label": "0 %"
             }
           ]
         },
@@ -157,13 +150,28 @@
         },
         {
           "label": "Skeiding van karakters",
-          "description": "Aktiveer indien spesifieke karakters (b.v. Sjinese Han karakters) outomaties in verskillende woorde verdeel moet word."
+          "description": "Aktiveer indien spesifieke karakters (b.v. Sjinese Han karakters) outomaties in verskillende woorde verdeel moet word.",
+          "options": [
+            {
+              "label": "Automatic detection"
+            },
+            {
+              "label": "Right-to-left"
+            },
+            {
+              "label": "Left-to-right"
+            }
+          ]
         },
         {
-          "label": "Aktiveer \"Probeer weer\""
+          "label": "Aktiveer \"Probeer weer\"",
+          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
         },
         {
           "label": "Aktiveer \"Wys antwoord\" knoppie"
+        },
+        {
+          "label": "Enable \"Show solution\" button"
         }
       ]
     },

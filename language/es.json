@@ -107,7 +107,8 @@
         },
         {
           "label": "Modo de cero errores",
-          "description": "Si se activa, solamente las respuestas correctas serán consideradas para puntaje. Los errores no serán penalizados."
+          "description": "Si se activa, solamente las respuestas correctas serán consideradas para puntaje. Los errores no serán penalizados.",
+          "default": " "
         },
         {
           "label": "Visualización personalizada de error tipográfico",
@@ -115,18 +116,7 @@
         },
         {
           "label": "Valor de errores tipográficos",
-          "description": "Determinar en que medida los errores tipográficos (palabra con 3-9 caracteres: hasta 1 error, palabra con más de 9 caracteres hasta 2 errores) cuentan como un error real.",
-          "options": [
-            {
-              "label": "100 %"
-            },
-            {
-              "label": "50 %"
-            },
-            {
-              "label": "0 %"
-            }
-          ]
+          "description": "Determinar en que medida los errores tipográficos (palabra con 3-9 caracteres: hasta 1 error, palabra con más de 9 caracteres hasta 2 errores) cuentan como un error real."
         },
         {
           "label": "Presentación de soluciones alternas",
@@ -137,6 +127,9 @@
             },
             {
               "label": "Mostrar todas las alternativas"
+            },
+            {
+              "label": "0 %"
             }
           ]
         },
@@ -157,13 +150,28 @@
         },
         {
           "label": "División de caracteres",
-          "description": "Activar si caracteres particulares (como por ejemplo caracteres Han chinos) deberían ser divididos en palabras separadas automáticamente."
+          "description": "Activar si caracteres particulares (como por ejemplo caracteres Han chinos) deberían ser divididos en palabras separadas automáticamente.",
+          "options": [
+            {
+              "label": "Automatic detection"
+            },
+            {
+              "label": "Right-to-left"
+            },
+            {
+              "label": "Left-to-right"
+            }
+          ]
         },
         {
-          "label": "Habilitar \"Reintentar\""
+          "label": "Habilitar \"Reintentar\"",
+          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
         },
         {
           "label": "Habilitar botón \"Mostrar solución\""
+        },
+        {
+          "label": "Enable \"Show solution\" button"
         }
       ]
     },

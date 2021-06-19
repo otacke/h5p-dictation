@@ -107,7 +107,8 @@
         },
         {
           "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished.",
+          "default": " "
         },
         {
           "label": "Custom typo display",
@@ -115,18 +116,7 @@
         },
         {
           "label": "Value of typos",
-          "description": "Déterminez dans quelle mesure les erreurs de frappe (mot de 3 à 9 caractères : jusqu'à 1 erreur, mot de plus de 9 caractères : jusqu'à 2 erreurs) comptent comme une erreur réelle.",
-          "options": [
-            {
-              "label": "100 %"
-            },
-            {
-              "label": "50 %"
-            },
-            {
-              "label": "0 %"
-            }
-          ]
+          "description": "Déterminez dans quelle mesure les erreurs de frappe (mot de 3 à 9 caractères : jusqu'à 1 erreur, mot de plus de 9 caractères : jusqu'à 2 erreurs) comptent comme une erreur réelle."
         },
         {
           "label": "Presentation of alternate solutions",
@@ -137,6 +127,9 @@
             },
             {
               "label": "Show all alternatives"
+            },
+            {
+              "label": "0 %"
             }
           ]
         },
@@ -157,13 +150,28 @@
         },
         {
           "label": "Splitting of characters",
+          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically.",
+          "options": [
+            {
+              "label": "Automatic detection"
+            },
+            {
+              "label": "Right-to-left"
+            },
+            {
+              "label": "Left-to-right"
+            }
+          ]
+        },
+        {
+          "label": "Activer \"Encore une fois\" bouton",
           "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
         },
         {
-          "label": "Activer \"Encore une fois\" bouton"
+          "label": "Activer \"Montrer la solution\" bouton"
         },
         {
-          "label": "Activer \"Montrer la solution\" bouton"
+          "label": "Enable \"Show solution\" button"
         }
       ]
     },
