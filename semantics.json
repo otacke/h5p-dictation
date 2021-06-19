@@ -183,14 +183,6 @@
     "description": "These options will let you control how the task behaves.",
     "fields": [
       {
-        "name": "wordSeparator",
-        "type": "text",
-        "label": "Word separator",
-        "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-        "optional": false,
-        "default": " "
-      },
-      {
         "name": "tries",
         "type": "number",
         "label": "Maximum tries",
@@ -234,6 +226,15 @@
         "description": "If checked, punctuation marks will not be considered for scoring.",
         "optional": false,
         "default": true
+      },
+      {
+        "name": "wordSeparator",
+        "type": "text",
+        "label": "Word separator",
+        "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+        "optional": false,
+        "default": " ",
+        "importance": "low"
       },
       {
         "name": "zeroMistakeMode",
