@@ -142,9 +142,6 @@
             },
             {
               "label": "Amosar todas as alternativas"
-            },
-            {
-              "label": "0 %"
             }
           ]
         },
@@ -172,9 +169,6 @@
         },
         {
           "label": "Activar botón \"Amosar solución\""
-        },
-        {
-          "label": "Enable \"Show solution\" button"
         }
       ]
     },

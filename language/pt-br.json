@@ -142,9 +142,6 @@
             },
             {
               "label": "Mostrar todas as alternativas"
-            },
-            {
-              "label": "0 %"
             }
           ]
         },
@@ -172,9 +169,6 @@
         },
         {
           "label": "Ativar o botão \"Mostrar solução\""
-        },
-        {
-          "label": "Enable \"Show solution\" button"
         }
       ]
     },

@@ -142,9 +142,6 @@
             },
             {
               "label": "Prikaži vse nadomestne besede"
-            },
-            {
-              "label": "0 %"
             }
           ]
         },
@@ -172,9 +169,6 @@
         },
         {
           "label": "Omogoči gumb \"Prikaži rešitev\""
-        },
-        {
-          "label": "Enable \"Show solution\" button"
         }
       ]
     },

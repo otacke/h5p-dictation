@@ -142,9 +142,6 @@
             },
             {
               "label": "Show all alternatives"
-            },
-            {
-              "label": "0 %"
             }
           ]
         },
@@ -172,9 +169,6 @@
         },
         {
           "label": "Schakel \"Oplossing\" in"
-        },
-        {
-          "label": "Enable \"Show solution\" button"
         }
       ]
     },

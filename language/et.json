@@ -142,9 +142,6 @@
             },
             {
               "label": "Näita kõiki asendusi"
-            },
-            {
-              "label": "0 %"
             }
           ]
         },
@@ -172,9 +169,6 @@
         },
         {
           "label": "Luba \"Näita lahendust\" nupp"
-        },
-        {
-          "label": "Enable \"Show solution\" button"
         }
       ]
     },

@@ -142,9 +142,6 @@
             },
             {
               "label": "Wys alle alternatiewe"
-            },
-            {
-              "label": "0 %"
             }
           ]
         },
@@ -172,9 +169,6 @@
         },
         {
           "label": "Aktiveer \"Wys antwoord\" knoppie"
-        },
-        {
-          "label": "Enable \"Show solution\" button"
         }
       ]
     },

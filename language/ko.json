@@ -142,9 +142,6 @@
             },
             {
               "label": "모든 대안 표시"
-            },
-            {
-              "label": "0 %"
             }
           ]
         },
@@ -172,9 +169,6 @@
         },
         {
           "label": "\"Show solution\" (해답보이기) 버튼 활성화"
-        },
-        {
-          "label": "Enable \"Show solution\" button"
         }
       ]
     },
