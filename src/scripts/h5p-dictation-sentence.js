@@ -43,10 +43,14 @@ class Sentence {
     this.containsRTL = (this.params.overrideRTL === 'auto') ?
       Util.containsRTLCharacters(this.solutionText) :
       this.params.overrideRTL === 'on';
+
+    // Compute maximum possible mistakes
     this.mistakesMax = Sentence.addSpaces(
       this.solutionText,
-      {autosplit: this.params.autosplit},
-      this.params.wordSeparator
+      {
+        autosplit: this.params.autosplit,
+        wordSeparator: this.params.wordSeparator
+      }
     ).split(params.wordSeparator).length;
 
     // DOM
@@ -242,8 +246,10 @@ class Sentence {
   getCorrectText(asArray = false) {
     return (asArray) ? Sentence.addSpaces(
       this.solutionText,
-      {autosplit: this.params.autosplit},
-      this.params.wordSeparator
+      {
+        autosplit: this.params.autosplit,
+        wordSeparator: this.params.wordSeparator
+      }
     ).split(this.params.wordSeparator) : this.solutionText;
   }
 
@@ -361,16 +367,17 @@ class Sentence {
 
   /**
    * Add spaces between text and punctuation.
-   * @param {string} text - Text to add spaces to.
-   * @param {object} options - Options.
+   * @param {string} text Text to add spaces to.
+   * @param {object} [options] Options.
    * @param {boolean} [options.autosplit=true] If true, automatically split respective symbols.
-   * @return {string} Text with spaces and symbols.
+   * @return {string} [options.wordSeparator=' '] Text with spaces and symbols.
    */
-  static addSpaces(text, options = {}, wordSeparator = ' ') {
+  static addSpaces(text, options = {}) {
     options.autosplit = (typeof options.autosplit !== 'boolean') ? true : options.autosplit;
+    options.wordSeparator = options.wordSeparator || ' ';
 
     // Users with a non default word separator will manually handle all spacing options
-    if (' ' !== wordSeparator)
+    if (' ' !== options.wordSeparator)
       return text;
 
     // In a sentence like "John's car broke.", the . would be removed, but not the '
@@ -443,8 +450,10 @@ class Sentence {
     // Add spaces to correct text
     const wordsSolution = Sentence.addSpaces(
       this.getCorrectText(),
-      {autosplit: this.params.autosplit},
-      this.params.wordSeparator
+      {
+        autosplit: this.params.autosplit,
+        wordSeparator: this.params.wordSeparator
+      },
     ).split(this.params.wordSeparator);
 
     let input = this.getUserInput();
@@ -475,8 +484,10 @@ class Sentence {
     // Add spaces to solution and break in parts
     let wordsInput = input.trim() === '' ? [] : Sentence.addSpaces(
       input,
-      {autosplit: this.params.autosplit},
-      this.params.wordSeparator
+      {
+        autosplit: this.params.autosplit,
+        wordSeparator: this.params.wordSeparator
+      },
     ).split(this.params.wordSeparator).filter(word => word.length > 0);
 
     // In case our wordSeparator is not space, we add spaces between tokens
