@@ -106,6 +106,11 @@
           "description": "Indien aangevinkt, worden de leestekens niet in aanmerking genomen bij het bepalen van de score."
         },
         {
+          "label": "Word separator",
+          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+          "default": " "
+        },
+        {
           "label": "Zero mistakes mode",
           "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
         },
@@ -137,6 +142,9 @@
             },
             {
               "label": "Show all alternatives"
+            },
+            {
+              "label": "0 %"
             }
           ]
         },
@@ -164,6 +172,9 @@
         },
         {
           "label": "Schakel \"Oplossing\" in"
+        },
+        {
+          "label": "Enable \"Show solution\" button"
         }
       ]
     },

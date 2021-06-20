@@ -17,6 +17,7 @@ class Sentence {
    * @param {string} params.sentence.sampleAlternatives - Path to alternative sound sample.
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
    * @param {string} params.alternateSolution - Mode to display alternate solutions.
+   * @param {string} params.wordSeparator - Separator of words.
    * @param {string} overrideRTL - Override for right-to-left support.
    * @param {boolean} autosplit - Set auto-splitting for characters.
    * @param {object} params.a11y - Readspeaker texts.
@@ -44,8 +45,9 @@ class Sentence {
       this.params.overrideRTL === 'on';
     this.mistakesMax = Sentence.addSpaces(
       this.solutionText,
-      this.params.autosplit
-    ).split(' ').length;
+      this.params.autosplit,
+      this.params.wordSeparator
+    ).split(params.wordSeparator).length;
 
     // DOM
     this.content = document.createElement('div');
@@ -238,7 +240,7 @@ class Sentence {
    * @return {string} Correct text.
    */
   getCorrectText(asArray = false) {
-    return (asArray) ? Sentence.addSpaces(this.solutionText, this.params.autosplit).split(' ') : this.solutionText;
+    return (asArray) ? Sentence.addSpaces(this.solutionText, this.params.autosplit, this.params.wordSeparator).split(this.params.wordSeparator) : this.solutionText;
   }
 
   /**
@@ -360,7 +362,11 @@ class Sentence {
    * @param {boolean} autosplit If true, automatically split respective symbols.
    * @return {string} Text with spaces and symbols.
    */
-  static addSpaces(text, options = {}) {
+  static addSpaces(text, options = {}, wordSeparator = ' ') {
+    // Users with a non default word separator will manually handle all spacing options
+    if (' ' !== wordSeparator)
+      return text;
+
     // In a sentence like "John's car broke.", the . would be removed, but not the '
     const wordThenPunctuation = new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION.replace("'", '')})( |$)`, 'g');
     const punctuationThenWord = new RegExp(`( |^)(${Sentence.PUNCTUATION})(${Sentence.WORD}|$)`, 'g');
@@ -431,16 +437,42 @@ class Sentence {
     // Add spaces to correct text
     const wordsSolution = Sentence.addSpaces(
       this.getCorrectText(),
-      this.params.autosplit
-    ).split(' ');
+      this.params.autosplit,
+      this.params.wordSeparator
+    ).split(this.params.wordSeparator);
 
     let input = this.getUserInput();
     if (this.params.ignorePunctuation) {
       input = Sentence.stripPunctuation(input);
     }
 
-    // Add spaces to solution
-    const wordsInput = input.trim() === '' ? [] : Sentence.addSpaces(input, this.params.autosplit).split(' ');
+    // In case our wordSeparator is not space, we must replace spaces by the separator
+    if (' ' !== this.params.wordSeparator) {
+      // If we have one alternative with multiple words, we want to escape the spaces
+      wordsSolution.forEach( solutionPart => {
+        const alternatives = solutionPart.split('|');
+        
+        alternatives.forEach(alternative => {
+          alternative = alternative.trim();
+          if (alternative.indexOf(' ') !== -1) {
+            const escapedAlternative = alternative.replace(/ /g, Sentence.SPACE_ESCAPE);
+            input = input.replace(new RegExp(alternative, 'g'), escapedAlternative);
+          }
+        });
+      });
+      
+      // And then unescape spaces
+      input = input.replace(/ /g, this.params.wordSeparator);
+      input = input.replace(new RegExp(Sentence.SPACE_ESCAPE, 'g'), ' ');
+    }
+
+    // Add spaces to solution and break in parts
+    let wordsInput = input.trim() === '' ? [] : Sentence.addSpaces(input, this.params.autosplit, this.params.wordSeparator).split(this.params.wordSeparator).filter(word => word.length > 0);
+    
+    // In case our wordSeparator is not space, we add spaces between tokens
+    if (' ' !== this.params.wordSeparator) {
+      wordsInput = wordsInput.map( (word, i) => i === wordsInput.length - 1 ? word : `${word} `);
+    }
 
     // Compute diff between correct solution and user input
     const aligned = this.alignWords(wordsSolution, wordsInput);
@@ -807,5 +839,8 @@ Sentence.AUTOSPLIT = '[\u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF]';
 Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u00AB\u00BB\u00BF\u201C-\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6\u2000-\u206F\u22EF\u3000-\u3002\u3008-\u3011\uFF01\uFF08\uFF09\uFF0C\uFF1A\uFF1B\uFF1F\uFF3B\uFF3D\uFE41\uFE42\uFE4F\uFF5E]';
 /** @constant {string} */
 Sentence.WORD = '\\w|[\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\u02AF\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u060B\u060D-\u061E\u0620-\u08FF]';
+
+/** @constant {string} */
+Sentence.SPACE_ESCAPE = 'astringthatwillneverhappen123@@';
 
 export default Sentence;

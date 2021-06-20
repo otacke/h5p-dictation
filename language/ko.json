@@ -106,6 +106,11 @@
           "description": "체크된 경우, 구두점은 점수를 매기는 것으로 간주되지 않습니다"
         },
         {
+          "label": "Word separator",
+          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+          "default": " "
+        },
+        {
           "label": "실수 제로 모드",
           "description": "체크된 경우 정답만 채점을 위해 고려됩니다. 실수에 대해 벌점은 없습니다."
         },
@@ -137,6 +142,9 @@
             },
             {
               "label": "모든 대안 표시"
+            },
+            {
+              "label": "0 %"
             }
           ]
         },
@@ -164,6 +172,9 @@
         },
         {
           "label": "\"Show solution\" (해답보이기) 버튼 활성화"
+        },
+        {
+          "label": "Enable \"Show solution\" button"
         }
       ]
     },
