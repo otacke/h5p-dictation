@@ -36,6 +36,7 @@ class Sentence {
     this.params.callbacks = this.params.callbacks || {};
     this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
     this.params.callbacks.onInteracted = this.params.callbacks.onInteracted || (() => {});
+    this.params.callbacks.resize = this.params.callbacks.resize || (() => {});
 
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
     this.solutionText = (!params.ignorePunctuation) ? this.solutionText : Sentence.stripPunctuation(this.solutionText);
