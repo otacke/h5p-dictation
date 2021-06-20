@@ -45,7 +45,7 @@ class Sentence {
       this.params.overrideRTL === 'on';
     this.mistakesMax = Sentence.addSpaces(
       this.solutionText,
-      this.params.autosplit,
+      {autosplit: this.params.autosplit},
       this.params.wordSeparator
     ).split(params.wordSeparator).length;
 
@@ -240,7 +240,11 @@ class Sentence {
    * @return {string} Correct text.
    */
   getCorrectText(asArray = false) {
-    return (asArray) ? Sentence.addSpaces(this.solutionText, this.params.autosplit, this.params.wordSeparator).split(this.params.wordSeparator) : this.solutionText;
+    return (asArray) ? Sentence.addSpaces(
+      this.solutionText,
+      {autosplit: this.params.autosplit},
+      this.params.wordSeparator
+    ).split(this.params.wordSeparator) : this.solutionText;
   }
 
   /**
@@ -359,10 +363,12 @@ class Sentence {
    * Add spaces between text and punctuation.
    * @param {string} text - Text to add spaces to.
    * @param {object} options - Options.
-   * @param {boolean} autosplit If true, automatically split respective symbols.
+   * @param {boolean} [options.autosplit=true] If true, automatically split respective symbols.
    * @return {string} Text with spaces and symbols.
    */
   static addSpaces(text, options = {}, wordSeparator = ' ') {
+    options.autosplit = (typeof options.autosplit !== 'boolean') ? true : options.autosplit;
+
     // Users with a non default word separator will manually handle all spacing options
     if (' ' !== wordSeparator)
       return text;
@@ -437,7 +443,7 @@ class Sentence {
     // Add spaces to correct text
     const wordsSolution = Sentence.addSpaces(
       this.getCorrectText(),
-      this.params.autosplit,
+      {autosplit: this.params.autosplit},
       this.params.wordSeparator
     ).split(this.params.wordSeparator);
 
@@ -451,7 +457,7 @@ class Sentence {
       // If we have one alternative with multiple words, we want to escape the spaces
       wordsSolution.forEach( solutionPart => {
         const alternatives = solutionPart.split('|');
-        
+
         alternatives.forEach(alternative => {
           alternative = alternative.trim();
           if (alternative.indexOf(' ') !== -1) {
@@ -460,15 +466,19 @@ class Sentence {
           }
         });
       });
-      
+
       // And then unescape spaces
       input = input.replace(/ /g, this.params.wordSeparator);
       input = input.replace(new RegExp(Sentence.SPACE_ESCAPE, 'g'), ' ');
     }
 
     // Add spaces to solution and break in parts
-    let wordsInput = input.trim() === '' ? [] : Sentence.addSpaces(input, this.params.autosplit, this.params.wordSeparator).split(this.params.wordSeparator).filter(word => word.length > 0);
-    
+    let wordsInput = input.trim() === '' ? [] : Sentence.addSpaces(
+      input,
+      {autosplit: this.params.autosplit},
+      this.params.wordSeparator
+    ).split(this.params.wordSeparator).filter(word => word.length > 0);
+
     // In case our wordSeparator is not space, we add spaces between tokens
     if (' ' !== this.params.wordSeparator) {
       wordsInput = wordsInput.map( (word, i) => i === wordsInput.length - 1 ? word : `${word} `);
