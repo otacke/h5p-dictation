@@ -108,11 +108,20 @@ class Sentence {
     );
 
     // Text input field
-    this.inputField = document.createElement('input');
+    this.inputField = document.createElement('textarea');
+    this.inputField.setAttribute('rows', 1);
     this.inputField.setAttribute('spellcheck', 'false');
     this.inputField.setAttribute('autocorrect', 'off');
     this.inputField.setAttribute('autocapitalize', 'off');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
+    this.inputField.onchange = this.inputField.onkeyup = function () {
+      // Remove new lines
+      if (this.value.indexOf("\n") !== -1 || this.value.indexOf("\r") !== -1) {
+        this.value = this.value.replace(/[\n\r]/g, "");
+      }
+      // Autosize
+      this.style.height = (this.scrollHeight) + "px";
+    };
     this.inputField.classList.add(Sentence.INPUT_FIELD);
 
     // Restore previous state
