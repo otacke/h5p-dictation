@@ -159,6 +159,9 @@ class Dictation extends H5P.Question {
             },
             onInteracted: () => {
               this.handleInteracted();
+            },
+            resize: () => {
+              this.trigger('resize');
             }
           }
         },
