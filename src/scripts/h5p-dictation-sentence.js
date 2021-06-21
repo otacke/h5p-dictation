@@ -115,17 +115,40 @@ class Sentence {
     this.inputField.setAttribute('autocorrect', 'off');
     this.inputField.setAttribute('autocapitalize', 'off');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
-    this.inputField.onchange = this.inputField.onkeyup = ()  => {
-      // Remove new lines
-      if (this.inputField.value.indexOf("\n") !== -1 || this.inputField.value.indexOf("\r") !== -1) {
-        this.inputField.value = this.inputField.value.replace(/[\n\r]/g, "");
+
+    // Prevent ENTER key
+    this.inputField.addEventListener('keypress', (e) => {
+      if (e.keyCode === 13 || e.which === 13 || e.key.charCodeAt(0) === 13) {
+        e.preventDefault();
+        return false;
       }
+    });
+    
+    [ 'change', 'keyup' ].forEach(event => this.inputField.addEventListener(event, () => {
+      // Remove new lines ( in case of pasting, for instance )
+      if (this.inputField.value.indexOf('\n') !== -1 || this.inputField.value.indexOf('\r') !== -1) {
+        this.inputField.value = this.inputField.value.replace(/[\n\r]/g, '');
+      }
+
       // Autosize
       if (!this.inputField.style.height || this.inputField.scrollHeight !== parseInt(this.inputField.style.height)) {
-        this.inputField.style.height = (this.inputField.scrollHeight) + "px";
+        let heightDelta = parseInt(this.inputField.getAttribute('heightDelta'));
+
+        if (!heightDelta) {
+          this.inputField.setAttribute('heightDelta', this.inputField.offsetHeight - this.inputField.clientHeight );
+          heightDelta = parseInt(this.inputField.getAttribute('heightDelta'));
+        }
+        
+        // Set size to zero to allow shrinking
+        this.inputField.style.height = 0;
+
+        // Set size to it's content size added of delta ( borders )
+        this.inputField.style.height = (this.inputField.scrollHeight + heightDelta) + 'px';
+
+        // Notifies H5P so iframe is resized
         this.params.callbacks.resize();
       }
-    };
+    }));
     this.inputField.classList.add(Sentence.INPUT_FIELD);
 
     // Restore previous state

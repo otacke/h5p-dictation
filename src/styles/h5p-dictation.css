@@ -122,6 +122,7 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   white-space: break-spaces;
+  resize: none;
 }
 .h5p-dictation .h5p-text-input.hide {
   display: none;
