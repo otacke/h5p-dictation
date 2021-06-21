@@ -115,13 +115,16 @@ class Sentence {
     this.inputField.setAttribute('autocorrect', 'off');
     this.inputField.setAttribute('autocapitalize', 'off');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
-    this.inputField.onchange = this.inputField.onkeyup = function () {
+    this.inputField.onchange = this.inputField.onkeyup = ()  => {
       // Remove new lines
-      if (this.value.indexOf("\n") !== -1 || this.value.indexOf("\r") !== -1) {
-        this.value = this.value.replace(/[\n\r]/g, "");
+      if (this.inputField.value.indexOf("\n") !== -1 || this.inputField.value.indexOf("\r") !== -1) {
+        this.inputField.value = this.inputField.value.replace(/[\n\r]/g, "");
       }
       // Autosize
-      this.style.height = (this.scrollHeight) + "px";
+      if (!this.inputField.style.height || this.inputField.scrollHeight !== parseInt(this.inputField.style.height)) {
+        this.inputField.style.height = (this.inputField.scrollHeight) + "px";
+        this.params.callbacks.resize();
+      }
     };
     this.inputField.classList.add(Sentence.INPUT_FIELD);
 
