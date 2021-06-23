@@ -394,10 +394,10 @@ class Dictation extends H5P.Question {
       const textScore = H5P.Question.determineOverallFeedback(
         this.params.overallFeedback, this.getScore() / this.getMaxScore());
 
-      // Output via H5P.Question
+      // H5P.Question expects ':num' and ':total'
       const ariaMessage = this.params.a11y.yourResult
-        .replace('@score', this.getScore())
-        .replace('@total', this.getMaxScore());
+        .replace('@score', ':num')
+        .replace('@total', ':total');
 
       this.setFeedback(
         (`${generalFeedback} ${textScore}`).trim(),
