@@ -410,13 +410,12 @@ class Dictation extends H5P.Question {
 
       // Update buttons
       this.hideButton('check-answer');
-      if (this.params.behaviour.enableSolutionsButton) {
+      if (this.params.behaviour.enableSolutionsButton && !this.params.behaviour.enableSolutionOnCheck) {
         this.showButton('show-solution');
       }
 
       if (this.params.behaviour.enableSolutionOnCheck) {
         this.showSolutions();
-        this.hideButton('show-solution');
       }
 
       this.trigger('resize');
