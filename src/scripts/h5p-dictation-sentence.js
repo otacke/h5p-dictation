@@ -116,14 +116,6 @@ class Sentence {
     this.inputField.setAttribute('autocapitalize', 'off');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
 
-    // Prevent ENTER key
-    this.inputField.addEventListener('keypress', (e) => {
-      if (e.keyCode === 13 || e.which === 13 || e.key.charCodeAt(0) === 13) {
-        e.preventDefault();
-        return false;
-      }
-    });
-    
     this.inputField.addEventListener('input', () => {
       // Remove line breaks when pasting, etc.
       if (this.inputField.value.indexOf('\n') !== -1 || this.inputField.value.indexOf('\r') !== -1) {
@@ -142,7 +134,7 @@ class Sentence {
         this.params.callbacks.resize();
       }
     });
-    
+
     this.inputField.classList.add(Sentence.INPUT_FIELD);
 
     // Restore previous state
