@@ -21,7 +21,8 @@ class Dictation extends H5P.Question {
         alternateSolution: 'first',
         autosplit: true,
         shuffleSentences: 'never',
-        enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
+        // See TODO comment below
+        enableSolutionsButton: undefined, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
         enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
         ignorePunctuation: true,
         zeroMistakeMode: false,
