@@ -102,73 +102,88 @@
           ]
         },
         {
-          "label": "Игнорировать пунктуацию",
-          "description": "В случае ошибок пунктуации баллы не снижаются."
-        },
-        {
-          "label": "Word separator",
-          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-          "default": " "
-        },
-        {
-          "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
-        },
-        {
-          "label": "Сообщение об опечатке",
-          "description": "При проверке, опечатки будут различаться от ошибок и отображены в обычном стиле."
-        },
-        {
-          "label": "Количество опечаток",
-          "description": "Установите степень определения опечаток (слово 3-9 характеров: до 1 ошибка, слово с более чем 9 характеров: до 2 ошибок), который будут считаться ошибкой.",
-          "options": [
+          "label": "Scoring",
+          "fields": [
             {
-              "label": "100 %"
+              "label": "Игнорировать пунктуацию",
+              "description": "В случае ошибок пунктуации баллы не снижаются."
             },
             {
-              "label": "50 %"
+              "label": "Zero mistakes mode",
+              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
             },
             {
-              "label": "0 %"
+              "label": "Количество опечаток",
+              "description": "Установите степень определения опечаток (слово 3-9 характеров: до 1 ошибка, слово с более чем 9 характеров: до 2 ошибок), который будут считаться ошибкой.",
+              "options": [
+                {
+                  "label": "100 %"
+                },
+                {
+                  "label": "50 %"
+                },
+                {
+                  "label": "0 %"
+                }
+              ]
             }
           ]
         },
         {
-          "label": "Презентация дополнительных решений",
-          "description": "Определите, какие дополнения должны быть представлены в случае неправильных или отсутствующих слов в решении.",
-          "options": [
+          "label": "Text",
+          "fields": [
             {
-              "label": "Показать только первую альтернативу"
+              "label": "Word separator",
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
-              "label": "Показать все альтернативы"
+              "label": "Направление письма",
+              "description": "Установите свойственное языку направление справа налево или слева направо.",
+              "options": [
+                {
+                  "label": "Автоматическое направление"
+                },
+                {
+                  "label": "Справа налево"
+                },
+                {
+                  "label": "Слева направо"
+                }
+              ]
+            },
+            {
+              "label": "Разделить характеры",
+              "description": "Включите, если определённые характеры должны автоматически разделяться в отдельные слова."
             }
           ]
         },
         {
-          "label": "Направление письма",
-          "description": "Установите свойственное языку направление справа налево или слева направо.",
-          "options": [
+          "label": "Presentation of feedback",
+          "fields": [
             {
-              "label": "Автоматическое направление"
+              "label": "Сообщение об опечатке",
+              "description": "При проверке, опечатки будут различаться от ошибок и отображены в обычном стиле."
             },
             {
-              "label": "Справа налево"
-            },
-            {
-              "label": "Слева направо"
+              "label": "Презентация дополнительных решений",
+              "description": "Определите, какие дополнения должны быть представлены в случае неправильных или отсутствующих слов в решении.",
+              "options": [
+                {
+                  "label": "Показать только первую альтернативу"
+                },
+                {
+                  "label": "Показать все альтернативы"
+                }
+              ]
             }
           ]
-        },
-        {
-          "label": "Разделить характеры",
-          "description": "Включите, если определённые характеры должны автоматически разделяться в отдельные слова."
         },
         {
           "label": "Разрешить \"Повторить\""
         },
         {
-          "label": "Разрешить кнопку \"Показать решение\" "
+          "label": "Разрешить кнопку \"Показать решение\""
         },
         {
           "label": "Show solution on check"

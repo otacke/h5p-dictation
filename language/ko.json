@@ -102,67 +102,82 @@
           ]
         },
         {
-          "label": "구두점 무시",
-          "description": "체크된 경우, 구두점은 점수를 매기는 것으로 간주되지 않습니다"
-        },
-        {
-          "label": "Word separator",
-          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-          "default": " "
-        },
-        {
-          "label": "실수 제로 모드",
-          "description": "체크된 경우 정답만 채점을 위해 고려됩니다. 실수에 대해 벌점은 없습니다."
-        },
-        {
-          "label": "사용자 정의 오타 표시",
-          "description": "선택한 경우 오타가 명확한 오류와 구별되는 사용자 정의 스타일로 표시됩니다."
-        },
-        {
-          "label": "오타의 값",
-          "description": "타자 오류를 어느 정도(3-9자 단어: 최대 1개 실수, 9자 이상 단어: 최대 2개 실수)까지 실수로 간주할 지 결정합니다.",
-          "options": [
+          "label": "Scoring",
+          "fields": [
             {
-              "label": "100 %"
+              "label": "구두점 무시",
+              "description": "체크된 경우, 구두점은 점수를 매기는 것으로 간주되지 않습니다"
             },
             {
-              "label": "50 %"
+              "label": "실수 제로 모드",
+              "description": "체크된 경우 정답만 채점을 위해 고려됩니다. 실수에 대해 벌점은 없습니다."
             },
             {
-              "label": "0 %"
+              "label": "오타의 값",
+              "description": "타자 오류를 어느 정도(3-9자 단어: 최대 1개 실수, 9자 이상 단어: 최대 2개 실수)까지 실수로 간주할 지 결정합니다.",
+              "options": [
+                {
+                  "label": "100 %"
+                },
+                {
+                  "label": "50 %"
+                },
+                {
+                  "label": "0 %"
+                }
+              ]
             }
           ]
         },
         {
-          "label": "대안 답 제시",
-          "description": "해답에서 잘못된 단어 또는 누락된 단어에 대해 어떤 대안을 제시해야 하는지 정의하십시오.",
-          "options": [
+          "label": "Text",
+          "fields": [
             {
-              "label": "첫 번째 대안만 표시"
+              "label": "Word separator",
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
-              "label": "모든 대안 표시"
+              "label": "쓰기 지시사항",
+              "description": "문장의 언어가 오른쪽에서 왼쪽으로인지 또는 왼쪽에서 오른쪽으로인지 설정합니다.",
+              "options": [
+                {
+                  "label": "자동 감지"
+                },
+                {
+                  "label": "오른쪽에서 왼쪽으로"
+                },
+                {
+                  "label": "왼쪽에서 오른쪽으로"
+                }
+              ]
+            },
+            {
+              "label": "문자의 분할",
+              "description": "특정 문자(예: 한자)가 자동으로 별도의 단어로 분할되어야 하는 경우 활성화합니다."
             }
           ]
         },
         {
-          "label": "쓰기 지시사항",
-          "description": "문장의 언어가 오른쪽에서 왼쪽으로인지 또는 왼쪽에서 오른쪽으로인지 설정합니다.",
-          "options": [
+          "label": "Presentation of feedback",
+          "fields": [
             {
-              "label": "자동 감지"
+              "label": "사용자 정의 오타 표시",
+              "description": "선택한 경우 오타가 명확한 오류와 구별되는 사용자 정의 스타일로 표시됩니다."
             },
             {
-              "label": "오른쪽에서 왼쪽으로"
-            },
-            {
-              "label": "왼쪽에서 오른쪽으로"
+              "label": "대안 답 제시",
+              "description": "해답에서 잘못된 단어 또는 누락된 단어에 대해 어떤 대안을 제시해야 하는지 정의하십시오.",
+              "options": [
+                {
+                  "label": "첫 번째 대안만 표시"
+                },
+                {
+                  "label": "모든 대안 표시"
+                }
+              ]
             }
           ]
-        },
-        {
-          "label": "문자의 분할",
-          "description": "특정 문자(예: 한자)가 자동으로 별도의 단어로 분할되어야 하는 경우 활성화합니다."
         },
         {
           "label": "\"Retry\" (재시도) 버튼 활성화"

@@ -102,67 +102,82 @@
           ]
         },
         {
-          "label": "Ignorar signos de puntuación",
-          "description": "Si se activa, los signos de puntuación no serán considerados para puntaje."
-        },
-        {
-          "label": "Word separator",
-          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-          "default": " "
-        },
-        {
-          "label": "Modo de cero errores",
-          "description": "Si se activa, solamente las respuestas correctas serán consideradas para puntaje. Los errores no serán penalizados."
-        },
-        {
-          "label": "Visualización personalizada de error tipográfico",
-          "description": "Si se activa, los errores tipográficos serán mostrados en un estilo personalizado, distinguiéndolos de los errores claros."
-        },
-        {
-          "label": "Valor de errores tipográficos",
-          "description": "Determinar en que medida los errores tipográficos (palabra con 3-9 caracteres: hasta 1 error, palabra con más de 9 caracteres hasta 2 errores) cuentan como un error real.",
-          "options": [
+          "label": "Scoring",
+          "fields": [
             {
-              "label": "100 %"
+              "label": "Ignorar signos de puntuación",
+              "description": "Si se activa, los signos de puntuación no serán considerados para puntaje."
             },
             {
-              "label": "50 %"
+              "label": "Modo de cero errores",
+              "description": "Si se activa, solamente las respuestas correctas serán consideradas para puntaje. Los errores no serán penalizados."
             },
             {
-              "label": "0 %"
+              "label": "Valor de errores tipográficos",
+              "description": "Determinar en que medida los errores tipográficos (palabra con 3-9 caracteres: hasta 1 error, palabra con más de 9 caracteres hasta 2 errores) cuentan como un error real.",
+              "options": [
+                {
+                  "label": "100 %"
+                },
+                {
+                  "label": "50 %"
+                },
+                {
+                  "label": "0 %"
+                }
+              ]
             }
           ]
         },
         {
-          "label": "Presentación de soluciones alternas",
-          "description": "Definir cuales alternativas deberían ser presentadas para palabras incorrectas o faltantes en la solución.",
-          "options": [
+          "label": "Text",
+          "fields": [
             {
-              "label": "Mostrar solamente la primera alternativa"
+              "label": "Word separator",
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
-              "label": "Mostrar todas las alternativas"
+              "label": "Dirección de la escritura",
+              "description": "Configurar si es que el idioma de las oraciones es de-derecha-a-izquierda o de-izquierda-a-derecha.",
+              "options": [
+                {
+                  "label": "Detección automática"
+                },
+                {
+                  "label": "Derecha-a-izquierda"
+                },
+                {
+                  "label": "Izquierda-a-derecha"
+                }
+              ]
+            },
+            {
+              "label": "División de caracteres",
+              "description": "Activar si caracteres particulares (como por ejemplo caracteres Han chinos) deberían ser divididos en palabras separadas automáticamente."
             }
           ]
         },
         {
-          "label": "Dirección de la escritura",
-          "description": "Configurar si es que el idioma de las oraciones es de-derecha-a-izquierda o de-izquierda-a-derecha.",
-          "options": [
+          "label": "Presentation of feedback",
+          "fields": [
             {
-              "label": "Detección automática"
+              "label": "Visualización personalizada de error tipográfico",
+              "description": "Si se activa, los errores tipográficos serán mostrados en un estilo personalizado, distinguiéndolos de los errores claros."
             },
             {
-              "label": "Derecha-a-izquierda"
-            },
-            {
-              "label": "Izquierda-a-derecha"
+              "label": "Presentación de soluciones alternas",
+              "description": "Definir cuales alternativas deberían ser presentadas para palabras incorrectas o faltantes en la solución.",
+              "options": [
+                {
+                  "label": "Mostrar solamente la primera alternativa"
+                },
+                {
+                  "label": "Mostrar todas las alternativas"
+                }
+              ]
             }
           ]
-        },
-        {
-          "label": "División de caracteres",
-          "description": "Activar si caracteres particulares (como por ejemplo caracteres Han chinos) deberían ser divididos en palabras separadas automáticamente."
         },
         {
           "label": "Habilitar \"Reintentar\""

@@ -18,21 +18,26 @@ class Dictation extends H5P.Question {
       taskDescription: 'Please listen carefully and write what you hear.',
       sentences: [],
       behaviour: {
-        alternateSolution: 'first',
-        autosplit: true,
-        shuffleSentences: 'never',
-        // See TODO comment below
-        enableSolutionsButton: undefined, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
-        enableSolutionOnCheck: undefined,
-        enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
-        ignorePunctuation: true,
-        zeroMistakeMode: false,
-        overrideRTL: 'auto',
         tries: Infinity,
         triesAlternative: Infinity,
-        customTypoDisplay: false,
-        typoFactor: '100',
-        wordSeparator: ' '
+        shuffleSentences: 'never',
+        scoring: {
+          ignorePunctuation: true,
+          zeroMistakeMode: false,
+          typoFactor: '100'
+        },
+        textual: {
+          wordSeparator: ' ',
+          overrideRTL: 'auto',
+          autosplit: true
+        },
+        feedbackPresentation: {
+          customTypoDisplay: false,
+          alternateSolution: 'first'
+        },
+        enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
+        enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
+        enableSolutionOnCheck: false
       },
       l10n: {
         generalFeedback: 'You have made @total mistake(s).',
@@ -82,12 +87,6 @@ class Dictation extends H5P.Question {
     const defaultLanguage = (contentData && contentData.metadata) ? contentData.metadata.defaultLanguage || 'en' : 'en';
     this.languageTag = Util.formatLanguageCode(defaultLanguage);
 
-    // TODO: When other functionality needs a minor version bump, rename semantics variable in upgrade script
-    if (typeof this.params.behaviour.enableSolutionsButton === 'undefined') {
-      this.params.behaviour.enableSolutionsButton = params.behaviour.enableSolution === undefined ?
-        true : params.behaviour.enableSolution;
-    }
-
     // Initialize
     if (!params) {
       return;
@@ -119,7 +118,7 @@ class Dictation extends H5P.Question {
     const hasAlternatives = this.params.sentences.some(sentence => sentence.sampleAlternative !== undefined);
 
     // Proper format for percentage
-    this.params.behaviour.typoFactor = parseInt(this.params.behaviour.typoFactor) / 100;
+    this.params.behaviour.scoring.typoFactor = parseInt(this.params.behaviour.scoring.typoFactor) / 100;
 
     // Strip incomplete sentences
     this.params.sentences = this.params.sentences
@@ -147,16 +146,16 @@ class Dictation extends H5P.Question {
           audioNotSupported: this.params.l10n.audioNotSupported,
           tries: this.params.behaviour.tries,
           triesAlternative: this.params.behaviour.triesAlternative,
-          ignorePunctuation: this.params.behaviour.ignorePunctuation,
+          ignorePunctuation: this.params.behaviour.scoring.ignorePunctuation,
           hasAlternatives: hasAlternatives,
           a11y: this.params.a11y,
-          customTypoDisplay: this.params.behaviour.customTypoDisplay,
-          zeroMistakeMode: this.params.behaviour.zeroMistakeMode,
-          typoFactor: this.params.behaviour.typoFactor,
-          alternateSolution: this.params.behaviour.alternateSolution,
-          overrideRTL: this.params.behaviour.overrideRTL,
-          autosplit: this.params.behaviour.autosplit,
-          wordSeparator: this.params.behaviour.wordSeparator,
+          customTypoDisplay: this.params.behaviour.feedbackPresentation.customTypoDisplay,
+          zeroMistakeMode: this.params.behaviour.scoring.zeroMistakeMode,
+          typoFactor: this.params.behaviour.scoring.typoFactor,
+          alternateSolution: this.params.behaviour.feedbackPresentation.alternateSolution,
+          overrideRTL: this.params.behaviour.textual.overrideRTL,
+          autosplit: this.params.behaviour.textual.autosplit,
+          wordSeparator: this.params.behaviour.textual.wordSeparator,
           callbacks: {
             playAudio: (button) => {
               this.handlePlayAudio(button);
@@ -344,6 +343,12 @@ class Dictation extends H5P.Question {
      * Show the evaluation for the input in the text input fields.
      */
     this.showEvaluation = () => {
+      // Update buttons
+      this.hideButton('check-answer');
+      if (this.params.behaviour.enableSolutionsButton && !this.params.behaviour.enableSolutionOnCheck) {
+        this.showButton('show-solution');
+      }
+
       this.computedResults = this.sentences.map(sentence => {
         return sentence.computeResults();
       });
@@ -369,14 +374,14 @@ class Dictation extends H5P.Question {
       const mistakesTotal = scoreTotal.added +
         scoreTotal.missing +
         scoreTotal.wrong +
-        scoreTotal.typo * this.params.behaviour.typoFactor;
+        scoreTotal.typo * this.params.behaviour.scoring.typoFactor;
 
       // Number of mistakes shall not be higher than number of words.
       this.mistakesCapped = Math.min(mistakesTotal, this.maxMistakes);
-      this.correctTotal = scoreTotal.match + scoreTotal.typo * (1 - this.params.behaviour.typoFactor);
+      this.correctTotal = scoreTotal.match + scoreTotal.typo * (1 - this.params.behaviour.scoring.typoFactor);
 
       let generalFeedback;
-      if (this.params.behaviour.zeroMistakeMode) {
+      if (this.params.behaviour.scoring.zeroMistakeMode) {
         generalFeedback = (this.params.l10n.generalFeedbackZeroMistakesMode || '')
           .replace('@added', scoreTotal.added)
           .replace('@missing', scoreTotal.missing)
@@ -411,12 +416,6 @@ class Dictation extends H5P.Question {
         ariaMessage
       );
 
-      // Update buttons
-      this.hideButton('check-answer');
-      if (this.params.behaviour.enableSolutionsButton && !this.params.behaviour.enableSolutionOnCheck) {
-        this.showButton('show-solution');
-      }
-
       if (this.params.behaviour.enableSolutionOnCheck) {
         this.showSolutions();
       }
@@ -445,7 +444,9 @@ class Dictation extends H5P.Question {
      * @return {number} latest score.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
-    this.getScore = () => (this.params.behaviour.zeroMistakeMode) ? Math.round(this.correctTotal) : Math.round(this.maxMistakes - this.mistakesCapped);
+    this.getScore = () => (this.params.behaviour.scoring.zeroMistakeMode) ?
+      Math.round(this.correctTotal) :
+      Math.round(this.maxMistakes - this.mistakesCapped);
 
     /**
      * Get maximum possible score.

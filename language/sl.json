@@ -102,67 +102,82 @@
           ]
         },
         {
-          "label": "Ne upoštevaj ločil",
-          "description": "V primeru onemogočene nastavitve se bo v stavkih točkoval tudi vnos ločil."
-        },
-        {
-          "label": "Word separator",
-          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-          "default": " "
-        },
-        {
-          "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
-        },
-        {
-          "label": "Tipkarske napake prikaži ločeno",
-          "description": "Omogočena nastavitev bo ločila med tipkarskimi in očitnimi napakami ter jih prikazala ločeno."
-        },
-        {
-          "label": "Vrednost tipkarskih napak",
-          "description": "Odstotek točkovanja tipkarskih napak (npr. 0 % samo opozori, 50 % točkuje s 1/2 točke). Vrednost točk je odvisna tudi od obsega tipkarske napake, ko se le-ta šteje kot očitna napaka (npr. beseda s 3-9 znaki: do 1 napaka, beseda nad 9 znakov: do 2 napaki).",
-          "options": [
+          "label": "Scoring",
+          "fields": [
             {
-              "label": "100 %"
+              "label": "Ne upoštevaj ločil",
+              "description": "V primeru onemogočene nastavitve se bo v stavkih točkoval tudi vnos ločil."
             },
             {
-              "label": "50 %"
+              "label": "Zero mistakes mode",
+              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
             },
             {
-              "label": "0 %"
+              "label": "Vrednost tipkarskih napak",
+              "description": "Odstotek točkovanja tipkarskih napak (npr. 0 % samo opozori, 50 % točkuje s 1/2 točke). Vrednost točk je odvisna tudi od obsega tipkarske napake, ko se le-ta šteje kot očitna napaka (npr. beseda s 3-9 znaki: do 1 napaka, beseda nad 9 znakov: do 2 napaki).",
+              "options": [
+                {
+                  "label": "100 %"
+                },
+                {
+                  "label": "50 %"
+                },
+                {
+                  "label": "0 %"
+                }
+              ]
             }
           ]
         },
         {
-          "label": "Prikaz nadomestnih rešitev",
-          "description": "Nastavitev prikaza nadomestnih besed kot napačnih ali manjkajočih besed v rešitvi.",
-          "options": [
+          "label": "Text",
+          "fields": [
             {
-              "label": "Prikaži samo prvo nadomestno besedo"
+              "label": "Word separator",
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
-              "label": "Prikaži vse nadomestne besede"
+              "label": "Smer pisanja",
+              "description": "Nastavitev smeri pisanja oz. prebiranja besedila.",
+              "options": [
+                {
+                  "label": "Samodejna zaznava"
+                },
+                {
+                  "label": "Desno proti levi"
+                },
+                {
+                  "label": "Levo proti desni"
+                }
+              ]
+            },
+            {
+              "label": "Razdeli znake",
+              "description": "Neobvezna nastavitev, ki omogočena samodejno razdelitev določenih znakov (npr. kitajski znaki Han)."
             }
           ]
         },
         {
-          "label": "Smer pisanja",
-          "description": "Nastavitev smeri pisanja oz. prebiranja besedila.",
-          "options": [
+          "label": "Presentation of feedback",
+          "fields": [
             {
-              "label": "Samodejna zaznava"
+              "label": "Tipkarske napake prikaži ločeno",
+              "description": "Omogočena nastavitev bo ločila med tipkarskimi in očitnimi napakami ter jih prikazala ločeno."
             },
             {
-              "label": "Desno proti levi"
-            },
-            {
-              "label": "Levo proti desni"
+              "label": "Prikaz nadomestnih rešitev",
+              "description": "Nastavitev prikaza nadomestnih besed kot napačnih ali manjkajočih besed v rešitvi.",
+              "options": [
+                {
+                  "label": "Prikaži samo prvo nadomestno besedo"
+                },
+                {
+                  "label": "Prikaži vse nadomestne besede"
+                }
+              ]
             }
           ]
-        },
-        {
-          "label": "Razdeli znake",
-          "description": "Neobvezna nastavitev, ki omogočena samodejno razdelitev določenih znakov (npr. kitajski znaki Han)."
         },
         {
           "label": "Omogoči gumb \"Poskusi ponovno\""

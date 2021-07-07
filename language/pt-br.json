@@ -102,67 +102,82 @@
           ]
         },
         {
-          "label": "Ignorar marcas de pontuação",
-          "description": "Se marcada, os sinais de pontuação não serão considerados para pontuação."
-        },
-        {
-          "label": "Word separator",
-          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-          "default": " "
-        },
-        {
-          "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
-        },
-        {
-          "label": "Exibição de erro de digitação personalizada",
-          "description": "Se marcada, os erros de digitação serão exibidos em um estilo personalizado, distinguindo-os de erros claros."
-        },
-        {
-          "label": "Valor dos erros de digitação",
-          "description": "Determine em que medida os erros de digitação (palavra com 3-9 caracteres: até 1 erro, palavra com mais de 9 caracteres: até 2 erros) contam como um erro real.",
-          "options": [
+          "label": "Scoring",
+          "fields": [
             {
-              "label": "100 %"
+              "label": "Ignorar marcas de pontuação",
+              "description": "Se marcada, os sinais de pontuação não serão considerados para pontuação."
             },
             {
-              "label": "50 %"
+              "label": "Zero mistakes mode",
+              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
             },
             {
-              "label": "0 %"
+              "label": "Valor dos erros de digitação",
+              "description": "Determine em que medida os erros de digitação (palavra com 3-9 caracteres: até 1 erro, palavra com mais de 9 caracteres: até 2 erros) contam como um erro real.",
+              "options": [
+                {
+                  "label": "100 %"
+                },
+                {
+                  "label": "50 %"
+                },
+                {
+                  "label": "0 %"
+                }
+              ]
             }
           ]
         },
         {
-          "label": "Apresentação de soluções alternativas",
-          "description": "Defina quais alternativas devem ser apresentadas para palavras erradas ou ausentes na solução.",
-          "options": [
+          "label": "Text",
+          "fields": [
             {
-              "label": "Mostrar apenas a primeira alternativa"
+              "label": "Word separator",
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
-              "label": "Mostrar todas as alternativas"
+              "label": "Direção de escrita",
+              "description": "Defina se o idioma das frases é da direita para a esquerda ou da esquerda para a direita.",
+              "options": [
+                {
+                  "label": "Detecção automática"
+                },
+                {
+                  "label": "Direita para esquerda"
+                },
+                {
+                  "label": "Esquerda para a direita"
+                }
+              ]
+            },
+            {
+              "label": "Divisão de caracteres",
+              "description": "Ative se caracteres específicos (por exemplo, caracteres Han chineses) devem ser divididos em palavras separadas automaticamente."
             }
           ]
         },
         {
-          "label": "Direção de escrita",
-          "description": "Defina se o idioma das frases é da direita para a esquerda ou da esquerda para a direita.",
-          "options": [
+          "label": "Presentation of feedback",
+          "fields": [
             {
-              "label": "Detecção automática"
+              "label": "Exibição de erro de digitação personalizada",
+              "description": "Se marcada, os erros de digitação serão exibidos em um estilo personalizado, distinguindo-os de erros claros."
             },
             {
-              "label": "Direita para esquerda"
-            },
-            {
-              "label": "Esquerda para a direita"
+              "label": "Apresentação de soluções alternativas",
+              "description": "Defina quais alternativas devem ser apresentadas para palavras erradas ou ausentes na solução.",
+              "options": [
+                {
+                  "label": "Mostrar apenas a primeira alternativa"
+                },
+                {
+                  "label": "Mostrar todas as alternativas"
+                }
+              ]
             }
           ]
-        },
-        {
-          "label": "Divisão de caracteres",
-          "description": "Ative se caracteres específicos (por exemplo, caracteres Han chineses) devem ser divididos em palavras separadas automaticamente."
         },
         {
           "label": "Ativar \"Repetir\""

@@ -102,67 +102,82 @@
           ]
         },
         {
-          "label": "Ignoreer leestekens",
-          "description": "Indien gemerk, sal leestekens nie in aanmerking geneem vir punte nie."
-        },
-        {
-          "label": "Word separator",
-          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-          "default": " "
-        },
-        {
-          "label": "Geen foute modus",
-          "description": "Indien gemerk, sal net regte antwoorde vir punte in aanmerking geneem word. Foute sal nie gepenaliseer word nie."
-        },
-        {
-          "label": "Verstek tikfoutvaansig",
-          "description": "Indien gemerk, sal tikfoute in 'n verstekstyl vertoon word om dit van ander ooglopende foute te onderskei."
-        },
-        {
-          "label": "Waarde van tikfoute",
-          "description": "Bepaal tot watter mate tikfoute (woorde met 3-9 karakters: tot en met 1 fout, woorde met meer as nege karakters: tot en met 2 foute) tel as egte foute.",
-          "options": [
+          "label": "Scoring",
+          "fields": [
             {
-              "label": "100 %"
+              "label": "Ignoreer leestekens",
+              "description": "Indien gemerk, sal leestekens nie in aanmerking geneem vir punte nie."
             },
             {
-              "label": "50 %"
+              "label": "Geen foute modus",
+              "description": "Indien gemerk, sal net regte antwoorde vir punte in aanmerking geneem word. Foute sal nie gepenaliseer word nie."
             },
             {
-              "label": "0 %"
+              "label": "Waarde van tikfoute",
+              "description": "Bepaal tot watter mate tikfoute (woorde met 3-9 karakters: tot en met 1 fout, woorde met meer as nege karakters: tot en met 2 foute) tel as egte foute.",
+              "options": [
+                {
+                  "label": "100 %"
+                },
+                {
+                  "label": "50 %"
+                },
+                {
+                  "label": "0 %"
+                }
+              ]
             }
           ]
         },
         {
-          "label": "Aanbieding van alternatiewe oplossings",
-          "description": "Bepaal watter alternatiewe vir regte of verkeerde woorde in die oplossing aangebied moet word.",
-          "options": [
+          "label": "Text",
+          "fields": [
             {
-              "label": "Wys slegs eerste alternatief"
+              "label": "Word separator",
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
-              "label": "Wys alle alternatiewe"
+              "label": "Skryfrigting",
+              "description": "Bepaal of die sin se taal van regs-na-links of van links-na-regs geskryf word.",
+              "options": [
+                {
+                  "label": "Outomatiese opsporing"
+                },
+                {
+                  "label": "Regs-na-links"
+                },
+                {
+                  "label": "Links-na-regs"
+                }
+              ]
+            },
+            {
+              "label": "Skeiding van karakters",
+              "description": "Aktiveer indien spesifieke karakters (b.v. Sjinese Han karakters) outomaties in verskillende woorde verdeel moet word."
             }
           ]
         },
         {
-          "label": "Skryfrigting",
-          "description": "Bepaal of die sin se taal van regs-na-links of van links-na-regs geskryf word.",
-          "options": [
+          "label": "Presentation of feedback",
+          "fields": [
             {
-              "label": "Outomatiese opsporing"
+              "label": "Verstek tikfoutvaansig",
+              "description": "Indien gemerk, sal tikfoute in 'n verstekstyl vertoon word om dit van ander ooglopende foute te onderskei."
             },
             {
-              "label": "Regs-na-links"
-            },
-            {
-              "label": "Links-na-regs"
+              "label": "Aanbieding van alternatiewe oplossings",
+              "description": "Bepaal watter alternatiewe vir regte of verkeerde woorde in die oplossing aangebied moet word.",
+              "options": [
+                {
+                  "label": "Wys slegs eerste alternatief"
+                },
+                {
+                  "label": "Wys alle alternatiewe"
+                }
+              ]
             }
           ]
-        },
-        {
-          "label": "Skeiding van karakters",
-          "description": "Aktiveer indien spesifieke karakters (b.v. Sjinese Han karakters) outomaties in verskillende woorde verdeel moet word."
         },
         {
           "label": "Aktiveer \"Probeer weer\""

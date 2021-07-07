@@ -102,67 +102,82 @@
           ]
         },
         {
-          "label": "Ignorer les signes de ponctuation",
-          "description": "Si la case est cochée, les signes de ponctuation ne seront pas pris en compte pour la notation."
-        },
-        {
-          "label": "Word separator",
-          "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-          "default": " "
-        },
-        {
-          "label": "Zero mistakes mode",
-          "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
-        },
-        {
-          "label": "Custom typo display",
-          "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
-        },
-        {
-          "label": "Value of typos",
-          "description": "Déterminez dans quelle mesure les erreurs de frappe (mot de 3 à 9 caractères : jusqu'à 1 erreur, mot de plus de 9 caractères : jusqu'à 2 erreurs) comptent comme une erreur réelle.",
-          "options": [
+          "label": "Scoring",
+          "fields": [
             {
-              "label": "100 %"
+              "label": "Ignorer les signes de ponctuation",
+              "description": "Si la case est cochée, les signes de ponctuation ne seront pas pris en compte pour la notation."
             },
             {
-              "label": "50 %"
+              "label": "Zero mistakes mode",
+              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
             },
             {
-              "label": "0 %"
+              "label": "Value of typos",
+              "description": "Déterminez dans quelle mesure les erreurs de frappe (mot de 3 à 9 caractères : jusqu'à 1 erreur, mot de plus de 9 caractères : jusqu'à 2 erreurs) comptent comme une erreur réelle.",
+              "options": [
+                {
+                  "label": "100 %"
+                },
+                {
+                  "label": "50 %"
+                },
+                {
+                  "label": "0 %"
+                }
+              ]
             }
           ]
         },
         {
-          "label": "Presentation of alternate solutions",
-          "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
-          "options": [
+          "label": "Text",
+          "fields": [
             {
-              "label": "Show only first alternative"
+              "label": "Word separator",
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
-              "label": "Show all alternatives"
+              "label": "Writing direction",
+              "description": "Set whether the sentences' language is right-to-left or left-to-right.",
+              "options": [
+                {
+                  "label": "Automatic detection"
+                },
+                {
+                  "label": "Right-to-left"
+                },
+                {
+                  "label": "Left-to-right"
+                }
+              ]
+            },
+            {
+              "label": "Splitting of characters",
+              "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
             }
           ]
         },
         {
-          "label": "Writing direction",
-          "description": "Set whether the sentences' language is right-to-left or left-to-right.",
-          "options": [
+          "label": "Presentation of feedback",
+          "fields": [
             {
-              "label": "Automatic detection"
+              "label": "Custom typo display",
+              "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
             },
             {
-              "label": "Right-to-left"
-            },
-            {
-              "label": "Left-to-right"
+              "label": "Presentation of alternate solutions",
+              "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
+              "options": [
+                {
+                  "label": "Show only first alternative"
+                },
+                {
+                  "label": "Show all alternatives"
+                }
+              ]
             }
           ]
-        },
-        {
-          "label": "Splitting of characters",
-          "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
         },
         {
           "label": "Activer \"Encore une fois\" bouton"
