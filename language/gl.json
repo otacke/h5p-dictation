@@ -169,6 +169,9 @@
         },
         {
           "label": "Activar botón \"Amosar solución\""
+        },
+        {
+          "label": "Show solution on check"
         }
       ]
     },

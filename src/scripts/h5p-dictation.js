@@ -23,6 +23,7 @@ class Dictation extends H5P.Question {
         shuffleSentences: 'never',
         // See TODO comment below
         enableSolutionsButton: undefined, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
+        enableSolutionOnCheck: undefined,
         enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
         ignorePunctuation: true,
         zeroMistakeMode: false,
@@ -412,8 +413,12 @@ class Dictation extends H5P.Question {
 
       // Update buttons
       this.hideButton('check-answer');
-      if (this.params.behaviour.enableSolutionsButton) {
+      if (this.params.behaviour.enableSolutionsButton && !this.params.behaviour.enableSolutionOnCheck) {
         this.showButton('show-solution');
+      }
+
+      if (this.params.behaviour.enableSolutionOnCheck) {
+        this.showSolutions();
       }
 
       this.trigger('resize');

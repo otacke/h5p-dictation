@@ -169,6 +169,9 @@
         },
         {
           "label": "Luba \"Näita lahendust\" nupp"
+        },
+        {
+          "label": "Show solution on check"
         }
       ]
     },

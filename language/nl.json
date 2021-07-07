@@ -169,6 +169,9 @@
         },
         {
           "label": "Schakel \"Oplossing\" in"
+        },
+        {
+          "label": "Show solution on check"
         }
       ]
     },

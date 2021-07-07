@@ -169,6 +169,9 @@
         },
         {
           "label": "\"Show solution\" (해답보이기) 버튼 활성화"
+        },
+        {
+          "label": "Show solution on check"
         }
       ]
     },

@@ -169,6 +169,9 @@
         },
         {
           "label": "Omogoči gumb \"Prikaži rešitev\""
+        },
+        {
+          "label": "Show solution on check"
         }
       ]
     },

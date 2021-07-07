@@ -169,6 +169,9 @@
         },
         {
           "label": "Aktiveer \"Wys antwoord\" knoppie"
+        },
+        {
+          "label": "Show solution on check"
         }
       ]
     },
