@@ -122,6 +122,7 @@ class Sentence {
     this.inputField.setAttribute('autocapitalize', 'off');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
 
+    // Auto resize the input field
     this.inputField.addEventListener('input', () => {
       // Remove line breaks when pasting, etc.
       if (this.inputField.value.indexOf('\n') !== -1 || this.inputField.value.indexOf('\r') !== -1) {
