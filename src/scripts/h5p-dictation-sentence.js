@@ -37,6 +37,7 @@ class Sentence {
     this.params.callbacks = this.params.callbacks || {};
     this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
     this.params.callbacks.onInteracted = this.params.callbacks.onInteracted || (() => {});
+    this.params.callbacks.resize = this.params.callbacks.resize || (() => {});
 
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
     this.solutionText = (!params.ignorePunctuation) ? this.solutionText : Sentence.stripPunctuation(this.solutionText);
@@ -114,11 +115,32 @@ class Sentence {
     );
 
     // Text input field
-    this.inputField = document.createElement('input');
+    this.inputField = document.createElement('textarea');
+    this.inputField.setAttribute('rows', 1);
     this.inputField.setAttribute('spellcheck', 'false');
     this.inputField.setAttribute('autocorrect', 'off');
     this.inputField.setAttribute('autocapitalize', 'off');
     this.inputField.setAttribute('aria-label', this.params.a11y.enterText);
+
+    this.inputField.addEventListener('input', () => {
+      // Remove line breaks when pasting, etc.
+      if (this.inputField.value.indexOf('\n') !== -1 || this.inputField.value.indexOf('\r') !== -1) {
+        this.inputField.value = this.inputField.value.replace(/[\n\r]/g, '');
+      }
+
+      this.inputField.style.height = 'auto'; // Reset to allow shrinking
+      const needsResize = (this.previousScrollHeight !== this.inputField.scrollHeight);
+
+      this.inputField.style.height = `${this.inputField.scrollHeight + this.inputField.offsetHeight - this.inputField.clientHeight}px`;
+
+      if (needsResize) {
+        this.previousScrollHeight = this.inputField.scrollHeight;
+
+        // Trigger iframe resize
+        this.params.callbacks.resize();
+      }
+    });
+
     this.inputField.classList.add(Sentence.INPUT_FIELD);
 
     // Restore previous state
