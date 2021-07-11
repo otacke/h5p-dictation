@@ -105,7 +105,7 @@
           "label": "Puntaje",
           "fields": [
             {
-              "label": "Ignorar signos de puntuación",
+              "label": "Ignorar Signos de puntuación",
               "description": "Si se activa, los signos de puntuación no serán considerados para puntaje."
             },
             {
