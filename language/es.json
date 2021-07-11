@@ -254,7 +254,7 @@
           "default": "infinito"
         },
         {
-          "label": "Infinitos (texto para Lector en voz alta y texto al pasar el ratón encima)",
+          "label": "Campo para Introducir texto",
           "default": "Escriba lo que Usted ha escuchado."
         },
         {
@@ -327,7 +327,7 @@
           "default": "coma"
         },
         {
-          "label": "comilla",
+          "label": "Comilla",
           "default": "comilla"
         },
         {
