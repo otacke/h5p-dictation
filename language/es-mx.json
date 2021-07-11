@@ -102,7 +102,7 @@
           ]
         },
         {
-          "label": "Scoring",
+          "label": "Puntaje",
           "fields": [
             {
               "label": "Ignorar signos de puntuación",
@@ -133,8 +133,8 @@
           "label": "Text",
           "fields": [
             {
-              "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "label": "Separador de palabras",
+              "description": "Definir el separador de palabras diferente del caracter de espacio para soportar soluciones alternas con diferentes número de palabras.",
               "default": " "
             },
             {
@@ -159,7 +159,7 @@
           ]
         },
         {
-          "label": "Presentation of feedback",
+          "label": "Presentación de retroalimentación",
           "fields": [
             {
               "label": "Visualización de error tipográfico personalizada",
@@ -186,7 +186,7 @@
           "label": "Habilitar botón \"Mostrar solución\""
         },
         {
-          "label": "Show solution on check"
+          "label": "Mostrar solución al Comprobar"
         }
       ]
     },
