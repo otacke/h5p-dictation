@@ -105,7 +105,7 @@
           "label": "Puntaje",
           "fields": [
             {
-              "label": "Ignorar signos de puntuación",
+              "label": "Ignorar Signos de puntuación",
               "description": "Si se activa, los signos de puntuación no serán considerados para el puntaje."
             },
             {
@@ -130,7 +130,7 @@
           ]
         },
         {
-          "label": "Text",
+          "label": "Texto",
           "fields": [
             {
               "label": "Separador de palabras",
@@ -138,7 +138,7 @@
               "default": " "
             },
             {
-              "label": "Dirección de escritura",
+              "label": "Dirección de la escritura",
               "description": "Configurar si es que el idioma de las oraciones es de-derecha-a-izquierda o de-izquierda-a-derecha.",
               "options": [
                 {
@@ -154,7 +154,7 @@
             },
             {
               "label": "División de caracteres",
-              "description": "Activar si caracteres particulares (por ejemplo caracteres Chinos Han) deberían ser automáticamente divididos en palabras separadas."
+              "description": "Activar si caracteres particulares (como por ejemplo caracteres Han chinos) deberían ser divididos en palabras separadas automáticamente."
             }
           ]
         },
@@ -162,15 +162,15 @@
           "label": "Presentación de retroalimentación",
           "fields": [
             {
-              "label": "Visualización de error tipográfico personalizada",
-              "description": "Si se activa, los errores tipográficos serán mostrados en un estilo personalizado que los distingue de errores claros."
+              "label": "Visualización personalizada de error tipográfico",
+              "description": "Si se activa, los errores tipográficos serán mostrados en un estilo personalizado, distinguiéndolos de los errores claros."
             },
             {
-              "label": "Presentación de soluciones alternativas",
-              "description": "Definir cuales alternativas deberían ser presentadas para palabras equivocadas o faltantes en la solución.",
+              "label": "Presentación de soluciones alternas",
+              "description": "Definir cuales alternativas deberían ser presentadas para palabras incorrectas o faltantes en la solución.",
               "options": [
                 {
-                  "label": "Mostrar solamente primera alternativa"
+                  "label": "Mostrar solamente la primera alternativa"
                 },
                 {
                   "label": "Mostrar todas las alternativas"
@@ -254,7 +254,7 @@
           "default": "Infinito"
         },
         {
-          "label": "Campo Introducir texto",
+          "label": "Campo para Introducir texto",
           "default": "Escriba lo que Usted ha escuchado."
         },
         {
