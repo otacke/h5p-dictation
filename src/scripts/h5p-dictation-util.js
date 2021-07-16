@@ -27,7 +27,7 @@ class Util {
    * @return {string} Output string.
    */
   static htmlDecode(input) {
-    var dparser = new DOMParser().parseFromString(input, 'text/html');
+    const dparser = new DOMParser().parseFromString(input, 'text/html');
     return dparser.documentElement.textContent;
   }
 
