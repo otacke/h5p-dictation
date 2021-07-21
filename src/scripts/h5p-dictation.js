@@ -220,8 +220,8 @@ class Dictation extends H5P.Question {
 
       // Rebuild old order or shuffle sentences if required
       if (this.contentData.previousState) {
-        const oldOrder = this.previousSentenceStates.reduce((result, current) => {
-          return [...result, current.index];
+        const oldOrder = this.previousSentenceStates.reduce((result, current, index) => {
+          return [...result, current ? current?.index : index];
         }, []);
 
         this.reorderSentences(oldOrder);
