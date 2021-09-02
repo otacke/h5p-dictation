@@ -34,10 +34,13 @@ class Sentence {
     this.maxTriesAlternative = params.triesAlternative;
 
     this.params.sentence.description = (this.params.sentence.description || '').trim();
-    this.params.callbacks = this.params.callbacks || {};
-    this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
-    this.params.callbacks.onInteracted = this.params.callbacks.onInteracted || (() => {});
-    this.params.callbacks.resize = this.params.callbacks.resize || (() => {});
+
+    this.params.callbacks = Util.extend({
+      playAudio: () => {},
+      onInteracted: () => {},
+      onContextChanged: () => {},
+      resize: () => {}
+    }, params.callbacks);
 
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
     this.solutionText = (!params.ignorePunctuation) ? this.solutionText : Sentence.stripPunctuation(this.solutionText);
@@ -152,6 +155,11 @@ class Sentence {
     else {
       this.oldValue = '';
     }
+
+    // Handle context changed for context contract
+    this.inputField.addEventListener('keydown', () => {
+      this.params.callbacks.onContextChanged(this.index);
+    });
 
     // Add interacted listener
     this.inputField.addEventListener('blur', () => {
@@ -377,6 +385,7 @@ class Sentence {
   handleButtonClicked(button) {
     this.params.callbacks.playAudio(button);
     this.params.callbacks.onInteracted();
+    this.params.callbacks.onContextChanged(this.index);
   }
 
   /**

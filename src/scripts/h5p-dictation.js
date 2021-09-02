@@ -95,6 +95,8 @@ class Dictation extends H5P.Question {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
+    this.contextId = 0; // Best guess, no interaction.
+
     this.sentences = [];
 
     /*
@@ -162,6 +164,9 @@ class Dictation extends H5P.Question {
             },
             onInteracted: () => {
               this.handleInteracted();
+            },
+            onContextChanged: (index) => {
+              this.handleContextChanged(index);
             },
             resize: () => {
               this.trigger('resize');
@@ -337,6 +342,13 @@ class Dictation extends H5P.Question {
      */
     this.handleInteracted = () => {
       this.triggerXAPI('interacted');
+    };
+
+    /**
+     * Handle context changed.
+     */
+    this.handleContextChanged = (contextId) => {
+      this.contextId = contextId;
     };
 
     /**
@@ -663,6 +675,18 @@ class Dictation extends H5P.Question {
      */
     this.getCurrentState = () => {
       return this.sentences.map(sentence => sentence.getCurrentState());
+    };
+
+    /**
+     * Get context data.
+     * Contract used for confusion report.
+     * @return {object} Context data.
+     */
+    this.getContext = () => {
+      return {
+        statement: 'sentence',
+        value: this.contextId + 1
+      }
     };
 
     /**
