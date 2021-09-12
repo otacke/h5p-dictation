@@ -53,7 +53,7 @@
         {
           "widgets": [
             {
-              "label": "Voreinstellung"
+              "label": "Eingabemaske"
             }
           ],
           "label": "Lege Rückmeldungen für einzelne Punktebereiche fest",
@@ -133,8 +133,8 @@
           "label": "Text",
           "fields": [
             {
-              "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "label": "Zeichen zum Trennen von Wörtern",
+              "description": "Lege fest, welches Zeichen zum Trennen von Wörtern als Alternative zum Leerzeichen benutzt wird, um alternative Lösungen mit mehr als einem Wort zuzulassen.",
               "default": " "
             },
             {
@@ -186,7 +186,7 @@
           "label": "\"Lösung anzeigen\" ermöglichen"
         },
         {
-          "label": "Show solution on check"
+          "label": "Zeige Lösung beim Überprüfen"
         }
       ]
     },
