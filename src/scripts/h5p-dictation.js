@@ -684,7 +684,7 @@ class Dictation extends H5P.Question {
      */
     this.getContext = () => {
       return {
-        statement: 'sentence',
+        type: 'sentence',
         value: this.contextId + 1
       }
     };
