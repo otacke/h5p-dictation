@@ -1,6 +1,6 @@
 {
   "name": "h5p-dictation",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Let your students train their listening comprehension and spelling skills.",
   "scripts": {
     "test": "jest",
