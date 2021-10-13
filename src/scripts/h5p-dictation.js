@@ -183,7 +183,7 @@ class Dictation extends H5P.Question {
       .map(sentence => sentence.getMaxMistakes())
       .reduce((a, b) => a + b, 0);
 
-    this.mistakesCapped = 0;
+    this.mistakesCapped = this.maxMistakes;
     this.isAnswered = false;
 
     /**
@@ -510,7 +510,7 @@ class Dictation extends H5P.Question {
         this.sentences[0].focus();
       }
 
-      this.mistakesCapped = 0;
+      this.mistakesCapped = this.maxMistakes;
       this.isAnswered = false;
     };
 
