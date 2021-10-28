@@ -208,6 +208,10 @@
           "default": "Controleer"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Tekst voor de \"Opnieuw\" -knop",
           "default": "Opnieuw"
         },
