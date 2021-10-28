@@ -686,7 +686,7 @@ class Dictation extends H5P.Question {
       return {
         type: 'sentence',
         value: this.contextId + 1
-      }
+      };
     };
 
     /**
