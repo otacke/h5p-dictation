@@ -12,7 +12,7 @@
   "extends": "eslint:recommended",
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": "2020"
+    "ecmaVersion": 2020
   },
   "rules": {
     "valid-jsdoc": "off",
