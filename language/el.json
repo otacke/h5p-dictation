@@ -208,6 +208,10 @@
           "default": "Έλεγχος"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Ετικέτα κουμπού \"Επανάληψη\"",
           "default": "Επανάληψη"
         },
