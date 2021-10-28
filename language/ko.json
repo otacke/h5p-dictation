@@ -208,6 +208,10 @@
           "default": "정답 확인"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "\"Retry\" 재시도 버튼 텍스트",
           "default": "재시도"
         },

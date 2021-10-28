@@ -208,6 +208,10 @@
           "default": "Toets"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Teks vir \"Probeer weer\" knoppie",
           "default": "Probeer weer"
         },

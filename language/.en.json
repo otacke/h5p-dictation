@@ -208,6 +208,10 @@
           "default": "Check"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Text for \"Retry\" button",
           "default": "Retry"
         },

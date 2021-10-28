@@ -45,7 +45,8 @@ class Dictation extends H5P.Question {
         checkAnswer: 'Check',
         tryAgain: 'Retry',
         showSolution: 'Show solution',
-        audioNotSupported: 'Your browser does not support this audio.'
+        audioNotSupported: 'Your browser does not support this audio.',
+        submitAnswer: 'Submit',
       },
       a11y: {
         check: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
@@ -277,7 +278,10 @@ class Dictation extends H5P.Question {
         }
       }, true, {
         'aria-label': this.params.a11y.check
-      }, {});
+      }, {
+        contentData: this.contentData,
+        textIfSubmitting: this.params.l10n.submitAnswer,
+      });
 
       // Retry button
       this.addButton('try-again', this.params.l10n.tryAgain, () => {

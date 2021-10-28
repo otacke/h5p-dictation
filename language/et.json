@@ -208,6 +208,10 @@
           "default": "Kontrolli"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Tekst \"Proovi uuesti\" nupule",
           "default": "Proovi uuesti"
         },
