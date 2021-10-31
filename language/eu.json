@@ -212,6 +212,10 @@
           "default": "Berriz saiatu"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "",
           "default": "Erakutsi emaitza"
         },
