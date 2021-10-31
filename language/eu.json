@@ -1,0 +1,364 @@
+{
+  "semantics": [
+    {
+      "label": "Multimedia",
+      "fields": [
+        {
+          "label": "Mota",
+          "description": "Aukerazko multimedia galderaren aurretik erakusteko."
+        },
+        {
+          "label": "Desgaitu irudien zooma"
+        }
+      ]
+    },
+    {
+      "label": "Lanaren deskribapena",
+      "description": "Deskribatu ezazu hemen zure lana.",
+      "placeholder": "Adi entzun ezazu mesedez eta idatzi ezazu entzuten duzuna."
+    },
+    {
+      "label": "Esaldiak",
+      "widgets": [
+        {
+          "label": "Lehenetsitakoa"
+        }
+      ],
+      "entity": "Esaldia",
+      "field": {
+        "label": "Esaldia",
+        "fields": [
+          {
+            "label": "Deskribapena",
+            "description": "Testua idazteko eremuaren aurretik deskribapen sinple bat gehitu dezakezu, erabilgarriak adibidez elkarrizketetarako."
+          },
+          {
+            "label": "Soinu-adibidea",
+            "description": "Abiadura arruntean esandako esaldia"
+          },
+          {
+            "label": "",
+            "description": ""
+          },
+          {
+            "label": "Testua",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "label": "Feedback Orokorra",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Lehenetsitakoa"
+            }
+          ],
+          "label": "Zehaztu ezazu edozein puntuazio-tarterako feedback pertsonalizatua",
+          "description": "Egin klik \"Gehitu tartea\" botoian behar dituzun tarte guztiak gehitzeko. Adibidez: 0-20% Puntuazio eskasa, 21-91% Batez besteko puntuazioa, 91-100% Puntuazio bikaina!",
+          "entity": "tartea",
+          "field": {
+            "fields": [
+              {
+                "label": "Puntuazio tartea"
+              },
+              {},
+              {
+                "label": "Zehaztutako tartearentzako feedbacka",
+                "placeholder": "Idatzi ezazu feedbacka"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Portaeraren ezarpenak",
+      "description": "Aukera hauek lanaren portaera kontrolatzea ahalbidetzen dizute.",
+      "fields": [
+        {
+          "label": "Gehienezko saiakerak",
+          "description": ""
+        },
+        {
+          "label": "",
+          "description": ""
+        },
+        {
+          "label": "Nahastu esaldiak",
+          "description": "",
+          "options": [
+            {
+              "label": "Inoiz ez"
+            },
+            {
+              "label": ""
+            },
+            {
+              "label": "Saiakera bakoitzean"
+            }
+          ]
+        },
+        {
+          "label": "Puntuazioa",
+          "fields": [
+            {
+              "label": "",
+              "description": ""
+            },
+            {
+              "label": "",
+              "description": ""
+            },
+            {
+              "label": "",
+              "description": "",
+              "options": [
+                {
+                  "label": "%100"
+                },
+                {
+                  "label": "%50"
+                },
+                {
+                  "label": "%0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Testua",
+          "fields": [
+            {
+              "label": "Hitz-banatzailea",
+              "description": "",
+              "default": " "
+            },
+            {
+              "label": "",
+              "description": "",
+              "options": [
+                {
+                  "label": "Antzemate automatikoa"
+                },
+                {
+                  "label": "Eskuinetik ezkerrera"
+                },
+                {
+                  "label": "Ezkerretik eskuinera"
+                }
+              ]
+            },
+            {
+              "label": "",
+              "description": ""
+            }
+          ]
+        },
+        {
+          "label": "",
+          "fields": [
+            {
+              "label": "",
+              "description": ""
+            },
+            {
+              "label": "",
+              "description": "",
+              "options": [
+                {
+                  "label": ""
+                },
+                {
+                  "label": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Gaitu \"Berriz saiatu\""
+        },
+        {
+          "label": "Gaitu \"Erakutsi erantzuna\" botoia"
+        },
+        {
+          "label": ""
+        }
+      ]
+    },
+    {
+      "label": "Erabiltzaile-interfazea",
+      "fields": [
+        {
+          "label": "Feedback orokorra",
+          "description": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "description": "",
+          "default": ""
+        },
+        {
+          "label": "\"Egiaztatu\" botoiarentzako testua",
+          "default": ""
+        },
+        {
+          "label": "\"Saiatu berriro\" botoiarentzako testua",
+          "default": "Berriz saiatu"
+        },
+        {
+          "label": "",
+          "default": "Erakutsi emaitza"
+        },
+        {
+          "label": "Audioa ez da onartzen mezua",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "label": "",
+      "fields": [
+        {
+          "label": "\"Egiaztatu\" botoiaren laguntza-teknologientzako etiketa",
+          "default": ""
+        },
+        {
+          "label": "\"Erakutsi Erantzuna\" botoiaren laguntza-teknologientzako etiketa",
+          "default": ""
+        },
+        {
+          "label": "\"Berriz saiatu\" botoiaren laguntza-teknologientzako etiketa",
+          "default": "Zeregina berriz egiten saiatu. Berrabiarazi erantzun guztiak eta hasi zeregina berriz."
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "description": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "Zure emaitza",
+          "description": "",
+          "default": "@total puntutik @score puntu lortu duzu"
+        },
+        {
+          "label": "Emaitza",
+          "default": "Emaitza"
+        },
+        {
+          "label": "Esaldia",
+          "default": "Esaldia"
+        },
+        {
+          "label": "Elementua",
+          "default": "Elementua"
+        },
+        {
+          "label": "Zuzena",
+          "default": "zuzena"
+        },
+        {
+          "label": "Okerra",
+          "default": "okerra"
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": "falta da"
+        },
+        {
+          "label": "",
+          "default": "gehituta"
+        },
+        {
+          "label": "Erantzun zuzena",
+          "default": ""
+        },
+        {
+          "label": "Edo",
+          "default": "edo"
+        },
+        {
+          "label": "Puntua",
+          "default": "puntua"
+        },
+        {
+          "label": "Puntuak",
+          "default": "puntuak"
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "Gehi",
+          "default": "gehi"
+        },
+        {
+          "label": "Ken",
+          "default": "ken"
+        },
+        {
+          "label": "",
+          "default": ""
+        },
+        {
+          "label": "",
+          "default": ""
+        }
+      ]
+    }
+  ]
+}
