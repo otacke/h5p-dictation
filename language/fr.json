@@ -33,11 +33,11 @@
             "description": "Vous pouvez éventuellement placer une simple description au-dessus du champ de saisie de texte, utile par exemple pour les dialogues."
           },
           {
-            "label": "Echantillon sonore",
+            "label": "Échantillon sonore",
             "description": "Phrase prononcée en vitesse normale"
           },
           {
-            "label": "Echantillon sonore lent",
+            "label": "Échantillon sonore lent",
             "description": "Phrase prononcée à vitesse lente"
           },
           {
@@ -62,7 +62,7 @@
           "field": {
             "fields": [
               {
-                "label": "fourchette de score"
+                "label": "Fourchette de score"
               },
               {},
               {
@@ -79,25 +79,25 @@
       "description": "Ces options vous permettront de contrôler le déroulement de la tâche.",
       "fields": [
         {
-          "label": "Un maximum d'essais",
-          "description": "limitera le nombre de fois que les échantillons de chaque phrase peuvent être écoutés."
+          "label": "Nombre maximum d'essais",
+          "description": "Limitera le nombre de fois que chaque phrase peut être écoutée."
         },
         {
-          "label": "Nombre maximum de tentatives de vitesse lente",
-          "description": "Cela limite le nombre de fois que les exemples lents peuvent être écoutés pour chaque phrase."
+          "label": "Nombre maximum de tentatives à vitesse lente",
+          "description": "Limite le nombre de fois que les exemples lents peuvent être écoutés pour chaque phrase."
         },
         {
-          "label": "Shuffle sentences",
+          "label": "Mélanger les phrase",
           "description": "Define when the sentences should be shuffled.",
           "options": [
             {
-              "label": "Never"
+              "label": "Jamais"
             },
             {
-              "label": "Once when starting exercise"
+              "label": "Une fois au début de l'exercice"
             },
             {
-              "label": "On every try"
+              "label": "À chaque essai"
             }
           ]
         },
@@ -109,12 +109,12 @@
               "description": "Si la case est cochée, les signes de ponctuation ne seront pas pris en compte pour la notation."
             },
             {
-              "label": "Zero mistakes mode",
-              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+              "label": "Mode zéro fautes",
+              "description": "Si la case est cochée, seules les réponses correctes seront prises en compte dans le score. Les fautes ne seront pas pénalisées."
             },
             {
-              "label": "Value of typos",
-              "description": "Déterminez dans quelle mesure les erreurs de frappe (mot de 3 à 9 caractères : jusqu'à 1 erreur, mot de plus de 9 caractères : jusqu'à 2 erreurs) comptent comme une erreur réelle.",
+              "label": "Poids des fautes d’orthographe",
+              "description": "Déterminez la manière dont sont comptées les fautes d’orthographe (mot de 3 à 9 caractères: jusqu'à 1 erreur, mot de plus de 9 caractères : jusqu'à 2 erreurs).",
               "options": [
                 {
                   "label": "100 %"
@@ -133,28 +133,28 @@
           "label": "Text",
           "fields": [
             {
-              "label": "Word separator",
+              "label": "Séparateur de mots",
               "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
               "default": " "
             },
             {
-              "label": "Writing direction",
-              "description": "Set whether the sentences' language is right-to-left or left-to-right.",
+              "label": "Sens de l'écriture",
+              "description": "Indiquez si le sens de l’écriture est de droite à gauche ou de gauche à droite.",
               "options": [
                 {
-                  "label": "Automatic detection"
+                  "label": "Détection automatique"
                 },
                 {
-                  "label": "Right-to-left"
+                  "label": "De droite à gauche"
                 },
                 {
-                  "label": "Left-to-right"
+                  "label": "De gauche à droite"
                 }
               ]
             },
             {
-              "label": "Splitting of characters",
-              "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+              "label": "Séparation des caractères",
+              "description": "Active la séparation automatique de certains caractères (par exemple les caractères chinois)."
             }
           ]
         },
@@ -162,28 +162,28 @@
           "label": "Presentation of feedback",
           "fields": [
             {
-              "label": "Custom typo display",
-              "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
+              "label": "Montrer les fautes d’orthographe",
+              "description": "Si la case est cochée, les fautes d’orthographe apparaîtront différement des autres fautes."
             },
             {
-              "label": "Presentation of alternate solutions",
-              "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
+              "label": "Présentation des solutions alternatives",
+              "description": "Déterminez si les solutions alternatives sont affichées ou non en cas d’erreur ou de terme manquant.",
               "options": [
                 {
-                  "label": "Show only first alternative"
+                  "label": "Montrer seulement la première solution"
                 },
                 {
-                  "label": "Show all alternatives"
+                  "label": "Montrer toutes les solutions"
                 }
               ]
             }
           ]
         },
         {
-          "label": "Activer \"Encore une fois\" bouton"
+          "label": "Activer le bouton \"Réessayer\""
         },
         {
-          "label": "Activer \"Montrer la solution\" bouton"
+          "label": "Activer le bouton \"Voir la solution\""
         },
         {
           "label": "Show solution on check"
@@ -195,7 +195,7 @@
       "fields": [
         {
           "label": "Commentaires généraux",
-          "description": "Vous pouvez utiliser plusieurs placeholders qui seront remplacés par le nombre adéquat : @matches = nombre de correspondances, @total = total des erreurs, @capped = total des erreurs plafonnées, @wrong = mots incorrects, @added = mots supplémentaires, @missing = mots manquants, @typo = erreurs de frappe",
+          "description": "Vous pouvez utiliser plusieurs placeholders qui seront remplacés par le nombre adéquat : @matches = nombre de correspondances, @total = total des erreurs, @capped = total des erreurs plafonnées, @wrong = mots incorrects, @added = mots supplémentaires, @missing = mots manquants, @typo = fautes d'orthographe",
           "default": "Tu as commis @total erreur(s)."
         },
         {
@@ -204,7 +204,7 @@
           "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
-          "label": "Texte pour le \"Vérifier\" bouton",
+          "label": "Texte pour le bouton \"Vérifier\"",
           "default": "Vérifier"
         },
         {
@@ -216,8 +216,8 @@
           "default": "Réessayer"
         },
         {
-          "label": "Texte pour le \"Montrer la solution\" bouton",
-          "default": "Montrer la solution"
+          "label": "Texte pour le bouton \"Voir la solution\"",
+          "default": "Voir la solution"
         },
         {
           "label": "Message audio non supporté",
