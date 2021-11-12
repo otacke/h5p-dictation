@@ -208,7 +208,7 @@
           "default": "Überprüfen"
         },
         {
-          "label": "Text for \"Submit\" button",
+          "label": "Beschriftung des \"Absenden\"-Buttons",
           "default": "Submit"
         },
         {
