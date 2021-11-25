@@ -5,10 +5,10 @@
       "fields": [
         {
           "label": "Type",
-          "description": "De optionele media wordt boven de vraag getoond."
+          "description": "Optionele media om boven de vraag te tonen."
         },
         {
-          "label": "Schakel het beeldzoomen uit"
+          "label": "Beeld zoomen uitschakelen"
         }
       ]
     },
@@ -91,13 +91,13 @@
           "description": "Define when the sentences should be shuffled.",
           "options": [
             {
-              "label": "Never"
+              "label": "Nooit"
             },
             {
-              "label": "Once when starting exercise"
+              "label": "Eenmaal bij het begin van de oefening"
             },
             {
-              "label": "On every try"
+              "label": "Bij elke poging"
             }
           ]
         },
@@ -109,8 +109,8 @@
               "description": "Indien aangevinkt, worden de leestekens niet in aanmerking genomen bij het bepalen van de score."
             },
             {
-              "label": "Zero mistakes mode",
-              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+              "label": "Nul fouten modus",
+              "description": "Indien aangevinkt, zullen alleen correcte antwoorden in aanmerking worden genomen voor de puntentelling. Fouten worden niet bestraft."
             },
             {
               "label": "De waarde van de typefouten",
@@ -133,28 +133,28 @@
           "label": "Text",
           "fields": [
             {
-              "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "label": "Woordscheidingsteken",
+              "description": "Definieer het scheidingsteken van woorden anders dan spatie om alternatieve oplossingen met een verschillend aantal woorden te ondersteunen.",
               "default": " "
             },
             {
-              "label": "Writing direction",
-              "description": "Set whether the sentences' language is right-to-left or left-to-right.",
+              "label": "Schrijfrichting",
+              "description": "Stel in of de taal van de zinnen van rechts naar links of van links naar rechts is.",
               "options": [
                 {
-                  "label": "Automatic detection"
+                  "label": "Automatische detectie"
                 },
                 {
-                  "label": "Right-to-left"
+                  "label": "Van rechts naar links"
                 },
                 {
-                  "label": "Left-to-right"
+                  "label": "Van links naar rechts"
                 }
               ]
             },
             {
-              "label": "Splitting of characters",
-              "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
+              "label": "Splitsing van tekens",
+              "description": "Activeer als bepaalde tekens (bijv. Chinese Han tekens) automatisch in aparte woorden moeten worden gesplitst."
             }
           ]
         },
@@ -162,18 +162,18 @@
           "label": "Presentation of feedback",
           "fields": [
             {
-              "label": "Custom typo display",
-              "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
+              "label": "Aangepast weergave van typefouten",
+              "description": "Indien aangevinkt, zullen typefouten worden weergegeven in een aangepaste stijl die ze onderscheidt van duidelijke fouten."
             },
             {
-              "label": "Presentation of alternate solutions",
-              "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
+              "label": "Presentatie van alternatieve oplossingen",
+              "description": "Bepaal welke alternatieven moeten worden voorgesteld voor verkeerde of ontbrekende woorden in de oplossing.",
               "options": [
                 {
-                  "label": "Show only first alternative"
+                  "label": "Toon alleen het eerste alternatief"
                 },
                 {
-                  "label": "Show all alternatives"
+                  "label": "Toon alle alternatieven"
                 }
               ]
             }
@@ -226,7 +226,7 @@
       ]
     },
     {
-      "label": "Readspeakers",
+      "label": "Voorlezer",
       "fields": [
         {
           "label": "Assistive technology description for \"Check\" button",
