@@ -53,7 +53,7 @@
         {
           "widgets": [
             {
-              "label": "Eingabemaske"
+              "label": "Voreinstellung"
             }
           ],
           "label": "Lege Rückmeldungen für einzelne Punktebereiche fest",
@@ -191,7 +191,7 @@
       ]
     },
     {
-      "label": "Bedienoberfläche",
+      "label": "Bezeichnungen und Beschriftungen",
       "fields": [
         {
           "label": "Allgemeine Rückmeldung",
@@ -226,18 +226,18 @@
       ]
     },
     {
-      "label": "Vorlesewerkzeug (Barrierefreiheit)",
+      "label": "Vorlesewerkzeug",
       "fields": [
         {
-          "label": "Beschreibung des \"Überprüfen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
+          "label": "Vorlesewerkzeug-Beschreibung für den \"Überprüfen\"-Button",
           "default": "Die Antworten überprüfen. Die Eingaben werden als richtig, falsch oder unbeantwortet markiert."
         },
         {
-          "label": "Beschreibung des \"Lösung anzeigen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
+          "label": "Vorlesewerkzeug-Beschreibung für den \"Lösung anzeigen\"-Button",
           "default": "Die Lösung anzeigen. Die richtigen Lösungen werden in der Aufgabe angezeigt."
         },
         {
-          "label": "Beschreibung des \"Wiederholen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
+          "label": "Vorlesewerkzeug-Beschreibung für den \"Wiederholen\"-Button",
           "default": "Die Aufgabe wiederholen. Alle Eingaben werden zurückgesetzt und die Aufgabe wird erneut gestartet."
         },
         {
