@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Mota",
-          "description": "Aukerazko multimedia galderaren aurretik erakusteko."
+          "description": "Galderaren gainean erakusteko aukerazko multimedia."
         },
         {
           "label": "Desgaitu irudien zooma"
@@ -37,12 +37,12 @@
             "description": "Abiadura arruntean esandako esaldia"
           },
           {
-            "label": "",
-            "description": ""
+            "label": "Soinu mantsoaren lagina",
+            "description": "Esaldia mantso ahoskatuta"
           },
           {
             "label": "Testua",
-            "description": ""
+            "description": "Idatzi beharreko testua. Hitz baten ordezko letreiatzeak gehitu ditzakezu aukeren artean lerro bertikal bat (|) gehituta."
           }
         ]
       }
@@ -80,21 +80,21 @@
       "fields": [
         {
           "label": "Gehienezko saiakerak",
-          "description": ""
+          "description": "Esaldi bakoitzaren laginak entzun ahalko den aldi kopurua mugatuko du."
         },
         {
-          "label": "",
-          "description": ""
+          "label": "Abiadura mantsoko gehieneko saiakera kopurua",
+          "description": "Esaldi bakoitzaren lagin mantsoak entzun ahalko den aldi kopurua mugatuko du."
         },
         {
           "label": "Nahastu esaldiak",
-          "description": "",
+          "description": "Zehaztu esaldiak noiz nahastu beharko diren.",
           "options": [
             {
               "label": "Inoiz ez"
             },
             {
-              "label": ""
+              "label": "Behin ariketa hastean"
             },
             {
               "label": "Saiakera bakoitzean"
@@ -109,7 +109,7 @@
               "description": ""
             },
             {
-              "label": "",
+              "label": "Hutsunerik ez modua",
               "description": ""
             },
             {
@@ -180,13 +180,13 @@
           ]
         },
         {
-          "label": "Gaitu \"Berriz saiatu\""
+          "label": "Gaitu \"Saiatu berriro\""
         },
         {
-          "label": "Gaitu \"Erakutsi erantzuna\" botoia"
+          "label": "Gaitu \"Erakutsi emaitza\" botoia"
         },
         {
-          "label": ""
+          "label": "Erakutsi emaitza egiaztatzerakoan"
         }
       ]
     },
@@ -199,24 +199,24 @@
           "default": ""
         },
         {
-          "label": "",
+          "label": "Feedback orokorra (hutsunerik ez modua)",
           "description": "",
           "default": ""
         },
         {
           "label": "\"Egiaztatu\" botoiarentzako testua",
-          "default": ""
+          "default": "Egiaztatu"
         },
         {
-          "label": "\"Saiatu berriro\" botoiarentzako testua",
-          "default": "Berriz saiatu"
+          "label": "\"Bidali\" botoiarentzako testua",
+          "default": "Bidali"
         },
         {
-          "label": "Text for \"Submit\" button",
-          "default": "Submit"
+          "label": "\"Saiatu berriro\" botoiaren testua",
+          "default": "Saiatu berriro"
         },
         {
-          "label": "",
+          "label": "\"Erakutsi emaitza\" botoiaren testua",
           "default": "Erakutsi emaitza"
         },
         {
@@ -233,16 +233,16 @@
           "default": ""
         },
         {
-          "label": "\"Erakutsi Erantzuna\" botoiaren laguntza-teknologientzako etiketa",
-          "default": ""
+          "label": "\"Erakutsi emaitza\" botoiaren laguntza-teknologientzako deskribapena",
+          "default": "Erakutsi emaitza. Ataza bere erantzun zuzenarekin markatuko da."
         },
         {
-          "label": "\"Berriz saiatu\" botoiaren laguntza-teknologientzako etiketa",
+          "label": "\"Saiatu berriro\" botoiaren laguntza-teknologientzako deskribapena",
           "default": "Zeregina berriz egiten saiatu. Berrabiarazi erantzun guztiak eta hasi zeregina berriz."
         },
         {
           "label": "",
-          "default": ""
+          "default": "Erreproduzitu"
         },
         {
           "label": "",
@@ -327,8 +327,8 @@
           "default": ""
         },
         {
-          "label": "",
-          "default": ""
+          "label": "Koma",
+          "default": "koma"
         },
         {
           "label": "",
