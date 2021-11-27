@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Type",
-          "description": "Optionele media om boven de vraag te tonen."
+          "description": "Optionele media, die boven de vragen worden getoond."
         },
         {
           "label": "Beeld zoomen uitschakelen"
@@ -162,7 +162,7 @@
           "label": "Presentation of feedback",
           "fields": [
             {
-              "label": "Aangepast weergave van typefouten",
+              "label": "Aangepast weergave van typfouten",
               "description": "Indien aangevinkt, zullen typefouten worden weergegeven in een aangepaste stijl die ze onderscheidt van duidelijke fouten."
             },
             {
