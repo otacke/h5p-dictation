@@ -1,3 +1,5 @@
+import Util from './h5p-dictation-util';
+
 /** Class representing a sound playing button. */
 class Button {
   /**
@@ -21,22 +23,25 @@ class Button {
    * @param {object} previousState PreviousState.
    */
   constructor(id, params, previousState = {}) {
-    this.params = params;
-    this.previousState = previousState;
+    // Sanitization of params
+    this.params = Util.extend({
+      audioNotSupported: 'Your browser does not support this audio.',
+      a11y: {
+        play: 'Play',
+        playSlowly: 'Play slowly',
+        triesLeft: 'number of tries left: @number',
+        infinite: 'infinite',
+        sentence: 'Sentence',
+        solution: 'Solution',
+        enterText: 'Enter what you have heard'
+      },
+      type: Button.BUTTON_TYPE_NORMAL,
+      callbacks: {
+        playAudio: (() => {})
+      }
+    }, params);
 
-    // Sanitization
-    this.params.audioNotSupported = this.params.audioNotSupported || "Your browser does not support this audio.";
-    this.params.a11y = params.a11y || [];
-    this.params.a11y.play = this.params.a11y.play || 'Play';
-    this.params.a11y.playSlowly = this.params.a11y.playSlowly || 'Play slowly';
-    this.params.a11y.triesLeft = this.params.a11y.triesLeft || 'number of tries left: @number';
-    this.params.a11y.infinite = this.params.a11y.infinite || 'infinite';
-    this.params.a11y.sentence = this.params.a11y.sentence || 'Sentence';
-    this.params.a11y.solution = this.params.a11y.solution || 'Solution';
-    this.params.a11y.enterText = this.params.a11y.enterText || 'Enter what you have heard';
-    this.params.type = this.params.type || Button.BUTTON_TYPE_NORMAL;
-    this.params.callbacks = this.params.callbacks || {};
-    this.params.callbacks.playAudio = this.params.callbacks.playAudio || (() => {});
+    this.previousState = previousState;
 
     if (typeof previousState.triesLeft === 'undefined') {
       this.triesLeft = this.params.maxTries;
