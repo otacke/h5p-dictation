@@ -87,6 +87,10 @@
           "description": "Limitará el número de veces que pueden ser escuchadas las muestras lentas para cada oración."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "Barajear oraciones",
           "description": "Definir cuando las oraciones deberían de ser barajadas.",
           "options": [

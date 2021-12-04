@@ -159,6 +159,7 @@ class Dictation extends H5P.Question {
           overrideRTL: this.params.behaviour.textual.overrideRTL,
           autosplit: this.params.behaviour.textual.autosplit,
           wordSeparator: this.params.behaviour.textual.wordSeparator,
+          disablePause: this.params.behaviour.disablePause,
           callbacks: {
             playAudio: (button) => {
               this.handlePlayAudio(button);
@@ -343,7 +344,12 @@ class Dictation extends H5P.Question {
      */
     this.handlePlayAudio = (button) => {
       this.sentences.forEach(sentence => {
-        sentence.pauseButtons(button);
+        if (this.params.behaviour.disablePause) {
+          sentence.stopButtons(button);
+        }
+        else {
+          sentence.pauseButtons(button);
+        }
       });
     };
 

@@ -87,6 +87,10 @@
           "description": "Begrenzt die Anzahl der Versuche, die man jeweils zum Anhören der langsamen Tonaufnahme hat."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "Sätze mischen",
           "description": "Lege fest, wann die Sätze gemischt werden sollten.",
           "options": [

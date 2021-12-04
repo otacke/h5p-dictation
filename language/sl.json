@@ -87,6 +87,10 @@
           "description": "Omejitev možnega števila predvajanja upočasnjenega posnetka (za vsak stavek posebej)."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "Shuffle sentences",
           "description": "Define when the sentences should be shuffled.",
           "options": [

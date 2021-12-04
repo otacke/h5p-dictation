@@ -200,6 +200,14 @@
         "min": 1
       },
       {
+        "name": "disablePause",
+        "type": "boolean",
+        "label": "Disable pause option",
+        "description": "If checked, pausing the audio while playing is not possible.",
+        "default": false,
+        "optional": true
+      },
+      {
         "name": "shuffleSentences",
         "type": "select",
         "label": "Shuffle sentences",

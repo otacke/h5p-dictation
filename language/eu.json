@@ -87,6 +87,10 @@
           "description": "Esaldi bakoitzaren lagin mantsoak entzun ahalko den aldi kopurua mugatuko du."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "Nahastu esaldiak",
           "description": "Zehaztu esaldiak noiz nahastu beharko diren.",
           "options": [

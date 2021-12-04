@@ -77,6 +77,7 @@ class Sentence {
       {
         sample: params.sentence.sample,
         audioNotSupported: params.audioNotSupported,
+        disablePause: params.disablePause,
         type: Button.BUTTON_TYPE_NORMAL,
         maxTries: params.tries,
         a11y: params.a11y,
@@ -97,6 +98,7 @@ class Sentence {
         {
           sample: params.sentence.sampleAlternative,
           audioNotSupported: params.audioNotSupported,
+          disablePause: params.disablePause,
           type: Button.BUTTON_TYPE_SLOW,
           maxTries: params.triesAlternative,
           a11y: params.a11y,
@@ -375,6 +377,20 @@ class Sentence {
 
     if (this.buttonPlaySlow && this.buttonPlaySlow !== excludeButton) {
       this.buttonPlaySlow.pause();
+    }
+  }
+
+  /**
+   * Stop buttons.
+   * @param {Button} [excludeButton] Button to ignore.
+   */
+  stopButtons(excludeButton) {
+    if (this.buttonPlayNormal && this.buttonPlayNormal !== excludeButton) {
+      this.buttonPlayNormal.stop();
+    }
+
+    if (this.buttonPlaySlow && this.buttonPlaySlow !== excludeButton) {
+      this.buttonPlaySlow.stop();
     }
   }
 

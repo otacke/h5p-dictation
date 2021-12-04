@@ -87,6 +87,10 @@
           "description": "각 문장에 대해 느린 속도 샘플이 청취될 수 있는 횟수를 제한합니다."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "문장 뒤섞기",
           "description": "언제 문장들이 뒤섞여야 하는지 정의합니다.",
           "options": [

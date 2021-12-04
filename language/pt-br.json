@@ -87,6 +87,10 @@
           "description": "Limitará o número de vezes que as amostras lentas de cada sentença podem ser ouvidas."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "Shuffle sentences",
           "description": "Define when the sentences should be shuffled.",
           "options": [

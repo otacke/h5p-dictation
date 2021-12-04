@@ -87,6 +87,10 @@
           "description": "Ограничивает количество прослушиваний каждого предложения медленной скорости."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "Shuffle sentences",
           "description": "Define when the sentences should be shuffled.",
           "options": [

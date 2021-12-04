@@ -35,6 +35,7 @@ class Button {
         solution: 'Solution',
         enterText: 'Enter what you have heard'
       },
+      disablePause: false,
       type: Button.BUTTON_TYPE_NORMAL,
       callbacks: {
         playAudio: (() => {})
@@ -113,6 +114,10 @@ class Button {
 
       // Event Listener Play
       audio.audio.addEventListener('play', () => {
+        // Prevent pausing
+        if (params.disablePause) {
+          audio.$audioButton.get(0).classList.add('h5p-audio-disabled');
+        }
 
         if (params.type === Button.BUTTON_TYPE_SLOW) {
           audio.$audioButton
@@ -139,19 +144,7 @@ class Button {
 
       // Event Listener Ended
       audio.audio.addEventListener('ended', () => {
-        this.handlePlayed();
-
-        if (params.type === Button.BUTTON_TYPE_SLOW) {
-          audio.$audioButton
-            .removeClass(Button.BUTTON_PAUSE)
-            .addClass(Button.BUTTON_SLOW);
-          this.setLabel(this.params.a11y.playSlowly);
-        }
-        else {
-          this.setLabel(this.params.a11y.play);
-        }
-
-        this.status = Button.STATUS_ENDED;
+        this.handleAudioEnded();
       });
 
       // Have to stop, else audio will take up socket pending forever in chrome.
@@ -203,6 +196,42 @@ class Button {
     if (this.status === Button.STATUS_PLAYING) {
       this.button.click();
     }
+  }
+
+  /**
+   * Stop.
+   */
+  stop() {
+    if (this.status !== Button.STATUS_PLAYING) {
+      return;
+    }
+
+    this.resetAudio();
+    this.handleAudioEnded();
+  }
+
+  /**
+   * Handle audio ended.
+   */
+  handleAudioEnded() {
+    // Re-allow pausing
+    if (this.params.disablePause) {
+      this.audio.$audioButton.get(0).classList.remove('h5p-audio-disabled');
+    }
+
+    this.handlePlayed();
+
+    if (this.params.type === Button.BUTTON_TYPE_SLOW) {
+      this.audio.$audioButton
+        .removeClass(Button.BUTTON_PAUSE)
+        .addClass(Button.BUTTON_SLOW);
+      this.setLabel(this.params.a11y.playSlowly);
+    }
+    else {
+      this.setLabel(this.params.a11y.play);
+    }
+
+    this.status = Button.STATUS_ENDED;
   }
 
   /**

@@ -87,6 +87,10 @@
           "description": "Dit begrenst het aantal maal dat de langzame voorbeelden voor elke zin kunnen worden beluisterd."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "Shuffle sentences",
           "description": "Define when the sentences should be shuffled.",
           "options": [

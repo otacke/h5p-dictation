@@ -87,6 +87,10 @@
           "description": "Limite le nombre de fois que les exemples lents peuvent être écoutés pour chaque phrase."
         },
         {
+          "label": "Disable pause option",
+          "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
           "label": "Mélanger les phrase",
           "description": "Define when the sentences should be shuffled.",
           "options": [
