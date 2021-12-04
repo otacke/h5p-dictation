@@ -7,9 +7,9 @@
   "env": {
     "browser": true,
     "node": true,
-    "jest/globals": true
+    "es2020": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended"],
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2020
@@ -31,6 +31,5 @@
     }],
     "no-extra-boolean-cast": "off",
     "no-console": ["error", {"allow": ["warn", "error"]}]
-  },
-  "plugins": ["jest"]
+  }
 }
