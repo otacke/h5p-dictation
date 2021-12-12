@@ -87,8 +87,8 @@
           "description": "Limitará el número de veces que pueden ser escuchadas las muestras lentas para cada oración."
         },
         {
-          "label": "Disable pause option",
-          "description": "If checked, pausing the audio while playing is not possible."
+          "label": "Opción de deshabilitar pausa",
+          "description": "Si se activa, no es posible pausar el audio al reproducir."
         },
         {
           "label": "Barajear oraciones",
