@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Type",
-          "description": "Optionele media, die boven de vragen worden getoond."
+          "description": "Optionele media, die boven de vraag wordt getoond."
         },
         {
           "label": "Beeld zoomen uitschakelen"
@@ -15,7 +15,7 @@
     {
       "label": "Taakomschrijving",
       "description": "Beschrijf hier je taak.",
-      "placeholder": "Luister alsjelieft goed en schrijf op wat je hoort."
+      "placeholder": "Luister goed en schrijf op wat je hoort."
     },
     {
       "label": "Zinnen",
@@ -29,7 +29,7 @@
         "label": "Zin",
         "fields": [
           {
-            "label": "Description",
+            "label": "Beschrijving",
             "description": "You can optionally put a simple description above the text input field, useful e.g. for dialogues."
           },
           {
@@ -38,7 +38,7 @@
           },
           {
             "label": "Geluidsvoorbeeld langzaam",
-            "description": "De zin gesproken in langzame snelheid"
+            "description": "De zin gesproken op langzame snelheid"
           },
           {
             "label": "Tekst",
@@ -57,7 +57,7 @@
             }
           ],
           "label": "Definieer aangepaste feedback voor elke scorereeks",
-          "description": "Druk op de knop \"Voeg scorereeks toe\" om zoveel reeksen toe te voegen als nodig is. Voorbeeld: 0-20% Onvoldoende score, 21-91% Gemiddelde score, 91-100% Uitstekende score!",
+          "description": "Druk op de \"Voeg scorereeks\"-knop om zoveel reeksen toe te voegen als nodig. Voorbeeld: 0-20% Onvoldoende, 21-91% Gemiddelde score, 91-100% Uitstekende score!",
           "entity": "reeks",
           "field": {
             "fields": [
@@ -67,7 +67,7 @@
               {},
               {
                 "label": "Feedback voor de gedefinieerde scorereeks",
-                "placeholder": "Vul de aangepaste feedback in"
+                "placeholder": "Vul de feedback in"
               }
             ]
           }
@@ -76,15 +76,15 @@
     },
     {
       "label": "Gedragsinstellingen",
-      "description": "Met deze opties kun je bepalen hoe de taak zich gedraagt.",
+      "description": "Met deze opties kun je bepalen hoe de opgave zich gedraagt.",
       "fields": [
         {
           "label": "Maximaal aantal pogingen",
-          "description": "Dit begrenst het aantal maal dat de voorbeelden voor elke zin kunnen worden beluisterd."
+          "description": "Begrenst het aantal maal dat de voorbeelden voor elke zin kunnen worden beluisterd."
         },
         {
-          "label": "Maximaal aantal pogingen voor de langzame snelheid",
-          "description": "Dit begrenst het aantal maal dat de langzame voorbeelden voor elke zin kunnen worden beluisterd."
+          "label": "Maximaal aantal pogingen voor langzame snelheid",
+          "description": "Begrenst het aantal maal dat de langzame voorbeelden voor elke zin kunnen worden beluisterd."
         },
         {
           "label": "Disable pause option",
@@ -106,7 +106,7 @@
           ]
         },
         {
-          "label": "Scoring",
+          "label": "Beoordeling",
           "fields": [
             {
               "label": "Negeer interpunctie",
@@ -114,11 +114,11 @@
             },
             {
               "label": "Nul fouten modus",
-              "description": "Indien aangevinkt, zullen alleen correcte antwoorden in aanmerking worden genomen voor de puntentelling. Fouten worden niet bestraft."
+              "description": "Indien aangevinkt, zullen alleen juiste antwoorden in aanmerking worden genomen voor de puntentelling. Fouten worden niet bestraft."
             },
             {
               "label": "De waarde van de typefouten",
-              "description": "Bepaal in welke mate typefouten (word with 3-9 characters: up to 1 mistake, word with more than 9 characters: up to 2 mistakes) als fout gelden.",
+              "description": "Bepaal in welke mate typefouten (woord met 3-9 tekens: max. 1 fout, woord met meer dan 9 tekens: max. 2 fouten) als fout gelden.",
               "options": [
                 {
                   "label": "100 %"
@@ -134,7 +134,7 @@
           ]
         },
         {
-          "label": "Text",
+          "label": "Tekst",
           "fields": [
             {
               "label": "Woordscheidingsteken",
@@ -163,10 +163,10 @@
           ]
         },
         {
-          "label": "Presentation of feedback",
+          "label": "Presentatie van feedback",
           "fields": [
             {
-              "label": "Aangepast weergave van typfouten",
+              "label": "Aangepast weergave van typefouten",
               "description": "Indien aangevinkt, zullen typefouten worden weergegeven in een aangepaste stijl die ze onderscheidt van duidelijke fouten."
             },
             {
@@ -187,44 +187,44 @@
           "label": "Schakel \"Opnieuw\" in"
         },
         {
-          "label": "Schakel \"Oplossing\" in"
+          "label": "Schakel \"Toon oplossing\"-knop in"
         },
         {
-          "label": "Show solution on check"
+          "label": "Toon oplossing bij controleren"
         }
       ]
     },
     {
-      "label": "Gebruikersomgeving",
+      "label": "Gebruikersinterface",
       "fields": [
         {
-          "label": "Algemene feedback",
-          "description": "Je kunt gebruik maken van meerdere plaatshouders die worden vervangen door het juiste nummer: @matches = aantal overeenkomsten, @total = totaal aantal fouten, @capped = gemaximeerd totaal aantal fouten, @wrong = verkeerde woorden, @added = extra woorden, @missing = ontbrekende woorden, @typo = tikfouten",
+          "label": "Algehele feedback",
+          "description": "Je kunt gebruik maken van meerdere variabelen die worden vervangen door het juiste getal: @matches = aantal overeenkomsten, @total = totaal aantal fouten, @capped = gemaximeerd totaal aantal fouten, @wrong = onjuiste woorden, @added = extra woorden, @missing = ontbrekende woorden, @typo = typefouten",
           "default": "Je hebt @total fout(en) gemaakt."
         },
         {
-          "label": "General feedback (zero mistakes mode)",
-          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
+          "label": "Algehele feedback (nul fouten modus)",
+          "description": "Je kunt gebruik maken van verschillende variabelen die vervangen worden door het juiste getal: @matches = aantal overeenkomsten, @total = totaalscore, @wrong = onjuiste woorden, @added = extra woorden, @missing = ontbrekende woorden, @typo = typefouten",
+          "default": "Je hebt @total woord(en) juist ingevoerd en @typo woord(en) met kleine foutjes."
         },
         {
-          "label": "Tekst voor de \"Controleer\" -knop",
+          "label": "Tekst voor \"Controleer\"-knop",
           "default": "Controleer"
         },
         {
-          "label": "Text for \"Submit\" button",
-          "default": "Submit"
+          "label": "Tekst voor \"Verzend\"-knop",
+          "default": "Verzend"
         },
         {
-          "label": "Tekst voor de \"Opnieuw\" -knop",
+          "label": "Tekst voor \"Opnieuw\"-knop",
           "default": "Opnieuw"
         },
         {
-          "label": "Tekst voor de \"Toon oplossing\" -knop",
+          "label": "Tekst voor \"Toon oplossing\"-knop",
           "default": "Toon oplossing"
         },
         {
-          "label": "Bericht dat de audio niet wordt ondersteund",
+          "label": "Statusbericht dat de audio niet wordt ondersteund",
           "default": "Je browser ondersteunt deze audio niet."
         }
       ]
@@ -233,16 +233,16 @@
       "label": "Voorlezer",
       "fields": [
         {
-          "label": "Assistive technology description for \"Check\" button",
-          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+          "label": "Ondersteunende technologie beschrijving voor \"Controleer\"-knop",
+          "default": "Controleer de antwoorden. De antwoorden worden gemarkeerd als juist, onjuist, of niet-beantwoord."
         },
         {
-          "label": "Assistive technology description for \"Show Solution\" button",
-          "default": "Show the solution. The task will be marked with its correct solution."
+          "label": "Ondersteunende technologie beschrijving voor \"Toon oplossing\"-knop",
+          "default": "Toon de oplossing. De taak wordt gemarkeerd met de juiste oplossing."
         },
         {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
+          "label": "Ondersteunende technologie beschrijving voor \"Opnieuw\"-knop",
+          "default": "Probeer de taak opnieuw. Reset alle antwoorden en start de taak opnieuw."
         },
         {
           "label": "Afspelen knop",
@@ -253,12 +253,12 @@
           "default": "Langzaam afspelen"
         },
         {
-          "label": "Resterende pogingen (tekst voor readspeakers en muisover tekst)",
+          "label": "Resterende pogingen (tekst voor voorlezers en hover tekst)",
           "description": "@number wordt vervangen door het huidige aantal resterende pogingen.",
           "default": "Aantal resterende pogingen: @number"
         },
         {
-          "label": "Oneindig (tekst voor readspeakers en muisover tekst)",
+          "label": "Oneindig (tekst voor voorlezers hover tekst)",
           "default": "oneindig"
         },
         {
@@ -267,8 +267,8 @@
         },
         {
           "label": "Je resultaat",
-          "description": "@score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
-          "default": "You got @score out of @total points"
+          "description": "@score zal worden vervangen door het aantal punten. @total zal worden vervangen door het maximaal mogelijke aantal punten.",
+          "default": "Je hebt @score van de @total punten"
         },
         {
           "label": "Oplossing",
@@ -295,16 +295,16 @@
           "default": "kleine fout"
         },
         {
-          "label": "Ontbrekend woord of symbool",
+          "label": "Ontbrekend woord of teken",
           "default": "ontbrekend"
         },
         {
-          "label": "Toegevoegd woord of symbool",
+          "label": "Toegevoegd woord of teken",
           "default": "toegevoegd"
         },
         {
-          "label": "Correct solution",
-          "default": "Should have been"
+          "label": "Juiste oplossing",
+          "default": "Zou moeten zijn"
         },
         {
           "label": "Of",
@@ -339,8 +339,8 @@
           "default": "enkel aanhalingsteken"
         },
         {
-          "label": "Dubbele aanhalingstekens",
-          "default": "dubbele aanhalingstekens"
+          "label": "Dubbel aanhalingsteken",
+          "default": "dubbel aanhalingsteken"
         },
         {
           "label": "Dubbele punt",
@@ -363,8 +363,8 @@
           "default": "asterisk"
         },
         {
-          "label": "Schuine streep naar voren",
-          "default": "schuine streep naar voren"
+          "label": "Voorwaartse schuine streep",
+          "default": "voorwaartse schuine streep"
         }
       ]
     }
