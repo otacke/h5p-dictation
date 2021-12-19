@@ -1,0 +1,18 @@
+{
+  "extends": "stylelint-config-recommended",
+  "rules": {
+    "font-family-name-quotes": "always-unless-keyword",
+    "string-quotes": "double",
+    "number-leading-zero": "never",
+    "length-zero-no-unit": true,
+    "unit-case": "lower",
+    "value-keyword-case": "lower",
+    "property-case": "lower",
+    "declaration-bang-space-after": "never",
+    "declaration-bang-space-before": "always",
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-before": "never",
+    "declaration-empty-line-before": "never",
+    "selector-pseudo-element-colon-notation": "double"
+  }
+}
