@@ -1,11 +1,10 @@
 /* Only used for audio button, could go into H5Picons */
 @font-face {
   font-family: "H5PDictation";
-  src:  url('../fonts/H5PDictation.woff') format('woff');
+  src: url("../fonts/H5PDictation.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
-.h5p-dictation {}
 .h5p-dictation-no-content {
   width: auto;
   font-size: 1.5em;
@@ -34,7 +33,7 @@
   display: flex;
   align-self: flex-start;
   float: left;
-  margin: 0 0.25em 0 0;
+  margin: 0 .25em 0 0;
   font-size: 1.5em;
   width: 1.5em;
   height: 1.5em;
@@ -46,14 +45,14 @@
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  padding-top: 0.25em;
-  padding-left: 0.25em;
+  padding-top: .25em;
+  padding-left: .25em;
   flex-grow: 1;
 }
 .h5p-dictation .h5p-solution-container {
   position: relative;
-  width: calc(100% - 0.5em);
-  left: 0.25em;
+  width: calc(100% - .5em);
+  left: .25em;
 }
 .h5p-dictation .h5p-solution-container.hide {
   display: none;
@@ -63,7 +62,7 @@
   border-bottom: 1px solid #ddd;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
-  padding: 0.5em 1.25em 0.5em 0.5em;
+  padding: .5em 1.25em .5em .5em;
   text-align: left;
   position: relative;
 }
@@ -73,11 +72,11 @@
   display: inline-flex;
   flex-wrap: wrap;
   padding-right: 1.615384615em;
-  padding-bottom: 0.5em;
-  padding-left: 0.5em;
+  padding-bottom: .5em;
+  padding-left: .5em;
 }
 .h5p-dictation .h5p-solution-text.h5p-solution-last-correct {
-  padding-right: 0.5em;
+  padding-right: .5em;
 }
 .h5p-dictation .h5p-audio-minimal-button {
   border: none;
@@ -88,33 +87,31 @@
   height: 1.5em;
   line-height: 1.5em;
 }
-.h5p-dictation .h5p-audio-minimal-button:before {
-  font-size: 0.8em;
+.h5p-dictation .h5p-audio-minimal-button::before {
+  font-size: .8em;
   vertical-align: bottom;
 }
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-none {
   background: none;
   cursor: default;
 }
-.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
-  font-size: 0.6em;
+.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause::before {
+  content: "\f04c";
+  font-size: .6em;
 }
 .h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-slow {
-  font-family: "H5PDictation";
+  font-family: "H5PDictation", sans-serif;
 }
-.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-slow:before {
+.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-slow::before {
   content: "\e900";
-    font-size: 1.1em;
-}
-.h5p-dictation .h5p-audio-minimal-button.h5p-audio-minimal-pause:before {
-  content: "\f04c";
+  font-size: 1.1em;
 }
 .h5p-dictation .h5p-text-input {
-  font-family: H5PDroidSans, sans-serif;
+  font-family: "H5PDroidSans", sans-serif;
   font-size: 1em;
-  border-radius: 0.25em;
+  border-radius: .25em;
   border: 1px solid #a0a0a0;
-  padding: 0.1875em 1em 0.1875em 0.5em;
+  padding: .1875em 1em .1875em .5em;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: break-spaces;
@@ -128,7 +125,7 @@
 }
 .h5p-dictation .h5p-text-input:focus {
   outline: none;
-  box-shadow: 0 0 0.5em 0 #7fb8ff;
+  box-shadow: 0 0 .5em 0 #7fb8ff;
   border-color: #7fb8ff;
 }
 .h5p-dictation .h5p-text-input:disabled {
@@ -136,26 +133,30 @@
 }
 /* Solution markers */
 
-.h5p-dictation .h5p-answer-added, .h5p-dictation .h5p-answer-wrong, .h5p-dictation .h5p-answer-typo {
+.h5p-dictation .h5p-answer-added,
+.h5p-dictation .h5p-answer-wrong,
+.h5p-dictation .h5p-answer-typo {
   text-decoration: line-through;
 }
-.h5p-dictation .h5p-answer-missing, .h5p-dictation .h5p-answer-match {}
-.h5p-dictation .h5p-solution-added, .h5p-dictation .h5p-solution-wrong, .h5p-dictation .h5p-solution-typo, .h5p-dictation .h5p-solution-missing, .h5p-dictation .h5p-solution-match {}
-.h5p-dictation .h5p-wrapper-wrong, .h5p-dictation .h5p-wrapper-missing, .h5p-dictation .h5p-wrapper-added {
+.h5p-dictation .h5p-wrapper-wrong,
+.h5p-dictation .h5p-wrapper-missing,
+.h5p-dictation .h5p-wrapper-added {
   background-color: #f7d0d0;
   border: 1px solid #f7d0d0;
   color: #b71c1c;
-  margin-top: 0.5em;
+  margin-top: .5em;
   position: relative;
-  border-radius: 0.25em;
-  padding: 0.15em;
+  border-radius: .25em;
+  padding: .15em;
   line-height: 1em;
 }
-.h5p-dictation .h5p-wrapper-wrong:after, .h5p-dictation .h5p-wrapper-missing:after, .h5p-dictation .h5p-wrapper-added:after {
-  padding-left: 0.25em;
-  right: 0.5em;
+.h5p-dictation .h5p-wrapper-wrong::after,
+.h5p-dictation .h5p-wrapper-missing::after,
+.h5p-dictation .h5p-wrapper-added::after {
+  padding-left: .25em;
+  right: .5em;
   top: 0;
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4", sans-serif;
   text-decoration: none;
   content: "\f00d";
   color: #b71c1c;
@@ -164,17 +165,17 @@
   background-color: #f7e3cf;
   border: 1px solid #f7e3cf;
   color: #b5691c;
-  margin-top: 0.5em;
+  margin-top: .5em;
   position: relative;
-  border-radius: 0.25em;
-  padding: 0.15em;
+  border-radius: .25em;
+  padding: .15em;
   line-height: 1em;
 }
-.h5p-dictation .h5p-wrapper-typo:after {
-  padding-left: 0.25em;
-  right: 0.5em;
+.h5p-dictation .h5p-wrapper-typo::after {
+  padding-left: .25em;
+  right: .5em;
   top: 0;
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4", sans-serif;
   text-decoration: none;
   content: "\f12a";
   color: #b5691c;
@@ -183,23 +184,23 @@
   background: #9dd8bb;
   border: 1px solid #9dd8bb;
   color: #255c41;
-  margin-top: 0.5em;
+  margin-top: .5em;
   position: relative;
-  border-radius: 0.25em;
-  padding: 0.15em;
+  border-radius: .25em;
+  padding: .15em;
   line-height: 1em;
 }
-.h5p-dictation .h5p-wrapper-match:after {
-  padding-left: 0.25em;
-  right: 0.5em;
+.h5p-dictation .h5p-wrapper-match::after {
+  padding-left: .25em;
+  right: .5em;
   top: 0;
   text-decoration: none;
   content: "\f00c";
-  font-family: 'H5PFontAwesome4';
+  font-family: "H5PFontAwesome4", sans-serif;
   color: #255c41;
 }
 .h5p-spacer {
-  margin-right: 0.25em;
+  margin-right: .25em;
 }
 /* This could be part of H5P.Question */
 
@@ -207,10 +208,10 @@
 .h5p-question-minus-one-half {
   position: absolute;
   width: 1.923076923em;
-  height: calc(1.923076923em * 0.638297872);
+  height: calc(1.923076923em * .638297872);
   background-size: 100% 100%;
   right: -1.615384615em;
-  top: -0.846153846em;
+  top: -.846153846em;
   z-index: 1;
   opacity: 1;
   transition: opacity 150ms linear, transform 150ms linear;
