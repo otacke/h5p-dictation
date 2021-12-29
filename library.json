@@ -5,7 +5,9 @@
   "minorVersion": 2,
   "patchVersion": 0,
   "runnable": 1,
-  "embedTypes": ["iframe"],
+  "embedTypes": [
+    "iframe"
+  ],
   "author": "Oliver Tacke",
   "license": "MIT",
   "machineName": "H5P.Dictation",
