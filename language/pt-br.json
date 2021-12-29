@@ -208,6 +208,10 @@
           "default": "Verificar"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Texto para o botão \"Repetir\"",
           "default": "Tente novamente"
         },

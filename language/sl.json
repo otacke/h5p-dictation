@@ -208,6 +208,10 @@
           "default": "Preveri"
         },
         {
+          "label": "Text for \"Submit\" button",
+          "default": "Submit"
+        },
+        {
           "label": "Besedilo za gumb \"Poskusi ponovno\"",
           "default": "Poskusi ponovno"
         },
