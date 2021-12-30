@@ -87,34 +87,34 @@
           "description": "Θα περιορίσει το πόσες φορές μπορούν να ακουστούν τα δείγματα ήχου για κάθε πρόταση."
         },
         {
-          "label": "Disable pause option",
-          "description": "If checked, pausing the audio while playing is not possible."
+          "label": "Απενεργοποίηση της επιλογής παύσης",
+          "description": "Εάν επιλεγεί, δεν είναι δυνατή η παύση του ήχου κατά την αναπαραγωγή."
         },
         {
-          "label": "Shuffle sentences",
-          "description": "Define when the sentences should be shuffled.",
+          "label": "Ανακάτεμα προτάσεων",
+          "description": "Καθορίστε πότε πρέπει να ανακατεύονται οι προτάσεις.",
           "options": [
             {
-              "label": "Never"
+              "label": "Ποτέ"
             },
             {
-              "label": "Once when starting exercise"
+              "label": "Μία φορά κατά την έναρξη της άσκησης"
             },
             {
-              "label": "On every try"
+              "label": "Σε κάθε προσπάθεια"
             }
           ]
         },
         {
-          "label": "Scoring",
+          "label": "Βαθμολογία",
           "fields": [
             {
               "label": "Αγνόηση σημείων στίξης",
               "description": "Αν επιλεγεί, τα σημεία στίξης δεν θα λαμβάνονται υπόψη κατά τη βαθμολόγηση."
             },
             {
-              "label": "Zero mistakes mode",
-              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+              "label": "Λειτουργία μηδενικών λαθών",
+              "description": "Εάν επιλεγεί, μόνο οι σωστές απαντήσεις θα ληφθούν υπόψη για τη βαθμολόγηση. Τα λάθη δεν θα τιμωρούνται."
             },
             {
               "label": "Τυπογραφικά λάθη",
@@ -134,11 +134,11 @@
           ]
         },
         {
-          "label": "Text",
+          "label": "Κείμενο",
           "fields": [
             {
-              "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "label": "Διαχωριστικό λέξεων",
+              "description": "Καθορίστε το διαχωριστικό των λέξεων διαφορετικό από τον χαρακτήρα διαστήματος για την υποστήριξη εναλλακτικών λύσεων με διαφορετικό αριθμό λέξεων.",
               "default": " "
             },
             {
@@ -163,7 +163,7 @@
           ]
         },
         {
-          "label": "Presentation of feedback",
+          "label": "Παρουσίαση ανατροφοδοτήσεων",
           "fields": [
             {
               "label": "Ειδική προβολή τυπογραφικών λαθών",
@@ -190,7 +190,7 @@
           "label": "Ενεργοποίηση κουμπιού \"Προβολή λύσης\""
         },
         {
-          "label": "Show solution on check"
+          "label": "Εμφάνιση λύσης κατά τον έλεγχο"
         }
       ]
     },
@@ -203,17 +203,17 @@
           "default": "Έχεις κάνει συνολικά @total λάθη."
         },
         {
-          "label": "General feedback (zero mistakes mode)",
-          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
+          "label": "Γενική ανατροφοδότηση (λειτουργία μηδενικών λαθών)",
+          "description": "Μπορείτε να χρησιμοποιήσετε διάφορες μεταβλητές που θα αντικατασταθούν με τον κατάλληλο αριθμό: @wrong = λάθος λέξεις, @added = πρόσθετες λέξεις, @missing = λέξεις που λείπουν, @typo = ορθογραφικά λάθη.",
+          "default": "Πληκτρολογήσατε σωστά @total λέξη/εις και @typo με μικρά λάθη."
         },
         {
           "label": "Ετικέτα κουμπιού \"Έλεγχος\"",
           "default": "Έλεγχος"
         },
         {
-          "label": "Text for \"Submit\" button",
-          "default": "Submit"
+          "label": "Ετικέτα κουμπού \"Υποβολή\"",
+          "default": "Υποβολή"
         },
         {
           "label": "Ετικέτα κουμπού \"Επανάληψη\"",
@@ -233,16 +233,16 @@
       "label": "Ακουστική υποβοήθηση",
       "fields": [
         {
-          "label": "Assistive technology description for \"Check\" button",
-          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+          "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \"Έλεγχος\"",
+          "default": "Ελέγξτε τις απαντήσεις. Οι απαντήσεις θα σημειωθούν ως σωστές, λανθασμένες ή μη αναπαντημένες."
         },
         {
-          "label": "Assistive technology description for \"Show Solution\" button",
-          "default": "Show the solution. The task will be marked with its correct solution."
+          "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \"Προβολή λύσης\"",
+          "default": "Προβολή της λύσης. Η εργασία θα επισημανθεί με τη σωστή λύση."
         },
         {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
+          "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \"Επανάληψη\"",
+          "default": "Επαναλάβετε την εργασία. Επαναφέρετε όλες τις απαντήσεις και ξεκινήστε από την αρχή."
         },
         {
           "label": "Κουμπί αναπαραγωγής",
@@ -268,7 +268,7 @@
         {
           "label": "Τα αποτελέσματά σας",
           "description": "@score θα αντικατασταθεί από τον αριθμό βαθμών. @total θα αντικατασταθεί απο τον μέγιστο αριθμό βαθμών.",
-          "default": "You got @score out of @total points"
+          "default": "Πήρατε @score από @total βαθμούς"
         },
         {
           "label": "Λύση",
