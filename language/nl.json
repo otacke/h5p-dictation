@@ -230,7 +230,7 @@
       ]
     },
     {
-      "label": "Voorlezer",
+      "label": "Schermlezer",
       "fields": [
         {
           "label": "Ondersteunende technologie beschrijving voor \"Controleer\"-knop",
@@ -253,12 +253,12 @@
           "default": "Langzaam afspelen"
         },
         {
-          "label": "Resterende pogingen (tekst voor voorlezers en hover tekst)",
+          "label": "Resterende pogingen (tekst voor schermlezers en hover tekst)",
           "description": "@number wordt vervangen door het huidige aantal resterende pogingen.",
           "default": "Aantal resterende pogingen: @number"
         },
         {
-          "label": "Oneindig (tekst voor voorlezers hover tekst)",
+          "label": "Oneindig (tekst voor schermlezers hover tekst)",
           "default": "oneindig"
         },
         {
