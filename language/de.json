@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Typ",
-          "description": "Optionales Medium, das über der Frage dargestellt wird."
+          "description": "Medium, das wahlweise oberhalb der Aufgabe angezeigt wird."
         },
         {
           "label": "Bild-Zoom deaktivieren"
@@ -87,8 +87,8 @@
           "description": "Begrenzt die Anzahl der Versuche, die man jeweils zum Anhören der langsamen Tonaufnahme hat."
         },
         {
-          "label": "Disable pause option",
-          "description": "If checked, pausing the audio while playing is not possible."
+          "label": "Pause verhindern",
+          "description": "Wenn diese Option gewählt ist, können die Tondateien während des Abspielens nicht pausiert werden."
         },
         {
           "label": "Sätze mischen",
