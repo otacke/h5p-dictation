@@ -48,7 +48,7 @@
       }
     },
     {
-      "label": "Retroalimentación global",
+      "label": "Retroalimentación Global",
       "fields": [
         {
           "widgets": [
@@ -62,7 +62,7 @@
           "field": {
             "fields": [
               {
-                "label": "Rango de Puntaje"
+                "label": "Rango del Puntaje"
               },
               {},
               {
