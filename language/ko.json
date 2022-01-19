@@ -138,8 +138,7 @@
           "fields": [
             {
               "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-              "default": " "
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
             },
             {
               "label": "쓰기 지시사항",

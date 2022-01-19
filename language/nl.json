@@ -138,8 +138,7 @@
           "fields": [
             {
               "label": "Woordscheidingsteken",
-              "description": "Definieer het scheidingsteken van woorden anders dan spatie om alternatieve oplossingen met een verschillend aantal woorden te ondersteunen.",
-              "default": " "
+              "description": "Definieer het scheidingsteken van woorden anders dan spatie om alternatieve oplossingen met een verschillend aantal woorden te ondersteunen."
             },
             {
               "label": "Schrijfrichting",

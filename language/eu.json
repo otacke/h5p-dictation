@@ -138,7 +138,6 @@
           "fields": [
             {
               "label": "Hitz-banatzailea",
-              "default": " ",
               "description": "Zehaztu hutsuneaz besteko hitzen banatzailea hitz kopuru ezberdinetako emaitzak onartu ahal izateko."
             },
             {

@@ -138,8 +138,7 @@
           "fields": [
             {
               "label": "Séparateur de mots",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-              "default": " "
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
             },
             {
               "label": "Sens de l'écriture",

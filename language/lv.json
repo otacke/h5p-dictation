@@ -136,8 +136,7 @@
           "fields": [
             {
               "label": "Vārdu atdalītājs",
-              "description": "Norādiet vārdu atdalītāju, kas atšķiras no atstarpes rakstzīmes, lai atbalstītu alternatīvus risinājumus ar atšķirīgu vārdu skaitu.",
-              "default": " "
+              "description": "Norādiet vārdu atdalītāju, kas atšķiras no atstarpes rakstzīmes, lai atbalstītu alternatīvus risinājumus ar atšķirīgu vārdu skaitu."
             },
             {
               "label": "Rakstīšanas virziens",
