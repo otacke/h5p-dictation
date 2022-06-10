@@ -13,7 +13,7 @@
       ]
     },
     {
-      "label": "Description de la tâche",
+      "label": "Task description",
       "description": "Décrivez votre tâche ici.",
       "placeholder": "Veuillez écouter attentivement et écrire ce que vous entendez."
     },
