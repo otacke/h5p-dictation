@@ -1,19 +1,19 @@
 {
   "semantics": [
     {
-      "label": "Medios",
+      "label": "Media",
       "fields": [
         {
-          "label": "Tipo",
-          "description": "Medios adicionais amosados enriba da pregunta."
+          "label": "Type",
+          "description": "Optional media to display above the question."
         },
         {
-          "label": "Desactivar zoom de imaxes"
+          "label": "Disable image zooming"
         }
       ]
     },
     {
-      "label": "Descrición da tarefa",
+      "label": "Task description",
       "description": "Describe a túa tarefa aquí.",
       "placeholder": "Por favor, escoita atentamente e escribe o que oias."
     },
@@ -21,7 +21,7 @@
       "label": "Oracións",
       "widgets": [
         {
-          "label": "Por defecto"
+          "label": "Default"
         }
       ],
       "entity": "Oración",
@@ -48,26 +48,26 @@
       }
     },
     {
-      "label": "Retroalimentación Xeral",
+      "label": "Overall Feedback",
       "fields": [
         {
           "widgets": [
             {
-              "label": "Por defecto"
+              "label": "Default"
             }
           ],
-          "label": "Definir retroalimentación personalizada para calquera rango de puntuación",
-          "description": "Preme o botón \"Engadir rango\" para engadir todos os rangos que precises. Exemplo: 0-20% Puntuación Mala, 21-91% Puntuación Media, 91-100% Puntuación Xenial!",
-          "entity": "rango",
+          "label": "Define custom feedback for any score range",
+          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
+          "entity": "range",
           "field": {
             "fields": [
               {
-                "label": "Rango de Puntuación"
+                "label": "Score Range"
               },
               {},
               {
-                "label": "Retroalimentación para o rango de puntuación definido",
-                "placeholder": "Escribe a retroalimentación"
+                "label": "Feedback for defined score range",
+                "placeholder": "Fill in the feedback"
               }
             ]
           }
@@ -75,8 +75,8 @@
       ]
     },
     {
-      "label": "Configuración do comportamento",
-      "description": "Estas opcións permiten controlar o comportamento da tarefa.",
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
       "fields": [
         {
           "label": "Intentos máximos",
@@ -194,7 +194,7 @@
       ]
     },
     {
-      "label": "Interface de usuario",
+      "label": "User interface",
       "fields": [
         {
           "label": "Retroalimentación xeral",
@@ -229,7 +229,7 @@
       ]
     },
     {
-      "label": "Lector de pantalla",
+      "label": "Readspeaker",
       "fields": [
         {
           "label": "Descrición para as texnoloxías de asistencia  do botón \"Comprobar\"",

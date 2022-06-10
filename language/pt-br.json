@@ -1,21 +1,21 @@
 {
   "semantics": [
     {
-      "label": "Média",
+      "label": "Mídia",
       "fields": [
         {
           "label": "Tipo",
           "description": "Mídia opcional para exibir acima da pergunta."
         },
         {
-          "label": "Desativar zoom da imagem"
+          "label": "Desativar o zoom da imagem"
         }
       ]
     },
     {
       "label": "Descrição da tarefa",
-      "description": "Descreve sua tarefa aqui.",
-      "placeholder": "Por favor escute cuidadosamente e escreva o que ouvir."
+      "description": "Descreva sua tarefa aqui.",
+      "placeholder": "Por favor, ouça com atenção e escreva o que ouvir."
     },
     {
       "label": "Frases",
@@ -30,19 +30,19 @@
         "fields": [
           {
             "label": "Descrição",
-            "description": "Como opção, você pode colocar uma descrição simples acima do campo de entrada de texto, útil para diálogos, por exemplo."
+            "description": "Opcionalmente, você pode colocar uma descrição simples acima do campo de entrada de texto, útil, por exemplo, para diálogos."
           },
           {
             "label": "Amostra de som",
             "description": "Frase falada em velocidade normal"
           },
           {
-            "label": "Amostra de som lenta",
+            "label": "Amostra de som lento",
             "description": "Frase falada em velocidade lenta"
           },
           {
             "label": "Texto",
-            "description": "Texto que deve ser escrito. Você pode adicionar grafias alternativas a uma palavra adicionando uma linha vertical (|) atrás seguida por uma alternativa."
+            "description": "Texto que deve ser escrito. Você pode adicionar grafias alternativas a uma palavra adicionando uma linha vertical (|) atrás, seguida por uma alternativa."
           }
         ]
       }
@@ -56,17 +56,17 @@
               "label": "Padrão"
             }
           ],
-          "label": "Definir feedback personalizado para qualquer intervalo de pontuação",
-          "description": "Clique no botão \"Adicionar intervalo \" para adicionar quantos intervalos forem necessários. Exemplo: 0-20% Pontuação ruim, 21-91% Pontuação média, 91-100% Pontuação máxima!",
-          "entity": "alcance",
+          "label": "Definir feedback personalizado para qualquer faixa de pontuação",
+          "description": "Clique no botão \"Adicionar faixa\" para adicionar quantos intervalos você precisar. Exemplo: 0-20% Pontuação Ruim, 21-91% Pontuação Média, 91-100% Pontuação Ótima!",
+          "entity": "faixa",
           "field": {
             "fields": [
               {
-                "label": "Faixa de pontuação"
+                "label": "Faixa de Pontuação"
               },
               {},
               {
-                "label": "Feedback para intervalo de pontuação definido",
+                "label": "Feedback para a faixa de pontuação definida",
                 "placeholder": "Preencha o feedback"
               }
             ]
@@ -76,45 +76,45 @@
     },
     {
       "label": "Configurações comportamentais",
-      "description": "Essas opções permitem controlar como a tarefa se comporta.",
+      "description": "Estas opções lhe permitirão controlar como a tarefa se comporta.",
       "fields": [
         {
-          "label": "Tentativas máximas",
-          "description": "Limitará o número de vezes que as amostras de cada sentença podem ser ouvidas."
+          "label": "Número máximo de tentativas",
+          "description": "Limitará o número de vezes que as amostras para cada sentença poderão ser ouvidas."
         },
         {
-          "label": "Tentativas máximas para velocidade lenta",
-          "description": "Limitará o número de vezes que as amostras lentas de cada sentença podem ser ouvidas."
+          "label": "Número máximo de tentativas para velocidade lenta",
+          "description": "Limitará o número de vezes que as amostras lentas de cada sentença poderão ser ouvidas."
         },
         {
-          "label": "Disable pause option",
-          "description": "If checked, pausing the audio while playing is not possible."
+          "label": "Desativar opção de pausa",
+          "description": "Se marcado, a pausa do áudio durante a reprodução não será possível."
         },
         {
-          "label": "Shuffle sentences",
-          "description": "Define when the sentences should be shuffled.",
+          "label": "Embaralhar as frases",
+          "description": "Definir quando as sentenças devem ser embaralhadas.",
           "options": [
             {
-              "label": "Never"
+              "label": "Nunca"
             },
             {
-              "label": "Once when starting exercise"
+              "label": "Uma vez ao iniciar o exercício"
             },
             {
-              "label": "On every try"
+              "label": "Em cada tentativa"
             }
           ]
         },
         {
-          "label": "Scoring",
+          "label": "Pontuação",
           "fields": [
             {
               "label": "Ignorar marcas de pontuação",
-              "description": "Se marcada, os sinais de pontuação não serão considerados para pontuação."
+              "description": "Se marcado, os sinais de pontuação não serão considerados para pontuação."
             },
             {
-              "label": "Zero mistakes mode",
-              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+              "label": "Modo erro zero",
+              "description": "Se marcado, somente as respostas corretas serão consideradas para a pontuação. Os erros não serão punidos."
             },
             {
               "label": "Valor dos erros de digitação",
@@ -134,21 +134,21 @@
           ]
         },
         {
-          "label": "Text",
+          "label": "Texto",
           "fields": [
             {
-              "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
+              "label": "Separador de palavras",
+              "description": "Defina o separador de palavras diferente do caractere de espaço para suportar soluções alternativas com diferentes números de palavras."
             },
             {
-              "label": "Direção de escrita",
-              "description": "Defina se o idioma das frases é da direita para a esquerda ou da esquerda para a direita.",
+              "label": "Direção da escrita",
+              "description": "Definir se a linguagem das sentenças é da direita para a esquerda ou da esquerda para a direita.",
               "options": [
                 {
                   "label": "Detecção automática"
                 },
                 {
-                  "label": "Direita para esquerda"
+                  "label": "Direita para a esquerda"
                 },
                 {
                   "label": "Esquerda para a direita"
@@ -162,7 +162,7 @@
           ]
         },
         {
-          "label": "Presentation of feedback",
+          "label": "Apresentação de feedback",
           "fields": [
             {
               "label": "Exibição de erro de digitação personalizada",
@@ -183,7 +183,7 @@
           ]
         },
         {
-          "label": "Ativar \"Repetir\""
+          "label": "Ativar \"Tentar Novamente\""
         },
         {
           "label": "Ativar o botão \"Mostrar solução\""
@@ -198,28 +198,28 @@
       "fields": [
         {
           "label": "Feedback geral",
-          "description": "Você pode usar vários espaços reservados que serão substituídos pelo número adequado: @matches = número de correspondências, @total = total de erros, @capped = total de erros limitados, @wrong = palavras incorretas, @added = palavras adicionais, @missing = missing palavras, @typo = erros de digitação",
+          "description": "Você pode usar várias variáveis que serão substituídas pelo número adequado: @matches = número de correspondências, @total = total de erros, @capped = total de erros limitados, @wrong = palavras incorretas, @added = palavras adicionais, @missing = palavras ausentes, @typo = erros de digitação",
           "default": "Você cometeu @total erro(s)."
         },
         {
-          "label": "General feedback (zero mistakes mode)",
-          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
+          "label": "Feedback geral (modo erro zero)",
+          "description": "É possível utilizar várias variáveis que serão substituídas com o número adequado: @matches = número de correspondências, @total = pontuação total, @wrong = palavras erradas, @added = palavras adicionais, @missing = palavras ausentes, @typo = erros de digitação",
+          "default": "Você inseriu @total palavra(s) corretamente e @typo palavra(s) com pequenos erros."
         },
         {
           "label": "Texto para o botão \"Verificar\"",
           "default": "Verificar"
         },
         {
-          "label": "Text for \"Submit\" button",
-          "default": "Submit"
+          "label": "Texto para o botão \"Enviar\"",
+          "default": "Enviar"
         },
         {
-          "label": "Texto para o botão \"Repetir\"",
-          "default": "Tente novamente"
+          "label": "Texto para o botão \"Tentar Novamente\"",
+          "default": "Tentar Novamente"
         },
         {
-          "label": "Texto para o botão \"Mostrar solução\"",
+          "label": "Texto para o botão \"Mostrar Solução\"",
           "default": "Mostrar solução"
         },
         {
@@ -229,39 +229,39 @@
       ]
     },
     {
-      "label": "Alto-falante",
+      "label": "Leitor de Tela",
       "fields": [
         {
-          "label": "Assistive technology description for \"Check\" button",
-          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+          "label": "Descrição da tecnologia de assistência para o botão \"Verificar\"",
+          "default": "Verifique as respostas. As respostas serão marcadas como corretas, incorretas, ou sem resposta."
         },
         {
-          "label": "Assistive technology description for \"Show Solution\" button",
-          "default": "Show the solution. The task will be marked with its correct solution."
+          "label": "Descrição da tecnologia de assistência para o botão \"Mostrar Solução\"",
+          "default": "Mostrar a solução. A tarefa será marcada com sua solução correta."
         },
         {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
+          "label": "Descrição da tecnologia de assistência para o botão \"Tentar Novamente\"",
+          "default": "Tente novamente a tarefa. Reinicialize todas as respostas e recomece a tarefa."
         },
         {
           "label": "Botão Reproduzir",
           "default": "Reproduzir"
         },
         {
-          "label": "Botão reproduzir pausadamente",
-          "default": "Reproduzir pausadamente"
+          "label": "Botão reproduzir lentamente",
+          "default": "Reproduzir lentamente"
         },
         {
-          "label": "Tentativas restantes (texto para leitura e texto flutuante)",
-          "description": "Tentativas restantes (texto para leitura e texto flutuante) @number será substituído pelo número atual de tentativas restantes.",
+          "label": "Tentativas restantes (texto para leitor de tela e texto flutuante)",
+          "description": "@number será substituído pelo número atual de tentativas restantes.",
           "default": "Número de tentativas restantes: @number"
         },
         {
-          "label": "Infinito (texto para leitura e texto flutuante)",
+          "label": "Infinito (texto para leitor de tela e texto flutuante)",
           "default": "Infinito"
         },
         {
-          "label": "Campo de texto de digitação",
+          "label": "Digite o campo de texto",
           "default": "Digite o que você ouviu."
         },
         {
@@ -271,15 +271,15 @@
         },
         {
           "label": "Solução",
-          "default": "solução"
+          "default": "Solução"
         },
         {
-          "label": "Frase",
-          "default": "frase"
+          "label": "Sentença",
+          "default": "Sentença"
         },
         {
           "label": "Item",
-          "default": "item"
+          "default": "Item"
         },
         {
           "label": "Correto",
@@ -290,15 +290,15 @@
           "default": "incorreto"
         },
         {
-          "label": "Pequeno erro",
-          "default": "pequeno erro"
+          "label": "Erro pequeno",
+          "default": "erro pequeno"
         },
         {
-          "label": "Palavra ou símbolo faltando",
-          "default": "faltando"
+          "label": "Palavra ou símbolo ausente",
+          "default": "ausente"
         },
         {
-          "label": "Adicionado palavra ou símbolo",
+          "label": "Adicionada palavra ou símbolo",
           "default": "adicionado"
         },
         {
@@ -318,8 +318,8 @@
           "default": "pontos"
         },
         {
-          "label": "Período",
-          "default": "período"
+          "label": "Ponto",
+          "default": "ponto"
         },
         {
           "label": "Ponto de exclamação",
@@ -334,7 +334,7 @@
           "default": "vírgula"
         },
         {
-          "label": "Aspas simples",
+          "label": "Aspa simples",
           "default": "aspas simples"
         },
         {
@@ -346,8 +346,8 @@
           "default": "dois pontos"
         },
         {
-          "label": "Ponto e virgula",
-          "default": "ponto e virgula"
+          "label": "Ponto e vírgula",
+          "default": "ponto e vírgula"
         },
         {
           "label": "Mais",
