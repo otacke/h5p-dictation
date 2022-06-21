@@ -1,19 +1,19 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Medios",
       "fields": [
         {
-          "label": "Type",
-          "description": "Optional media to display above the question."
+          "label": "Tipo",
+          "description": "Medios opcionais amosados enriba da pregunta."
         },
         {
-          "label": "Disable image zooming"
+          "label": "Desactivar zoom de imaxe"
         }
       ]
     },
     {
-      "label": "Task description",
+      "label": "Descrición da tarefa",
       "description": "Describe a túa tarefa aquí.",
       "placeholder": "Por favor, escoita atentamente e escribe o que oias."
     },
@@ -21,7 +21,7 @@
       "label": "Oracións",
       "widgets": [
         {
-          "label": "Default"
+          "label": "Por defecto"
         }
       ],
       "entity": "Oración",
@@ -48,26 +48,26 @@
       }
     },
     {
-      "label": "Overall Feedback",
+      "label": "Retroalimentación Xeral",
       "fields": [
         {
           "widgets": [
             {
-              "label": "Default"
+              "label": "Por defecto"
             }
           ],
-          "label": "Define custom feedback for any score range",
-          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
-          "entity": "range",
+          "label": "Establecer retroalimentación personalizada para calquera rango de puntuación",
+          "description": "Preme o botón \"Engadir rango\" para engadir tantos rangos como precises. Exemplo: 0-20% Mala puntuación, 21-91% Puntuación media, 91-100% Puntuación estupenda!",
+          "entity": "rango",
           "field": {
             "fields": [
               {
-                "label": "Score Range"
+                "label": "Rango de Puntuación"
               },
               {},
               {
-                "label": "Feedback for defined score range",
-                "placeholder": "Fill in the feedback"
+                "label": "Retroalimentación para rango de puntuación definido",
+                "placeholder": "Escribe a túa retroalimentación"
               }
             ]
           }
@@ -75,8 +75,8 @@
       ]
     },
     {
-      "label": "Behavioural settings",
-      "description": "These options will let you control how the task behaves.",
+      "label": "Configuración do comportamento",
+      "description": "Estas opcións permitiranche controlar o comportamento da tarefa.",
       "fields": [
         {
           "label": "Intentos máximos",
@@ -87,29 +87,29 @@
           "description": "Limita o número de veces que poden escoitarse as mostras de audio a velocidade lenta para cada oración."
         },
         {
-          "label": "Disable pause option",
-          "description": "If checked, pausing the audio while playing is not possible."
+          "label": "Desactivar a opción de pausa",
+          "description": "Se está marcado, non é posible deter o son durante a reprodución."
         },
         {
-          "label": "Shuffle sentences",
-          "description": "Define when the sentences should be shuffled.",
+          "label": "Barallar frases",
+          "description": "Define cando se deben barallar as frases.",
           "options": [
             {
-              "label": "Never"
+              "label": "Nunca"
             },
             {
-              "label": "Once when starting exercise"
+              "label": "Unha vez ao comezar o exercicio"
             },
             {
-              "label": "On every try"
+              "label": "En cada intento"
             }
           ]
         },
         {
-          "label": "Scoring",
+          "label": "Puntuación",
           "fields": [
             {
-              "label": "Ignorar signos de puntuación",
+              "label": "Ignorar os signos de puntuación",
               "description": "Se se marca esta opción, non se terán en conta os signos de puntuación para o resultado."
             },
             {
@@ -137,8 +137,8 @@
           "label": "Text",
           "fields": [
             {
-              "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
+              "label": "Separador de palabras",
+              "description": "Define o separador de palabras diferente do carácter de espazo para admitir solucións alternativas con diferente número de palabras."
             },
             {
               "label": "Dirección da escritura",
@@ -162,7 +162,7 @@
           ]
         },
         {
-          "label": "Presentation of feedback",
+          "label": "Presentación da retroalimentación",
           "fields": [
             {
               "label": "Marcado de erros tipográficos personalizado",
@@ -189,12 +189,12 @@
           "label": "Activar botón \"Amosar solución\""
         },
         {
-          "label": "Show solution on check"
+          "label": "Mostrar a solución na comprobación"
         }
       ]
     },
     {
-      "label": "User interface",
+      "label": "Interface de usuario",
       "fields": [
         {
           "label": "Retroalimentación xeral",
@@ -211,7 +211,7 @@
           "default": "Comprobar"
         },
         {
-          "label": "Text for \"Submit\" button",
+          "label": "Texto para o botón \"Enviar\"",
           "default": "Submit"
         },
         {
@@ -229,18 +229,18 @@
       ]
     },
     {
-      "label": "Readspeaker",
+      "label": "Lector de pantalla",
       "fields": [
         {
-          "label": "Descrición para as texnoloxías de asistencia  do botón \"Comprobar\"",
+          "label": "Descrición para as tecnoloxías de asistencia do botón \"Comprobar\"",
           "default": "Comproba as respostas. As respostas marcaranse como correctas, incorrectas ou non contestadas."
         },
         {
-          "label": "Descrición para as texnoloxías de asistencia  do botón \"Amosar solución\"",
+          "label": "Descrición para as tecnoloxías de asistencia do botón \"Amosar solución\"",
           "default": "Amosar a solución. Marcarase a tarefa coas solucións correctas."
         },
         {
-          "label": "Descrición para as texnoloxías de asistencia  do botón \"Reintentar\"",
+          "label": "Descrición para as tecnoloxías de asistencia do botón \"Tentar de novo\"",
           "default": "Reintenta a tarefa. Borra todas as respostas e empeza a tarefa de novo."
         },
         {
