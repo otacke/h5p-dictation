@@ -92,7 +92,7 @@ class Dictation extends H5P.Question {
     if (!params) {
       return;
     }
-
+    this.correctTotal = 0;
     this.contentId = contentId;
     this.contentData = contentData || {};
 
@@ -528,6 +528,7 @@ class Dictation extends H5P.Question {
 
       this.mistakesCapped = this.maxMistakes;
       this.isAnswered = false;
+      this.correctTotal = 0;
     };
 
     /**
