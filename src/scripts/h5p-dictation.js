@@ -37,6 +37,7 @@ class Dictation extends H5P.Question {
         },
         enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
         enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
+        enableCheckButton: true,
         enableSolutionOnCheck: false
       },
       l10n: {
@@ -277,7 +278,7 @@ class Dictation extends H5P.Question {
         if (this.params.behaviour.enableRetry && !this.isPassed()) {
           this.showButton('try-again');
         }
-      }, true, {
+      }, this.params.behavior.enableCheckButton, {
         'aria-label': this.params.a11y.check
       }, {
         contentData: this.contentData,
@@ -517,7 +518,10 @@ class Dictation extends H5P.Question {
       this.removeFeedback();
       this.hideButton('try-again');
       this.hideButton('show-solution');
-      this.showButton('check-answer');
+
+      if (this.params.behavior.enableCheckButton) {
+        this.showButton('check-answer');
+      }
 
       if (this.introduction) {
         this.introduction.focus();
