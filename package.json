@@ -4,6 +4,7 @@
   "description": "Let your students train their listening comprehension and spelling skills.",
   "scripts": {
     "test": "jest",
+    "lint": "stylelint './src/**/*.css' && eslint './src/**/*.js'",
     "build": "cross-env NODE_ENV=production webpack",
     "watch": "cross-env NODE_ENV=development webpack --watch"
   },
