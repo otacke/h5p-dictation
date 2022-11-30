@@ -278,7 +278,7 @@ class Dictation extends H5P.Question {
         if (this.params.behaviour.enableRetry && !this.isPassed()) {
           this.showButton('try-again');
         }
-      }, this.params.behavior.enableCheckButton, {
+      }, this.params.behaviour.enableCheckButton, {
         'aria-label': this.params.a11y.check
       }, {
         contentData: this.contentData,
@@ -519,7 +519,7 @@ class Dictation extends H5P.Question {
       this.hideButton('try-again');
       this.hideButton('show-solution');
 
-      if (this.params.behavior.enableCheckButton) {
+      if (this.params.behaviour.enableCheckButton) {
         this.showButton('check-answer');
       }
 
