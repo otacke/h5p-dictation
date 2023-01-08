@@ -1,36 +1,44 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
-const isProd = (nodeEnv === 'production');
+const libraryName = process.env.npm_package_name;
 
 module.exports = {
   mode: nodeEnv,
+  resolve: {
+    alias: {
+      '@services': path.resolve(__dirname, 'src/scripts/services'),
+      '@scripts': path.resolve(__dirname, 'src/scripts'),
+      '@styles': path.resolve(__dirname, 'src/styles')
+    }
+  },
   optimization: {
-    minimize: isProd,
+    minimize: nodeEnv === 'production',
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          compress:{
+          compress: {
             drop_console: true,
           }
         }
-      }),
-    ],
+      })
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'h5p-dictation.css'
+      filename: `${libraryName}.css`
     })
   ],
   entry: {
-    dist: './src/entries/h5p-dictation.js'
+    dist: './src/entries/dist.js'
   },
   output: {
-    filename: 'h5p-dictation.js',
+    filename: `${libraryName}.js`,
     path: path.resolve(__dirname, 'dist')
   },
+  target: ['browserslist'],
   module: {
     rules: [
       {
@@ -47,9 +55,11 @@ module.exports = {
               publicPath: ''
             }
           },
-          { loader: "css-loader" },
           {
-            loader: "sass-loader"
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
           }
         ]
       },
@@ -68,5 +78,5 @@ module.exports = {
   stats: {
     colors: true
   },
-  devtool: (isProd) ? undefined : 'eval-cheap-module-source-map'
+  ...(nodeEnv !== 'production' && { devtool: 'eval-cheap-module-source-map' })
 };

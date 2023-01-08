@@ -9,8 +9,9 @@ H5PUpgrades['H5P.Dictation'] = (function () {
        * Move parameters in Behavioural Settings.
        * Correct use of enableSolution => enableSolutionsButton
        *
-       * @param {Object} parameters
+       * @param {object} parameters
        * @param {function} finished
+       * @param extras
        */
       1: function (parameters, finished, extras) {
         if (parameters && parameters.behaviour) {

@@ -24,15 +24,15 @@ const testCasesStripPunctuation = [
   {string: 'John', result: 'John'},
   {string: 'John goes to school.', result: 'John goes to school'},
   {string: 'John goes to school. Do you?', result: 'John goes to school Do you'},
-  {string: "Users' browser", result: "Users' browser"},
-  {string: "John's car broke.", result: "John's car broke"},
-  {string: "¿Qué?", result: "Qué"},
-  {string: "¿Qué? Hola!", result: "Qué Hola"},
-  {string: "¿Qué? Foo's Hola!", result: "Qué Foo's Hola"},
-  {string: "a - b", result: "a b"},
-  {string: "a- b", result: "a b"},
-  {string: "a -b", result: "a b"},
-  {string: "a - b – c — d", result: "a b c d"}
+  {string: 'Users\' browser', result: 'Users\' browser'},
+  {string: 'John\'s car broke.', result: 'John\'s car broke'},
+  {string: '¿Qué?', result: 'Qué'},
+  {string: '¿Qué? Hola!', result: 'Qué Hola'},
+  {string: '¿Qué? Foo\'s Hola!', result: 'Qué Foo\'s Hola'},
+  {string: 'a - b', result: 'a b'},
+  {string: 'a- b', result: 'a b'},
+  {string: 'a -b', result: 'a b'},
+  {string: 'a - b – c — d', result: 'a b c d'}
 ];
 
 for (let i = 0; i < testCasesStripPunctuation.length; i++) {
@@ -47,12 +47,12 @@ const testCasesAddSpaces = [
   {string: 'John', result: 'John'},
   {string: 'John goes to school.', result: 'John goes to school .'},
   {string: 'John goes to school. Do you?', result: 'John goes to school . Do you ?'},
-  {string: "Users' browser", result: "Users' browser"},
-  {string: "John's car broke.", result: "John's car broke ."},
-  {string: "¿Qui?", result: "¿ Qui ?"},
-  {string: "¿Qué?", result: "¿ Qué ?"},
-  {string: "¿Qué? Hola!", result: "¿ Qué ? Hola !"},
-  {string: "¿Qué? Foo's Hola!", result: "¿ Qué ? Foo's Hola !"}
+  {string: 'Users\' browser', result: 'Users\' browser'},
+  {string: 'John\'s car broke.', result: 'John\'s car broke .'},
+  {string: '¿Qui?', result: '¿ Qui ?'},
+  {string: '¿Qué?', result: '¿ Qué ?'},
+  {string: '¿Qué? Hola!', result: '¿ Qué ? Hola !'},
+  {string: '¿Qué? Foo\'s Hola!', result: '¿ Qué ? Foo\'s Hola !'}
 ];
 
 for (let i = 0; i < testCasesAddSpaces.length; i++) {

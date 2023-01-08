@@ -1,11 +1,12 @@
-import Util from './h5p-dictation-util';
+import Util from '@services/util';
 
 /** Class representing a solution */
 class Solution {
   /**
-   * @constructor
+   * @class
+   * @param {object} [params={}] Parameters.
    */
-  constructor(params) {
+  constructor(params = {}) {
     this.params = params;
 
     // Solution words
@@ -21,10 +22,10 @@ class Solution {
       const wordElement = this.wordMarked ||
         (this.params.containsRTL ? this.words.lastChild : this.words.firstChild);
 
-      switch (event.keyCode) {
-        case 13: // Enter
+      switch (event.code) {
+        case 'Enter':
         // intentional fallthrough
-        case 32: // Space
+        case 'Space':
           if (event.target !== event.currentTarget) {
             // Ignore children
             break;
@@ -60,7 +61,8 @@ class Solution {
 
   /**
    * Get content for H5P.Question.
-   * @return {object} DOM elements for solution view.
+   *
+   * @returns {object} DOM elements for solution view.
    */
   getDOM() {
     return this.container;
@@ -68,6 +70,7 @@ class Solution {
 
   /**
    * Build the solution for the sentence's results.
+   *
    * @param {object} result Result.
    * @param {object} result.score Scores.
    * @param {number} result.score.added Number of added words added.
@@ -80,7 +83,7 @@ class Solution {
    * @param {string} result.words[].solution Correct word.
    * @param {string} result.words[].type Type of mistake or match.
    * @param {boolean[]} result.spaces Spaces for gaps between words.
-   * @return {object[]} Solution with all every word's DOM element.
+   * @returns {object[]} Solution with all every word's DOM element.
    */
   createSolution(result) {
     // Revert order of right-to-left chunks
@@ -94,12 +97,14 @@ class Solution {
 
   /**
    * Build wrapper for single word of a solution.
+   *
    * @param {number} index Tabindex for ARIA.
    * @param {object} word Word information.
    * @param {string} word.type Status about missing, typo, ...
    * @param {string} word.solution Correct spelling of the word.
    * @param {string} word.answer User input for this word.
-   * @param {boolean} [trainingGap=true] True if wrapper should have trailing gap.
+   * @param {boolean} [trailingGap=true] True if wrapper should have trailing gap.
+   * @returns {HTMLElement} DOM for solution words.
    */
   createSolutionWordDOM(index, word, trailingGap = true) {
     if (this.params.alternateSolution === 'first' && word.type !== 'match' && word.type !== 'typo') {
@@ -110,7 +115,7 @@ class Solution {
     const wordDOM = document.createElement('span');
     if (this.params.customTypoDisplay === false && word.type === 'typo') {
       // Use "mistake" style instead of "typo style"
-      wordDOM.classList.add(`h5p-wrapper-wrong`);
+      wordDOM.classList.add('h5p-wrapper-wrong');
     }
     else {
       wordDOM.classList.add(`h5p-wrapper-${word.type}`);
@@ -139,18 +144,19 @@ class Solution {
 
   /**
    * Add EventListeners to solutions's words.
-   * @param {object} Word's DOM element.
+   *
+   * @param {object} wordDOM Word's DOM element.
    */
   addSolutionWordListeners(wordDOM) {
     // on focus
-    wordDOM.addEventListener('focus', event => {
+    wordDOM.addEventListener('focus', (event) => {
       // Remember this word had focus
       this.wordMarked = event.target;
       event.target.setAttribute('tabindex', '0');
     });
 
     // on keydown
-    wordDOM.addEventListener('keydown', event => {
+    wordDOM.addEventListener('keydown', (event) => {
       const firstChild = this.params.containsRTL ?
         event.target.parentNode.lastChild :
         event.target.parentNode.firstChild;
@@ -205,8 +211,9 @@ class Solution {
 
   /**
    * Create explanation text for aria label.
+   *
    * @param {object} word Word with type, answer and solution.
-   * @return {string} Explanation text for aria label.
+   * @returns {string} Explanation text for aria label.
    */
   createAriaExplanation(word) {
     const ariaLabelType = {
@@ -235,8 +242,9 @@ class Solution {
 
   /**
    * Replace symbols with a11y readably words.
+   *
    * @param {string} [text=''] Text to make readable.
-   * @return {string} Readable text.
+   * @returns {string} Readable text.
    */
   makeReadable(text) {
     if (text === undefined) {
@@ -260,8 +268,9 @@ class Solution {
 
   /**
    * Create aria score text.
+   *
    * @param {string} type Type of mistake.
-   * @return {string} Aria score text.
+   * @returns {string} Aria score text.
    */
   createAriaScore(type) {
     let ariaScore;
@@ -302,6 +311,7 @@ class Solution {
 
   /**
    * Append explanation to solution.
+   *
    * @param {object} wordDOM Word's DOM element.
    * @param {object} word Word with type, answer and solution.
    */
@@ -359,6 +369,7 @@ class Solution {
   /**
    * Set current text in InputField.
    * DOM is not created before to make cheating a little more difficult at least.
+   *
    * @param {object} result - Current DOM element with words.
    */
   show(result) {
@@ -373,7 +384,7 @@ class Solution {
     }
 
     if (!this.words.firstChild) {
-      solutionElements.forEach(element => {
+      solutionElements.forEach((element) => {
         this.words.appendChild(element);
         this.container.classList.remove(Solution.HIDE);
       });

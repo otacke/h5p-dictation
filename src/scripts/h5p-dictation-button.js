@@ -1,9 +1,9 @@
-import Util from './h5p-dictation-util';
+import Util from '@services/util';
 
 /** Class representing a sound playing button. */
 class Button {
   /**
-   * @constructor
+   * @class
    * @param {number} id Content Id.
    * @param {object} params More params.
    * @param {object} params.a11y Readspeaker texts.
@@ -64,9 +64,10 @@ class Button {
 
   /**
    * Create H5P.Audio.
+   *
    * @param {number} id ContentID.
    * @param {object} params Parameters.
-   * @return {object} DOM element for the sample.
+   * @returns {object} DOM element for the sample.
    */
   createAudioDOM(id, params) {
     const $audioWrapper = H5P.jQuery('<div>', {'class': Button.AUDIO_WRAPPER});
@@ -158,7 +159,8 @@ class Button {
 
   /**
    * Get Button DOM.
-   * @return {object} Button DOM.
+   *
+   * @returns {object} Button DOM.
    */
   getDOM() {
     return this.dom;
@@ -166,7 +168,8 @@ class Button {
 
   /**
    * Get DOM for dummy button.
-   * @return {object} DOM for dummy button.
+   *
+   * @returns {object} DOM for dummy button.
    */
   getDummyButtonDOM() {
     const button = document.createElement('div');
@@ -246,6 +249,7 @@ class Button {
 
   /**
    * Set the title label and the aria label.
+   *
    * @param {string} label Label to set.
    */
   setLabel(label) {
@@ -317,7 +321,8 @@ class Button {
 
   /**
    * Check if button is enabled.
-   * @return {boolean} True, if enabled.
+   *
+   * @returns {boolean} True, if enabled.
    */
   isEnabled() {
     if (!this.button) {
@@ -352,7 +357,8 @@ class Button {
 
   /**
    * Get current state.
-   * @return {object} Current state.
+   *
+   * @returns {object} Current state.
    */
   getCurrentState() {
     return {

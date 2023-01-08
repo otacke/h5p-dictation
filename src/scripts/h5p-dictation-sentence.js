@@ -1,11 +1,11 @@
-import Button from './h5p-dictation-button';
-import Solution from './h5p-dictation-solution';
-import Util from './h5p-dictation-util';
+import Button from '@scripts/h5p-dictation-button';
+import Solution from '@scripts/h5p-dictation-solution';
+import Util from '@services/util';
 
 /** Class representing a sentence */
 class Sentence {
   /**
-   * @constructor
+   * @class
    * @param {number} index - Index of the sentence.
    * @param {object} params - Parameters.
    * @param {number} params.tries - Number of attempts for sample.
@@ -18,8 +18,8 @@ class Sentence {
    * @param {string} params.audioNotSupported - Text to show if audio not supported.
    * @param {string} params.alternateSolution - Mode to display alternate solutions.
    * @param {string} params.wordSeparator - Separator of words.
-   * @param {string} overrideRTL - Override for right-to-left support.
-   * @param {boolean} autosplit - Set auto-splitting for characters.
+   * @param {string} params.overrideRTL - Override for right-to-left support.
+   * @param {boolean} params.autosplit - Set auto-splitting for characters.
    * @param {object} params.a11y - Readspeaker texts.
    * @param {number} id - Content Id.
    * @param {object} previousState - PreviousState.
@@ -218,7 +218,8 @@ class Sentence {
 
   /**
    * Get content for H5P.Question.
-   * @return {object} DOM elements for content.
+   *
+   * @returns {object} DOM elements for content.
    */
   getDOM() {
     return this.content;
@@ -226,7 +227,8 @@ class Sentence {
 
   /**
    * Get current text in InputField.
-   * @return {string} Current text.
+   *
+   * @returns {string} Current text.
    */
   getUserInput() {
     return this.inputField.value;
@@ -234,6 +236,7 @@ class Sentence {
 
   /**
    * Set the sentence's position in DOM.
+   *
    * @param {number} position Position.
    */
   setPosition(position) {
@@ -244,6 +247,7 @@ class Sentence {
   /**
    * Set current text in InputField.
    * DOM is not created before to make cheating a little more difficult at least.
+   *
    * @param {object} result - Current DOM element with words.
    */
   showSolution(result) {
@@ -273,8 +277,9 @@ class Sentence {
 
   /**
    * Get correct text.
+   *
    * @param {boolean} asArray If true, text will be returned as array of words.
-   * @return {string} Correct text.
+   * @returns {string} Correct text.
    */
   getCorrectText(asArray = false) {
     return (asArray) ? Sentence.addSpaces(
@@ -288,7 +293,8 @@ class Sentence {
 
   /**
    * Get current state.
-   * @return {object} current State.
+   *
+   * @returns {object} current State.
    */
   getCurrentState() {
     return {
@@ -301,7 +307,8 @@ class Sentence {
 
   /**
    * Get the maximum of possible mistakes.
-   * @return {number} Number of possible mistakes.
+   *
+   * @returns {number} Number of possible mistakes.
    */
   getMaxMistakes() {
     return this.mistakesMax;
@@ -309,7 +316,8 @@ class Sentence {
 
   /**
    * Get description text.
-   * @return {string} Description text.
+   *
+   * @returns {string} Description text.
    */
   getXAPIDescription() {
     return this.params.sentence.description || '' ?
@@ -368,6 +376,7 @@ class Sentence {
 
   /**
    * Pause buttons.
+   *
    * @param {Button} [excludeButton] Button to ignore.
    */
   pauseButtons(excludeButton) {
@@ -382,6 +391,7 @@ class Sentence {
 
   /**
    * Stop buttons.
+   *
    * @param {Button} [excludeButton] Button to ignore.
    */
   stopButtons(excludeButton) {
@@ -396,6 +406,7 @@ class Sentence {
 
   /**
    * Handle button clicked.
+   *
    * @param {Button} button Calling button.
    */
   handleButtonClicked(button) {
@@ -415,10 +426,11 @@ class Sentence {
 
   /**
    * Add spaces between text and punctuation.
+   *
    * @param {string} text Text to add spaces to.
    * @param {object} [options] Options.
    * @param {boolean} [options.autosplit=true] If true, automatically split respective symbols.
-   * @return {string} [options.wordSeparator=' '] Text with spaces and symbols.
+   * @returns {string} [options.wordSeparator=' '] Text with spaces and symbols.
    */
   static addSpaces(text, options = {}) {
     options.autosplit = (typeof options.autosplit !== 'boolean') ? true : options.autosplit;
@@ -429,28 +441,28 @@ class Sentence {
       return text;
 
     // In a sentence like "John's car broke.", the . would be removed, but not the '
-    const wordThenPunctuation = new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION.replace("'", '')})( |$)`, 'g');
+    const wordThenPunctuation = new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION.replace('\'', '')})( |$)`, 'g');
     const punctuationThenWord = new RegExp(`( |^)(${Sentence.PUNCTUATION})(${Sentence.WORD}|$)`, 'g');
 
     text = text
-      .replace(wordThenPunctuation, `$1 $2 `)
-      .replace(punctuationThenWord, ` $2 $3`);
+      .replace(wordThenPunctuation, '$1 $2 ')
+      .replace(punctuationThenWord, ' $2 $3');
 
     if (options.autosplit === true) {
       // Space between autosplit characters, e.g. Chinese Han symbols
       text = text.replace(
         new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.AUTOSPLIT})`, 'g'),
-        `$1 `
+        '$1 '
       );
 
       text = text.replace(
         new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.WORD}|d|${Sentence.PUNCTUATION})`, 'g'),
-        `$1 `
+        '$1 '
       );
 
       text = text.replace(
         new RegExp(`(${Sentence.WORD}|d|${Sentence.PUNCTUATION})(?=${Sentence.AUTOSPLIT})`, 'g'),
-        `$1 `
+        '$1 '
       );
     }
 
@@ -459,8 +471,9 @@ class Sentence {
 
   /**
    * Strip punctuation from a sentence.
+   *
    * @param {object[]|string} words - Words of a sentence.
-   * @return {object[]|string} Words without punctuation.
+   * @returns {object[]|string} Words without punctuation.
    */
   static stripPunctuation(words) {
     let wasString = false;
@@ -477,9 +490,9 @@ class Sentence {
     const punctuationEnd = new RegExp(`${Sentence.PUNCTUATION}$`);
     const punctuationBefore = new RegExp(` ${Sentence.PUNCTUATION}`, 'g');
     // Special case: "The users' browser", keep the ' here
-    const punctuationAfter = new RegExp(`${Sentence.PUNCTUATION.replace("'", '')} `, 'g');
+    const punctuationAfter = new RegExp(`${Sentence.PUNCTUATION.replace('\'', '')} `, 'g');
 
-    words = words.map(word => {
+    words = words.map((word) => {
       return word
         .replace(punctuationStart, '')
         .replace(punctuationEnd, '')
@@ -492,7 +505,8 @@ class Sentence {
 
   /**
    * Compute the results for this sentence.
-   * @return {object} Results.
+   *
+   * @returns {object} Results.
    */
   computeResults() {
     // Add spaces to correct text
@@ -512,10 +526,10 @@ class Sentence {
     // In case our wordSeparator is not space, we must replace spaces by the separator
     if (' ' !== this.params.wordSeparator) {
       // If we have one alternative with multiple words, we want to escape the spaces
-      wordsSolution.forEach( solutionPart => {
+      wordsSolution.forEach( (solutionPart) => {
         const alternatives = solutionPart.split('|');
 
-        alternatives.forEach(alternative => {
+        alternatives.forEach((alternative) => {
           alternative = alternative.trim();
           if (alternative.indexOf(' ') !== -1) {
             const escapedAlternative = alternative.replace(/ /g, Sentence.SPACE_ESCAPE);
@@ -536,7 +550,7 @@ class Sentence {
         autosplit: this.params.autosplit,
         wordSeparator: this.params.wordSeparator
       },
-    ).split(this.params.wordSeparator).filter(word => word.length > 0);
+    ).split(this.params.wordSeparator).filter((word) => word.length > 0);
 
     // In case our wordSeparator is not space, we add spaces between tokens
     if (' ' !== this.params.wordSeparator) {
@@ -552,24 +566,26 @@ class Sentence {
     const words = scoreNWords.words;
 
     return {
-      "score": {
-        "added": score[Sentence.TYPE_ADDED],
-        "missing": score[Sentence.TYPE_MISSING],
-        "typo": score[Sentence.TYPE_TYPO],
-        "wrong": score[Sentence.TYPE_WRONG],
-        "match": score[Sentence.TYPE_MATCH],
-        "total": Math.min(score[Sentence.TYPE_ADDED] +
+      'score': {
+        'added': score[Sentence.TYPE_ADDED],
+        'missing': score[Sentence.TYPE_MISSING],
+        'typo': score[Sentence.TYPE_TYPO],
+        'wrong': score[Sentence.TYPE_WRONG],
+        'match': score[Sentence.TYPE_MATCH],
+        'total': Math.min(score[Sentence.TYPE_ADDED] +
           score[Sentence.TYPE_MISSING] +
           score[Sentence.TYPE_TYPO] +
           score[Sentence.TYPE_WRONG], this.getMaxMistakes())
       },
-      "words": words
+      'words': words
     };
   }
 
   /**
    * Compute total score and explanation for each word.
+   *
    * @param {object} aligned Word by word comparison of input and solution.
+   * @returns {object} Scores per word.
    */
   computeScore(aligned) {
     const words = [];
@@ -628,16 +644,17 @@ class Sentence {
    * TODO: This needs to be boiled down. It's long, there's redundant code,
    * but I am too scared to touch it without having tests in place first.
    *
-   * @param {array} words1 - First Array of words.
-   * @param {array} words2 - Second Array of words.
-   * @return {object} Object containing two new arrays.
+   * @param {Array} words1 - First Array of words.
+   * @param {Array} words2 - Second Array of words.
+   * @returns {object} Object containing two new arrays.
    */
   alignWords(words1, words2) {
 
     /**
      * Get match pattern.
+     *
      * @param {object} aligned Aligned words.
-     * @return {boolean[]} Match pattern.
+     * @returns {boolean[]} Match pattern.
      */
     const getMatchPattern = (aligned) => aligned.words1.map((word1, index) =>
       word1 === aligned.words2[index] ||
@@ -655,14 +672,14 @@ class Sentence {
       const alternatives = Util.splitWordAlternatives(solution);
 
       if (fuzzy) {
-        alternatives.forEach(alternative => {
+        alternatives.forEach((alternative) => {
           if (H5P.TextUtilities.areSimilar(alternative, answer)) {
             match = match || alternative;
           }
         });
       }
       else {
-        alternatives.forEach(alternative => {
+        alternatives.forEach((alternative) => {
           if (alternative === answer) {
             match = match || alternative;
           }
@@ -673,11 +690,11 @@ class Sentence {
     };
 
     const align = (words1, words2) => {
-      words2 = words2.map(word => (word === '') ? undefined : word);
+      words2 = words2.map((word) => (word === '') ? undefined : word);
 
       // Add words2.length empty gaps in front of and behind every word
       let master = words1
-        .map(word1 => {
+        .map((word1) => {
           return Array.apply(null, Array(words2.length)).concat(word1);
         })
         .reduce((a, b) => a.concat(b), []);
@@ -824,13 +841,14 @@ class Sentence {
       master.reverse();
       slave.reverse();
 
-      return {"words1": master, "words2": slave};
+      return {'words1': master, 'words2': slave};
     };
 
     /**
      * Count the number of matches + typos.
+     *
      * @param {object} aligned Aligned words.
-     * @return {number} Number of matches and typos.
+     * @returns {number} Number of matches and typos.
      */
     const count = (aligned) => getMatchPattern(aligned)
       .reduce((stack, current) => stack + (current ? 1 : 0), 0);

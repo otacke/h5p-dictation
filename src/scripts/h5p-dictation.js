@@ -1,10 +1,10 @@
-import Sentence from './h5p-dictation-sentence';
-import Util from './h5p-dictation-util';
+import Sentence from '@scripts/h5p-dictation-sentence';
+import Util from '@services/util';
 
 /** Class for dictation interaction */
 class Dictation extends H5P.Question {
   /**
-   * @constructor
+   * @class
    * @param {object} params Params from semantics.json.
    * @param {string} contentId ContentId.
    * @param {object} contentData contentData.
@@ -119,14 +119,14 @@ class Dictation extends H5P.Question {
     }
 
     // Relevant for building the DOM later (play slowly button)
-    const hasAlternatives = this.params.sentences.some(sentence => sentence.sampleAlternative !== undefined);
+    const hasAlternatives = this.params.sentences.some((sentence) => sentence.sampleAlternative !== undefined);
 
     // Proper format for percentage
     this.params.behaviour.scoring.typoFactor = parseInt(this.params.behaviour.scoring.typoFactor) / 100;
 
     // Strip incomplete sentences
     this.params.sentences = this.params.sentences
-      .filter(sentence => sentence.text !== undefined && sentence.sample !== undefined);
+      .filter((sentence) => sentence.text !== undefined && sentence.sample !== undefined);
 
     // Set previousState to empty defaults
     this.previousSentenceStates = [...Array(this.params.sentences.length)];
@@ -177,13 +177,13 @@ class Dictation extends H5P.Question {
           }
         },
         this.contentId,
-        this.previousSentenceStates.filter(state => state?.index === index).shift()
+        this.previousSentenceStates.filter((state) => state?.index === index).shift()
       ));
     });
 
     // Maximum number of possible mistakes for all sentences
     this.maxMistakes = this.sentences
-      .map(sentence => sentence.getMaxMistakes())
+      .map((sentence) => sentence.getMaxMistakes())
       .reduce((a, b) => a + b, 0);
 
     this.mistakesCapped = this.maxMistakes;
@@ -310,7 +310,7 @@ class Dictation extends H5P.Question {
       }
       else {
         // Sentences
-        this.sentences.forEach(sentence => {
+        this.sentences.forEach((sentence) => {
           this.content.appendChild(sentence.getDOM());
         });
       }
@@ -328,6 +328,7 @@ class Dictation extends H5P.Question {
 
     /**
      * Reorder sentences.
+     *
      * @param {number[]} order Order.
      */
     this.reorderSentences = (order) => {
@@ -341,10 +342,11 @@ class Dictation extends H5P.Question {
 
     /**
      * Handle playing audio.
-     * @param {Button} button Calling button.
+     *
+     * @param {object} button Calling button.
      */
     this.handlePlayAudio = (button) => {
-      this.sentences.forEach(sentence => {
+      this.sentences.forEach((sentence) => {
         if (this.params.behaviour.disablePause) {
           sentence.stopButtons(button);
         }
@@ -363,6 +365,8 @@ class Dictation extends H5P.Question {
 
     /**
      * Handle context changed.
+     *
+     * @param {string} contextId Context id.
      */
     this.handleContextChanged = (contextId) => {
       this.contextId = contextId;
@@ -378,17 +382,17 @@ class Dictation extends H5P.Question {
         this.showButton('show-solution');
       }
 
-      this.computedResults = this.sentences.map(sentence => {
+      this.computedResults = this.sentences.map((sentence) => {
         return sentence.computeResults();
       });
 
-      this.sentences.forEach(sentence => {
+      this.sentences.forEach((sentence) => {
         sentence.disable();
       });
 
       // Sum up the scores of all sentences
       const scoreTotal = this.computedResults
-        .map(result => result.score)
+        .map((result) => result.score)
         .reduce((a, b) => {
           return {
             added: a.added + b.added,
@@ -454,23 +458,26 @@ class Dictation extends H5P.Question {
 
     /**
      * Determine whether the task has been passed by the user.
-     * @return {boolean} True if user passed or task is not scored.
+     *
+     * @returns {boolean} True if user passed or task is not scored.
      */
     this.isPassed = () => this.mistakesCapped === 0;
 
     /**
      * Check if Dictation has been submitted or input has been given.
-     * @return {boolean} True, if answer was given.
+     *
+     * @returns {boolean} True, if answer was given.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
     this.getAnswerGiven = () => {
       return this.isAnswered ||
-        this.sentences.some(sentence => sentence.getUserInput().length > 0);
+        this.sentences.some((sentence) => sentence.getUserInput().length > 0);
     };
 
     /**
      * Get latest score.
-     * @return {number} latest score.
+     *
+     * @returns {number} latest score.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
     this.getScore = () => (this.params.behaviour.scoring.zeroMistakeMode) ?
@@ -479,13 +486,15 @@ class Dictation extends H5P.Question {
 
     /**
      * Get maximum possible score.
-     * @return {number} Score necessary for mastering.
+     *
+     * @returns {number} Score necessary for mastering.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
      */
     this.getMaxScore = () => this.maxMistakes;
 
     /**
      * Show solutions for all sentences.
+     *
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
      */
     this.showSolutions = () => {
@@ -501,6 +510,7 @@ class Dictation extends H5P.Question {
 
     /**
      * Reset task.
+     *
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
      */
     this.resetTask = () => {
@@ -510,7 +520,7 @@ class Dictation extends H5P.Question {
         this.addSentences();
       }
 
-      this.sentences.forEach(sentence => {
+      this.sentences.forEach((sentence) => {
         sentence.reset();
         sentence.enable();
         sentence.hideSolution();
@@ -537,7 +547,8 @@ class Dictation extends H5P.Question {
 
     /**
      * Get xAPI data.
-     * @return {object} XAPI statement.
+     *
+     * @returns {object} XAPI statement.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
      */
     this.getXAPIData = () => ({statement: this.getXAPIAnswerEvent().data.statement});
@@ -551,10 +562,11 @@ class Dictation extends H5P.Question {
 
     /**
      * Build xAPI answer event.
-     * @return {H5P.XAPIEvent} XAPI answer event.
+     *
+     * @returns {H5P.XAPIEvent} XAPI answer event.
      */
     this.getXAPIAnswerEvent = () => {
-      this.computedResults = this.sentences.map(sentence => {
+      this.computedResults = this.sentences.map((sentence) => {
         return sentence.computeResults();
       });
 
@@ -589,8 +601,9 @@ class Dictation extends H5P.Question {
 
     /**
      * Create an xAPI event for Dictation.
+     *
      * @param {string} verb Short id of the verb we want to trigger.
-     * @return {H5P.XAPIEvent} Event template.
+     * @returns {H5P.XAPIEvent} Event template.
      */
     this.createDictationXAPIEvent = (verb) => {
       const xAPIEvent = this.createXAPIEventTemplate(verb);
@@ -602,7 +615,8 @@ class Dictation extends H5P.Question {
 
     /**
      * Get the xAPI definition for the xAPI object.
-     * @return {object} XAPI definition.
+     *
+     * @returns {object} XAPI definition.
      */
     this.getxAPIDefinition = () => {
       // We need to build the placeholders dynamically based on user input
@@ -643,12 +657,13 @@ class Dictation extends H5P.Question {
 
     /**
      * Build all correct gap variations.
-     * @return {object[]} Correct gap variations.
+     *
+     * @returns {object[]} Correct gap variations.
      */
     this.buildCorrectGapVariations = () => {
       return this.computedResults.reduce((gaps, sentence) => {
         return gaps.concat(
-          sentence.words.map(word => {
+          sentence.words.map((word) => {
             return word.solution ? word.solution.split('|') : [];
           })
         );
@@ -663,7 +678,7 @@ class Dictation extends H5P.Question {
      *
      * @param {object[]} gapsVariations Sentences gaps.
      * @param {boolean} [complete=false] If true, will build complete CRP.
-     * @return {object[]} Correct responses pattern.
+     * @returns {object[]} Correct responses pattern.
      */
     this.buildxAPICRP = (gapsVariations, complete = false) => {
       let crp = [''];
@@ -674,16 +689,16 @@ class Dictation extends H5P.Question {
 
       if (!complete) {
         crp = gapsVariations
-          .map(sentences => sentences[0])
+          .map((sentences) => sentences[0])
           .join('[,]');
         crp = [`{case_matters=true}${crp}`];
       }
       else {
-        gapsVariations.forEach(sentences => {
+        gapsVariations.forEach((sentences) => {
           crp = Util.buildCombinations(sentences, crp, '[,]');
         });
 
-        crp = crp.map(response => `{case_matters=true}${response}`);
+        crp = crp.map((response) => `{case_matters=true}${response}`);
 
       }
 
@@ -692,16 +707,18 @@ class Dictation extends H5P.Question {
 
     /**
      * Get current state.
-     * @return {Object} Current state.
+     *
+     * @returns {object} Current state.
      */
     this.getCurrentState = () => {
-      return this.sentences.map(sentence => sentence.getCurrentState());
+      return this.sentences.map((sentence) => sentence.getCurrentState());
     };
 
     /**
      * Get context data.
      * Contract used for confusion report.
-     * @return {object} Context data.
+     *
+     * @returns {object} Context data.
      */
     this.getContext = () => {
       return {
@@ -712,7 +729,8 @@ class Dictation extends H5P.Question {
 
     /**
      * Get tasks title.
-     * @return {string} Title.
+     *
+     * @returns {string} Title.
      */
     this.getTitle = () => {
       let raw;
@@ -726,7 +744,8 @@ class Dictation extends H5P.Question {
 
     /**
      * Get tasks description.
-     * @return {string} Description.
+     *
+     * @returns {string} Description.
      */
     this.getDescription = () => this.params.taskDescription || Dictation.DEFAULT_DESCRIPTION;
   }
@@ -747,7 +766,8 @@ Dictation.XAPI_REPORTING_VERSION_EXTENSION = 'https://h5p.org/x-api/h5p-reportin
 /** @constant {string} */
 Dictation.XAPI_REPORTING_VERSION = '1.0.0';
 
-/** @constant {string}
+/**
+ * @constant {string}
  * Required to be added to xAPI object description for H5P reporting
  */
 Dictation.FILL_IN_PLACEHOLDER = '__________';
