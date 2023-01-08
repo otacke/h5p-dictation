@@ -1,0 +1,206 @@
+$color-gradient-blue-0: rgba(100,152,254,1);
+$color-gradient-blue-10: rgba(90,147,249,1);
+$color-gradient-blue-20: rgba(81,142,244,1);
+$color-gradient-blue-30: rgba(71,138,240,1);
+$color-gradient-blue-40: rgba(62,133,235,1);
+$color-gradient-blue-50: rgba(52,128,230,1);
+$color-gradient-blue-60: rgba(42,123,225,1);
+$color-gradient-blue-70: rgba(33,118,220,1);
+$color-gradient-blue-80: rgba(23,114,216,1);
+$color-gradient-blue-90: rgba(14,109,211,1);
+$color-gradient-blue-100: rgba(4,104,206,1);
+
+$color-gradient-green-0: rgba(38,170,68,1);
+$color-gradient-green-10: rgba(34,164,62,1);
+$color-gradient-green-20: rgba(30,158,56,1);
+$color-gradient-green-30: rgba(27,153,51,1);
+$color-gradient-green-40: rgba(23,147,45,1);
+$color-gradient-green-50: rgba(19,141,39,1);
+$color-gradient-green-60: rgba(15,135,33,1);
+$color-gradient-green-70: rgba(11,129,27,1);
+$color-gradient-green-80: rgba(8,124,22,1);
+$color-gradient-green-90: rgba(4,118,16,1);
+$color-gradient-green-100: rgba(0,112,10,1);
+
+@keyframes play-button-delay {
+	0% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-blue-30 30%,
+			$color-gradient-blue-40 40%,
+			$color-gradient-blue-50 50%,
+			$color-gradient-blue-60 60%,
+			$color-gradient-blue-70 70%,
+			$color-gradient-blue-80 80%,
+			$color-gradient-blue-90 90%,
+			$color-gradient-blue-100 100%
+		);
+	}
+	9% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-blue-30 30%,
+			$color-gradient-blue-40 40%,
+			$color-gradient-blue-50 50%,
+			$color-gradient-blue-60 60%,
+			$color-gradient-blue-70 70%,
+			$color-gradient-blue-80 80%,
+			$color-gradient-blue-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	18% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-blue-30 30%,
+			$color-gradient-blue-40 40%,
+			$color-gradient-blue-50 50%,
+			$color-gradient-blue-60 60%,
+			$color-gradient-blue-70 70%,
+			$color-gradient-blue-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	27% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-blue-30 30%,
+			$color-gradient-blue-40 40%,
+			$color-gradient-blue-50 50%,
+			$color-gradient-blue-60 60%,
+			$color-gradient-blue-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	36% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-blue-30 30%,
+			$color-gradient-blue-40 40%,
+			$color-gradient-blue-50 50%,
+			$color-gradient-blue-60 60%,
+			$color-gradient-green-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	45% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-blue-30 30%,
+			$color-gradient-blue-40 40%,
+			$color-gradient-blue-50 50%,
+			$color-gradient-green-60 60%,
+			$color-gradient-green-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	55% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-blue-30 30%,
+			$color-gradient-blue-40 40%,
+			$color-gradient-green-50 50%,
+			$color-gradient-green-60 60%,
+			$color-gradient-green-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	64% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-blue-30 30%,
+			$color-gradient-green-40 40%,
+			$color-gradient-green-50 50%,
+			$color-gradient-green-60 60%,
+			$color-gradient-green-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	73% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-blue-20 20%,
+			$color-gradient-green-30 30%,
+			$color-gradient-green-40 40%,
+			$color-gradient-green-50 50%,
+			$color-gradient-green-60 60%,
+			$color-gradient-green-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	82% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-blue-10 10%,
+			$color-gradient-green-20 20%,
+			$color-gradient-green-30 30%,
+			$color-gradient-green-40 40%,
+			$color-gradient-green-50 50%,
+			$color-gradient-green-60 60%,
+			$color-gradient-green-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+  91% {
+		background: linear-gradient(
+			$color-gradient-blue-0 0%,
+			$color-gradient-green-10 10%,
+			$color-gradient-green-20 20%,
+			$color-gradient-green-30 30%,
+			$color-gradient-green-40 40%,
+			$color-gradient-green-50 50%,
+			$color-gradient-green-60 60%,
+			$color-gradient-green-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+	100% {
+		background: linear-gradient(
+			$color-gradient-green-0 0%,
+			$color-gradient-green-10 10%,
+			$color-gradient-green-20 20%,
+			$color-gradient-green-30 30%,
+			$color-gradient-green-40 40%,
+			$color-gradient-green-50 50%,
+			$color-gradient-green-60 60%,
+			$color-gradient-green-70 70%,
+			$color-gradient-green-80 80%,
+			$color-gradient-green-90 90%,
+			$color-gradient-green-100 100%
+		);
+	}
+}

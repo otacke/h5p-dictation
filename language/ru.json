@@ -91,6 +91,10 @@
           "description": "If checked, pausing the audio while playing is not possible."
         },
         {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
           "label": "Shuffle sentences",
           "description": "Define when the sentences should be shuffled.",
           "options": [
@@ -138,7 +142,8 @@
           "fields": [
             {
               "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
               "label": "Направление письма",

@@ -1,3 +1,5 @@
+@import "@styles/keyframes";
+
 $color_1: #b71c1c;
 $color_2: #b5691c;
 $color_3: #255c41;
@@ -138,6 +140,10 @@ $border-color_1: #7fb8ff;
 				content: "\e900";
 				font-size: 1.1em;
 			}
+		}
+
+		&.h5p-dictation-delay-animation {
+			animation-name: play-button-delay;
 		}
 	}
 

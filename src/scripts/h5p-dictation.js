@@ -21,6 +21,7 @@ class Dictation extends H5P.Question {
         tries: Infinity,
         triesAlternative: Infinity,
         shuffleSentences: 'never',
+        playButtonDelay: 0,
         scoring: {
           ignorePunctuation: true,
           zeroMistakeMode: false,
@@ -93,9 +94,13 @@ class Dictation extends H5P.Question {
     if (!params) {
       return;
     }
+
     this.correctTotal = 0;
     this.contentId = contentId;
     this.contentData = contentData || {};
+
+    // TODO: Use randomUUID() if coverage is better
+    this.randomId = H5P.createUUID();
 
     this.contextId = 0; // Best guess, no interaction.
 
@@ -161,6 +166,7 @@ class Dictation extends H5P.Question {
           autosplit: this.params.behaviour.textual.autosplit,
           wordSeparator: this.params.behaviour.textual.wordSeparator,
           disablePause: this.params.behaviour.disablePause,
+          playButtonDelay: this.params.behaviour.playButtonDelay,
           callbacks: {
             playAudio: (button) => {
               this.handlePlayAudio(button);

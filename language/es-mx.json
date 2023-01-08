@@ -91,6 +91,10 @@
           "description": "Si se activa, no es posible pausar el audio al reproducir."
         },
         {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
           "label": "Barajear oraciones",
           "description": "Definir cuando las oraciones deberían de ser barajadas.",
           "options": [
@@ -138,7 +142,8 @@
           "fields": [
             {
               "label": "Separador de palabras",
-              "description": "Definir el separador de palabras diferente del caracter de espacio para soportar soluciones alternas con diferentes número de palabras."
+              "description": "Definir el separador de palabras diferente del caracter de espacio para soportar soluciones alternas con diferentes número de palabras.",
+              "default": " "
             },
             {
               "label": "Dirección de la escritura",

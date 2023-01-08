@@ -91,6 +91,10 @@
           "description": "Indien gekozen, is pauzeren van audio tijdens afspelen niet mogelijk."
         },
         {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
           "label": "Zinnen husselen",
           "description": "Vastleggen wanneer de zinnen moeten worden gehusseld.",
           "options": [
@@ -138,7 +142,8 @@
           "fields": [
             {
               "label": "Woordscheidingsteken",
-              "description": "Definieer het scheidingsteken van woorden anders dan spatie om alternatieve oplossingen met een verschillend aantal woorden te ondersteunen."
+              "description": "Definieer het scheidingsteken van woorden anders dan spatie om alternatieve oplossingen met een verschillend aantal woorden te ondersteunen.",
+              "default": " "
             },
             {
               "label": "Schrijfrichting",

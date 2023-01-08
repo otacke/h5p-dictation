@@ -80,6 +80,7 @@ class Sentence {
         disablePause: params.disablePause,
         type: Button.BUTTON_TYPE_NORMAL,
         maxTries: params.tries,
+        playButtonDelay: params.playButtonDelay,
         a11y: params.a11y,
         callbacks: {
           playAudio: (button) => {
@@ -101,6 +102,7 @@ class Sentence {
           disablePause: params.disablePause,
           type: Button.BUTTON_TYPE_SLOW,
           maxTries: params.triesAlternative,
+          playButtonDelay: params.playButtonDelay,
           a11y: params.a11y,
           callbacks: {
             playAudio: (button) => {

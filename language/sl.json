@@ -91,6 +91,10 @@
           "description": "Omejitev možnosti zaustavitve predvajanja posnetka."
         },
         {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
           "label": "Premešaj stavke",
           "description": "Določitev načina prikaza stavkov v naključnem vrstnem redu.",
           "options": [
@@ -138,7 +142,8 @@
           "fields": [
             {
               "label": "Ločilo besed",
-              "description": "Določi ločilo med besedami, ki ni presledek. Ločilo omogoča zapis nadomestnih odgovorov z različnim številom besed."
+              "description": "Določi ločilo med besedami, ki ni presledek. Ločilo omogoča zapis nadomestnih odgovorov z različnim številom besed.",
+              "default": " "
             },
             {
               "label": "Smer pisanja",

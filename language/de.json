@@ -91,6 +91,10 @@
           "description": "Wenn diese Option gewählt ist, können die Tondateien während des Abspielens nicht pausiert werden."
         },
         {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
           "label": "Sätze mischen",
           "description": "Lege fest, wann die Sätze gemischt werden sollten.",
           "options": [
@@ -138,7 +142,8 @@
           "fields": [
             {
               "label": "Zeichen zum Trennen von Wörtern",
-              "description": "Lege fest, welches Zeichen zum Trennen von Wörtern als Alternative zum Leerzeichen benutzt wird, um alternative Lösungen mit mehr als einem Wort zuzulassen."
+              "description": "Lege fest, welches Zeichen zum Trennen von Wörtern als Alternative zum Leerzeichen benutzt wird, um alternative Lösungen mit mehr als einem Wort zuzulassen.",
+              "default": " "
             },
             {
               "label": "Schreibrichtung",

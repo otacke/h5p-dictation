@@ -91,6 +91,10 @@
           "description": "Se marcado, a pausa do áudio durante a reprodução não será possível."
         },
         {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
           "label": "Embaralhar as frases",
           "description": "Definir quando as sentenças devem ser embaralhadas.",
           "options": [
@@ -138,7 +142,8 @@
           "fields": [
             {
               "label": "Separador de palavras",
-              "description": "Defina o separador de palavras diferente do caractere de espaço para suportar soluções alternativas com diferentes números de palavras."
+              "description": "Defina o separador de palavras diferente do caractere de espaço para suportar soluções alternativas com diferentes números de palavras.",
+              "default": " "
             },
             {
               "label": "Direção da escrita",
