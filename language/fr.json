@@ -13,7 +13,7 @@
       ]
     },
     {
-      "label": "Task description",
+      "label": "Description de la tâche",
       "description": "Décrivez votre tâche ici.",
       "placeholder": "Veuillez écouter attentivement et écrire ce que vous entendez."
     },
@@ -96,7 +96,7 @@
         },
         {
           "label": "Mélanger les phrase",
-          "description": "Define when the sentences should be shuffled.",
+          "description": "Définit quand les phrases devraient être mélangées.",
           "options": [
             {
               "label": "Jamais"
@@ -194,7 +194,7 @@
           "label": "Activer le bouton \"Voir la solution\""
         },
         {
-          "label": "Show solution on check"
+          "label": "Afficher la solution lors de la vérification"
         }
       ]
     },
