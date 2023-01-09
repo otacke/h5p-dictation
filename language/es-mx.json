@@ -91,8 +91,8 @@
           "description": "Si se activa, no es posible pausar el audio al reproducir."
         },
         {
-          "label": "Play button delay",
-          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+          "label": "Retraso de botón Reproducir",
+          "description": "Opcionalmente configurar un período de hasta tres segundos que debería ser retrasado el reproducir al apretar un botón. Esto es útil si usted quiere que sus alumnos escriban en el campo de texto antes de que comiencen a escuchar."
         },
         {
           "label": "Barajear oraciones",
