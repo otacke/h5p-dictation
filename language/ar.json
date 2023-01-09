@@ -74,6 +74,8 @@
       ]
     },
     {
+      "label": "الإعدادات السلوكية",
+      "description": "ستتيح لك هذه الخيارات التحكم في كيفية عمل المهمة.",
       "fields": [
         {
           "label": "عدد المحاولات الأقصى",
@@ -86,6 +88,10 @@
         {
           "label": "تعطيل خيار الإيقاف المؤقت",
           "description": "إذا تم تحديده، فلا يمكن إيقاف الصوت مؤقتاً أثناء التشغيل."
+        },
+        {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
         },
         {
           "label": "جُمل مخلوطة",
@@ -103,6 +109,7 @@
           ]
         },
         {
+          "label": "معدل العلامات",
           "fields": [
             {
               "label": "تجاهل علامات الترقيم",
@@ -127,27 +134,15 @@
                 }
               ]
             }
-          ],
-          "label": "معدل العلامات",
-          "options": [
-            {
-              "label": "Never"
-            },
-            {
-              "label": "Once when starting exercise"
-            },
-            {
-              "label": "On every try"
-            }
-          ],
-          "description": "Define when the sentences should be shuffled."
+          ]
         },
         {
           "label": "النص",
           "fields": [
             {
               "label": "فاصل الكلمات",
-              "description": "حدد فاصل الكلمات المختلفة عن حرف المسافة لدعم الحلول البديلة بعدد مختلف من الكلمات."
+              "description": "حدد فاصل الكلمات المختلفة عن حرف المسافة لدعم الحلول البديلة بعدد مختلف من الكلمات.",
+              "default": " "
             },
             {
               "label": "اتجاه الكتابة",
@@ -167,26 +162,15 @@
             {
               "label": "تقسيم الأحرف",
               "description": "قم بالتفعيل إذا كان يجب تقسيم أحرف معينة (مثل أحرف \"هان الصينية\") إلى كلمات منفصلة تلقائياً.",
-              "options": [
-                {
-                  "label": "100 %"
-                },
-                {
-                  "label": "50 %"
-                },
-                {
-                  "label": "0 %"
-                }
-              ]
             }
           ]
         },
         {
+          "label": "عرض الملاحظات",
           "fields": [
             {
               "label": "عرض مخصص للخطأ المطبعي",
-              "description": "إذا تم تحديده، فسيتم عرض الأخطاء الإملائية بنمط مخصص يميزها عن الأخطاء الواضحة.",
-              "default": " "
+              "description": "إذا تم تحديده، فسيتم عرض الأخطاء الإملائية بنمط مخصص يميزها عن الأخطاء الواضحة."
             },
             {
               "label": "عرض الحلول البديلة",
@@ -197,52 +181,21 @@
                 },
                 {
                   "label": "أظهر جميع البدائل"
-                },
-                {
-                  "label": "Left-to-right"
-                }
-              ]
-            },
-            {
-              "label": "Splitting of characters",
-              "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
-            }
-          ],
-          "label": "عرض الملاحظات"
-        },
-        {
-          "label": "تمكين \"إعادة المحاولة\"",
-          "fields": [
-            {
-              "label": "Custom typo display",
-              "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
-            },
-            {
-              "label": "Presentation of alternate solutions",
-              "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
-              "options": [
-                {
-                  "label": "Show only first alternative"
-                },
-                {
-                  "label": "Show all alternatives"
                 }
               ]
             }
           ]
         },
         {
+          "label": "تمكين \"إعادة المحاولة\""
+        },
+        {
           "label": "تفعيل زر \"إظهار الحلول\""
         },
         {
           "label": "إظهار الحل عند الاختيار"
-        },
-        {
-          "label": "Show solution on check"
         }
-      ],
-      "label": "الإعدادات السلوكية",
-      "description": "ستتيح لك هذه الخيارات التحكم في كيفية عمل المهمة."
+      ]
     },
     {
       "label": "واجهة المستخدم",

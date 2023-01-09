@@ -1,6 +1,7 @@
 {
   "semantics": [
     {
+      "label": "Medija",
       "fields": [
         {
           "label": "Tipas",
@@ -10,7 +11,6 @@
           "label": "Išjungti paveikslėlio mastelio keitimą"
         }
       ],
-      "label": "Medija"
     },
     {
       "label": "Užduoties aprašymas",
@@ -74,6 +74,8 @@
       ]
     },
     {
+      "label": "Behavioural settings",
+      "description": "These options will let you control how the task behaves.",
       "fields": [
         {
           "label": "Maximum tries",
@@ -86,6 +88,10 @@
         {
           "label": "Disable pause option",
           "description": "If checked, pausing the audio while playing is not possible."
+        },
+        {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
         },
         {
           "label": "Shuffle sentences",
@@ -128,18 +134,6 @@
                 }
               ]
             }
-          ],
-          "description": "Define when the sentences should be shuffled.",
-          "options": [
-            {
-              "label": "Never"
-            },
-            {
-              "label": "Once when starting exercise"
-            },
-            {
-              "label": "On every try"
-            }
           ]
         },
         {
@@ -147,7 +141,8 @@
           "fields": [
             {
               "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
+              "default": " "
             },
             {
               "label": "Writing direction",
@@ -166,52 +161,12 @@
             },
             {
               "label": "Splitting of characters",
-              "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically.",
-              "options": [
-                {
-                  "label": "100 %"
-                },
-                {
-                  "label": "50 %"
-                },
-                {
-                  "label": "0 %"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "label": "Presentation of feedback",
-          "fields": [
-            {
-              "label": "Custom typo display",
-              "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes.",
-              "default": " "
-            },
-            {
-              "label": "Presentation of alternate solutions",
-              "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
-              "options": [
-                {
-                  "label": "Show only first alternative"
-                },
-                {
-                  "label": "Show all alternatives"
-                },
-                {
-                  "label": "Left-to-right"
-                }
-              ]
-            },
-            {
-              "label": "Splitting of characters",
               "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
             }
           ]
         },
         {
-          "label": "Enable \"Retry\"",
+          "label": "Presentation of feedback",
           "fields": [
             {
               "label": "Custom typo display",
@@ -232,17 +187,15 @@
           ]
         },
         {
+          "label": "Enable \"Retry\""
+        },
+        {
           "label": "Enable \"Show solution\" button"
         },
         {
           "label": "Show solution on check"
-        },
-        {
-          "label": "Show solution on check"
         }
-      ],
-      "label": "Behavioural settings",
-      "description": "These options will let you control how the task behaves."
+      ]
     },
     {
       "label": "User interface",

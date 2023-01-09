@@ -90,6 +90,10 @@
           "description": "Se marcado, a pausa do áudio durante a reprodução não será possível."
         },
         {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
           "label": "Baralhar as frases",
           "description": "Definir quando as sentenças devem ser baralhadas.",
           "options": [
@@ -120,7 +124,7 @@
               "description": "Determine em que medida os erros de digitação (palavra com 3-9 caracteres: até 1 erro, palavra com mais de 9 caracteres: até 2 erros) contam como um erro real.",
               "options": [
                 {
-                  "label": "100"
+                  "label": "100 %"
                 },
                 {
                   "label": "50 %"
@@ -130,26 +134,15 @@
                 }
               ]
             }
-          ],
-          "options": [
-            {
-              "label": "Never"
-            },
-            {
-              "label": "Once when starting exercise"
-            },
-            {
-              "label": "On every try"
-            }
-          ],
-          "description": "Define when the sentences should be shuffled."
+          ]
         },
         {
           "label": "Texto",
           "fields": [
             {
               "label": "Separador de palavras",
-              "description": "Defina o separador de palavras diferente do caracter de espaço para suportar soluções alternativas com diferentes números de palavras."
+              "description": "Defina o separador de palavras diferente do caracter de espaço para suportar soluções alternativas com diferentes números de palavras.",
+              "default": " "
             },
             {
               "label": "Direção da escrita",
@@ -168,18 +161,7 @@
             },
             {
               "label": "Divisão de caracteres",
-              "description": "Active se caracteres específicos (por exemplo, caracteres Han chineses) devem ser divididos em palavras separadas automaticamente.",
-              "options": [
-                {
-                  "label": "100 %"
-                },
-                {
-                  "label": "50 %"
-                },
-                {
-                  "label": "0 %"
-                }
-              ]
+              "description": "Active se caracteres específicos (por exemplo, caracteres Han chineses) devem ser divididos em palavras separadas automaticamente."
             }
           ]
         },
@@ -188,8 +170,7 @@
           "fields": [
             {
               "label": "Exibição de erro de digitação personalizada",
-              "description": "Se marcada, os erros de digitação serão exibidos num estilo personalizado, distinguindo-os de erros claros.",
-              "default": " "
+              "description": "Se marcada, os erros de digitação serão exibidos num estilo personalizado, distinguindo-os de erros claros."
             },
             {
               "label": "Apresentação de soluções alternativas",
@@ -200,47 +181,19 @@
                 },
                 {
                   "label": "Mostrar todas as alternativas"
-                },
-                {
-                  "label": "Left-to-right"
                 }
               ]
-            },
-            {
-              "label": "Splitting of characters",
-              "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
             }
           ]
         },
         {
-          "label": "Activar \"Tentar Novamente\"",
-          "fields": [
-            {
-              "label": "Custom typo display",
-              "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
-            },
-            {
-              "options": [
-                {
-                  "label": "Show only first alternative"
-                },
-                {
-                  "label": "Show all alternatives"
-                }
-              ],
-              "label": "Presentation of alternate solutions",
-              "description": "Define which alternatives should be presented for wrong or missing words in the solution."
-            }
-          ]
+          "label": "Activar \"Tentar Novamente\""
         },
         {
           "label": "Activar o botão \"Mostrar solução\""
         },
         {
           "label": "Exibir solução ao verificar"
-        },
-        {
-          "label": "Show solution on check"
         }
       ]
     },

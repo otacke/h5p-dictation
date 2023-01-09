@@ -90,6 +90,10 @@
           "description": "Ikichaguliwa, kusitisha sauti wakati wa kucheza hakuwezekani."
         },
         {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
           "label": "Changanya sentensi",
           "description": "Bainisha ni lini sentensi zinafaa kuchanganywa.",
           "options": [
@@ -130,26 +134,15 @@
                 }
               ]
             }
-          ],
-          "options": [
-            {
-              "label": "Never"
-            },
-            {
-              "label": "Once when starting exercise"
-            },
-            {
-              "label": "On every try"
-            }
-          ],
-          "description": "Define when the sentences should be shuffled."
+          ]
         },
         {
           "label": "Maandishi",
           "fields": [
             {
-              "label": "Kitenganishi cha maneno",
-              "description": "Bainisha kitenganishi cha maneno tofauti na herufi ya nafasi ili kusaidia suluhisho mbadala zenye idadi tofauti ya maneno."
+              "label": "Onyesho maalum la kuchapa",
+              "description": "Ikiwa imechaguliwa, makosa ya kuchapa yataonyeshwa kwa mtindo maalum unaoyatofautisha na makosa ya wazi.",
+              "default": " "
             },
             {
               "label": "Mwelekeo wa kuandika",
@@ -168,18 +161,7 @@
             },
             {
               "label": "Mgawanyiko wa herufi",
-              "description": "Washa ikiwa herufi mahususi (kwa mfano herufi za Kichina za Han) zinapaswa kugawanywa katika maneno tofauti kiotomatiki.",
-              "options": [
-                {
-                  "label": "100 %"
-                },
-                {
-                  "label": "50 %"
-                },
-                {
-                  "label": "0 %"
-                }
-              ]
+              "description": "Washa ikiwa herufi mahususi (kwa mfano herufi za Kichina za Han) zinapaswa kugawanywa katika maneno tofauti kiotomatiki."
             }
           ]
         },
@@ -187,9 +169,8 @@
           "label": "Uwasilishaji wa maoni",
           "fields": [
             {
-              "label": "Onyesho maalum la kuchapa",
-              "description": "Ikiwa imechaguliwa, makosa ya kuchapa yataonyeshwa kwa mtindo maalum unaoyatofautisha na makosa ya wazi.",
-              "default": " "
+              "label": "Kitenganishi cha maneno",
+              "description": "Bainisha kitenganishi cha maneno tofauti na herufi ya nafasi ili kusaidia suluhisho mbadala zenye idadi tofauti ya maneno."
             },
             {
               "label": "Uwasilishaji wa suluhisho mbadala",
@@ -200,47 +181,19 @@
                 },
                 {
                   "label": "Onyesha njia mbadala zote"
-                },
-                {
-                  "label": "Left-to-right"
                 }
               ]
-            },
-            {
-              "label": "Splitting of characters",
-              "description": "Activate if particular characters (e.g. Chinese Han characters) should be split into separate words automatically."
             }
           ]
         },
         {
-          "label": "Wezesha \"Jaribu tena\"",
-          "fields": [
-            {
-              "label": "Custom typo display",
-              "description": "If checked, typos will be displayed in a custom style distinguishing them from clear mistakes."
-            },
-            {
-              "label": "Presentation of alternate solutions",
-              "description": "Define which alternatives should be presented for wrong or missing words in the solution.",
-              "options": [
-                {
-                  "label": "Show only first alternative"
-                },
-                {
-                  "label": "Show all alternatives"
-                }
-              ]
-            }
-          ]
+          "label": "Wezesha \"Jaribu tena\""
         },
         {
           "label": "Wezesha kitufe cha \"Onyesha suluhisho\""
         },
         {
           "label": "Onyesha suluhisho lililochaguliwa"
-        },
-        {
-          "label": "Show solution on check"
         }
       ]
     },
