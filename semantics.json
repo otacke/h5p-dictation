@@ -586,7 +586,7 @@
       {
         "name": "shouldHaveBeen",
         "type": "text",
-        "label": "CorrectSolution",
+        "label": "Correct solution",
         "importance": "low",
         "default": "Should have been"
       },
