@@ -91,8 +91,8 @@
           "description": "Se está marcado, non é posible deter o son durante a reprodución."
         },
         {
-          "label": "Play button delay",
-          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+          "label": "Retraso do botón de reprodución",
+          "description": "Opcionalmente, establece un período de tempo de ata tres segundos para que se retrase a reprodución dun botón. Isto é útil se queres permitir que os estudantes completen un campo de texto antes de comezar a escoitar."
         },
         {
           "label": "Barallar frases",
