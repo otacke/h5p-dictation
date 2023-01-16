@@ -90,8 +90,8 @@
           "description": "Wenn diese Option gewählt ist, können die Tondateien während des Abspielens nicht pausiert werden."
         },
         {
-          "label": "Play button delay",
-          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+          "label": "Verzögerung der Wiedergabe",
+          "description": "Stelle optional einen Zeitraum von bis zu drei Sekunden ein, um den die Wiedergabe verzögert werden soll. Das kann nützlich sein, wenn du Lernenden Zeit geben möchtest, in das Texteingabefeld zu wechseln."
         },
         {
           "label": "Sätze mischen",
