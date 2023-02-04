@@ -8,4 +8,4 @@ on:
 
 jobs:
   build:
-    uses: otacke/github-action-h5p-build/.github/workflows/h5p-build.yml@v1.0.0
+    uses: otacke/github-action-h5p-build/.github/workflows/h5p-build.yml@v1
