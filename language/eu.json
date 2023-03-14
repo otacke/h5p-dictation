@@ -90,8 +90,8 @@
           "description": "Markatuz gero, erreproduzitzea pausatzea ez da posiblea izango."
         },
         {
-          "label": "Play button delay",
-          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+          "label": "Erreproduzitzeko botoiaren atzerapena",
+          "description": "Aukeran, ezarri gehienez hiru segundoko denbora-tarte bat botoi bat sakatzean erreprodukzioa atzeratzeko. Hau erabilgarria da ikasleek testu-eremuan idazteko entzuten hasi aurretik."
         },
         {
           "label": "Nahastu esaldiak",
@@ -142,7 +142,7 @@
             {
               "label": "Hitz-banatzailea",
               "description": "Zehaztu hutsuneaz besteko hitzen banatzailea hitz kopuru ezberdinetako emaitzak onartu ahal izateko.",
-              "default": " "
+              "default": " . "
             },
             {
               "label": "Idazketaren norabidea",
