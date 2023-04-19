@@ -1,7 +1,8 @@
 import Util from '@services/util';
 import Sentence from '@scripts/h5p-dictation-sentence';
+import {expect, test} from '@jest/globals';
 
-/* containsRTLCharacters */
+// containsRTLCharacters
 const testCasesRTL = [
   {string: 'abc', result: false},
   {string: '', result: false},
@@ -18,7 +19,7 @@ for (let i = 0; i < testCasesRTL.length; i++) {
   });
 }
 
-/* stripPunctuation */
+// stripPunctuation
 const testCasesStripPunctuation = [
   {string: '', result: ''},
   {string: 'John', result: 'John'},
@@ -41,7 +42,7 @@ for (let i = 0; i < testCasesStripPunctuation.length; i++) {
   });
 }
 
-/* addSpaces */
+// addSpaces
 const testCasesAddSpaces = [
   {string: '', result: ''},
   {string: 'John', result: 'John'},

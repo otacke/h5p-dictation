@@ -4,7 +4,7 @@
   "description": "Let your students train their listening comprehension and spelling skills.",
   "scripts": {
     "test": "jest",
-    "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js'",
+    "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js' && eslint './test/**/*.js'" ,
     "build": "cross-env NODE_ENV=production webpack",
     "watch": "cross-env NODE_ENV=development webpack --watch"
   },
@@ -35,6 +35,7 @@
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
+    "@jest/globals": "^29.5.0",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "cross-env": "^7.0.3",
