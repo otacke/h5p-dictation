@@ -220,7 +220,6 @@ class Sentence {
 
   /**
    * Get content for H5P.Question.
-   *
    * @returns {object} DOM elements for content.
    */
   getDOM() {
@@ -229,7 +228,6 @@ class Sentence {
 
   /**
    * Get current text in InputField.
-   *
    * @returns {string} Current text.
    */
   getUserInput() {
@@ -238,7 +236,6 @@ class Sentence {
 
   /**
    * Set the sentence's position in DOM.
-   *
    * @param {number} position Position.
    */
   setPosition(position) {
@@ -249,7 +246,6 @@ class Sentence {
   /**
    * Set current text in InputField.
    * DOM is not created before to make cheating a little more difficult at least.
-   *
    * @param {object} result - Current DOM element with words.
    */
   showSolution(result) {
@@ -279,7 +275,6 @@ class Sentence {
 
   /**
    * Get correct text.
-   *
    * @param {boolean} asArray If true, text will be returned as array of words.
    * @returns {string} Correct text.
    */
@@ -295,7 +290,6 @@ class Sentence {
 
   /**
    * Get current state.
-   *
    * @returns {object} current State.
    */
   getCurrentState() {
@@ -309,7 +303,6 @@ class Sentence {
 
   /**
    * Get the maximum of possible mistakes.
-   *
    * @returns {number} Number of possible mistakes.
    */
   getMaxMistakes() {
@@ -318,7 +311,6 @@ class Sentence {
 
   /**
    * Get description text.
-   *
    * @returns {string} Description text.
    */
   getXAPIDescription() {
@@ -378,7 +370,6 @@ class Sentence {
 
   /**
    * Pause buttons.
-   *
    * @param {Button} [excludeButton] Button to ignore.
    */
   pauseButtons(excludeButton) {
@@ -393,7 +384,6 @@ class Sentence {
 
   /**
    * Stop buttons.
-   *
    * @param {Button} [excludeButton] Button to ignore.
    */
   stopButtons(excludeButton) {
@@ -408,7 +398,6 @@ class Sentence {
 
   /**
    * Handle button clicked.
-   *
    * @param {Button} button Calling button.
    */
   handleButtonClicked(button) {
@@ -428,7 +417,6 @@ class Sentence {
 
   /**
    * Add spaces between text and punctuation.
-   *
    * @param {string} text Text to add spaces to.
    * @param {object} [options] Options.
    * @param {boolean} [options.autosplit=true] If true, automatically split respective symbols.
@@ -473,7 +461,6 @@ class Sentence {
 
   /**
    * Strip punctuation from a sentence.
-   *
    * @param {object[]|string} words - Words of a sentence.
    * @returns {object[]|string} Words without punctuation.
    */
@@ -507,7 +494,6 @@ class Sentence {
 
   /**
    * Compute the results for this sentence.
-   *
    * @returns {object} Results.
    */
   computeResults() {
@@ -585,7 +571,6 @@ class Sentence {
 
   /**
    * Compute total score and explanation for each word.
-   *
    * @param {object} aligned Word by word comparison of input and solution.
    * @returns {object} Scores per word.
    */
@@ -645,7 +630,6 @@ class Sentence {
    *
    * TODO: This needs to be boiled down. It's long, there's redundant code,
    * but I am too scared to touch it without having tests in place first.
-   *
    * @param {Array} words1 - First Array of words.
    * @param {Array} words2 - Second Array of words.
    * @returns {object} Object containing two new arrays.
@@ -654,7 +638,6 @@ class Sentence {
 
     /**
      * Get match pattern.
-     *
      * @param {object} aligned Aligned words.
      * @returns {boolean[]} Match pattern.
      */
@@ -848,7 +831,6 @@ class Sentence {
 
     /**
      * Count the number of matches + typos.
-     *
      * @param {object} aligned Aligned words.
      * @returns {number} Number of matches and typos.
      */

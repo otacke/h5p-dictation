@@ -334,7 +334,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Reorder sentences.
-     *
      * @param {number[]} order Order.
      */
     this.reorderSentences = (order) => {
@@ -348,7 +347,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Handle playing audio.
-     *
      * @param {object} button Calling button.
      */
     this.handlePlayAudio = (button) => {
@@ -371,7 +369,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Handle context changed.
-     *
      * @param {string} contextId Context id.
      */
     this.handleContextChanged = (contextId) => {
@@ -464,14 +461,12 @@ class Dictation extends H5P.Question {
 
     /**
      * Determine whether the task has been passed by the user.
-     *
      * @returns {boolean} True if user passed or task is not scored.
      */
     this.isPassed = () => this.mistakesCapped === 0;
 
     /**
      * Check if Dictation has been submitted or input has been given.
-     *
      * @returns {boolean} True, if answer was given.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
      */
@@ -482,7 +477,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Get latest score.
-     *
      * @returns {number} latest score.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
      */
@@ -492,7 +486,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Get maximum possible score.
-     *
      * @returns {number} Score necessary for mastering.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
      */
@@ -500,7 +493,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Show solutions for all sentences.
-     *
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
      */
     this.showSolutions = () => {
@@ -516,7 +508,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Reset task.
-     *
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
      */
     this.resetTask = () => {
@@ -553,7 +544,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Get xAPI data.
-     *
      * @returns {object} XAPI statement.
      * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
      */
@@ -568,7 +558,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Build xAPI answer event.
-     *
      * @returns {H5P.XAPIEvent} XAPI answer event.
      */
     this.getXAPIAnswerEvent = () => {
@@ -607,7 +596,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Create an xAPI event for Dictation.
-     *
      * @param {string} verb Short id of the verb we want to trigger.
      * @returns {H5P.XAPIEvent} Event template.
      */
@@ -621,7 +609,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Get the xAPI definition for the xAPI object.
-     *
      * @returns {object} XAPI definition.
      */
     this.getxAPIDefinition = () => {
@@ -663,7 +650,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Build all correct gap variations.
-     *
      * @returns {object[]} Correct gap variations.
      */
     this.buildCorrectGapVariations = () => {
@@ -681,7 +667,6 @@ class Dictation extends H5P.Question {
      *
      * This may not be completely true, because we can't sensibly compile all
      * possible answers for a sentence if we accept small mistakes.
-     *
      * @param {object[]} gapsVariations Sentences gaps.
      * @param {boolean} [complete=false] If true, will build complete CRP.
      * @returns {object[]} Correct responses pattern.
@@ -713,7 +698,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Get current state.
-     *
      * @returns {object} Current state.
      */
     this.getCurrentState = () => {
@@ -723,7 +707,6 @@ class Dictation extends H5P.Question {
     /**
      * Get context data.
      * Contract used for confusion report.
-     *
      * @returns {object} Context data.
      */
     this.getContext = () => {
@@ -735,7 +718,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Get tasks title.
-     *
      * @returns {string} Title.
      */
     this.getTitle = () => {
@@ -750,7 +732,6 @@ class Dictation extends H5P.Question {
 
     /**
      * Get tasks description.
-     *
      * @returns {string} Description.
      */
     this.getDescription = () => this.params.taskDescription || Dictation.DEFAULT_DESCRIPTION;

@@ -61,7 +61,6 @@ class Solution {
 
   /**
    * Get content for H5P.Question.
-   *
    * @returns {object} DOM elements for solution view.
    */
   getDOM() {
@@ -70,7 +69,6 @@ class Solution {
 
   /**
    * Build the solution for the sentence's results.
-   *
    * @param {object} result Result.
    * @param {object} result.score Scores.
    * @param {number} result.score.added Number of added words added.
@@ -97,7 +95,6 @@ class Solution {
 
   /**
    * Build wrapper for single word of a solution.
-   *
    * @param {number} index Tabindex for ARIA.
    * @param {object} word Word information.
    * @param {string} word.type Status about missing, typo, ...
@@ -144,7 +141,6 @@ class Solution {
 
   /**
    * Add EventListeners to solutions's words.
-   *
    * @param {object} wordDOM Word's DOM element.
    */
   addSolutionWordListeners(wordDOM) {
@@ -211,7 +207,6 @@ class Solution {
 
   /**
    * Create explanation text for aria label.
-   *
    * @param {object} word Word with type, answer and solution.
    * @returns {string} Explanation text for aria label.
    */
@@ -242,7 +237,6 @@ class Solution {
 
   /**
    * Replace symbols with a11y readably words.
-   *
    * @param {string} [text=''] Text to make readable.
    * @returns {string} Readable text.
    */
@@ -268,7 +262,6 @@ class Solution {
 
   /**
    * Create aria score text.
-   *
    * @param {string} type Type of mistake.
    * @returns {string} Aria score text.
    */
@@ -311,7 +304,6 @@ class Solution {
 
   /**
    * Append explanation to solution.
-   *
    * @param {object} wordDOM Word's DOM element.
    * @param {object} word Word with type, answer and solution.
    */
@@ -369,7 +361,6 @@ class Solution {
   /**
    * Set current text in InputField.
    * DOM is not created before to make cheating a little more difficult at least.
-   *
    * @param {object} result - Current DOM element with words.
    */
   show(result) {

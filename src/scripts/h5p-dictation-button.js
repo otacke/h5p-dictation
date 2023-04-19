@@ -64,7 +64,6 @@ class Button {
 
   /**
    * Create H5P.Audio.
-   *
    * @param {number} id ContentID.
    * @param {object} params Parameters.
    * @returns {object} DOM element for the sample.
@@ -162,7 +161,6 @@ class Button {
 
   /**
    * Get Button DOM.
-   *
    * @returns {object} Button DOM.
    */
   getDOM() {
@@ -171,7 +169,6 @@ class Button {
 
   /**
    * Get DOM for dummy button.
-   *
    * @returns {object} DOM for dummy button.
    */
   getDummyButtonDOM() {
@@ -252,7 +249,6 @@ class Button {
 
   /**
    * Set the title label and the aria label.
-   *
    * @param {string} label Label to set.
    */
   setLabel(label) {
@@ -324,7 +320,6 @@ class Button {
 
   /**
    * Check if button is enabled.
-   *
    * @returns {boolean} True, if enabled.
    */
   isEnabled() {
@@ -360,7 +355,6 @@ class Button {
 
   /**
    * Get current state.
-   *
    * @returns {object} Current state.
    */
   getCurrentState() {

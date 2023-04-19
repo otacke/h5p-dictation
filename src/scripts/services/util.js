@@ -2,7 +2,6 @@
 class Util {
   /**
    * Extend an array just like JQuery's extend.
-   *
    * @returns {object} Merged objects.
    */
   static extend() {
@@ -23,7 +22,6 @@ class Util {
 
   /**
    * Retrieve true string from HTML encoded string.
-   *
    * @param {string} input Input string.
    * @returns {string} Output string.
    */
@@ -38,7 +36,6 @@ class Util {
    * Words can be mixed as right-to-left and left-to-right, and the
    * parsed input from the text field will have a different order than the
    * displayed words. The right-to-left chunks are reversed here.
-   *
    * @param {object[]} words Words object.
    * @param {string} words.solution Word to test.
    * @returns {object[]} RTL words reordered.
@@ -71,7 +68,6 @@ class Util {
    *
    * Can be replaced by word.split(/(?<!\\)\|/) as soon as lookbehinds in
    * regular expressions are commonly available in browsers (mind IE11 though)
-   *
    * @param {string} word Word to be split.
    * @returns {string[]} Word alternatives.
    */
@@ -85,7 +81,6 @@ class Util {
 
   /**
    * Check for right-to-left characters.
-   *
    * @param {string} input Input to check for right-to-left characters.
    * @returns {boolean} True, if input contains right-to-left characters.
    */
@@ -97,7 +92,6 @@ class Util {
    * Combine all possible combinations of strings from two sets.
    *
    * ['a', 'b', 'c'] and ['d', 'e'] become ['a d', 'a e', 'b d', 'b e', 'c d', 'c e']
-   *
    * @param {object[]} words1 First set of strings.
    * @param {object[]} words2 Second set of strings.
    * @param {string} [delimiter=' '] Delimiter between each string.
@@ -118,7 +112,6 @@ class Util {
   /**
    * Format language tag (RFC 5646). Assuming "language-coutry". No validation.
    * Cmp. https://tools.ietf.org/html/rfc5646
-   *
    * @param {string} languageCode Language tag.
    * @returns {string} Formatted language tag.
    */
@@ -143,7 +136,6 @@ class Util {
 
   /**
    * Shuffle array.
-   *
    * @param {object[]} array Array.
    * @returns {object[]} Shuffled array.
    */
