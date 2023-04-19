@@ -1,5 +1,5 @@
-import Util from '../../src/scripts/h5p-dictation-util';
-import Sentence from '../../src/scripts/h5p-dictation-sentence';
+import Util from '@services/util';
+import Sentence from '@scripts/h5p-dictation-sentence';
 
 /* containsRTLCharacters */
 const testCasesRTL = [
