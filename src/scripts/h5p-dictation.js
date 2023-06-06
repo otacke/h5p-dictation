@@ -668,7 +668,7 @@ class Dictation extends H5P.Question {
      * This may not be completely true, because we can't sensibly compile all
      * possible answers for a sentence if we accept small mistakes.
      * @param {object[]} gapsVariations Sentences gaps.
-     * @param {boolean} [complete=false] If true, will build complete CRP.
+     * @param {boolean} [complete] If true, will build complete CRP.
      * @returns {object[]} Correct responses pattern.
      */
     this.buildxAPICRP = (gapsVariations, complete = false) => {

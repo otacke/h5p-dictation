@@ -94,7 +94,7 @@ class Util {
    * ['a', 'b', 'c'] and ['d', 'e'] become ['a d', 'a e', 'b d', 'b e', 'c d', 'c e']
    * @param {object[]} words1 First set of strings.
    * @param {object[]} words2 Second set of strings.
-   * @param {string} [delimiter=' '] Delimiter between each string.
+   * @param {string} [delimiter] Delimiter between each string.
    * @returns {object[]} Result.
    */
   static buildCombinations(words1, words2, delimiter = ' ') {

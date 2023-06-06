@@ -4,7 +4,7 @@ import Util from '@services/util';
 class Solution {
   /**
    * @class
-   * @param {object} [params={}] Parameters.
+   * @param {object} [params] Parameters.
    */
   constructor(params = {}) {
     this.params = params;
@@ -100,7 +100,7 @@ class Solution {
    * @param {string} word.type Status about missing, typo, ...
    * @param {string} word.solution Correct spelling of the word.
    * @param {string} word.answer User input for this word.
-   * @param {boolean} [trailingGap=true] True if wrapper should have trailing gap.
+   * @param {boolean} [trailingGap] True if wrapper should have trailing gap.
    * @returns {HTMLElement} DOM for solution words.
    */
   createSolutionWordDOM(index, word, trailingGap = true) {
@@ -237,7 +237,7 @@ class Solution {
 
   /**
    * Replace symbols with a11y readably words.
-   * @param {string} [text=''] Text to make readable.
+   * @param {string} [text] Text to make readable.
    * @returns {string} Readable text.
    */
   makeReadable(text) {

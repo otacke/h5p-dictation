@@ -419,7 +419,7 @@ class Sentence {
    * Add spaces between text and punctuation.
    * @param {string} text Text to add spaces to.
    * @param {object} [options] Options.
-   * @param {boolean} [options.autosplit=true] If true, automatically split respective symbols.
+   * @param {boolean} [options.autosplit] If true, automatically split respective symbols.
    * @returns {string} [options.wordSeparator=' '] Text with spaces and symbols.
    */
   static addSpaces(text, options = {}) {
