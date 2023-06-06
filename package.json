@@ -5,8 +5,8 @@
   "scripts": {
     "test": "jest",
     "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js' && eslint './test/**/*.js'" ,
-    "build": "cross-env NODE_ENV=production webpack",
-    "watch": "cross-env NODE_ENV=development webpack --watch"
+    "build": "webpack --mode=production",
+    "watch": "webpack --mode=development --watch"
   },
   "repository": {
     "type": "git",
