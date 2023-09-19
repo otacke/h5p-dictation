@@ -703,7 +703,10 @@ class Dictation extends H5P.Question {
      * @returns {object} Current state.
      */
     this.getCurrentState = () => {
-      return this.sentences.map((sentence) => sentence.getCurrentState());
+      // Prevent storing state unless user has actually interacted with the task
+      return this.getAnswerGiven() || this.isAudioPlayBackStarted()
+        ? this.sentences.map((sentence) => sentence.getCurrentState())
+        : undefined;
     };
 
     /**
@@ -737,6 +740,17 @@ class Dictation extends H5P.Question {
      * @returns {string} Description.
      */
     this.getDescription = () => this.params.taskDescription || Dictation.DEFAULT_DESCRIPTION;
+
+    /**
+     * Checks if any sentence's audio playback has started.
+     * @returns {boolean} True if audio playback has started, false otherwise.
+     */
+    this.isAudioPlayBackStarted = () => {
+      return this.sentences?.some((sentence) => {
+        return sentence.getCurrentState().buttonPlayNormal?.audio?.currentTime > 0 
+            || sentence.getCurrentState().buttonPlaySlow?.audio?.currentTime > 0;
+      });
+    };
   }
 }
 
