@@ -747,8 +747,7 @@ class Dictation extends H5P.Question {
      */
     this.isAudioPlayBackStarted = () => {
       return this.sentences?.some((sentence) => {
-        return sentence.getCurrentState().buttonPlayNormal?.audio?.currentTime > 0 
-            || sentence.getCurrentState().buttonPlaySlow?.audio?.currentTime > 0;
+        return sentence.buttonPlayNormal?.isAudioPlaying() || sentence.buttonPlaySlow?.isAudioPlaying();
       });
     };
   }

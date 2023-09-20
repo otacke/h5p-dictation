@@ -280,6 +280,8 @@ class Button {
     else {
       this.setLabel(this.params.a11y.play);
     }
+
+    this.resetAudio();
   }
 
   /**
@@ -399,6 +401,10 @@ class Button {
       this.button.style.animationDuration = '';
       this.isDelayingPlay = false;
     }, this.params.playButtonDelay * 1000);
+  }
+
+  isAudioPlaying() {
+    return this.audio?.audio?.currentTime > 0;
   }
 }
 

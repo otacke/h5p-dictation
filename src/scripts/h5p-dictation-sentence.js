@@ -330,11 +330,9 @@ class Sentence {
 
     if (this.buttonPlayNormal) {
       this.buttonPlayNormal.reset();
-      this.buttonPlayNormal.resetAudio();
     }
     if (this.buttonPlaySlow) {
       this.buttonPlaySlow.reset();
-      this.buttonPlaySlow.resetAudio();
     }
   }
 
