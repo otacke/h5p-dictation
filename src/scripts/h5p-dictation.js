@@ -520,6 +520,8 @@ class Dictation extends H5P.Question {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
   resetTask() {
+    this.contentWasReset = true;
+
     // Shuffle sentences if they should be
     if (this.params.behaviour.shuffleSentences === 'onRetry') {
       this.shuffleSentences();
@@ -712,10 +714,12 @@ class Dictation extends H5P.Question {
    * @returns {object} Current state.
    */
   getCurrentState() {
-    // Prevent storing state unless user has actually interacted with the task
-    return this.getAnswerGiven() || this.isAudioPlayBackStarted()
-      ? this.sentences.map((sentence) => sentence.getCurrentState())
-      : undefined;
+    if (!this.getAnswerGiven() && !this.isAudioPlayBackStarted()) {
+      // Nothing relevant to store, but previous state in DB must be cleared after reset
+      return this.contentWasReset ? {} : undefined;
+    }
+
+    return this.sentences.map((sentence) => sentence.getCurrentState());
   }
 
   /**
