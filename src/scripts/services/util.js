@@ -2,8 +2,7 @@
 class Util {
   /**
    * Extend an array just like JQuery's extend.
-   * @param {object} arguments Objects to be merged.
-   * @return {object} Merged objects.
+   * @returns {object} Merged objects.
    */
   static extend() {
     for (let i = 1; i < arguments.length; i++) {
@@ -24,7 +23,7 @@ class Util {
   /**
    * Retrieve true string from HTML encoded string.
    * @param {string} input Input string.
-   * @return {string} Output string.
+   * @returns {string} Output string.
    */
   static htmlDecode(input) {
     const dparser = new DOMParser().parseFromString(input, 'text/html');
@@ -37,17 +36,16 @@ class Util {
    * Words can be mixed as right-to-left and left-to-right, and the
    * parsed input from the text field will have a different order than the
    * displayed words. The right-to-left chunks are reversed here.
-   *
    * @param {object[]} words Words object.
-   * @param {string} word.solution Word to test.
-   * @return {object[]} RTL words reordered.
+   * @param {string} words.solution Word to test.
+   * @returns {object[]} RTL words reordered.
    */
   static revertRTL(words) {
     let reversedWords = [];
     let currentRTL = [];
 
     // Reverse RTL blocks, keep LTR
-    words.forEach(word => {
+    words.forEach((word) => {
       const isRTL = Util.containsRTLCharacters(word.solution);
       if (isRTL) {
         currentRTL.push(word);
@@ -70,23 +68,21 @@ class Util {
    *
    * Can be replaced by word.split(/(?<!\\)\|/) as soon as lookbehinds in
    * regular expressions are commonly available in browsers (mind IE11 though)
-   *
    * @param {string} word Word to be split.
-   * @param {string[]} Word alternatives.
+   * @returns {string[]} Word alternatives.
    */
   static splitWordAlternatives(word) {
     const wordReversed = word.split('').reverse().join('');
     const alternatives = wordReversed.split(/\|(?!\\)/);
     return alternatives
-      .map(alternative => alternative.split('').reverse().join('').replace('\\|', '|'))
+      .map((alternative) => alternative.split('').reverse().join('').replace('\\|', '|'))
       .reverse();
   }
 
   /**
    * Check for right-to-left characters.
-   *
    * @param {string} input Input to check for right-to-left characters.
-   * @return {boolean} True, if input contains right-to-left characters.
+   * @returns {boolean} True, if input contains right-to-left characters.
    */
   static containsRTLCharacters(input) {
     return new RegExp('^[^' + Util.RTL + ']*?[' + Util.RTL + ']').test(input);
@@ -96,17 +92,17 @@ class Util {
    * Combine all possible combinations of strings from two sets.
    *
    * ['a', 'b', 'c'] and ['d', 'e'] become ['a d', 'a e', 'b d', 'b e', 'c d', 'c e']
-   *
    * @param {object[]} words1 First set of strings.
    * @param {object[]} words2 Second set of strings.
-   * @param {string} [delimiter=' '] Delimiter between each string.
+   * @param {string} [delimiter] Delimiter between each string.
+   * @returns {object[]} Result.
    */
   static buildCombinations(words1, words2, delimiter = ' ') {
     const result = [];
 
-    words1.forEach(word1 => {
+    words1.forEach((word1) => {
       result.push(
-        ...words2.map(word2 => (word2 === '') ? word1 : `${word2}${delimiter}${word1}`)
+        ...words2.map((word2) => (word2 === '') ? word1 : `${word2}${delimiter}${word1}`)
       );
     });
 
@@ -116,8 +112,8 @@ class Util {
   /**
    * Format language tag (RFC 5646). Assuming "language-coutry". No validation.
    * Cmp. https://tools.ietf.org/html/rfc5646
-   * @param {string} languageTag Language tag.
-   * @return {string} Formatted language tag.
+   * @param {string} languageCode Language tag.
+   * @returns {string} Formatted language tag.
    */
   static formatLanguageCode(languageCode) {
     if (typeof languageCode !== 'string') {
@@ -141,7 +137,7 @@ class Util {
   /**
    * Shuffle array.
    * @param {object[]} array Array.
-   * @return {object[]} Shuffled array.
+   * @returns {object[]} Shuffled array.
    */
   static shuffleArray(array) {
     let j, x, i;
@@ -153,7 +149,7 @@ class Util {
     }
 
     return array;
-  }  
+  }
 }
 
 // Regular expression configuration

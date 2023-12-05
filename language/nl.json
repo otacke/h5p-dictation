@@ -30,7 +30,7 @@
         "fields": [
           {
             "label": "Beschrijving",
-            "description": "You can optionally put a simple description above the text input field, useful e.g. for dialogues."
+            "description": "Je kunt optioneel en eenvoudige beschrijving boven het tekstinvoerveld plaatsen, bijv. voor dialogen."
           },
           {
             "label": "Geluidsvoorbeeld",
@@ -42,7 +42,7 @@
           },
           {
             "label": "Tekst",
-            "description": "De te schrijven tekst. You can add alternate spellings to a word by adding a vertical line (|) behind followed by an alternative."
+            "description": "De te schrijven tekst. Je kunt alternatieve spellingswijzen voor een woord opgeven door een verticale lijn (|) toe te voegen gevolgd door het alternatief."
           }
         ]
       }
@@ -64,7 +64,6 @@
               {
                 "label": "Scorereeks"
               },
-              {},
               {
                 "label": "Feedback voor de gedefinieerde scorereeks",
                 "placeholder": "Vul de feedback in"
@@ -75,8 +74,8 @@
       ]
     },
     {
-      "label": "Gedragsinstellingen",
-      "description": "Met deze opties kun je bepalen hoe de opgave zich gedraagt.",
+      "label": "Gedragsinstelllingen",
+      "description": "Met deze opties kun je bepalen hoe de taak zich gedraagt.",
       "fields": [
         {
           "label": "Maximaal aantal pogingen",
@@ -87,12 +86,16 @@
           "description": "Begrenst het aantal maal dat de langzame voorbeelden voor elke zin kunnen worden beluisterd."
         },
         {
-          "label": "Disable pause option",
-          "description": "If checked, pausing the audio while playing is not possible."
+          "label": "Pauze uitschakelen",
+          "description": "Indien gekozen, is pauzeren van audio tijdens afspelen niet mogelijk."
         },
         {
-          "label": "Shuffle sentences",
-          "description": "Define when the sentences should be shuffled.",
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
+          "label": "Zinnen husselen",
+          "description": "Vastleggen wanneer de zinnen moeten worden gehusseld.",
           "options": [
             {
               "label": "Nooit"
@@ -138,7 +141,8 @@
           "fields": [
             {
               "label": "Woordscheidingsteken",
-              "description": "Definieer het scheidingsteken van woorden anders dan spatie om alternatieve oplossingen met een verschillend aantal woorden te ondersteunen."
+              "description": "Definieer het scheidingsteken van woorden anders dan spatie om alternatieve oplossingen met een verschillend aantal woorden te ondersteunen.",
+              "default": " "
             },
             {
               "label": "Schrijfrichting",
@@ -165,7 +169,7 @@
           "label": "Presentatie van feedback",
           "fields": [
             {
-              "label": "Aangepast weergave van typefouten",
+              "label": "Aangepaste weergave van typefouten",
               "description": "Indien aangevinkt, zullen typefouten worden weergegeven in een aangepaste stijl die ze onderscheidt van duidelijke fouten."
             },
             {
@@ -229,7 +233,7 @@
       ]
     },
     {
-      "label": "Schermlezer",
+      "label": "Voorlezer",
       "fields": [
         {
           "label": "Ondersteunende technologie beschrijving voor \"Controleer\"-knop",

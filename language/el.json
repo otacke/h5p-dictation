@@ -64,7 +64,6 @@
               {
                 "label": "Βαθμολογία"
               },
-              {},
               {
                 "label": "Χαρακτηρισμός",
                 "placeholder": "Συμπληρώστε τον χαρακτηρισμό"
@@ -89,6 +88,10 @@
         {
           "label": "Απενεργοποίηση της επιλογής παύσης",
           "description": "Εάν επιλεγεί, δεν είναι δυνατή η παύση του ήχου κατά την αναπαραγωγή."
+        },
+        {
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
         },
         {
           "label": "Ανακάτεμα προτάσεων",
@@ -138,7 +141,8 @@
           "fields": [
             {
               "label": "Διαχωριστικό λέξεων",
-              "description": "Καθορίστε το διαχωριστικό των λέξεων διαφορετικό από τον χαρακτήρα διαστήματος για την υποστήριξη εναλλακτικών λύσεων με διαφορετικό αριθμό λέξεων."
+              "description": "Καθορίστε το διαχωριστικό των λέξεων διαφορετικό από τον χαρακτήρα διαστήματος για την υποστήριξη εναλλακτικών λύσεων με διαφορετικό αριθμό λέξεων.",
+              "default": " "
             },
             {
               "label": "Κατεύθυνση γλώσσας",

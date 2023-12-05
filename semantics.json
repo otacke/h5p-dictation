@@ -12,8 +12,8 @@
         "importance": "medium",
         "options": [
           "H5P.Image 1.1",
-          "H5P.Video 1.5",
-          "H5P.Audio 1.4"
+          "H5P.Video 1.6",
+          "H5P.Audio 1.5"
         ],
         "optional": true,
         "description": "Optional media to display above the question."
@@ -206,6 +206,15 @@
         "description": "If checked, pausing the audio while playing is not possible.",
         "default": false,
         "optional": true
+      },
+      {
+        "name": "playButtonDelay",
+        "type": "number",
+        "label": "Play button delay",
+        "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening.",
+        "optional": true,
+        "min": 0,
+        "max": 3
       },
       {
         "name": "shuffleSentences",
@@ -577,7 +586,7 @@
       {
         "name": "shouldHaveBeen",
         "type": "text",
-        "label": "CorrectSolution",
+        "label": "Correct solution",
         "importance": "low",
         "default": "Should have been"
       },

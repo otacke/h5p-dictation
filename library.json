@@ -2,7 +2,7 @@
   "title": "Dictation",
   "description": "Let your students train their listening comprehension and spelling",
   "majorVersion": 1,
-  "minorVersion": 2,
+  "minorVersion": 3,
   "patchVersion": 0,
   "runnable": 1,
   "embedTypes": [
@@ -39,7 +39,7 @@
     {
       "machineName": "H5P.Audio",
       "majorVersion": 1,
-      "minorVersion": 4
+      "minorVersion": 5
     },
     {
       "machineName": "H5P.TextUtilities",

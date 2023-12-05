@@ -64,7 +64,6 @@
               {
                 "label": "Razpon rezultatov"
               },
-              {},
               {
                 "label": "Povratna informacija za definiran razpon rezultatov",
                 "placeholder": "Vnesite povratno informacijo"
@@ -87,34 +86,38 @@
           "description": "Omejitev možnega števila predvajanja upočasnjenega posnetka (za vsak stavek posebej)."
         },
         {
-          "label": "Disable pause option",
-          "description": "If checked, pausing the audio while playing is not possible."
+          "label": "Onemogoči premor",
+          "description": "Omejitev možnosti zaustavitve predvajanja posnetka."
         },
         {
-          "label": "Shuffle sentences",
-          "description": "Define when the sentences should be shuffled.",
+          "label": "Play button delay",
+          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+        },
+        {
+          "label": "Premešaj stavke",
+          "description": "Določitev načina prikaza stavkov v naključnem vrstnem redu.",
           "options": [
             {
-              "label": "Never"
+              "label": "Nikoli"
             },
             {
-              "label": "Once when starting exercise"
+              "label": "Enkrat ob začetku naloge"
             },
             {
-              "label": "On every try"
+              "label": "Ob vsakem poskusu reševanja"
             }
           ]
         },
         {
-          "label": "Scoring",
+          "label": "Točkovanje",
           "fields": [
             {
               "label": "Ne upoštevaj ločil",
               "description": "V primeru onemogočene nastavitve se bo v stavkih točkoval tudi vnos ločil."
             },
             {
-              "label": "Zero mistakes mode",
-              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+              "label": "Način brez napak",
+              "description": "Udeleženec prejme točke le za pravilne odgovore. Napake sicer niso kaznovane."
             },
             {
               "label": "Vrednost tipkarskih napak",
@@ -134,11 +137,12 @@
           ]
         },
         {
-          "label": "Text",
+          "label": "Besedilo",
           "fields": [
             {
-              "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
+              "label": "Ločilo besed",
+              "description": "Določi ločilo med besedami, ki ni presledek. Ločilo omogoča zapis nadomestnih odgovorov z različnim številom besed.",
+              "default": " "
             },
             {
               "label": "Smer pisanja",
@@ -162,7 +166,7 @@
           ]
         },
         {
-          "label": "Presentation of feedback",
+          "label": "Predstavitev povratne informacije",
           "fields": [
             {
               "label": "Tipkarske napake prikaži ločeno",
@@ -189,7 +193,7 @@
           "label": "Omogoči gumb \"Prikaži rešitev\""
         },
         {
-          "label": "Show solution on check"
+          "label": "Ob preverjanju odgovorov prikaži rešitve"
         }
       ]
     },
@@ -202,17 +206,17 @@
           "default": "Število napak: @total."
         },
         {
-          "label": "General feedback (zero mistakes mode)",
-          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
+          "label": "Splošna povratna informacija (Način brez napak)",
+          "description": "Na voljo je več spremenljivk: @matches = število ujemanj, @total = število napak, @wrong = napačnih besed, @added = dodatnih besed, @missing = manjkajočih besed, @typo = tipkarskih napak",
+          "default": "Število napak: @total. Število tipkarskih napak: @typo."
         },
         {
           "label": "Besedilo za gumb \"Preveri\"",
           "default": "Preveri"
         },
         {
-          "label": "Text for \"Submit\" button",
-          "default": "Submit"
+          "label": "Besedilo za gumb \"Oddaj\"",
+          "default": "Oddaj"
         },
         {
           "label": "Besedilo za gumb \"Poskusi ponovno\"",
@@ -232,16 +236,16 @@
       "label": "Bralniki zaslona",
       "fields": [
         {
-          "label": "Assistive technology description for \"Check\" button",
-          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+          "label": "Opis gumba \"Preveri\" za bralnike zaslona",
+          "default": "Preveri pravilnost. Odgovori bodo označeni kot pravilni, napačni ali brez odgovorov."
         },
         {
-          "label": "Assistive technology description for \"Show Solution\" button",
-          "default": "Show the solution. The task will be marked with its correct solution."
+          "label": "Opis gumba \"Prikaži rešitev\" za bralnike zaslona",
+          "default": "Prikaže rešitev. Pravilni odgovori bodo označeni."
         },
         {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
+          "label": "Opis gumba \"Poskusi ponovno\" za bralnike zaslona",
+          "default": "Omogoči ponoven poskus. Ponastavi vse odzive in znova zažene nalogo."
         },
         {
           "label": "Gumb za predvajanje",

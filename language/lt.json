@@ -1,63 +1,63 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Medija",
       "fields": [
         {
-          "label": "Type",
-          "description": "Optional media to display above the question."
+          "label": "Tipas",
+          "description": "Pasirenkama medija, rodoma virš klausimo."
         },
         {
-          "label": "Disable image zooming"
+          "label": "Išjungti paveikslėlio mastelio keitimą"
         }
       ]
     },
     {
-      "label": "Task description",
-      "description": "Describe your task here.",
-      "placeholder": "Please listen carefully and write what you hear."
+      "label": "Užduoties aprašymas",
+      "description": "Čia aprašykite savo užduotį.",
+      "placeholder": "Atidžiai klausykite ir parašykite tai, ką girdite."
     },
     {
-      "label": "Sentences",
+      "label": "Sakiniai",
       "widgets": [
         {
-          "label": "Default"
+          "label": "Numatytasis"
         }
       ],
-      "entity": "Sentence",
+      "entity": "Sakinys",
       "field": {
-        "label": "Sentence",
+        "label": "Sakinys",
         "fields": [
           {
-            "label": "Description",
+            "label": "Aprašymas",
             "description": "You can optionally put a simple description above the text input field, useful e.g. for dialogues."
           },
           {
-            "label": "Sound sample",
-            "description": "Sentence spoken in normal speed"
+            "label": "Garso pavyzdys",
+            "description": "Sakinys pasakytas įprastu greičiu"
           },
           {
-            "label": "Sound sample slow",
-            "description": "Sentence spoken in slow speed"
+            "label": "Lėtas garso pavyzdys",
+            "description": "Sakinys sakomas lėtai"
           },
           {
-            "label": "Text",
+            "label": "Tekstas",
             "description": "Text that should be written. You can add alternate spellings to a word by adding a vertical line (|) behind followed by an alternative."
           }
         ]
       }
     },
     {
-      "label": "Overall Feedback",
+      "label": "Bendras atsiliepimas",
       "fields": [
         {
           "widgets": [
             {
-              "label": "Default"
+              "label": "Numatytasis"
             }
           ],
           "label": "Define custom feedback for any score range",
-          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
+          "description": "Spustelėkite mygtuką „Pridėti diapazoną“, kad pridėtumėte tiek diapazonų, kiek jums reikia. Pavyzdys: 0–20 % blogas balas, 21–91 % vidutinis balas, 91–100 % puikus rezultatas!",
           "entity": "range",
           "field": {
             "fields": [
@@ -65,8 +65,8 @@
                 "label": "Score Range"
               },
               {
-                "label": "Feedback for defined score range",
-                "placeholder": "Fill in the feedback"
+                "label": "Atsiliepimas apibrėžtam balų diapazonui",
+                "placeholder": "Užpildykite atsiliepimą"
               }
             ]
           }
@@ -74,11 +74,11 @@
       ]
     },
     {
-      "label": "Behavioural settings",
-      "description": "These options will let you control how the task behaves.",
+      "label": "Veikimo nustatymai",
+      "description": "Šios parinktys leis jums valdyti, kaip veikia užduotis.",
       "fields": [
         {
-          "label": "Maximum tries",
+          "label": "Maksimalus bandymų skaičius",
           "description": "Will limit the number of times the samples for each sentence can be listened to."
         },
         {
@@ -90,11 +90,11 @@
           "description": "If checked, pausing the audio while playing is not possible."
         },
         {
-          "label": "Play button delay",
+          "label": "Paleidimo mygtuko delsa",
           "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
         },
         {
-          "label": "Shuffle sentences",
+          "label": "Sumaišyti sakinius",
           "description": "Define when the sentences should be shuffled.",
           "options": [
             {
@@ -109,18 +109,18 @@
           ]
         },
         {
-          "label": "Scoring",
+          "label": "Taškais",
           "fields": [
             {
-              "label": "Ignore Punctuation marks",
-              "description": "If checked, punctuation marks will not be considered for scoring."
+              "label": "Ignoruoti skyrybos ženklus",
+              "description": "Jei pažymėta, į skyrybos ženklus nebus atsižvelgiama skaičiuojant balus."
             },
             {
-              "label": "Zero mistakes mode",
-              "description": "If checked, only correct answers will be considered for scoring. Mistakes will not be punished."
+              "label": "Nulio klaidų režimas",
+              "description": "Jei pažymėta, skaičiuojant bus atsižvelgiama tik į teisingus atsakymus. Už klaidas nebus baudžiama."
             },
             {
-              "label": "Value of typos",
+              "label": "Rašymo klaidų vertė",
               "description": "Determine to which extent typing errors (word with 3-9 characters: up to 1 mistake, word with more than 9 characters: up to 2 mistakes) count as a real mistake.",
               "options": [
                 {
@@ -137,22 +137,22 @@
           ]
         },
         {
-          "label": "Text",
+          "label": "Tekstas",
           "fields": [
             {
-              "label": "Word separator",
+              "label": "Žodžio skyriklis",
               "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
               "default": " "
             },
             {
-              "label": "Writing direction",
+              "label": "Rašymo kryptis",
               "description": "Set whether the sentences' language is right-to-left or left-to-right.",
               "options": [
                 {
-                  "label": "Automatic detection"
+                  "label": "Automatinis aptikimas"
                 },
                 {
-                  "label": "Right-to-left"
+                  "label": "Iš dešinės į kairę"
                 },
                 {
                   "label": "Left-to-right"
@@ -166,7 +166,7 @@
           ]
         },
         {
-          "label": "Presentation of feedback",
+          "label": "Atsiliepimų pristatymas",
           "fields": [
             {
               "label": "Custom typo display",
@@ -187,10 +187,10 @@
           ]
         },
         {
-          "label": "Enable \"Retry\""
+          "label": "Įjungti „Bandyti dar kartą“"
         },
         {
-          "label": "Enable \"Show solution\" button"
+          "label": "Įjungti mygtuką „Rodyti sprendimą“."
         },
         {
           "label": "Show solution on check"
@@ -211,8 +211,8 @@
           "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
-          "label": "Text for \"Check\" button",
-          "default": "Check"
+          "label": "Tekstas mygtukui „Tikrinti“",
+          "default": "Tikrinti"
         },
         {
           "label": "Text for \"Submit\" button",
@@ -236,11 +236,11 @@
       "label": "Readspeaker",
       "fields": [
         {
-          "label": "Assistive technology description for \"Check\" button",
+          "label": "Mygtuko „Tikrinti“ pagalbinės technologijos aprašymas",
           "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
         },
         {
-          "label": "Assistive technology description for \"Show Solution\" button",
+          "label": "Mygtuko „Rodyti sprendimą“ pagalbinės technologijos aprašymas",
           "default": "Show the solution. The task will be marked with its correct solution."
         },
         {

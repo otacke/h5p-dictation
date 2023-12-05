@@ -1,9 +1,9 @@
-import Util from './h5p-dictation-util';
+import Util from '@services/util';
 
 /** Class representing a sound playing button. */
 class Button {
   /**
-   * @constructor
+   * @class
    * @param {number} id Content Id.
    * @param {object} params More params.
    * @param {object} params.a11y Readspeaker texts.
@@ -66,7 +66,7 @@ class Button {
    * Create H5P.Audio.
    * @param {number} id ContentID.
    * @param {object} params Parameters.
-   * @return {object} DOM element for the sample.
+   * @returns {object} DOM element for the sample.
    */
   createAudioDOM(id, params) {
     const $audioWrapper = H5P.jQuery('<div>', {'class': Button.AUDIO_WRAPPER});
@@ -78,21 +78,24 @@ class Button {
         audioNotSupported: params.audioNotSupported
       };
 
-      const audio = new H5P.Audio(
+      this.audioInstance = new H5P.Audio(
         audioDefaults,
         id,
         {
           previousState: this.previousState.audio
         }
       );
-      audio.attach($audioWrapper);
+      this.audioInstance.playOriginal = this.audioInstance.play;
+      this.audioInstance.play = this.playOverride.bind(this);
 
-      this.button = audio.$audioButton.get(0);
+      this.audioInstance.attach($audioWrapper);
 
-      this.audio = audio;
+      this.button = this.audioInstance.$audioButton.get(0);
+
+      this.audio = this.audioInstance;
 
       if (params.type === Button.BUTTON_TYPE_SLOW) {
-        audio.$audioButton
+        this.audioInstance.$audioButton
           .removeClass(Button.BUTTON_PLAY)
           .addClass(Button.BUTTON_SLOW);
         this.setLabel(params.a11y.playSlowly);
@@ -109,18 +112,18 @@ class Button {
       // Set from previous state
       if (this.previousState.audio && this.previousState.audio.currentTime !== 0) {
         this.status = Button.STATUS_PAUSE;
-        audio.$audioButton.addClass(Button.BUTTON_PLAY_PAUSED);
+        this.audioInstance.$audioButton.addClass(Button.BUTTON_PLAY_PAUSED);
       }
 
       // Event Listener Play
-      audio.audio.addEventListener('play', () => {
+      this.audioInstance.audio.addEventListener('play', () => {
         // Prevent pausing
         if (params.disablePause) {
-          audio.$audioButton.get(0).classList.add('h5p-audio-disabled');
+          this.audioInstance.$audioButton.get(0).classList.add('h5p-audio-disabled');
         }
 
         if (params.type === Button.BUTTON_TYPE_SLOW) {
-          audio.$audioButton
+          this.audioInstance.$audioButton
             .removeClass(Button.BUTTON_SLOW)
             .addClass(Button.BUTTON_PAUSE);
         }
@@ -131,10 +134,10 @@ class Button {
       });
 
       // Event Listener Pause
-      audio.audio.addEventListener('pause', () => {
+      this.audioInstance.audio.addEventListener('pause', () => {
 
         if (params.type === Button.BUTTON_TYPE_SLOW) {
-          audio.$audioButton
+          this.audioInstance.$audioButton
             .removeClass(Button.BUTTON_PAUSE)
             .addClass(Button.BUTTON_SLOW);
         }
@@ -143,13 +146,13 @@ class Button {
       });
 
       // Event Listener Ended
-      audio.audio.addEventListener('ended', () => {
+      this.audioInstance.audio.addEventListener('ended', () => {
         this.handleAudioEnded();
       });
 
       // Have to stop, else audio will take up socket pending forever in chrome.
-      if (audio.audio && audio.audio.preload) {
-        audio.audio.preload = 'none';
+      if (this.audioInstance.audio && this.audioInstance.audio.preload) {
+        this.audioInstance.audio.preload = 'none';
       }
     }
 
@@ -158,7 +161,7 @@ class Button {
 
   /**
    * Get Button DOM.
-   * @return {object} Button DOM.
+   * @returns {object} Button DOM.
    */
   getDOM() {
     return this.dom;
@@ -166,7 +169,7 @@ class Button {
 
   /**
    * Get DOM for dummy button.
-   * @return {object} DOM for dummy button.
+   * @returns {object} DOM for dummy button.
    */
   getDummyButtonDOM() {
     const button = document.createElement('div');
@@ -277,6 +280,8 @@ class Button {
     else {
       this.setLabel(this.params.a11y.play);
     }
+
+    this.resetAudio();
   }
 
   /**
@@ -317,7 +322,7 @@ class Button {
 
   /**
    * Check if button is enabled.
-   * @return {boolean} True, if enabled.
+   * @returns {boolean} True, if enabled.
    */
   isEnabled() {
     if (!this.button) {
@@ -352,7 +357,7 @@ class Button {
 
   /**
    * Get current state.
-   * @return {object} Current state.
+   * @returns {object} Current state.
    */
   getCurrentState() {
     return {
@@ -368,6 +373,38 @@ class Button {
     if (this.button) {
       this.button.focus();
     }
+  }
+
+  /**
+   * Override for original H5P.Audio play method. Allows delaying of playing.
+   */
+  playOverride() {
+    if (this.isDelayingPlay) {
+      return;
+    }
+
+    // No delay requested
+    if (this.params.playButtonDelay === 0) {
+      this.audioInstance.playOriginal();
+      return;
+    }
+
+    this.isDelayingPlay = true;
+    this.button.classList.add('h5p-dictation-delay-animation');
+    this.button.style.animationDuration =
+      `${this.params.playButtonDelay + 0.01}s`;
+
+    window.clearTimeout(this.playTimeout);
+    this.playTimeout = window.setTimeout(() => {
+      this.audioInstance.playOriginal();
+      this.button.classList.remove('h5p-dictation-delay-animation');
+      this.button.style.animationDuration = '';
+      this.isDelayingPlay = false;
+    }, this.params.playButtonDelay * 1000);
+  }
+
+  isAudioPlaying() {
+    return this.audio?.audio?.currentTime > 0;
   }
 }
 

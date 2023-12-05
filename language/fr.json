@@ -1,11 +1,11 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Média",
       "fields": [
         {
           "label": "Type",
-          "description": "Supports optionnels à afficher au-dessus de la question."
+          "description": "Média à afficher au-dessus de la question (facultatif)."
         },
         {
           "label": "Désactiver le zoom sur les images"
@@ -13,7 +13,7 @@
       ]
     },
     {
-      "label": "Description de la tâche",
+      "label": "Consigne",
       "description": "Décrivez votre tâche ici.",
       "placeholder": "Veuillez écouter attentivement et écrire ce que vous entendez."
     },
@@ -24,9 +24,9 @@
           "label": "Par défaut"
         }
       ],
-      "entity": "Phrases",
+      "entity": "Phrase",
       "field": {
-        "label": "Phrases",
+        "label": "Phrase",
         "fields": [
           {
             "label": "Description",
@@ -34,7 +34,7 @@
           },
           {
             "label": "Échantillon sonore",
-            "description": "Phrase prononcée en vitesse normale"
+            "description": "Phrase prononcée à vitesse normale"
           },
           {
             "label": "Échantillon sonore lent",
@@ -56,18 +56,17 @@
               "label": "Par défaut"
             }
           ],
-          "label": "Définir un retour d'information personnalisé pour toute fourchette de points",
-          "description": "Cliquez sur le bouton \"Ajouter une gamme\" pour ajouter autant de séquences que nécessaire. Exemple : 0-20 % Mauvais score, 21-91 % Score moyen, 91-100 % Grand score !",
-          "entity": "gamme",
+          "label": "Définissez le feedback pour chaque intervalle de score",
+          "description": "Cliquez sur le bouton \"Ajouter Intervalle\" pour ajouter autant d'intervalles de score que vous souhaitez. Exemple : 0-20% Mauvais score, 21-91% Score moyen, 91-100% Score excellent !",
+          "entity": "intervalle",
           "field": {
             "fields": [
               {
-                "label": "Fourchette de score"
+                "label": "Intervalle de scores"
               },
-              {},
               {
-                "label": "Feedback pour une fourchette de score définie",
-                "placeholder": "Remplir les commentaires"
+                "label": "Feedback pour l'intervalle de score défini",
+                "placeholder": "Compléter le feedback"
               }
             ]
           }
@@ -75,8 +74,8 @@
       ]
     },
     {
-      "label": "Paramètres comportementaux",
-      "description": "Ces options vous permettront de contrôler le déroulement de la tâche.",
+      "label": "Paramètres de comportement",
+      "description": "Ces options vous permettent de contrôler le déroulement de vos activités.",
       "fields": [
         {
           "label": "Nombre maximum d'essais",
@@ -87,12 +86,16 @@
           "description": "Limite le nombre de fois que les exemples lents peuvent être écoutés pour chaque phrase."
         },
         {
-          "label": "Disable pause option",
-          "description": "If checked, pausing the audio while playing is not possible."
+          "label": "Désactiver l'option de pause",
+          "description": "Si cette case est cochée, la mise en pause de l'audio pendant la lecture n'est pas possible."
         },
         {
-          "label": "Mélanger les phrase",
-          "description": "Define when the sentences should be shuffled.",
+          "label": "Délai du bouton de lecture",
+          "description": "Définissez éventuellement une période de temps allant jusqu'à trois secondes pendant laquelle la lecture doit être retardée. Ceci est utile si vous souhaitez permettre aux étudiants de saisir le champ de texte avant qu'ils ne commencent à écouter."
+        },
+        {
+          "label": "Mélanger les phrases",
+          "description": "Définit quand les phrases devraient être mélangées.",
           "options": [
             {
               "label": "Jamais"
@@ -106,7 +109,7 @@
           ]
         },
         {
-          "label": "Scoring",
+          "label": "Notation",
           "fields": [
             {
               "label": "Ignorer les signes de ponctuation",
@@ -118,7 +121,7 @@
             },
             {
               "label": "Poids des fautes d’orthographe",
-              "description": "Déterminez la manière dont sont comptées les fautes d’orthographe (mot de 3 à 9 caractères: jusqu'à 1 erreur, mot de plus de 9 caractères : jusqu'à 2 erreurs).",
+              "description": "Déterminez la manière dont sont comptées les fautes d'orthographe (mot de 3 à 9 caractères : jusqu'à 1 erreur, mot de plus de 9 caractères : jusqu'à 2 erreurs).",
               "options": [
                 {
                   "label": "100 %"
@@ -134,11 +137,12 @@
           ]
         },
         {
-          "label": "Text",
+          "label": "Texte",
           "fields": [
             {
               "label": "Séparateur de mots",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
+              "description": "Définissez un séparateur de mots différent du caractère espace pour prendre en charge des réponses alternatives avec un nombre de mots différent.",
+              "default": " "
             },
             {
               "label": "Sens de l'écriture",
@@ -162,21 +166,21 @@
           ]
         },
         {
-          "label": "Presentation of feedback",
+          "label": "Présentation des feedbacks",
           "fields": [
             {
               "label": "Montrer les fautes d’orthographe",
-              "description": "Si la case est cochée, les fautes d’orthographe apparaîtront différement des autres fautes."
+              "description": "Si la case est cochée, les fautes d’orthographe apparaîtront différemment des autres fautes."
             },
             {
-              "label": "Présentation des solutions alternatives",
-              "description": "Déterminez si les solutions alternatives sont affichées ou non en cas d’erreur ou de terme manquant.",
+              "label": "Présentation des réponses alternatives",
+              "description": "Déterminez si les réponses alternatives sont affichées ou non en cas d’erreur ou de terme manquant.",
               "options": [
                 {
-                  "label": "Montrer seulement la première solution"
+                  "label": "Montrer seulement la première réponse"
                 },
                 {
-                  "label": "Montrer toutes les solutions"
+                  "label": "Montrer toutes les réponses possibles"
                 }
               ]
             }
@@ -186,10 +190,10 @@
           "label": "Activer le bouton \"Réessayer\""
         },
         {
-          "label": "Activer le bouton \"Voir la solution\""
+          "label": "Activer le bouton \"Voir la réponse\""
         },
         {
-          "label": "Show solution on check"
+          "label": "Afficher la réponse lors de la vérification"
         }
       ]
     },
@@ -197,30 +201,30 @@
       "label": "Interface utilisateur",
       "fields": [
         {
-          "label": "Commentaires généraux",
-          "description": "Vous pouvez utiliser plusieurs placeholders qui seront remplacés par le nombre adéquat : @matches = nombre de correspondances, @total = total des erreurs, @capped = total des erreurs plafonnées, @wrong = mots incorrects, @added = mots supplémentaires, @missing = mots manquants, @typo = fautes d'orthographe",
+          "label": "Feedback global",
+          "description": "Vous pouvez utiliser plusieurs champs paramétrables qui seront remplacés par le nombre adéquat : @matches = nombre de correspondances, @total = total des erreurs, @capped = total des erreurs plafonnées, @wrong = mots incorrects, @added = mots supplémentaires, @missing = mots manquants, @typo = fautes d'orthographe",
           "default": "Tu as commis @total erreur(s)."
         },
         {
-          "label": "General feedback (zero mistakes mode)",
-          "description": "You can use several placeholders that will be replaced with the adequate number: @matches = number of matches, @total = total score, @wrong = wrong words, @added = additional words, @missing = missing words, @typo = typing errors",
-          "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
+          "label": "Feedback global (mode zéro fautes)",
+          "description": "Vous pouvez utiliser plusieurs champs paramétrables qui seront remplacés par le nombre adéquat : @matches = nombre de correspondances, @total = score total, @wrong = mots erronés, @added = mots supplémentaires, @missing = mots manquants, @typo = fautes de frappe",
+          "default": "Vous avez écrit @total mot(s) correctement et @typo mot(s) avec des erreurs mineures."
         },
         {
           "label": "Texte pour le bouton \"Vérifier\"",
           "default": "Vérifier"
         },
         {
-          "label": "Text for \"Submit\" button",
-          "default": "Submit"
+          "label": "Texte pour le bouton \"Vérifier\"",
+          "default": "Vérifier"
         },
         {
-          "label": "Texte pour le \"Réessayer\" bouton",
-          "default": "Réessayer"
+          "label": "Texte pour le bouton \"Recommencer\"",
+          "default": "Recommencer"
         },
         {
-          "label": "Texte pour le bouton \"Voir la solution\"",
-          "default": "Voir la solution"
+          "label": "Texte pour le bouton \"Voir la réponse\"",
+          "default": "Voir la réponse"
         },
         {
           "label": "Message audio non supporté",
@@ -229,19 +233,19 @@
       ]
     },
     {
-      "label": "Readspeaker",
+      "label": "Lecteur d'écran",
       "fields": [
         {
-          "label": "Assistive technology description for \"Check\" button",
-          "default": "Check the answers. The responses will be marked as correct, incorrect, or unanswered."
+          "label": "Description du bouton \"Vérifier\" pour les outils d'accessibilité",
+          "default": "Vérifiez les réponses. Les réponses seront marquées comme correctes, incorrectes ou sans réponse."
         },
         {
-          "label": "Assistive technology description for \"Show Solution\" button",
-          "default": "Show the solution. The task will be marked with its correct solution."
+          "label": "Description du bouton \"Voir la réponse\" pour les outils d'accessibilité",
+          "default": "Voir la réponse. L'exercice s'affichera avec la réponse correcte."
         },
         {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the task. Reset all responses and start the task over again."
+          "label": "Description du bouton \"Recommencer\" pour les outils d'accessibilité",
+          "default": "Recommencer la tâche. Réinitialise toutes les réponses et redémarre l'activité."
         },
         {
           "label": "Bouton de lecture",
@@ -254,7 +258,7 @@
         {
           "label": "Essais à gauche (texte à lire et texte à survoler)",
           "description": "@number sera remplacé par le nombre actuel d'essais restants.",
-          "default": "Nombre d'essais restants: @number"
+          "default": "Nombre d'essais restants : @number"
         },
         {
           "label": "Infini (texte à lire et texte à survoler)",

@@ -1,7 +1,8 @@
-import Util from '../../src/scripts/h5p-dictation-util';
-import Sentence from '../../src/scripts/h5p-dictation-sentence';
+import Util from '@services/util';
+import Sentence from '@scripts/h5p-dictation-sentence';
+import {expect, test} from '@jest/globals';
 
-/* containsRTLCharacters */
+// containsRTLCharacters
 const testCasesRTL = [
   {string: 'abc', result: false},
   {string: '', result: false},
@@ -18,21 +19,21 @@ for (let i = 0; i < testCasesRTL.length; i++) {
   });
 }
 
-/* stripPunctuation */
+// stripPunctuation
 const testCasesStripPunctuation = [
   {string: '', result: ''},
   {string: 'John', result: 'John'},
   {string: 'John goes to school.', result: 'John goes to school'},
   {string: 'John goes to school. Do you?', result: 'John goes to school Do you'},
-  {string: "Users' browser", result: "Users' browser"},
-  {string: "John's car broke.", result: "John's car broke"},
-  {string: "¿Qué?", result: "Qué"},
-  {string: "¿Qué? Hola!", result: "Qué Hola"},
-  {string: "¿Qué? Foo's Hola!", result: "Qué Foo's Hola"},
-  {string: "a - b", result: "a b"},
-  {string: "a- b", result: "a b"},
-  {string: "a -b", result: "a b"},
-  {string: "a - b – c — d", result: "a b c d"}
+  {string: 'Users\' browser', result: 'Users\' browser'},
+  {string: 'John\'s car broke.', result: 'John\'s car broke'},
+  {string: '¿Qué?', result: 'Qué'},
+  {string: '¿Qué? Hola!', result: 'Qué Hola'},
+  {string: '¿Qué? Foo\'s Hola!', result: 'Qué Foo\'s Hola'},
+  {string: 'a - b', result: 'a b'},
+  {string: 'a- b', result: 'a b'},
+  {string: 'a -b', result: 'a b'},
+  {string: 'a - b – c — d', result: 'a b c d'}
 ];
 
 for (let i = 0; i < testCasesStripPunctuation.length; i++) {
@@ -41,18 +42,18 @@ for (let i = 0; i < testCasesStripPunctuation.length; i++) {
   });
 }
 
-/* addSpaces */
+// addSpaces
 const testCasesAddSpaces = [
   {string: '', result: ''},
   {string: 'John', result: 'John'},
   {string: 'John goes to school.', result: 'John goes to school .'},
   {string: 'John goes to school. Do you?', result: 'John goes to school . Do you ?'},
-  {string: "Users' browser", result: "Users' browser"},
-  {string: "John's car broke.", result: "John's car broke ."},
-  {string: "¿Qui?", result: "¿ Qui ?"},
-  {string: "¿Qué?", result: "¿ Qué ?"},
-  {string: "¿Qué? Hola!", result: "¿ Qué ? Hola !"},
-  {string: "¿Qué? Foo's Hola!", result: "¿ Qué ? Foo's Hola !"}
+  {string: 'Users\' browser', result: 'Users\' browser'},
+  {string: 'John\'s car broke.', result: 'John\'s car broke .'},
+  {string: '¿Qui?', result: '¿ Qui ?'},
+  {string: '¿Qué?', result: '¿ Qué ?'},
+  {string: '¿Qué? Hola!', result: '¿ Qué ? Hola !'},
+  {string: '¿Qué? Foo\'s Hola!', result: '¿ Qué ? Foo\'s Hola !'}
 ];
 
 for (let i = 0; i < testCasesAddSpaces.length; i++) {

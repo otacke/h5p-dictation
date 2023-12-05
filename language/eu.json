@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Mota",
-          "description": "Galderaren gainean erakusteko aukerazko multimedia."
+          "description": "Galderaren gainean bistaratzeko aukerako multimedia."
         },
         {
           "label": "Desgaitu irudien zooma"
@@ -64,7 +64,6 @@
               {
                 "label": "Puntuazio tartea"
               },
-              {},
               {
                 "label": "Zehaztutako tartearentzako feedbacka",
                 "placeholder": "Idatzi ezazu feedbacka"
@@ -75,8 +74,8 @@
       ]
     },
     {
-      "label": "Portaeraren ezarpenak",
-      "description": "Aukera hauek lanaren portaera kontrolatzea ahalbidetzen dizute.",
+      "label": "Portaera ezarpenak",
+      "description": "Aukera hauek portaera kontrolatzea ahalbidetzen dizute.",
       "fields": [
         {
           "label": "Gehienezko saiakerak",
@@ -89,6 +88,10 @@
         {
           "label": "Desgaitu pausatzeko aukera",
           "description": "Markatuz gero, erreproduzitzea pausatzea ez da posiblea izango."
+        },
+        {
+          "label": "Erreproduzitzeko botoiaren atzerapena",
+          "description": "Aukeran, ezarri gehienez hiru segundoko denbora-tarte bat botoi bat sakatzean erreprodukzioa atzeratzeko. Hau erabilgarria da ikasleek testu-eremuan idazteko entzuten hasi aurretik."
         },
         {
           "label": "Nahastu esaldiak",
@@ -117,6 +120,8 @@
               "description": "Markatuz gero, soilik erantzun zuzenak hartuko dira kontuan puntuaziorako. Akatsak ez dira zigortuko."
             },
             {
+              "label": "Akats tipografikoen balioa",
+              "description": "Zehaztu ezazu nolako akats tipografikoak (3-9 karaktere bitarteko hitzak: akats bat gehienez, 9 karaktere baino gehiagoko hitzak: bi akats gehienez) zenbatuko diren benetako akats gisa.",
               "options": [
                 {
                   "label": "%100"
@@ -127,9 +132,7 @@
                 {
                   "label": "%0"
                 }
-              ],
-              "label": "Akats tipografikoen balioa",
-              "description": "Zehaztu ezazu nolako akats tipografikoak (3-9 karaktere bitarteko hitzak: akats bat gehienez, 9 karaktere baino gehiagoko hitzak: bi akats gehienez) zenbatuko diren benetako akats gisa."
+              ]
             }
           ]
         },
@@ -138,9 +141,12 @@
           "fields": [
             {
               "label": "Hitz-banatzailea",
-              "description": "Zehaztu hutsuneaz besteko hitzen banatzailea hitz kopuru ezberdinetako emaitzak onartu ahal izateko."
+              "description": "Zehaztu hutsuneaz besteko hitzen banatzailea hitz kopuru ezberdinetako emaitzak onartu ahal izateko.",
+              "default": " . "
             },
             {
+              "label": "Idazketaren norabidea",
+              "description": "Zehaztu adierazpenen hizkuntza eskuinetik-ezkerrera edo ezkerretik-eskuinera idazten den.",
               "options": [
                 {
                   "label": "Antzemate automatikoa"
@@ -151,9 +157,7 @@
                 {
                   "label": "Ezkerretik eskuinera"
                 }
-              ],
-              "label": "Idazketaren norabidea",
-              "description": "Zehaztu adierazpenen hizkuntza eskuinetik-ezkerrera edo ezkerretik-eskuinera idazten den."
+              ]
             },
             {
               "label": "Karaktereen banaketa",
@@ -162,6 +166,7 @@
           ]
         },
         {
+          "label": "Feedbackaren aurkezpena",
           "fields": [
             {
               "label": "Akats tipografikoen erakuste pertsonalizatua",
@@ -179,8 +184,7 @@
                 }
               ]
             }
-          ],
-          "label": "Feedbackaren aurkezpena"
+          ]
         },
         {
           "label": "Gaitu \"Saiatu berriro\""
@@ -198,13 +202,13 @@
       "fields": [
         {
           "label": "Feedback orokorra",
-          "default": "@total akats egin dituzu.",
-          "description": "Hainbat leku-marka erabili dezakezu dagozkien zenbakiarekin ordezkatuko direnak: @matches = bat-etortze kopurua, @total = akatsak guztira, @capped = mugatutako akats kopurua, @wrong = hitz okerrak, @added = hitz gehigarriak, @missing = falta diren hitzak, @typo = akats tipografikoak"
+          "description": "Hainbat leku-marka erabili dezakezu dagozkien zenbakiarekin ordezkatuko direnak: @matches = bat-etortze kopurua, @total = akatsak guztira, @capped = mugatutako akats kopurua, @wrong = hitz okerrak, @added = hitz gehigarriak, @missing = falta diren hitzak, @typo = akats tipografikoak",
+          "default": "@total akats egin dituzu."
         },
         {
           "label": "Feedback orokorra (hutsunerik ez modua)",
-          "default": "Guztira @total hitz idatzi eta @typo akats txiki egin dituzu.",
-          "description": "Hainbat leku-marka erabili dezakezu dagozkien zenbakiarekin ordezkatuko direnak: @matches = bat-etortze kopurua, @total = guztirako puntuazioa, @wrong = oker dauden hitzak, @added = hitz gehigarriak, @missing = falta diren hitzak, @typo = akats tipografikoak"
+          "description": "Hainbat leku-marka erabili dezakezu dagozkien zenbakiarekin ordezkatuko direnak: @matches = bat-etortze kopurua, @total = guztirako puntuazioa, @wrong = oker dauden hitzak, @added = hitz gehigarriak, @missing = falta diren hitzak, @typo = akats tipografikoak",
+          "default": "Guztira @total hitz idatzi eta @typo akats txiki egin dituzu."
         },
         {
           "label": "\"Egiaztatu\" botoiarentzako testua",
@@ -229,6 +233,7 @@
       ]
     },
     {
+      "label": "Irakurtzen duen bozgorailua",
       "fields": [
         {
           "label": "\"Egiaztatu\" botoiaren laguntza-teknologientzako etiketa",
@@ -243,16 +248,16 @@
           "default": "Zeregina berriz egiten saiatu. Berrabiarazi erantzun guztiak eta hasi zeregina berriz."
         },
         {
-          "default": "Erreproduzitu",
-          "label": "Erreproduzitu botoia"
+          "label": "Erreproduzitu botoia",
+          "default": "Erreproduzitu"
         },
         {
           "label": "Mantso erreproduzitu botoia",
           "default": "Mantso erreproduzitu"
         },
         {
-          "description": "@number une bakoitzean geratzen diren saiakerekin ordezkatuko da.",
           "label": "Geratzen diren saiakerak (irakurtzen duen bozgorailua eta gainean jartzean erakusten den testua)",
+          "description": "@number une bakoitzean geratzen diren saiakerekin ordezkatuko da.",
           "default": "Geratzen diren saiakerak: @number"
         },
         {
@@ -265,8 +270,8 @@
         },
         {
           "label": "Zure emaitza",
-          "default": "@total puntutik @score puntu lortu duzu",
-          "description": "@score lortutako puntuazioarekin ordezkatuko da. @total lortu daitezkeen gehienezko puntuekin ordezkatuko da."
+          "description": "@score lortutako puntuazioarekin ordezkatuko da. @total lortu daitezkeen gehienezko puntuekin ordezkatuko da.",
+          "default": "@total puntutik @score puntu lortu duzu"
         },
         {
           "label": "Emaitza",
@@ -289,16 +294,16 @@
           "default": "okerra"
         },
         {
-          "default": "akats txikia",
-          "label": "Akats txikia"
+          "label": "Akats txikia",
+          "default": "akats txikia"
         },
         {
-          "default": "falta da",
-          "label": "Falta den hitz edo sinboloa"
+          "label": "Falta den hitz edo sinboloa",
+          "default": "falta da"
         },
         {
-          "default": "gehituta",
-          "label": "Gehitutako hitz edo sinboloa"
+          "label": "Gehitutako hitz edo sinboloa",
+          "default": "gehituta"
         },
         {
           "label": "Erantzun zuzena",
@@ -317,16 +322,16 @@
           "default": "puntuak"
         },
         {
-          "default": "puntua",
-          "label": "Puntua"
+          "label": "Puntua",
+          "default": "puntua"
         },
         {
-          "default": "harridura ikurra",
-          "label": "Harridura ikurra"
+          "label": "Harridura ikurra",
+          "default": "harridura ikurra"
         },
         {
-          "default": "galdera ikurra",
-          "label": "Galdera ikurra"
+          "label": "Galdera ikurra",
+          "default": "galdera ikurra"
         },
         {
           "label": "Koma",
@@ -337,12 +342,12 @@
           "default": "kakotx sinplea"
         },
         {
-          "default": "kakotx bikoitza",
-          "label": "Kakotx bikoitzak"
+          "label": "Kakotx bikoitzak",
+          "default": "kakotx bikoitza"
         },
         {
-          "default": "bi puntu",
-          "label": "Bi puntu"
+          "label": "Bi puntu",
+          "default": "bi puntu"
         },
         {
           "label": "Puntu eta koma",
@@ -361,11 +366,10 @@
           "default": "izartxoa"
         },
         {
-          "default": "zatikien barra",
-          "label": "Zatikien barra"
+          "label": "Zatikien barra",
+          "default": "zatikien barra"
         }
-      ],
-      "label": "Irakurtzen duen bozgorailua"
+      ]
     }
   ]
 }
