@@ -1,4 +1,4 @@
-import Util from '@services/util';
+import Util from '@services/util.js';
 
 /** Class representing a sound playing button. */
 class Button {

@@ -1,5 +1,5 @@
-import Sentence from '@scripts/h5p-dictation-sentence';
-import Util from '@services/util';
+import Sentence from '@scripts/h5p-dictation-sentence.js';
+import Util from '@services/util.js';
 
 /** Class for dictation interaction */
 class Dictation extends H5P.Question {

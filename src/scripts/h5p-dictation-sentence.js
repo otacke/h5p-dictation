@@ -1,6 +1,6 @@
-import Button from '@scripts/h5p-dictation-button';
-import Solution from '@scripts/h5p-dictation-solution';
-import Util from '@services/util';
+import Button from '@scripts/h5p-dictation-button.js';
+import Solution from '@scripts/h5p-dictation-solution.js';
+import Util from '@services/util.js';
 
 /** Class representing a sentence */
 class Sentence {

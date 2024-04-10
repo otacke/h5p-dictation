@@ -1,5 +1,5 @@
-import Util from '@services/util';
-import Sentence from '@scripts/h5p-dictation-sentence';
+import Util from '@services/util.js';
+import Sentence from '@scripts/h5p-dictation-sentence.js';
 import {expect, test} from '@jest/globals';
 
 // containsRTLCharacters
