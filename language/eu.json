@@ -141,8 +141,7 @@
           "fields": [
             {
               "label": "Hitz-banatzailea",
-              "description": "Zehaztu hutsuneaz besteko hitzen banatzailea hitz kopuru ezberdinetako emaitzak onartu ahal izateko.",
-              "default": " . "
+              "description": "Zehaztu hutsuneaz besteko hitzen banatzailea hitz kopuru ezberdinetako emaitzak onartu ahal izateko."
             },
             {
               "label": "Idazketaren norabidea",
