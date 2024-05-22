@@ -141,8 +141,7 @@
           "fields": [
             {
               "label": "Zeichen zum Trennen von Wörtern",
-              "description": "Lege fest, welches Zeichen zum Trennen von Wörtern als Alternative zum Leerzeichen benutzt wird, um alternative Lösungen mit mehr als einem Wort zuzulassen.",
-              "default": " "
+              "description": "Lege fest, welches Zeichen zum Trennen von Wörtern als Alternative zum Leerzeichen benutzt wird, um alternative Lösungen mit mehr als einem Wort zuzulassen."
             },
             {
               "label": "Schreibrichtung",

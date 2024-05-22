@@ -141,8 +141,7 @@
           "fields": [
             {
               "label": "Separador de palabras",
-              "description": "Define el separador de palabras diferente al carácter de espacio para admitir soluciones alternativas con diferente número de palabras.",
-              "default": " "
+              "description": "Define el separador de palabras diferente al carácter de espacio para admitir soluciones alternativas con diferente número de palabras."
             },
             {
               "label": "Dirección de la escritura",

@@ -141,8 +141,7 @@
           "fields": [
             {
               "label": "Word separator",
-              "description": "Define the separator of words different than space character to support alternate solutions with different number of words.",
-              "default": " "
+              "description": "Define the separator of words different than space character to support alternate solutions with different number of words."
             },
             {
               "label": "Направление письма",
@@ -211,7 +210,7 @@
           "default": "You have entered @total word(s) correctly and @typo word(s) with minor mistakes."
         },
         {
-          "label": "Текст для кнопки \"Проверить\" ",
+          "label": "Текст для кнопки \"Проверить\"",
           "default": "Проверить"
         },
         {
@@ -219,11 +218,11 @@
           "default": "Submit"
         },
         {
-          "label": "Текст для кнопки \"Повторить\" ",
+          "label": "Текст для кнопки \"Повторить\"",
           "default": "Повторить"
         },
         {
-          "label": "Tекст для кнопки \"Показать решение\" ",
+          "label": "Tекст для кнопки \"Показать решение\"",
           "default": "Показать решение"
         },
         {

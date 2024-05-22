@@ -141,8 +141,7 @@
             "fields": [
               {
                 "label": "Skilletegn for ord",
-                "description": "Definer skilletegnet for å dele inn ord som fungerer som alternative løsninger. Ordene kan ikke skilles med mellomromstast.",
-                "default": " "
+                "description": "Definer skilletegnet for å dele inn ord som fungerer som alternative løsninger. Ordene kan ikke skilles med mellomromstast."
               },
               {
                 "label": "Skriveretning",
@@ -373,4 +372,3 @@
       }
     ]
   }
-  

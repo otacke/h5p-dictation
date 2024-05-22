@@ -139,8 +139,7 @@
           "fields": [
             {
               "label": "Znaki przestankowe",
-              "description": "Określ znaki przestankowe inne niż spacja dla wspierania alternatywnych rozwiązań składających się z innej liczby słów.",
-              "default": " "
+              "description": "Określ znaki przestankowe inne niż spacja dla wspierania alternatywnych rozwiązań składających się z innej liczby słów."
             },
             {
               "label": "Kierunek pisma",

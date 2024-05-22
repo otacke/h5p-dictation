@@ -141,8 +141,7 @@
           "fields": [
             {
               "label": "Ločilo besed",
-              "description": "Določi ločilo med besedami, ki ni presledek. Ločilo omogoča zapis nadomestnih odgovorov z različnim številom besed.",
-              "default": " "
+              "description": "Določi ločilo med besedami, ki ni presledek. Ločilo omogoča zapis nadomestnih odgovorov z različnim številom besed."
             },
             {
               "label": "Smer pisanja",

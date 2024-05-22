@@ -141,8 +141,7 @@
           "fields": [
             {
               "label": "Onyesho maalum la kuchapa",
-              "description": "Ikiwa imechaguliwa, makosa ya kuchapa yataonyeshwa kwa mtindo maalum unaoyatofautisha na makosa ya wazi.",
-              "default": " "
+              "description": "Ikiwa imechaguliwa, makosa ya kuchapa yataonyeshwa kwa mtindo maalum unaoyatofautisha na makosa ya wazi."
             },
             {
               "label": "Mwelekeo wa kuandika",

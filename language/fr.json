@@ -141,8 +141,7 @@
           "fields": [
             {
               "label": "Séparateur de mots",
-              "description": "Définissez un séparateur de mots différent du caractère espace pour prendre en charge des réponses alternatives avec un nombre de mots différent.",
-              "default": " "
+              "description": "Définissez un séparateur de mots différent du caractère espace pour prendre en charge des réponses alternatives avec un nombre de mots différent."
             },
             {
               "label": "Sens de l'écriture",
