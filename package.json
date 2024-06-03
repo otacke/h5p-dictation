@@ -1,10 +1,10 @@
 {
   "name": "h5p-dictation",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Let your students train their listening comprehension and spelling skills.",
   "scripts": {
     "test": "jest",
-    "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js' && eslint './test/**/*.js'" ,
+    "lint": "stylelint './src/**/*.scss' && eslint './src/**/*.js' && eslint './test/**/*.js'",
     "build": "webpack --mode=production",
     "watch": "webpack --mode=development --watch"
   },
