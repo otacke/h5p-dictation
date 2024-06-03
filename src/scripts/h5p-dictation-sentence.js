@@ -501,6 +501,11 @@ class Sentence {
 
   /**
    * Replace fullwidth characters with halfwidth characters.
+   *
+   * Some languages use full width characters in order to keep a homogeneous
+   * layout. The content type replaces them with their half width counterparts
+   * in order to make it easier for the user to type them (in some cases) and to
+   * be able to detect digits.
    * @param {string} text Text to replace characters in.
    * @returns {string} Text with replaced characters.
    */
