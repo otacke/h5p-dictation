@@ -447,18 +447,23 @@ class Sentence {
         '$1 '
       );
 
+      // Ensure space between autosplit characters and words/punctuation
       text = text.replace(
-        new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.WORD}|d|${Sentence.PUNCTUATION})`, 'g'),
+        new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.WORD}|\\d+|${Sentence.PUNCTUATION})`, 'g'),
         '$1 '
       );
 
+      // Ensure space between words/punctuation and autosplit characters
       text = text.replace(
-        new RegExp(`(${Sentence.WORD}|d|${Sentence.PUNCTUATION})(?=${Sentence.AUTOSPLIT})`, 'g'),
+        new RegExp(`(${Sentence.WORD}|\\d+|${Sentence.PUNCTUATION})(?=${Sentence.AUTOSPLIT})`, 'g'),
         '$1 '
       );
     }
 
-    return text.trim();
+    // Remove double spaces and trim
+    text = text.replace(/\s{2,}/g, ' ').trim();
+
+    return text;
   }
 
   /**
