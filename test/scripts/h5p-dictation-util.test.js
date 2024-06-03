@@ -70,3 +70,44 @@ const testCasesReplaceFullwidth = [
 test('Do all full width characters get replaced with their regular width counterparts?', () => {
   expect(Sentence.replaceFullwidthWithHalfwidth(testCasesReplaceFullwidth[0].string, { autosplit: true })).toBe(testCasesReplaceFullwidth[0].result);
 });
+
+// autosplit off
+const testCasesAutosplitOff = [
+  {string: '', result: ''},
+  {string: 'JohnDoe', result: 'JohnDoe'},
+  {string: '明日の午後、わたしはスーパーでリンゴとミルクを買います。', result: '明日の午後、わたしはスーパーでリンゴとミルクを買います。'},
+  {string: 'Johnさんはリンゴを買います。', result: 'Johnさんはリンゴを買います。'},
+  {string: 'Johnさんはリンゴを12個買います。', result: 'Johnさんはリンゴを12個買います。'},
+  {string: 'Johnさんはリンゴを１２個買います。', result: 'Johnさんはリンゴを１２個買います。'}
+];
+
+for (let i = 0; i < testCasesAutosplitOff.length; i++) {
+  test('Is ' + testCasesAutosplitOff[i].string + ' kept as ' + testCasesAutosplitOff[i].result, () => {
+    expect(Sentence.addSpaces(testCasesAutosplitOff[i].string, { autosplit: false } )).toBe(testCasesAutosplitOff[i].result);
+  });
+}
+
+// autosplit on
+
+/*
+ * Some languages do not use spaces to separate words. In order to determine
+ * words (we don't have a dictionary), we need to split the string. Boundaries
+ * between characters from those languages, between words, digits and
+ * punctuation marks need to be detected correctly and marked with a space.
+ */
+const testCasesAutosplitOn = [
+  {string: '', result: ''},
+  {string: 'JohnDoe', result: 'JohnDoe'},
+  {string: '明日の午後、わたしはスーパーでリンゴとミルクを買います。', result: '明 日 の 午 後 、 わ た し は ス ー パ ー で リ ン ゴ と ミ ル ク を 買 い ま す 。'},
+  {string: 'Johnさんはリンゴを買います。', result: 'John さ ん は リ ン ゴ を 買 い ま す 。'},
+  {string: 'Johnさんはリンゴを12個買います。', result: 'John さ ん は リ ン ゴ を 12 個 買 い ま す 。'},
+  // 1 and 2 are fullwidth characters and do get replaces outside of addSpaces
+  {string: 'Johnさんはリンゴを１２個買います。', result: 'John さ ん は リ ン ゴ を１２個 買 い ま す 。'}
+];
+
+// Autosplit on
+for (let i = 0; i < testCasesAutosplitOn.length; i++) {
+  test('Is ' + testCasesAutosplitOn[i].string + ' expanded to ' + testCasesAutosplitOn[i].result, () => {
+    expect(Sentence.addSpaces(testCasesAutosplitOn[i].string, { autosplit: true })).toBe(testCasesAutosplitOn[i].result);
+  });
+}
