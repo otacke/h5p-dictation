@@ -61,3 +61,12 @@ for (let i = 0; i < testCasesAddSpaces.length; i++) {
     expect(Sentence.addSpaces(testCasesAddSpaces[i].string)).toBe(testCasesAddSpaces[i].result);
   });
 }
+
+// replace fullwidth characters
+const testCasesReplaceFullwidth = [
+  {string: '　！＂＃＄％＆＇（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～', result: ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'},
+];
+
+test('Do all full width characters get replaced with their regular width counterparts?', () => {
+  expect(Sentence.replaceFullwidthWithHalfwidth(testCasesReplaceFullwidth[0].string, { autosplit: true })).toBe(testCasesReplaceFullwidth[0].result);
+});

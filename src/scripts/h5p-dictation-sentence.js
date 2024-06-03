@@ -44,6 +44,8 @@ class Sentence {
 
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
     this.solutionText = (!params.ignorePunctuation) ? this.solutionText : Sentence.stripPunctuation(this.solutionText);
+    this.solutionText = Sentence.replaceFullwidthWithHalfwidth(this.solutionText);
+
     this.containsRTL = (this.params.overrideRTL === 'auto') ?
       Util.containsRTLCharacters(this.solutionText) :
       this.params.overrideRTL === 'on';
@@ -231,7 +233,7 @@ class Sentence {
    * @returns {string} Current text.
    */
   getUserInput() {
-    return this.inputField.value;
+    return Sentence.replaceFullwidthWithHalfwidth(this.inputField.value);
   }
 
   /**
@@ -490,6 +492,19 @@ class Sentence {
     });
 
     return (wasString) ? words.toString().replace(/[ ]{2}/g, ' ') : words;
+  }
+
+  /**
+   * Replace fullwidth characters with halfwidth characters.
+   * @param {string} text Text to replace characters in.
+   * @returns {string} Text with replaced characters.
+   */
+  static replaceFullwidthWithHalfwidth(text) {
+    return text
+      .replace(/[\uFF01-\uFF5E]/g, (char) => {
+        return String.fromCharCode(char.charCodeAt(0) - 0xFEE0);
+      })
+      .replace(/\u3000/g, ' '); // replace full-width space with regular space
   }
 
   /**
