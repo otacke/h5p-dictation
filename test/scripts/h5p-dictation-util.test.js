@@ -1,6 +1,6 @@
 import Util from '@services/util.js';
 import Sentence from '@scripts/h5p-dictation-sentence.js';
-import {describe, expect, test} from '@jest/globals';
+import { describe, expect, test } from '@jest/globals';
 
 describe('Does the string contain RTL characters?', () => {
   const testCasesRTL = [
