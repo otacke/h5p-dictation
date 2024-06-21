@@ -69,7 +69,7 @@ class Button {
    * @returns {object} DOM element for the sample.
    */
   createAudioDOM(id, params) {
-    const $audioWrapper = H5P.jQuery('<div>', {'class': Button.AUDIO_WRAPPER});
+    const $audioWrapper = H5P.jQuery('<div>', { 'class': Button.AUDIO_WRAPPER });
 
     if (params.sample !== undefined) {
       // H5P.Audio

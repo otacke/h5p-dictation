@@ -851,7 +851,7 @@ class Sentence {
       master.reverse();
       slave.reverse();
 
-      return {'words1': master, 'words2': slave};
+      return { 'words1': master, 'words2': slave };
     };
 
     /**
@@ -867,7 +867,7 @@ class Sentence {
     const aligned2 = align(words1.reverse(), words2.reverse());
 
     if (count(aligned2) > count(aligned1)) {
-      aligned1 = {'words1': aligned2.words1.reverse(), 'words2': aligned2.words2.reverse()};
+      aligned1 = { 'words1': aligned2.words1.reverse(), 'words2': aligned2.words2.reverse() };
     }
 
     /*

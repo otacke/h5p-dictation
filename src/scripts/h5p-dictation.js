@@ -407,7 +407,7 @@ class Dictation extends H5P.Question {
           wrong: a.wrong + b.wrong,
           match: a.match + b.match
         };
-      }, {added: 0, missing: 0, typo: 0, wrong: 0, match: 0});
+      }, { added: 0, missing: 0, typo: 0, wrong: 0, match: 0 });
 
     // Prepare output
     const mistakesTotal = scoreTotal.added +
@@ -559,7 +559,7 @@ class Dictation extends H5P.Question {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
   getXAPIData() {
-    return {statement: this.getXAPIAnswerEvent().data.statement};
+    return { statement: this.getXAPIAnswerEvent().data.statement };
   }
 
   /**
