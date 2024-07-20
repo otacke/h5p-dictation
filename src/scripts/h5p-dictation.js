@@ -99,9 +99,6 @@ class Dictation extends H5P.Question {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
-    // TODO: Use randomUUID() if coverage is better
-    this.randomId = H5P.createUUID();
-
     this.contextId = 0; // Best guess, no interaction.
 
     this.sentences = [];
