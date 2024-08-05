@@ -85,7 +85,7 @@ class Util {
    * @returns {boolean} True, if input contains right-to-left characters.
    */
   static containsRTLCharacters(input) {
-    return new RegExp('^[^' + Util.RTL + ']*?[' + Util.RTL + ']').test(input);
+    return new RegExp(`^[^${Util.RTL}]*?[${Util.RTL}]`).test(input);
   }
 
   /**
