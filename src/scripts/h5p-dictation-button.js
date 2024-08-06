@@ -389,10 +389,16 @@ class Button {
       return;
     }
 
+    // Add a small delay to the play button, workaround for something :-)
+    const WORKAROUND_DELAY = 0.01;
+
+    // There are 1000 ms in a second
+    const MS_IN_S = 1000;
+
     this.isDelayingPlay = true;
     this.button.classList.add('h5p-dictation-delay-animation');
     this.button.style.animationDuration =
-      `${this.params.playButtonDelay + 0.01}s`;
+      `${this.params.playButtonDelay + WORKAROUND_DELAY}s`;
 
     window.clearTimeout(this.playTimeout);
     this.playTimeout = window.setTimeout(() => {
@@ -400,7 +406,7 @@ class Button {
       this.button.classList.remove('h5p-dictation-delay-animation');
       this.button.style.animationDuration = '';
       this.isDelayingPlay = false;
-    }, this.params.playButtonDelay * 1000);
+    }, this.params.playButtonDelay * MS_IN_S);
   }
 
   isAudioPlaying() {

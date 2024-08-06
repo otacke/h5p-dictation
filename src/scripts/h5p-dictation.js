@@ -124,7 +124,9 @@ class Dictation extends H5P.Question {
     const hasAlternatives = this.params.sentences.some((sentence) => sentence.sampleAlternative !== undefined);
 
     // Proper format for percentage
-    this.params.behaviour.scoring.typoFactor = parseInt(this.params.behaviour.scoring.typoFactor) / 100;
+    this.params.behaviour.scoring.typoFactor = parseInt(
+      this.params.behaviour.scoring.typoFactor
+    ) / 100; // eslint-disable-line no-magic-numbers
 
     // Strip incomplete sentences
     this.params.sentences = this.params.sentences

@@ -1,5 +1,14 @@
 import Util from '@services/util.js';
 
+/** @constant {number} TYPO_FACTOR_NO_MISTAKE Mistake multiplier for no mistake. */
+const TYPO_NO_MISTAKE = 0;
+
+/** @constant {number} TYPO_FACTOR_HALF_MISTAKE Mistake multiplier for half mistake. */
+const TYPO_HALF_MISTAKE = 0.5;
+
+/** @constant {number} TYPO_FACTOR_FULL_MISTAKE Mistake multiplier for full mistake. */
+const TYPO_FULL_MISTAKE = 1;
+
 /** Class representing a solution */
 class Solution {
   /**
@@ -156,16 +165,15 @@ class Solution {
       const firstChild = this.params.containsRTL ?
         event.target.parentNode.lastChild :
         event.target.parentNode.firstChild;
+
       const lastChild = this.params.containsRTL ?
         event.target.parentNode.firstChild :
         event.target.parentNode.lastChild;
 
-      switch (event.keyCode) {
-
+      switch (event.code) {
         // Focus previous solution word
-        case 37: // Left
-        // intentional fallthrough
-        case 38: // Top
+        case 'ArrowLeft': // Left
+        case 'ArrowUp': // Up
           event.preventDefault();
           if (event.target.previousSibling) {
             event.target.setAttribute('tabindex', '-1');
@@ -174,9 +182,8 @@ class Solution {
           break;
 
         // Focus next solution word
-        case 39: // Right
-        // intentional fallthrough
-        case 40: // Down
+        case 'ArrowRight': // Right
+        case 'ArrowDown': // Down
           event.preventDefault();
           if (event.target.nextSibling) {
             event.target.setAttribute('tabindex', '-1');
@@ -185,7 +192,7 @@ class Solution {
           break;
 
         // Focus first solution word
-        case 36: // Home
+        case 'Home':
           event.preventDefault();
           if (event.target !== firstChild) {
             event.target.setAttribute('tabindex', '-1');
@@ -194,7 +201,7 @@ class Solution {
           break;
 
         // Focus last solution word
-        case 35: // End
+        case 'End':
           event.preventDefault();
           if (event.target !== lastChild) {
             event.target.setAttribute('tabindex', '-1');
@@ -334,24 +341,24 @@ class Solution {
         wordDOM.appendChild(scoreExplanation);
       }
 
-      if (word.type === 'typo' && this.params.typoFactor === 0.5) {
+      if (word.type === 'typo' && this.params.typoFactor === TYPO_HALF_MISTAKE) {
         scoreExplanation.classList.remove('h5p-question-minus-one');
         scoreExplanation.classList.add('h5p-question-plus-one-half');
       }
 
-      if (word.type === 'typo' && this.params.typoFactor < 1) {
+      if (word.type === 'typo' && this.params.typoFactor < TYPO_FULL_MISTAKE) {
         wordDOM.appendChild(scoreExplanation);
       }
     }
     else {
       const scoreExplanation = scorePoints.getElement(false);
       if (word.type !== 'match') {
-        if (word.type === 'typo' && this.params.typoFactor === 0.5) {
+        if (word.type === 'typo' && this.params.typoFactor === TYPO_HALF_MISTAKE) {
           scoreExplanation.classList.remove('h5p-question-minus-one');
           scoreExplanation.classList.add('h5p-question-minus-one-half');
         }
 
-        if (word.type !== 'typo' || this.params.typoFactor > 0) {
+        if (word.type !== 'typo' || this.params.typoFactor > TYPO_NO_MISTAKE) {
           wordDOM.appendChild(scoreExplanation);
         }
       }

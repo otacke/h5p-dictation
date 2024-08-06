@@ -510,9 +510,14 @@ class Sentence {
    * @returns {string} Text with replaced characters.
    */
   static replaceFullwidthWithHalfwidth(text) {
+    // Difference between the full-width and half-width characters in Unicode
+    const FULL_WIDTH_HALF_WITDH_DIFFERENCE = 0xFEE0;
+
     return text
       .replace(/[\uFF01-\uFF5E]/g, (char) => {
-        return String.fromCharCode(char.charCodeAt(0) - 0xFEE0);
+        return String.fromCharCode(
+          char.charCodeAt(0) - FULL_WIDTH_HALF_WITDH_DIFFERENCE
+        );
       })
       .replace(/\u3000/g, ' '); // replace full-width space with regular space
   }
