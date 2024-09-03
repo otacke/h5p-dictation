@@ -99,7 +99,8 @@ class Solution {
     }
 
     return result.words.map((word, index) =>
-      this.createSolutionWordDOM(index, word, result.words.length - 1 !== index));
+      this.createSolutionWordDOM(index, word)
+    );
   }
 
   /**
@@ -109,10 +110,9 @@ class Solution {
    * @param {string} word.type Status about missing, typo, ...
    * @param {string} word.solution Correct spelling of the word.
    * @param {string} word.answer User input for this word.
-   * @param {boolean} [trailingGap] True if wrapper should have trailing gap.
    * @returns {HTMLElement} DOM for solution words.
    */
-  createSolutionWordDOM(index, word, trailingGap = true) {
+  createSolutionWordDOM(index, word) {
     if (this.params.alternateSolution === 'first' && word.type !== 'match' && word.type !== 'typo') {
       word.solution = word.solution ? Util.splitWordAlternatives(word.solution)[0] : '';
     }
@@ -127,9 +127,6 @@ class Solution {
       wordDOM.classList.add(`h5p-wrapper-${word.type}`);
     }
 
-    if (trailingGap) {
-      wordDOM.classList.add('h5p-spacer');
-    }
     wordDOM.setAttribute('tabindex', '-1');
     wordDOM.setAttribute('role', 'listitem');
 
