@@ -255,6 +255,14 @@
             "default": "Spill av med lav hastighet"
           },
           {
+            "label": "Continue playing button",
+            "default": "Continue playing"
+          },
+          {
+            "label": "Continue playing slowly button",
+            "default": "Continue playing slowly"
+          },
+          {
             "label": "Forsøk igjen (tekst for skjermlesere og når musepeker holdes over element)",
             "description": "@number vil erstattes av antall forsøk igjen.",
             "default": "Antall forsøk igjen: @number"

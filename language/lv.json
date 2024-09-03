@@ -255,6 +255,14 @@
           "default": "Atskaņot lēnām"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Atlikušie mēģinājumi (teksts asistīvajām tehnoloģijām un teksts, kas paredzēts atspoguļošanai pēc kursora novietošanas)",
           "description": "@number tiks aizstāts ar pašreizējo atlikušo mēģinājumu skaitu.",
           "default": "Atlikušo mēģinājumu skaits: @number"

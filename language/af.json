@@ -255,6 +255,14 @@
           "default": "Speel stadig"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Probeerslae oor (spreekleserteks en sweefteks)",
           "description": "@number sal vervang word met die aantal probeerslae oor.",
           "default": "Aantal probeerslae oor: @number"

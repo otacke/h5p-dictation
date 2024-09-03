@@ -255,6 +255,14 @@
           "default": "играть медленно"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Осталось попыток (текст для ассистирующих технологии и текст подсказки)",
           "description": "@number будет заменено на количество оставшихся попыток.",
           "default": "Осталось попыток: @number"

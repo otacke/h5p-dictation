@@ -255,6 +255,14 @@
           "default": "Reproduzir lentamente"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Tentativas restantes (texto para leitor de tela e texto flutuante)",
           "description": "@number será substituído pelo número atual de tentativas restantes.",
           "default": "Número de tentativas restantes: @number"

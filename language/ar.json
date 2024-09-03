@@ -255,6 +255,14 @@
           "default": "التشغيل ببطء"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "المحاولات المتبقية (نص لمتكلم القراءة ونص التمرير)",
           "description": "@numberسيتم استبدال الأرقام بالعدد الحالي من المحاولات المتبقية.",
           "default": "عدد المحاولات المتبقية: @number"

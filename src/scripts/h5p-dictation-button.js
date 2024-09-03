@@ -9,6 +9,8 @@ class Button {
    * @param {object} params.a11y Readspeaker texts.
    * @param {string} params.a11y.play Readspeaker text for "Play".
    * @param {string} params.a11y.playSlowly Readspeaker text for "Play slowly".
+   * @param {string} params.a11y.continuePlaying Readspeaker text for "Continue playing".
+   * @param {string} params.a11y.continuePlayingSlowly Readspeaker text for "Continue playing slowly".
    * @param {string} params.a11y.triesLeft Readspeaker text for "number of tries left".
    * @param {string} params.a11y.infinite Readspeaker text for "infinite".
    * @param {string} params.a11y.enterText Readspeaker text for "Enter what you have heard here".
@@ -29,6 +31,8 @@ class Button {
       a11y: {
         play: 'Play',
         playSlowly: 'Play slowly',
+        continuePlaying: 'Continue playing',
+        continuePlayingSlowly: 'Continue playing slowly',
         triesLeft: 'number of tries left: @number',
         infinite: 'infinite',
         sentence: 'Sentence',
@@ -140,6 +144,11 @@ class Button {
           this.audioInstance.$audioButton
             .removeClass(Button.BUTTON_PAUSE)
             .addClass(Button.BUTTON_SLOW);
+
+          this.setLabel(params.a11y.continuePlayingSlowly, { amend: false });
+        }
+        else {
+          this.setLabel(params.a11y.continuePlaying, { amend: false });
         }
 
         this.status = Button.STATUS_PAUSE;
@@ -250,14 +259,25 @@ class Button {
   /**
    * Set the aria label.
    * @param {string} label Label to set.
+   * @param {object} options Options.
+   * @param {boolean} options.amend If not false, append tries left to label.
    */
-  setLabel(label) {
+  setLabel(label, options = {}) {
+    if (!this.button || !label) {
+      return;
+    }
+
+    if (options.amend === false) {
+      this.button.setAttribute('aria-label', label);
+      return;
+    }
+
     const tries = isFinite(this.triesLeft) ?
       this.triesLeft :
       this.params.a11y.infinite;
 
     const triesLeftLabel = this.params.a11y.triesLeft.replace(/@number/g, tries);
-    this.button?.setAttribute('aria-label', `${label}. ${triesLeftLabel}`);
+    this.button.setAttribute('aria-label', `${label}. ${triesLeftLabel}`);
   }
 
   /**

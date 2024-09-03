@@ -255,6 +255,14 @@
           "default": "천천히 플레이 하기"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "남은 시도(읽어주기 스피커 텍스트와 마우스 커서 텍스트)",
           "description": "@number 는 현재 남은 시도횟수로 대체됩니다.",
           "default": "남은 시도 횟수: @number"

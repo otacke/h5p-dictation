@@ -255,6 +255,14 @@
           "default": "Esita aeglaselt"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Proove järel (tekst lugejate ja hõljuva teksti jaoks)",
           "description": "@number asendatakse alles jäänud proovide arvuga.",
           "default": "Proove alles: @number"

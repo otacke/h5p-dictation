@@ -255,6 +255,14 @@
           "default": "Odtwórz powoli"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Pozostałych prób (tekst dla czytających Readspeakerem i tekst po najechaniu kursorem)",
           "description": "@number zostanie zastąpiony aktualną liczbą pozostałych prób.",
           "default": "Liczba pozostałych prób: @number"

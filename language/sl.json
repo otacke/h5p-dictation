@@ -255,6 +255,14 @@
           "default": "Predvajaj upočasnjeno"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Število poskusov (besedilo za bralnike zaslonov in besedilo ob preletu miške)",
           "description": "Spremenljivka je @number.",
           "default": "Število reševanj: @number"

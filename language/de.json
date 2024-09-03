@@ -247,12 +247,20 @@
           "default": "Die Aufgabe wiederholen. Alle Eingaben werden zurückgesetzt und die Aufgabe wird erneut gestartet."
         },
         {
-          "label": "Abspiel-Button",
+          "label": "\"Abspielen\"-Button",
           "default": "Abspielen"
         },
         {
-          "label": "Langsam-Abspiel-Button",
+          "label": "\"Langsam abspielen\"-Button",
           "default": "Langsam abspielen"
+        },
+        {
+          "label": "\"Weiter abspielen\"-Button",
+          "default": "Weiter abspielen"
+        },
+        {
+          "label": "\"Weiter langsam abspielen\"-Button",
+          "default": "Weiter langsam abspielen"
         },
         {
           "label": "Verbleibende Versuche (Text für Vorlesewerkzeuge und Tooltips)",

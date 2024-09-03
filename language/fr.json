@@ -255,6 +255,14 @@
           "default": "Lecture lente"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Essais à gauche (texte à lire et texte à survoler)",
           "description": "@number sera remplacé par le nombre actuel d'essais restants.",
           "default": "Nombre d'essais restants : @number"

@@ -255,6 +255,14 @@
           "default": "Αργή αναπαραγωγή"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Προσπάθειες που απομένουν (κείμενο ακουστικής υποβοήθησης)",
           "description": "@number θα αντικατασταθεί από τον τρέχοντα αριθμό προσπαθειών που απομένουν.",
           "default": "Προσπάθειες που απομένουν: @number"

@@ -56,6 +56,8 @@ class Dictation extends H5P.Question {
         retry: 'Retry the task. Reset all responses and start the task over again.',
         play: 'Play',
         playSlowly: 'Play slowly',
+        continuePlaying: 'Continue playing',
+        continuePlayingSlowly: 'Continue playing slowly',
         triesLeft: 'Number of tries left: @number',
         infinite: 'infinite',
         enterText: 'Enter what you have heard.',

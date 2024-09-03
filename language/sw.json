@@ -255,6 +255,14 @@
           "default": "Cheza polepole"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Inajaribu kushoto (maandishi kwa visoma maandishii na maandishi ya juu)",
           "description": "@number itabadilishwa na nambari ya sasa ya majaribio yaliyosalia.",
           "default": "Idadi ya majaribio yaliyosalia:@number"

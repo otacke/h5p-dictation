@@ -255,6 +255,14 @@
           "default": "Langzaam afspelen"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Resterende pogingen (tekst voor schermlezers en hover tekst)",
           "description": "@number wordt vervangen door het huidige aantal resterende pogingen.",
           "default": "Aantal resterende pogingen: @number"

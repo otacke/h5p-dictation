@@ -255,6 +255,14 @@
           "default": "Mantso erreproduzitu"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Geratzen diren saiakerak (irakurtzen duen bozgorailua eta gainean jartzean erakusten den testua)",
           "description": "@number une bakoitzean geratzen diren saiakerekin ordezkatuko da.",
           "default": "Geratzen diren saiakerak: @number"

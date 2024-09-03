@@ -255,6 +255,14 @@
           "default": "Удаан тоглуулах"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Үлдсэн оролдлого (унших чанга яригчдад зориулсан текст болон хулганаар зөөгч текст)",
           "description": "@number нь үлдсэн оролдлогын одоогийн тоогоор солигдох болно.",
           "default": "Үлдсэн оролдлогын тоо: @number"

@@ -255,6 +255,14 @@
           "default": "Reproducir lentamente"
         },
         {
+          "label": "Continue playing button",
+          "default": "Continue playing"
+        },
+        {
+          "label": "Continue playing slowly button",
+          "default": "Continue playing slowly"
+        },
+        {
           "label": "Intentos dispoñibles (texto para lector de pantalla e para cando o cursor do rato pasa por enriba)",
           "description": "Substituirase @number polo número actual de intentos dispoñibles.",
           "default": "Número de intentos dispoñibles: @number"

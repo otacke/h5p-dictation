@@ -498,6 +498,20 @@
         "default": "Play slowly"
       },
       {
+        "name": "continuePlaying",
+        "type": "text",
+        "label": "Continue playing button",
+        "importance": "low",
+        "default": "Continue playing"
+      },
+      {
+        "name": "continuePlayingSlowly",
+        "type": "text",
+        "label": "Continue playing slowly button",
+        "importance": "low",
+        "default": "Continue playing slowly"
+      },
+      {
         "name": "triesLeft",
         "type": "text",
         "label": "Tries left (text for readspeakers and hover text)",
