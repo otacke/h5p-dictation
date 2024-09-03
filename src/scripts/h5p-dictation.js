@@ -43,7 +43,8 @@ class Dictation extends H5P.Question {
       },
       l10n: {
         generalFeedback: 'You have made @total mistake(s).',
-        generalFeedbackZeroMistakesMode: 'You have entered @total word(s) correctly and @typo word(s) with minor mistakes.',
+        generalFeedbackZeroMistakesMode:
+          'You have entered @total word(s) correctly and @typo word(s) with minor mistakes.',
         checkAnswer: 'Check',
         tryAgain: 'Retry',
         showSolution: 'Show solution',

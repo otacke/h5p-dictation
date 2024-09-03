@@ -141,7 +141,8 @@ class Sentence {
       this.inputField.style.height = 'auto'; // Reset to allow shrinking
       const needsResize = (this.previousScrollHeight !== this.inputField.scrollHeight);
 
-      this.inputField.style.height = `${this.inputField.scrollHeight + this.inputField.offsetHeight - this.inputField.clientHeight}px`;
+      this.inputField.style.height =
+        `${this.inputField.scrollHeight + this.inputField.offsetHeight - this.inputField.clientHeight}px`;
 
       if (needsResize) {
         this.previousScrollHeight = this.inputField.scrollHeight;
@@ -937,10 +938,37 @@ Sentence.TYPE_TYPO = 'typo';
 Sentence.AUTOSPLIT = '[\u3040-\u30FF\u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF]';
 
 /** @constant {string} */
-Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u00AB\u00BB\u00BF\u201C-\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6\u2000-\u206F\u22EF\u3000-\u3002\u3008-\u3011\uFF01\uFF08\uFF09\uFF0C\uFF1A\uFF1B\uFF1F\uFF3B\uFF3D\uFE41\uFE42\uFE4F\uFF5E]';
+const basicPunctuation = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*';
+const latin1Supplement = '\u00AB\u00BB\u00BF';
+const generalPunctuation = '\u201C-\u201E';
+const arabicPunctuation = '\u060C\u061F';
+const hebrewPunctuation = '\u05BE\u05C0\u05C3\u05C6';
+const generalPunctuationContinued = '\u2000-\u206F';
+const mathematicalOperators = '\u22EF';
+const cjkSymbolsAndPunctuation = '\u3000-\u3002\u3008-\u3011';
+const fullwidthForms = '\uFF01\uFF08\uFF09\uFF0C\uFF1A\uFF1B\uFF1F\uFF3B\uFF3D\uFE41\uFE42\uFE4F\uFF5E';
 
 /** @constant {string} */
-Sentence.WORD = '\\w|[\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\u02AF\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u060B\u060D-\u061E\u0620-\u08FF]';
+Sentence.PUNCTUATION = `
+  ${basicPunctuation}
+  ${latin1Supplement}
+  ${generalPunctuation}
+  ${arabicPunctuation}
+  ${hebrewPunctuation}
+  ${generalPunctuationContinued}
+  ${mathematicalOperators}
+  ${cjkSymbolsAndPunctuation}
+  ${fullwidthForms}
+`.replace(/\s+/g, '');
+
+const basicLatin = '\\w';
+const latinExtendedA = '\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF';
+const latinExtendedB = '\u0100-\u02AF';
+const hebrewWord = '\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7';
+const arabicWord = '\u060B\u060D-\u061E\u0620-\u08FF';
+
+/** @constant {string} */
+Sentence.WORD = `${basicLatin}|[${latinExtendedA}${latinExtendedB}${hebrewWord}${arabicWord}]`;
 
 /** @constant {string} */
 Sentence.SPACE_ESCAPE = 'astringthatwillneverhappen123@@';

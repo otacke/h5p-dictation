@@ -76,11 +76,16 @@ describe('Add spaces to string', () => {
  */
 describe('Replace full width characters with half width characters', () => {
   const testCasesReplaceFullwidth = [
-    { string: '　！＂＃＄％＆＇（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～', result: ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~' },
+    {
+      string: '　！＂＃＄％＆＇（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～',
+      result: ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+    },
   ];
 
   test('Do all full width characters get replaced with their regular width counterparts?', () => {
-    expect(Sentence.replaceFullwidthWithHalfwidth(testCasesReplaceFullwidth[0].string, { autosplit: true })).toBe(testCasesReplaceFullwidth[0].result);
+    expect(
+      Sentence.replaceFullwidthWithHalfwidth(testCasesReplaceFullwidth[0].string, { autosplit: true })
+    ).toBe(testCasesReplaceFullwidth[0].result);
   });
 });
 
@@ -88,7 +93,10 @@ describe('Add spaces to string without splitting automatically', () => {
   const testCasesAutosplitOff = [
     { string: '', result: '' },
     { string: 'JohnDoe', result: 'JohnDoe' },
-    { string: '明日の午後、わたしはスーパーでリンゴとミルクを買います。', result: '明日の午後、わたしはスーパーでリンゴとミルクを買います。' },
+    {
+      string: '明日の午後、わたしはスーパーでリンゴとミルクを買います。',
+      result: '明日の午後、わたしはスーパーでリンゴとミルクを買います。'
+    },
     { string: 'Johnさんはリンゴを買います。', result: 'Johnさんはリンゴを買います。' },
     { string: 'Johnさんはリンゴを12個買います。', result: 'Johnさんはリンゴを12個買います。' },
     { string: 'Johnさんはリンゴを１２個買います。', result: 'Johnさんはリンゴを１２個買います。' }
@@ -111,7 +119,10 @@ describe('Add spaces to string without splitting automatically', () => {
   const testCasesAutosplitOn = [
     { string: '', result: '' },
     { string: 'JohnDoe', result: 'JohnDoe' },
-    { string: '明日の午後、わたしはスーパーでリンゴとミルクを買います。', result: '明 日 の 午 後 、 わ た し は ス ー パ ー で リ ン ゴ と ミ ル ク を 買 い ま す 。' },
+    {
+      string: '明日の午後、わたしはスーパーでリンゴとミルクを買います。',
+      result: '明 日 の 午 後 、 わ た し は ス ー パ ー で リ ン ゴ と ミ ル ク を 買 い ま す 。'
+    },
     { string: 'Johnさんはリンゴを買います。', result: 'John さ ん は リ ン ゴ を 買 い ま す 。' },
     { string: 'Johnさんはリンゴを12個買います。', result: 'John さ ん は リ ン ゴ を 12 個 買 い ま す 。' },
     // 1 and 2 are fullwidth characters and do get replaces outside of addSpaces
