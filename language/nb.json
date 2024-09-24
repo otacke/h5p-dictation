@@ -64,6 +64,7 @@
                 {
                   "label": "Poengintervall"
                 },
+                {},
                 {
                   "label": "Tilbakemelding for spesifisert poengintervall",
                   "placeholder": "Fyll inn tilbakemelding"

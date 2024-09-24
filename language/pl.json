@@ -64,6 +64,7 @@
               {
                 "label": "Zakres punktacji"
               },
+              {},
               {
                 "label": "Informacja zwrotna dla zdefiniowanego zakresu wyniku",
                 "placeholder": "Uzupełnij informację zwrotną"

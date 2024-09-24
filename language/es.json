@@ -64,6 +64,7 @@
               {
                 "label": "Rango del Puntuación"
               },
+              {},
               {
                 "label": "Realimentación para el rango de puntuación definido",
                 "placeholder": "Escribe tu retroalimentación"

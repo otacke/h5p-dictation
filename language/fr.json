@@ -64,6 +64,7 @@
               {
                 "label": "Intervalle de scores"
               },
+              {},
               {
                 "label": "Feedback pour l'intervalle de score défini",
                 "placeholder": "Compléter le feedback"
