@@ -63,6 +63,7 @@ class Button {
     if (this.dom.firstChild === null) {
       this.dom.appendChild(this.getDummyButtonDOM());
     }
+
     this.status = Button.STATUS_ENDED;
   }
 
@@ -95,6 +96,11 @@ class Button {
       this.audioInstance.attach($audioWrapper);
 
       this.button = this.audioInstance.$audioButton.get(0);
+
+      // Poor man's check for proper H5P.Tooltip version (should be in core 1.28+)
+      if (H5P.Tooltip && !!H5P.Tooltip(document.createElement('div'))?.observer) {
+        H5P.Tooltip(this.button, {position: 'bottom'});
+      }
 
       this.audio = this.audioInstance;
 
