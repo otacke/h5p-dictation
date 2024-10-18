@@ -99,7 +99,7 @@ class Button {
 
       // Poor man's check for proper H5P.Tooltip version (should be in core 1.28+)
       if (H5P.Tooltip && !!H5P.Tooltip(document.createElement('div'))?.observer) {
-        H5P.Tooltip(this.button, {position: 'bottom'});
+        H5P.Tooltip(this.button, { position: 'bottom' });
       }
 
       this.audio = this.audioInstance;
