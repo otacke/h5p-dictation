@@ -3,7 +3,7 @@
   "description": "Let your students train their listening comprehension and spelling",
   "majorVersion": 1,
   "minorVersion": 3,
-  "patchVersion": 7,
+  "patchVersion": 8,
   "runnable": 1,
   "embedTypes": [
     "iframe"
