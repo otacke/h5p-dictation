@@ -644,7 +644,7 @@ class Dictation extends H5P.Question {
     // Fallback for h5p-php-reporting, expects en-US
     definition.name['en-US'] = definition.name[this.languageTag];
     definition.description = {};
-    definition.description[this.languageTag] = `${this.getDescription()}${placeholders}`;
+    definition.description[this.languageTag] = `${this.getXAPIDescription()}${placeholders}`;
     // Fallback for h5p-php-reporting, expects en-US
     definition.description['en-US'] = definition.description[this.languageTag];
     definition.type = 'http://adlnet.gov/expapi/activities/cmi.interaction';
@@ -759,6 +759,14 @@ class Dictation extends H5P.Question {
   }
 
   /**
+   * Get description for xAPI statement.
+   * @returns {string} Description for xAPI statement.
+   */
+  getXAPIDescription() {
+    return this.getDescription().replaceAll(/_{10,}/gi, Dictation.FILL_IN_PLACEHOLDER_REPLACEMENT);
+  }
+
+  /**
    * Checks if any sentence's audio playback has started.
    * @returns {boolean} True if audio playback has started, false otherwise.
    */
@@ -789,5 +797,8 @@ Dictation.XAPI_REPORTING_VERSION = '1.0.0';
  * Required to be added to xAPI object description for H5P reporting
  */
 Dictation.FILL_IN_PLACEHOLDER = '__________';
+
+/** @constant {string} FILL_IN_PLACEHOLDER_REPLACEMENT Replacement for FILL_IN_PLACEHOLDER in genuine text. */
+Dictation.FILL_IN_PLACEHOLDER_REPLACEMENT = '_________';
 
 export default Dictation;

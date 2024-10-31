@@ -317,8 +317,9 @@ class Sentence {
    * @returns {string} Description text.
    */
   getXAPIDescription() {
-    return this.params.sentence.description || '' ?
-      `<p>${this.params.sentence.description}</p>` :
+    return this.params.sentence.description?.length ?
+      `<p>${this.params.sentence.description
+        .replaceAll(/_{10,}/gi, H5P.Dictation.FILL_IN_PLACEHOLDER_REPLACEMENT)}</p>` :
       '';
   }
 
