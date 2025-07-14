@@ -1,11 +1,11 @@
 {
   "semantics": [
     {
-      "label": "Mediji",
+      "label": "Medijska vsebina",
       "fields": [
         {
           "label": "Tip",
-          "description": "Neobvezna nastavitev dodatnega medija za prikaz nad vprašanjem."
+          "description": "Neobvezna nastavitev dodatne medijske vsebine za prikaz nad vprašanjem."
         },
         {
           "label": "Onemogoči povečavo slike"
@@ -91,8 +91,8 @@
           "description": "Omejitev možnosti zaustavitve predvajanja posnetka."
         },
         {
-          "label": "Play button delay",
-          "description": "Optionally set a time period of up to three seconds that playing a button should be delayed. This is useful if you want to allow students to enter the text field before they start listening."
+          "label": "Zakasnitev gumba za predvajanje",
+          "description": "Neobvezno je možno nastaviti časovno zakasnitev do treh sekund, preden se prikaže gumb za predvajanje (npr. da udeleženci še pred poslušanjem posnetka izpolnijo vnosno polje)."
         },
         {
           "label": "Premešaj stavke",
@@ -256,12 +256,12 @@
           "default": "Predvajaj upočasnjeno"
         },
         {
-          "label": "Continue playing button",
-          "default": "Continue playing"
+          "label": "Gumb za nadaljevanje predvajanja",
+          "default": "Nadaljuj s predvajanjem"
         },
         {
-          "label": "Continue playing slowly button",
-          "default": "Continue playing slowly"
+          "label": "Gumb za nadaljevanje upočasnjenega predvajanja",
+          "default": "Nadaljuj z upočasnjenim predvajanjem"
         },
         {
           "label": "Število poskusov (besedilo za bralnike zaslonov in besedilo ob preletu miške)",
