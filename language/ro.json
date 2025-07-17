@@ -1,0 +1,383 @@
+{
+  "semantics": [
+    {
+      "label": "Media",
+      "fields": [
+        {
+          "label": "Tip",
+          "description": "Media opțională de afișat deasupra întrebării."
+        },
+        {
+          "label": "Dezactivați mărirea imaginii"
+        }
+      ]
+    },
+    {
+      "label": "Descrierea sarcinii",
+      "description": "Descrieți sarcina aici.",
+      "placeholder": "Vă rugăm să ascultați cu atenție și să scrieți ce auziți."
+    },
+    {
+      "label": "Propoziții",
+      "widgets": [
+        {
+          "label": "Implicit"
+        }
+      ],
+      "entity": "Propoziție",
+      "field": {
+        "label": "Propoziție",
+        "fields": [
+          {
+            "label": "Descriere",
+            "description": "Opțional, puteți pune o descriere simplă deasupra câmpului de introducere a textului, utilă, de exemplu, pentru dialoguri."
+          },
+          {
+            "label": " mostră de sunet",
+            "description": "Propoziție rostită la viteză normală"
+          },
+          {
+            "label": " mostră de sunet lentă",
+            "description": "Propoziție rostită la viteză redusă"
+          },
+          {
+            "label": "Text",
+            "description": "Text care ar trebui scris. Puteți adăuga ortografii alternative la un cuvânt adăugând o linie verticală (|) în spate, urmată de o alternativă."
+          }
+        ]
+      }
+    },
+    {
+      "label": "Feedback general",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Implicit"
+            }
+          ],
+          "label": "Definiți feedback personalizat pentru orice interval de scor",
+          "description": "Faceți clic pe butonul „Adăugare interval” pentru a adăuga câte intervale aveți nevoie. Exemplu: 0-20% Scor slab, 21-91% Scor mediu, 91-100% Scor excelent!",
+          "entity": "interval",
+          "field": {
+            "fields": [
+              {
+                "label": "Interval de scor"
+              },
+              {},
+              {
+                "label": "Feedback pentru intervalul de scor definit",
+                "placeholder": "Completați feedback-ul"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Setări comportamentale",
+      "description": "Aceste opțiuni vă vor permite să controlați modul în care se comportă sarcina.",
+      "fields": [
+        {
+          "label": "Încercări maxime",
+          "description": "Va limita numărul de ori în care mostrele pentru fiecare propoziție pot fi ascultate."
+        },
+        {
+          "label": "Încercări maxime pentru viteză redusă",
+          "description": "Va limita numărul de ori în care mostrele lente pentru fiecare propoziție pot fi ascultate."
+        },
+        {
+          "label": "Dezactivați opțiunea de pauză",
+          "description": "Dacă este bifat, întreruperea sunetului în timpul redării nu este posibilă."
+        },
+        {
+          "label": "Întârzierea butonului de redare",
+          "description": "Opțional, setați o perioadă de timp de până la trei secunde cu care ar trebui să fie întârziată redarea unui buton. Acest lucru este util dacă doriți să permiteți elevilor să intre în câmpul de text înainte de a începe să asculte."
+        },
+        {
+          "label": "Amestecați propozițiile",
+          "description": "Definiți când ar trebui amestecate propozițiile.",
+          "options": [
+            {
+              "label": "Niciodată"
+            },
+            {
+              "label": "O dată la începerea exercițiului"
+            },
+            {
+              "label": "La fiecare încercare"
+            }
+          ]
+        },
+        {
+          "label": "Punctaj",
+          "fields": [
+            {
+              "label": "Ignorați semnele de punctuație",
+              "description": "Dacă este bifat, semnele de punctuație nu vor fi luate în considerare la punctaj."
+            },
+            {
+              "label": "Mod zero greșeli",
+              "description": "Dacă este bifat, numai răspunsurile corecte vor fi luate în considerare la punctaj. Greșelile nu vor fi penalizate."
+            },
+            {
+              "label": "Valoarea greșelilor de tipar",
+              "description": "Stabiliți în ce măsură erorile de tastare (cuvânt cu 3-9 caractere: până la 1 greșeală, cuvânt cu mai mult de 9 caractere: până la 2 greșeli) contează ca o greșeală reală.",
+              "options": [
+                {
+                  "label": "100 %"
+                },
+                {
+                  "label": "50 %"
+                },
+                {
+                  "label": "0 %"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Text",
+          "fields": [
+            {
+              "label": "Separator de cuvinte",
+              "description": "Definiți separatorul de cuvinte diferit de caracterul spațiu pentru a sprijini soluții alternative cu un număr diferit de cuvinte."
+            },
+            {
+              "label": "Direcția de scriere",
+              "description": "Setați dacă limba propozițiilor este de la dreapta la stânga sau de la stânga la dreapta.",
+              "options": [
+                {
+                  "label": "Detectare automată"
+                },
+                {
+                  "label": "De la dreapta la stânga"
+                },
+                {
+                  "label": "De la stânga la dreapta"
+                }
+              ]
+            },
+            {
+              "label": "Împărțirea caracterelor",
+              "description": "Activați dacă anumite caractere (de exemplu, caracterele chinezești Han) ar trebui împărțite automat în cuvinte separate."
+            }
+          ]
+        },
+        {
+          "label": "Prezentarea feedback-ului",
+          "fields": [
+            {
+              "label": "Afișare personalizată a greșelilor de tipar",
+              "description": "Dacă este bifat, greșelile de tipar vor fi afișate într-un stil personalizat, deosebindu-le de greșelile clare."
+            },
+            {
+              "label": "Prezentarea soluțiilor alternative",
+              "description": "Definiți ce alternative ar trebui prezentate pentru cuvintele greșite sau lipsă din soluție.",
+              "options": [
+                {
+                  "label": "Afișați numai prima alternativă"
+                },
+                {
+                  "label": "Afișați toate alternativele"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Activați „Reîncercare”"
+        },
+        {
+          "label": "Activați butonul „Afișare soluție”"
+        },
+        {
+          "label": "Afișați soluția la verificare"
+        }
+      ]
+    },
+    {
+      "label": "Interfață utilizator",
+      "fields": [
+        {
+          "label": "Feedback general",
+          "description": "Puteți utiliza mai mulți substituenți care vor fi înlocuiți cu numărul adecvat: @matches = numărul de potriviri, @total = total greșeli, @capped = total greșeli plafonate, @wrong = cuvinte greșite, @added = cuvinte suplimentare, @missing = cuvinte lipsă, @typo = erori de tastare",
+          "default": "Ați făcut @total greșeală(i)."
+        },
+        {
+          "label": "Feedback general (mod zero greșeli)",
+          "description": "Puteți utiliza mai mulți substituenți care vor fi înlocuiți cu numărul adecvat: @matches = numărul de potriviri, @total = scor total, @wrong = cuvinte greșite, @added = cuvinte suplimentare, @missing = cuvinte lipsă, @typo = erori de tastare",
+          "default": "Ați introdus corect @total cuvânt(e) și @typo cuvânt(e) cu greșeli minore."
+        },
+        {
+          "label": "Text pentru butonul „Verificare”",
+          "default": "Verificare"
+        },
+        {
+          "label": "Text pentru butonul „Trimitere”",
+          "default": "Trimitere"
+        },
+        {
+          "label": "Text pentru butonul „Reîncercare”",
+          "default": "Reîncercare"
+        },
+        {
+          "label": "Text pentru butonul „Afișare soluție”",
+          "default": "Afișare soluție"
+        },
+        {
+          "label": "Mesaj audio neacceptat",
+          "default": "Browserul dvs. nu acceptă acest audio."
+        }
+      ]
+    },
+    {
+      "label": "Cititor de ecran",
+      "fields": [
+        {
+          "label": "Descrierea tehnologiei de asistare pentru butonul „Verificare”",
+          "default": "Verificați răspunsurile. Răspunsurile vor fi marcate ca fiind corecte, incorecte sau fără răspuns."
+        },
+        {
+          "label": "Descrierea tehnologiei de asistare pentru butonul „Afișare soluție”",
+          "default": "Afișați soluția. Sarcina va fi marcată cu soluția sa corectă."
+        },
+        {
+          "label": "Descrierea tehnologiei de asistare pentru butonul „Reîncercare”",
+          "default": "Reîncercați sarcina. Resetați toate răspunsurile și începeți din nou sarcina."
+        },
+        {
+          "label": "Buton de redare",
+          "default": "Redare"
+        },
+        {
+          "label": "Buton de redare lentă",
+          "default": "Redare lentă"
+        },
+        {
+          "label": "Buton de continuare a redării",
+          "default": "Continuare redare"
+        },
+        {
+          "label": "Buton de continuare a redării lente",
+          "default": "Continuare redare lentă"
+        },
+        {
+          "label": "Încercări rămase (text pentru cititoare de ecran și text la trecerea cursorului)",
+          "description": "@number va fi înlocuit cu numărul curent de încercări rămase.",
+          "default": "Număr de încercări rămase: @number"
+        },
+        {
+          "label": "Infinit (text pentru cititoare de ecran și text la trecerea cursorului)",
+          "default": "infinit"
+        },
+        {
+          "label": "Introduceți câmpul de text",
+          "default": "Introduceți ceea ce ați auzit."
+        },
+        {
+          "label": "Rezultatul dvs.",
+          "description": "@score va fi înlocuit cu numărul de puncte. @total va fi înlocuit cu numărul maxim posibil de puncte.",
+          "default": "Ați obținut @score din @total puncte"
+        },
+        {
+          "label": "Soluție",
+          "default": "Soluție"
+        },
+        {
+          "label": "Propoziție",
+          "default": "Propoziție"
+        },
+        {
+          "label": "Element",
+          "default": "Element"
+        },
+        {
+          "label": "Corect",
+          "default": "corect"
+        },
+        {
+          "label": "Greșit",
+          "default": "greșit"
+        },
+        {
+          "label": "Greșeală minoră",
+          "default": "greșeală minoră"
+        },
+        {
+          "label": "Cuvânt sau simbol lipsă",
+          "default": "lipsă"
+        },
+        {
+          "label": "Cuvânt sau simbol adăugat",
+          "default": "adăugat"
+        },
+        {
+          "label": "Soluție corectă",
+          "default": "Ar fi trebuit să fie"
+        },
+        {
+          "label": "Sau",
+          "default": "sau"
+        },
+        {
+          "label": "Punct",
+          "default": "punct"
+        },
+        {
+          "label": "Puncte",
+          "default": "puncte"
+        },
+        {
+          "label": "Punct",
+          "default": "punct"
+        },
+        {
+          "label": "Semnul exclamării",
+          "default": "semnul exclamării"
+        },
+        {
+          "label": "Semnul întrebării",
+          "default": "semnul întrebării"
+        },
+        {
+          "label": "Virgulă",
+          "default": "virgulă"
+        },
+        {
+          "label": "Ghilimele simple",
+          "default": "ghilimele simple"
+        },
+        {
+          "label": "Ghilimele duble",
+          "default": "ghilimele duble"
+        },
+        {
+          "label": "Două puncte",
+          "default": "două puncte"
+        },
+        {
+          "label": "Punct și virgulă",
+          "default": "punct și virgulă"
+        },
+        {
+          "label": "Plus",
+          "default": "plus"
+        },
+        {
+          "label": "Minus",
+          "default": "minus"
+        },
+        {
+          "label": "Asterisc",
+          "default": "asterisc"
+        },
+        {
+          "label": "Bară oblică",
+          "default": "bară oblică"
+        }
+      ]
+    }
+  ]
+}
