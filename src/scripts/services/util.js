@@ -102,7 +102,7 @@ class Util {
 
     words1.forEach((word1) => {
       result.push(
-        ...words2.map((word2) => (word2 === '') ? word1 : `${word2}${delimiter}${word1}`)
+        ...words2.map((word2) => (word2 === '') ? word1 : `${word2}${delimiter}${word1}`),
       );
     });
 

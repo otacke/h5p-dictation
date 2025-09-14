@@ -37,13 +37,13 @@ class Button {
         infinite: 'infinite',
         sentence: 'Sentence',
         solution: 'Solution',
-        enterText: 'Enter what you have heard'
+        enterText: 'Enter what you have heard',
       },
       disablePause: false,
       type: Button.BUTTON_TYPE_NORMAL,
       callbacks: {
-        playAudio: (() => {})
-      }
+        playAudio: (() => {}),
+      },
     }, params);
 
     this.previousState = previousState;
@@ -80,15 +80,15 @@ class Button {
       // H5P.Audio
       const audioDefaults = {
         files: params.sample,
-        audioNotSupported: params.audioNotSupported
+        audioNotSupported: params.audioNotSupported,
       };
 
       this.audioInstance = new H5P.Audio(
         audioDefaults,
         id,
         {
-          previousState: this.previousState.audio
-        }
+          previousState: this.previousState.audio,
+        },
       );
       this.audioInstance.playOriginal = this.audioInstance.play;
       this.audioInstance.play = this.playOverride.bind(this);
@@ -385,7 +385,7 @@ class Button {
   getCurrentState() {
     return {
       audio: (this.audio) ? this.audio.getCurrentState() : undefined,
-      triesLeft: this.triesLeft
+      triesLeft: this.triesLeft,
     };
   }
 

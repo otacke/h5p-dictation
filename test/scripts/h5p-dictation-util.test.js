@@ -10,7 +10,7 @@ describe('Does the string contain RTL characters?', () => {
     { string: '汉堡包/漢堡包, 汉堡/漢堡', result: false },
     { string: 'עברית', result: true },
     { string: 'عبرانی_زبان', result: true },
-    { string: 'Arabic: عَرَبِيّ', result: true }
+    { string: 'Arabic: عَرَبِيّ', result: true },
   ];
 
   testCasesRTL.forEach((testCase) => {
@@ -34,7 +34,7 @@ describe('Strip punctuation from string', () => {
     { string: 'a - b', result: 'a b' },
     { string: 'a- b', result: 'a b' },
     { string: 'a -b', result: 'a b' },
-    { string: 'a - b – c — d', result: 'a b c d' }
+    { string: 'a - b – c — d', result: 'a b c d' },
   ];
 
   testCasesStripPunctuation.forEach((testCase) => {
@@ -58,7 +58,7 @@ describe('Add spaces to string', () => {
     { string: '¿Qui?', result: '¿ Qui ?' },
     { string: '¿Qué?', result: '¿ Qué ?' },
     { string: '¿Qué? Hola!', result: '¿ Qué ? Hola !' },
-    { string: '¿Qué? Foo\'s Hola!', result: '¿ Qué ? Foo\'s Hola !' }
+    { string: '¿Qué? Foo\'s Hola!', result: '¿ Qué ? Foo\'s Hola !' },
   ];
 
   testCasesAddSpaces.forEach((testCase) => {
@@ -78,13 +78,13 @@ describe('Replace full width characters with half width characters', () => {
   const testCasesReplaceFullwidth = [
     {
       string: '　！＂＃＄％＆＇（）＊＋，－．／０１２３４５６７８９：；＜＝＞？＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～',
-      result: ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+      result: ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~',
     },
   ];
 
   test('Do all full width characters get replaced with their regular width counterparts?', () => {
     expect(
-      Sentence.replaceFullwidthWithHalfwidth(testCasesReplaceFullwidth[0].string, { autosplit: true })
+      Sentence.replaceFullwidthWithHalfwidth(testCasesReplaceFullwidth[0].string, { autosplit: true }),
     ).toBe(testCasesReplaceFullwidth[0].result);
   });
 });
@@ -95,11 +95,11 @@ describe('Add spaces to string without splitting automatically', () => {
     { string: 'JohnDoe', result: 'JohnDoe' },
     {
       string: '明日の午後、わたしはスーパーでリンゴとミルクを買います。',
-      result: '明日の午後、わたしはスーパーでリンゴとミルクを買います。'
+      result: '明日の午後、わたしはスーパーでリンゴとミルクを買います。',
     },
     { string: 'Johnさんはリンゴを買います。', result: 'Johnさんはリンゴを買います。' },
     { string: 'Johnさんはリンゴを12個買います。', result: 'Johnさんはリンゴを12個買います。' },
-    { string: 'Johnさんはリンゴを１２個買います。', result: 'Johnさんはリンゴを１２個買います。' }
+    { string: 'Johnさんはリンゴを１２個買います。', result: 'Johnさんはリンゴを１２個買います。' },
   ];
 
   testCasesAutosplitOff.forEach((testCase) => {
@@ -121,12 +121,12 @@ describe('Add spaces to string without splitting automatically', () => {
     { string: 'JohnDoe', result: 'JohnDoe' },
     {
       string: '明日の午後、わたしはスーパーでリンゴとミルクを買います。',
-      result: '明 日 の 午 後 、 わ た し は ス ー パ ー で リ ン ゴ と ミ ル ク を 買 い ま す 。'
+      result: '明 日 の 午 後 、 わ た し は ス ー パ ー で リ ン ゴ と ミ ル ク を 買 い ま す 。',
     },
     { string: 'Johnさんはリンゴを買います。', result: 'John さ ん は リ ン ゴ を 買 い ま す 。' },
     { string: 'Johnさんはリンゴを12個買います。', result: 'John さ ん は リ ン ゴ を 12 個 買 い ま す 。' },
     // 1 and 2 are fullwidth characters and do get replaces outside of addSpaces
-    { string: 'Johnさんはリンゴを１２個買います。', result: 'John さ ん は リ ン ゴ を１２個 買 い ま す 。' }
+    { string: 'Johnさんはリンゴを１２個買います。', result: 'John さ ん は リ ン ゴ を１２個 買 い ま す 。' },
   ];
 
   // Autosplit on

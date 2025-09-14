@@ -25,21 +25,21 @@ class Dictation extends H5P.Question {
         scoring: {
           ignorePunctuation: true,
           zeroMistakeMode: false,
-          typoFactor: '100'
+          typoFactor: '100',
         },
         textual: {
           wordSeparator: ' ',
           overrideRTL: 'auto',
-          autosplit: true
+          autosplit: true,
         },
         feedbackPresentation: {
           customTypoDisplay: false,
-          alternateSolution: 'first'
+          alternateSolution: 'first',
         },
         enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
         enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
         enableCheckButton: true,
-        enableSolutionOnCheck: false
+        enableSolutionOnCheck: false,
       },
       l10n: {
         generalFeedback: 'You have made @total mistake(s).',
@@ -86,8 +86,8 @@ class Dictation extends H5P.Question {
         plus: 'plus',
         minus: 'minus',
         asterisk: 'asterisk',
-        forwardSlash: 'forward slash'
-      }
+        forwardSlash: 'forward slash',
+      },
     }, params);
 
     const defaultLanguage = (contentData && contentData.metadata) ? contentData.metadata.defaultLanguage || 'en' : 'en';
@@ -128,8 +128,8 @@ class Dictation extends H5P.Question {
 
     // Proper format for percentage
     this.params.behaviour.scoring.typoFactor = parseInt(
-      this.params.behaviour.scoring.typoFactor
-    ) / 100; // eslint-disable-line no-magic-numbers
+      this.params.behaviour.scoring.typoFactor,
+    ) / 100;  
 
     // Strip incomplete sentences
     this.params.sentences = this.params.sentences
@@ -181,11 +181,11 @@ class Dictation extends H5P.Question {
             },
             resize: () => {
               this.trigger('resize');
-            }
-          }
+            },
+          },
         },
         this.contentId,
-        this.previousSentenceStates.filter((state) => state?.index === index).shift()
+        this.previousSentenceStates.filter((state) => state?.index === index).shift(),
       ));
     });
 
@@ -214,7 +214,7 @@ class Dictation extends H5P.Question {
             alt: media.params.alt,
             title: media.params.title,
             expandImage: media.params.expandImage,
-            minimizeImage: media.params.minimizeImage
+            minimizeImage: media.params.minimizeImage,
           });
         }
       }
@@ -278,7 +278,7 @@ class Dictation extends H5P.Question {
       this.showSolutions();
       this.hideButton('show-solution');
     }, false, {
-      'aria-label': this.params.a11y.showSolution
+      'aria-label': this.params.a11y.showSolution,
     }, {});
 
     // Check answer button
@@ -290,7 +290,7 @@ class Dictation extends H5P.Question {
         this.showButton('try-again');
       }
     }, this.params.behaviour.enableCheckButton, {
-      'aria-label': this.params.a11y.check
+      'aria-label': this.params.a11y.check,
     }, {
       contentData: this.contentData,
       textIfSubmitting: this.params.l10n.submitAnswer,
@@ -301,7 +301,7 @@ class Dictation extends H5P.Question {
       this.resetTask();
       this.sentences[0].focus();
     }, false, {
-      'aria-label': this.params.a11y.retry
+      'aria-label': this.params.a11y.retry,
     }, {});
   }
 
@@ -407,7 +407,7 @@ class Dictation extends H5P.Question {
           missing: a.missing + b.missing,
           typo: a.typo + b.typo,
           wrong: a.wrong + b.wrong,
-          match: a.match + b.match
+          match: a.match + b.match,
         };
       }, { added: 0, missing: 0, typo: 0, wrong: 0, match: 0 });
 
@@ -454,7 +454,7 @@ class Dictation extends H5P.Question {
       (`${generalFeedback} ${textScore}`).trim(),
       this.getScore(),
       this.getMaxScore(),
-      ariaMessage
+      ariaMessage,
     );
 
     if (this.params.behaviour.enableSolutionOnCheck) {
@@ -598,7 +598,7 @@ class Dictation extends H5P.Question {
         return gaps.concat(
           sentence.words.reduce((answers, word) => {
             return answers.concat(word.answer || '');
-          }, [])
+          }, []),
         );
       }, [])
       .join('[,]');
@@ -672,7 +672,7 @@ class Dictation extends H5P.Question {
       return gaps.concat(
         sentence.words.map((word) => {
           return word.solution ? word.solution.split('|') : [];
-        })
+        }),
       );
     }, []);
   }
@@ -732,7 +732,7 @@ class Dictation extends H5P.Question {
   getContext() {
     return {
       type: 'sentence',
-      value: this.contextId + 1
+      value: this.contextId + 1,
     };
   }
 

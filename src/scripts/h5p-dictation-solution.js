@@ -99,7 +99,7 @@ class Solution {
     }
 
     return result.words.map((word, index) =>
-      this.createSolutionWordDOM(index, word)
+      this.createSolutionWordDOM(index, word),
     );
   }
 
@@ -220,7 +220,7 @@ class Solution {
       wrong: this.params.a11y.wrong,
       typo: this.params.a11y.typo,
       missing: this.params.a11y.missing,
-      added: this.params.a11y.added
+      added: this.params.a11y.added,
     };
 
     const answer = this.makeReadable(word.answer);

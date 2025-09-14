@@ -39,7 +39,7 @@ class Sentence {
       playAudio: () => {},
       onInteracted: () => {},
       onContextChanged: () => {},
-      resize: () => {}
+      resize: () => {},
     }, params.callbacks);
 
     this.solutionText = Util.htmlDecode(params.sentence.text).trim();
@@ -55,8 +55,8 @@ class Sentence {
       this.solutionText,
       {
         autosplit: this.params.autosplit,
-        wordSeparator: this.params.wordSeparator
-      }
+        wordSeparator: this.params.wordSeparator,
+      },
     ).split(params.wordSeparator).length;
 
     // DOM
@@ -87,10 +87,10 @@ class Sentence {
         callbacks: {
           playAudio: (button) => {
             this.handleButtonClicked(button);
-          }
-        }
+          },
+        },
       },
-      previousState.buttonPlayNormal
+      previousState.buttonPlayNormal,
     );
     contentInteraction.appendChild(this.buttonPlayNormal.getDOM());
 
@@ -109,10 +109,10 @@ class Sentence {
           callbacks: {
             playAudio: (button) => {
               this.handleButtonClicked(button);
-            }
-          }
+            },
+          },
         },
-        previousState.buttonPlaySlow
+        previousState.buttonPlaySlow,
       );
       contentInteraction.appendChild(this.buttonPlaySlow.getDOM());
 
@@ -120,7 +120,7 @@ class Sentence {
 
     contentDescription.classList.add((this.params.hasAlternatives === true) ?
       Sentence.CONTENT_DESCRIPTION_TWO_BUTTONS :
-      Sentence.CONTENT_DESCRIPTION_ONE_BUTTON
+      Sentence.CONTENT_DESCRIPTION_ONE_BUTTON,
     );
 
     // Text input field
@@ -206,8 +206,8 @@ class Sentence {
         plus: this.params.a11y.plus,
         minus: this.params.a11y.minus,
         asterisk: this.params.a11y.asterisk,
-        forwardSlash: this.params.a11y.forwardSlash
-      }
+        forwardSlash: this.params.a11y.forwardSlash,
+      },
     });
 
     // Sentence input field and solution
@@ -286,8 +286,8 @@ class Sentence {
       this.solutionText,
       {
         autosplit: this.params.autosplit,
-        wordSeparator: this.params.wordSeparator
-      }
+        wordSeparator: this.params.wordSeparator,
+      },
     ).split(this.params.wordSeparator) : this.solutionText;
   }
 
@@ -300,7 +300,7 @@ class Sentence {
       index: this.index, // Original index in semantics
       userInput: this.getUserInput(),
       buttonPlayNormal: (this.buttonPlayNormal) ? this.buttonPlayNormal.getCurrentState() : undefined,
-      buttonPlaySlow: (this.buttonPlaySlow) ? this.buttonPlaySlow.getCurrentState() : undefined
+      buttonPlaySlow: (this.buttonPlaySlow) ? this.buttonPlaySlow.getCurrentState() : undefined,
     };
   }
 
@@ -446,19 +446,19 @@ class Sentence {
       // Space between autosplit characters, e.g. Chinese Han symbols
       text = text.replace(
         new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.AUTOSPLIT})`, 'g'),
-        '$1 '
+        '$1 ',
       );
 
       // Ensure space between autosplit characters and words/punctuation
       text = text.replace(
         new RegExp(`(${Sentence.AUTOSPLIT})(?=${Sentence.WORD}|\\d+|${Sentence.PUNCTUATION})`, 'g'),
-        '$1 '
+        '$1 ',
       );
 
       // Ensure space between words/punctuation and autosplit characters
       text = text.replace(
         new RegExp(`(${Sentence.WORD}|\\d+|${Sentence.PUNCTUATION})(?=${Sentence.AUTOSPLIT})`, 'g'),
-        '$1 '
+        '$1 ',
       );
     }
 
@@ -518,7 +518,7 @@ class Sentence {
     return text
       .replace(/[\uFF01-\uFF5E]/g, (char) => {
         return String.fromCharCode(
-          char.charCodeAt(0) - FULL_WIDTH_HALF_WITDH_DIFFERENCE
+          char.charCodeAt(0) - FULL_WIDTH_HALF_WITDH_DIFFERENCE,
         );
       })
       .replace(/\u3000/g, ' '); // replace full-width space with regular space
@@ -534,7 +534,7 @@ class Sentence {
       this.getCorrectText(),
       {
         autosplit: this.params.autosplit,
-        wordSeparator: this.params.wordSeparator
+        wordSeparator: this.params.wordSeparator,
       },
     ).split(this.params.wordSeparator);
 
@@ -568,7 +568,7 @@ class Sentence {
       input,
       {
         autosplit: this.params.autosplit,
-        wordSeparator: this.params.wordSeparator
+        wordSeparator: this.params.wordSeparator,
       },
     ).split(this.params.wordSeparator).filter((word) => word.length > 0);
 
@@ -595,9 +595,9 @@ class Sentence {
         'total': Math.min(score[Sentence.TYPE_ADDED] +
           score[Sentence.TYPE_MISSING] +
           score[Sentence.TYPE_TYPO] +
-          score[Sentence.TYPE_WRONG], this.getMaxMistakes())
+          score[Sentence.TYPE_WRONG], this.getMaxMistakes()),
       },
-      'words': words
+      'words': words,
     };
   }
 
@@ -640,13 +640,13 @@ class Sentence {
       words.push({
         'solution': solution,
         'answer': answer,
-        'type': type
+        'type': type,
       });
     }
 
     return {
       scoreTotal: scoreTotal,
-      words: words
+      words: words,
     };
   }
 
@@ -939,11 +939,11 @@ Sentence.TYPE_TYPO = 'typo';
 Sentence.AUTOSPLIT = '[\u3040-\u30FF\u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF]';
 
 /** @constant {string} */
-// eslint-disable-next-line max-len
+// eslint-disable-next-line @stylistic/js/max-len
 Sentence.PUNCTUATION = '[.?!,\'";\\:\\-\\(\\)/\\+\\-\\*\u00AB\u00BB\u00BF\u201C-\u201E\u060C\u061F\u05BE\u05C0\u05C3\u05C6\u2000-\u206F\u22EF\u3000-\u3002\u3008-\u3011\uFF01\uFF08\uFF09\uFF0C\uFF1A\uFF1B\uFF1F\uFF3B\uFF3D\uFE41\uFE42\uFE4F\uFF5E]';
 
 /** @constant {string} */
-// eslint-disable-next-line max-len
+// eslint-disable-next-line @stylistic/js/max-len
 Sentence.WORD = '\\w|[\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\u02AF\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u060B\u060D-\u061E\u0620-\u08FF]';
 
 /** @constant {string} */
