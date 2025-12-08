@@ -64,14 +64,28 @@ class Sentence {
     this.content.setAttribute('role', 'group');
     this.content.setAttribute('aria-label', `${this.params.a11y.sentence} ${this.position}`);
     this.content.classList.add(Sentence.CONTENT_WRAPPER);
+    if (this.params.hasAlternatives) {
+      this.content.classList.add('two-audio-buttons');
+    }
+    else {
+      this.content.classList.add('one-audio-button');
+    }
 
     // Description (optional)
+    const gridSpacer = document.createElement('div');
+    gridSpacer.classList.add('h5p-dictation-grid-spacer');
+    this.content.appendChild(gridSpacer);
+
+    if (this.params.hasAlternatives) {
+      const gridSpacerAlt = document.createElement('div');
+      gridSpacerAlt.classList.add('h5p-dictation-grid-spacer');
+      this.content.appendChild(gridSpacerAlt);
+    }
+
     const contentDescription = document.createElement('div');
     contentDescription.classList.add(Sentence.CONTENT_DESCRIPTION);
     contentDescription.innerHTML = this.params.sentence.description;
-
-    const contentInteraction = document.createElement('div');
-    contentInteraction.classList.add(Sentence.CONTENT_INTERACTION);
+    this.content.appendChild(contentDescription);
 
     // Normal audio button
     this.buttonPlayNormal = new Button(
@@ -92,7 +106,7 @@ class Sentence {
       },
       previousState.buttonPlayNormal,
     );
-    contentInteraction.appendChild(this.buttonPlayNormal.getDOM());
+    this.content.appendChild(this.buttonPlayNormal.getDOM());
 
     // Alternative audio button
     if (this.params.hasAlternatives === true) {
@@ -114,17 +128,13 @@ class Sentence {
         },
         previousState.buttonPlaySlow,
       );
-      contentInteraction.appendChild(this.buttonPlaySlow.getDOM());
+      this.content.appendChild(this.buttonPlaySlow.getDOM());
 
     }
 
-    contentDescription.classList.add((this.params.hasAlternatives === true) ?
-      Sentence.CONTENT_DESCRIPTION_TWO_BUTTONS :
-      Sentence.CONTENT_DESCRIPTION_ONE_BUTTON,
-    );
-
     // Text input field
     this.inputField = document.createElement('textarea');
+    this.inputField.classList.add(Sentence.INPUT_FIELD);
     this.inputField.setAttribute('rows', 1);
     this.inputField.setAttribute('spellcheck', 'false');
     this.inputField.setAttribute('autocorrect', 'off');
@@ -133,26 +143,8 @@ class Sentence {
 
     // Auto resize the input field
     this.inputField.addEventListener('input', () => {
-      // Remove line breaks when pasting, etc.
-      if (this.inputField.value.indexOf('\n') !== -1 || this.inputField.value.indexOf('\r') !== -1) {
-        this.inputField.value = this.inputField.value.replace(/[\n\r]/g, '');
-      }
-
-      this.inputField.style.height = 'auto'; // Reset to allow shrinking
-      const needsResize = (this.previousScrollHeight !== this.inputField.scrollHeight);
-
-      this.inputField.style.height =
-        `${this.inputField.scrollHeight + this.inputField.offsetHeight - this.inputField.clientHeight}px`;
-
-      if (needsResize) {
-        this.previousScrollHeight = this.inputField.scrollHeight;
-
-        // Trigger iframe resize
-        this.params.callbacks.resize();
-      }
+      this.updateHeight();
     });
-
-    this.inputField.classList.add(Sentence.INPUT_FIELD);
 
     // Restore previous state
     if (previousState.userInput) {
@@ -215,10 +207,27 @@ class Sentence {
     this.inputWrapper.classList.add(Sentence.INPUT_WRAPPER);
     this.inputWrapper.appendChild(this.inputField);
     this.inputWrapper.appendChild(this.solution.getDOM());
-    contentInteraction.appendChild(this.inputWrapper);
+    this.content.appendChild(this.inputWrapper);
+  }
 
-    this.content.appendChild(contentDescription);
-    this.content.appendChild(contentInteraction);
+  updateHeight() {
+    // Remove line breaks when pasting, etc.
+    if (this.inputField.value.indexOf('\n') !== -1 || this.inputField.value.indexOf('\r') !== -1) {
+      this.inputField.value = this.inputField.value.replace(/[\n\r]/g, '');
+    }
+
+    this.inputField.style.height = 'auto'; // Reset to allow shrinking
+    const needsResize = (this.previousScrollHeight !== this.inputField.scrollHeight);
+
+    this.inputField.style.height =
+      `${this.inputField.scrollHeight + this.inputField.offsetHeight - this.inputField.clientHeight}px`;
+
+    if (needsResize) {
+      this.previousScrollHeight = this.inputField.scrollHeight;
+
+      // Trigger iframe resize
+      this.params.callbacks.resize();
+    }
   }
 
   /**
@@ -911,10 +920,6 @@ class Sentence {
 Sentence.CONTENT_WRAPPER = 'h5p-sentence';
 /** @constant {string} */
 Sentence.CONTENT_DESCRIPTION = 'h5p-sentence-description';
-/** @constant {string} */
-Sentence.CONTENT_DESCRIPTION_ONE_BUTTON = 'h5p-sentence-description-one-button';
-/** @constant {string} */
-Sentence.CONTENT_DESCRIPTION_TWO_BUTTONS = 'h5p-sentence-description-two-buttons';
 /** @constant {string} */
 Sentence.CONTENT_INTERACTION = 'h5p-sentence-interaction';
 /** @constant {string} */
