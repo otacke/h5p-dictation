@@ -431,8 +431,9 @@ class Sentence {
     options.wordSeparator = options.wordSeparator || ' ';
 
     // Users with a non default word separator will manually handle all spacing options
-    if (' ' !== options.wordSeparator)
+    if (options.wordSeparator !== ' ') {
       return text;
+    }
 
     // In a sentence like "John's car broke.", the . would be removed, but not the '
     const wordThenPunctuation = new RegExp(`(${Sentence.WORD}|^)(${Sentence.PUNCTUATION.replace('\'', '')})( |$)`, 'g');
