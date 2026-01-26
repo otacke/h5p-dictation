@@ -256,12 +256,12 @@
           "default": "Lecture lente"
         },
         {
-          "label": "Continue playing button",
-          "default": "Continue playing"
+          "label": "Bouton de reprise de lecture",
+          "default": "Reprendre la lecture"
         },
         {
-          "label": "Continue playing slowly button",
-          "default": "Continue playing slowly"
+          "label": "Bouton de reprise de lecture lente",
+          "default": "Reprendre la lecture lente"
         },
         {
           "label": "Essais à gauche (texte à lire et texte à survoler)",
@@ -278,8 +278,8 @@
         },
         {
           "label": "Ton résultat",
-          "description": "@score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
-          "default": "You got @score out of @total points"
+          "description": "@score sera remplacé par le nombre de points. @total sera remplacé par le nombre maximum de points possibles.",
+          "default": "Vous avez obtenu @score points sur @total"
         },
         {
           "label": "Solution",
@@ -290,8 +290,8 @@
           "default": "Phrase"
         },
         {
-          "label": "Item",
-          "default": "Item"
+          "label": "Élément",
+          "default": "Élément"
         },
         {
           "label": "Correct",
@@ -314,8 +314,8 @@
           "default": "ajouté"
         },
         {
-          "label": "Correct solution",
-          "default": "Should have been"
+          "label": "Solution correcte",
+          "default": "Aurait dû être"
         },
         {
           "label": "Ou",
@@ -370,8 +370,8 @@
           "default": "moins"
         },
         {
-          "label": "Asterisk",
-          "default": "asterisk"
+          "label": "Astérisque",
+          "default": "astérisque"
         },
         {
           "label": "Barre oblique",
