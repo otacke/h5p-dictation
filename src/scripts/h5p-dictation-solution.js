@@ -119,6 +119,7 @@ class Solution {
 
     // General stuff
     const wordDOM = document.createElement('span');
+    wordDOM.classList.add('h5p-solution-word');
     if (this.params.customTypoDisplay === false && word.type === 'typo') {
       // Use "mistake" style instead of "typo style"
       wordDOM.classList.add('h5p-wrapper-wrong');
@@ -339,8 +340,8 @@ class Solution {
       }
 
       if (word.type === 'typo' && this.params.typoFactor === TYPO_HALF_MISTAKE) {
-        scoreExplanation.classList.remove('h5p-question-minus-one');
-        scoreExplanation.classList.add('h5p-question-plus-one-half');
+        scoreExplanation.childNodes[0].classList.remove('h5p-question-plus-one');
+        scoreExplanation.childNodes[0].classList.add('h5p-question-plus-one-half');
       }
 
       if (word.type === 'typo' && this.params.typoFactor < TYPO_FULL_MISTAKE) {
@@ -350,9 +351,10 @@ class Solution {
     else {
       const scoreExplanation = scorePoints.getElement(false);
       if (word.type !== 'match') {
+
         if (word.type === 'typo' && this.params.typoFactor === TYPO_HALF_MISTAKE) {
-          scoreExplanation.classList.remove('h5p-question-minus-one');
-          scoreExplanation.classList.add('h5p-question-minus-one-half');
+          scoreExplanation.childNodes[0].classList.remove('h5p-question-minus-one');
+          scoreExplanation.childNodes[0].classList.add('h5p-question-minus-one-half');
         }
 
         if (word.type !== 'typo' || this.params.typoFactor > TYPO_NO_MISTAKE) {
@@ -369,14 +371,6 @@ class Solution {
    */
   show(result) {
     const solutionElements = this.createSolution(result);
-
-    // Adjust padding around text
-    if (solutionElements.length > 0 && result.words[solutionElements.length - 1].type === 'match') {
-      this.words.classList.add('h5p-solution-last-correct');
-    }
-    else {
-      this.words.classList.remove('h5p-solution-last-correct');
-    }
 
     if (!this.words.firstChild) {
       solutionElements.forEach((element) => {

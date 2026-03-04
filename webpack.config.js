@@ -22,8 +22,8 @@ export default {
       '@root': _resolve(__dirname, './'),
       '@scripts': _resolve(__dirname, 'src/scripts'),
       '@services': _resolve(__dirname, 'src/scripts/services'),
-      '@styles': _resolve(__dirname, 'src/styles')
-    }
+      '@styles': _resolve(__dirname, 'src/styles'),
+    },
   },
   optimization: {
     minimize: mode === 'production',
@@ -32,23 +32,23 @@ export default {
         terserOptions: {
           compress: {
             drop_console: true,
-          }
-        }
-      })
-    ]
+          },
+        },
+      }),
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `${libraryName}.css`
-    })
+      filename: `${libraryName}.css`,
+    }),
   ],
   entry: {
-    dist: './src/entries/dist.js'
+    dist: './src/entries/dist.js',
   },
   output: {
     filename: `${libraryName}.js`,
     path: _resolve(__dirname, 'dist'),
-    clean: true
+    clean: true,
   },
   target: ['browserslist'],
   module: {
@@ -56,7 +56,7 @@ export default {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.(s[ac]ss|css)$/,
@@ -64,36 +64,36 @@ export default {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: ''
-            }
+              publicPath: '',
+            },
           },
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.svg|\.jpg|\.png$/,
         include: join(__dirname, 'src/images'),
-        type: 'asset/resource'
+        type: 'asset/resource',
       },
       {
         test: /\.mp3|\.wav$/,
         include: join(__dirname, 'src/audio'),
-        type: 'asset/resource'
+        type: 'asset/resource',
       },
       {
         test: /\.woff$/,
         include: join(__dirname, 'src/fonts'),
-        type: 'asset/resource'
-      }
-    ]
+        type: 'asset/resource',
+      },
+    ],
   },
   stats: {
-    colors: true
+    colors: true,
   },
-  ...(mode !== 'production' && { devtool: 'eval-cheap-module-source-map' })
+  ...(mode !== 'production' && { devtool: 'eval-cheap-module-source-map' }),
 };

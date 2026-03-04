@@ -10,7 +10,7 @@ class Dictation extends H5P.Question {
    * @param {object} contentData contentData.
    */
   constructor(params, contentId, contentData) {
-    super('dictation');
+    super('dictation', { theme: true });
 
     // Add defaults
     this.params = Util.extend({
@@ -129,7 +129,7 @@ class Dictation extends H5P.Question {
     // Proper format for percentage
     this.params.behaviour.scoring.typoFactor = parseInt(
       this.params.behaviour.scoring.typoFactor,
-    ) / 100;  
+    ) / 100;
 
     // Strip incomplete sentences
     this.params.sentences = this.params.sentences
@@ -196,6 +196,12 @@ class Dictation extends H5P.Question {
 
     this.mistakesCapped = this.maxMistakes;
     this.isAnswered = false;
+
+    this.on('resize', () => {
+      this.sentences.forEach((sentence) => {
+        sentence.updateHeight();
+      });
+    });
   }
 
   /**
@@ -274,35 +280,54 @@ class Dictation extends H5P.Question {
    */
   addButtons() {
     // Show solution button
-    this.addButton('show-solution', this.params.l10n.showSolution, () => {
-      this.showSolutions();
-      this.hideButton('show-solution');
-    }, false, {
-      'aria-label': this.params.a11y.showSolution,
-    }, {});
+    this.addButton(
+      'show-solution',
+      this.params.l10n.showSolution, () => {
+        this.showSolutions();
+        this.hideButton('show-solution');
+      },
+      false,
+      { 'aria-label': this.params.a11y.showSolution },
+      {
+        styleType: 'secondary',
+        icon: 'show-results',
+      },
+    );
 
     // Check answer button
-    this.addButton('check-answer', this.params.l10n.checkAnswer, () => {
-      this.showEvaluation();
-      this.isAnswered = true;
-      this.triggerXAPIAnswered();
-      if (this.params.behaviour.enableRetry && !this.isPassed()) {
-        this.showButton('try-again');
-      }
-    }, this.params.behaviour.enableCheckButton, {
-      'aria-label': this.params.a11y.check,
-    }, {
-      contentData: this.contentData,
-      textIfSubmitting: this.params.l10n.submitAnswer,
-    });
+    this.addButton(
+      'check-answer',
+      this.params.l10n.checkAnswer, () => {
+        this.showEvaluation();
+        this.isAnswered = true;
+        this.triggerXAPIAnswered();
+        if (this.params.behaviour.enableRetry && !this.isPassed()) {
+          this.showButton('try-again');
+        }
+      },
+      this.params.behaviour.enableCheckButton,
+      { 'aria-label': this.params.a11y.check },
+      {
+        contentData: this.contentData,
+        textIfSubmitting: this.params.l10n.submitAnswer,
+        icon: 'check',
+      },
+    );
 
     // Retry button
-    this.addButton('try-again', this.params.l10n.tryAgain, () => {
-      this.resetTask();
-      this.sentences[0].focus();
-    }, false, {
-      'aria-label': this.params.a11y.retry,
-    }, {});
+    this.addButton(
+      'try-again',
+      this.params.l10n.tryAgain, () => {
+        this.resetTask();
+        this.sentences[0].focus();
+      },
+      false,
+      { 'aria-label': this.params.a11y.retry },
+      {
+        icon: 'retry',
+        styleType: 'secondary',
+      },
+    );
   }
 
   /**
