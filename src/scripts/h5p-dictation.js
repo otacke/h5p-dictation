@@ -800,6 +800,14 @@ class Dictation extends H5P.Question {
       return sentence.buttonPlayNormal?.isAudioPlaying() || sentence.buttonPlaySlow?.isAudioPlaying();
     });
   }
+
+  /**
+   * Workaround for H5P core mutating prototype to inject its isRoot, but ES6 inheritance here.
+   * @returns {boolean} True, if content type is root. Else false.
+   */
+  isRoot() {
+    return !!this.contentData.standalone;
+  }
 }
 
 /** @constant {string} */
