@@ -234,7 +234,13 @@ class Solution {
 
     let ariaExplanation = `${answer}${answer === '' ? '' : '. '}${ariaLabelType[word.type]}.`;
     if (word.type === 'wrong' || word.type === 'typo' || word.type === 'missing') {
-      ariaExplanation += ` ${this.params.a11y.shouldHaveBeen}. ${solution}.`;
+      const differentCaseOnly = (answer ?? '').toLowerCase() === solution.toLowerCase();
+      if (differentCaseOnly) {
+        ariaExplanation += ` ${this.params.a11y.shouldHaveBeen} ${solution}. ${this.params.a11y.wrongCapitalization}.`;
+      }
+      else {
+        ariaExplanation += ` ${this.params.a11y.shouldHaveBeen}. ${solution}.`;
+      }
     }
 
     return ariaExplanation;

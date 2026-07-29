@@ -318,6 +318,10 @@
           "default": "كان يجب وضع"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "أو",
           "default": "أو"
         },

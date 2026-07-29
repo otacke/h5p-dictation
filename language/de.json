@@ -318,6 +318,10 @@
           "default": "Richtig wäre gewesen"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Falsche Groß-Kleinschreibung"
+        },
+        {
           "label": "Oder",
           "default": "oder"
         },

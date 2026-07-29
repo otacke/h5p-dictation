@@ -605,6 +605,13 @@
         "default": "Should have been"
       },
       {
+        "name": "wrongCapitalization",
+        "type": "text",
+        "label": "Wrong capitalization",
+        "importance": "low",
+        "default": "Wrong capitalization"
+      },
+      {
         "name": "or",
         "type": "text",
         "label": "Or",

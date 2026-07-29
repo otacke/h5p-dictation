@@ -318,6 +318,10 @@
           "default": "Veronderstel om te wees"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Of",
           "default": "of"
         },

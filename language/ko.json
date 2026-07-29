@@ -318,6 +318,10 @@
           "default": "올바른 해답"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "혹은",
           "default": "혹은"
         },

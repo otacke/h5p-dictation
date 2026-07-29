@@ -187,6 +187,7 @@ class Sentence {
         solution: this.params.a11y.solution,
         or: this.params.a11y.or,
         shouldHaveBeen: this.params.a11y.shouldHaveBeen,
+        wrongCapitalization: this.params.a11y.wrongCapitalization,
         period: this.params.a11y.period,
         exclamationPoint: this.params.a11y.exclamationPoint,
         questionMark: this.params.a11y.questionMark,

@@ -1,4 +1,5 @@
 import Sentence from '@scripts/h5p-dictation-sentence.js';
+import { getSemanticsDefaults } from '@services/h5p-util.js';
 import Util from '@services/util.js';
 
 /** Class for dictation interaction */
@@ -12,83 +13,23 @@ class Dictation extends H5P.Question {
   constructor(params, contentId, contentData) {
     super('dictation', { theme: true });
 
-    // Add defaults
-    this.params = Util.extend({
+    const defaults = Util.extend({
       media: {},
       taskDescription: 'Please listen carefully and write what you hear.',
       sentences: [],
       behaviour: {
+        enableCheckButton: true,
+        enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
+        enableSolutionOnCheck: false,
+        enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
+        playButtonDelay: 0,
         tries: Infinity,
         triesAlternative: Infinity,
         shuffleSentences: 'never',
-        playButtonDelay: 0,
-        scoring: {
-          ignorePunctuation: true,
-          zeroMistakeMode: false,
-          typoFactor: '100',
-        },
-        textual: {
-          wordSeparator: ' ',
-          overrideRTL: 'auto',
-          autosplit: true,
-        },
-        feedbackPresentation: {
-          customTypoDisplay: false,
-          alternateSolution: 'first',
-        },
-        enableRetry: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
-        enableSolutionsButton: true, // @see {@link https://h5p.org/documentation/developers/contracts#guides-header-8}
-        enableCheckButton: true,
-        enableSolutionOnCheck: false,
       },
-      l10n: {
-        generalFeedback: 'You have made @total mistake(s).',
-        generalFeedbackZeroMistakesMode:
-          'You have entered @total word(s) correctly and @typo word(s) with minor mistakes.',
-        checkAnswer: 'Check',
-        tryAgain: 'Retry',
-        showSolution: 'Show solution',
-        audioNotSupported: 'Your browser does not support this audio.',
-        submitAnswer: 'Submit',
-      },
-      a11y: {
-        check: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
-        showSolution: 'Show the solution. The task will be marked with its correct solution.',
-        retry: 'Retry the task. Reset all responses and start the task over again.',
-        play: 'Play',
-        playSlowly: 'Play slowly',
-        continuePlaying: 'Continue playing',
-        continuePlayingSlowly: 'Continue playing slowly',
-        triesLeft: 'Number of tries left: @number',
-        infinite: 'infinite',
-        enterText: 'Enter what you have heard.',
-        yourResult: 'You got @score out of @total points',
-        solution: 'Solution',
-        sentence: 'Sentence',
-        item: 'Item',
-        correct: 'correct',
-        wrong: 'wrong',
-        typo: 'small mistake',
-        missing: 'missing',
-        added: 'added',
-        shouldHaveBeen: 'Should have been',
-        or: 'or',
-        point: 'point',
-        points: 'points',
-        period: 'period',
-        exclamationPoint: 'exclamation point',
-        questionMark: 'question mark',
-        comma: 'comma',
-        singleQuote: 'single quote',
-        doubleQuote: 'double quote',
-        colon: 'colon',
-        semicolon: 'semicolon',
-        plus: 'plus',
-        minus: 'minus',
-        asterisk: 'asterisk',
-        forwardSlash: 'forward slash',
-      },
-    }, params);
+    }, getSemanticsDefaults());
+
+    this.params = Util.extend(defaults, params);
 
     const defaultLanguage = (contentData && contentData.metadata) ? contentData.metadata.defaultLanguage || 'en' : 'en';
     this.languageTag = Util.formatLanguageCode(defaultLanguage);
@@ -799,6 +740,14 @@ class Dictation extends H5P.Question {
     return this.sentences?.some((sentence) => {
       return sentence.buttonPlayNormal?.isAudioPlaying() || sentence.buttonPlaySlow?.isAudioPlaying();
     });
+  }
+
+  /**
+   * Workaround for H5P core mutating prototype to inject its isRoot, but ES6 inheritance here.
+   * @returns {boolean} True, if content type is root. Else false.
+   */
+  isRoot() {
+    return !!this.contentData.standalone;
   }
 }
 
