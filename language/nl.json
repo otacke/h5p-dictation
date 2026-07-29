@@ -318,6 +318,10 @@
           "default": "Zou moeten zijn"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Of",
           "default": "of"
         },

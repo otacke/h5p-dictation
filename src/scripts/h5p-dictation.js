@@ -72,6 +72,7 @@ class Dictation extends H5P.Question {
         missing: 'missing',
         added: 'added',
         shouldHaveBeen: 'Should have been',
+        wrongCapitalization: 'Wrong capitalization',
         or: 'or',
         point: 'point',
         points: 'points',

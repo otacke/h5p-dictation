@@ -318,6 +318,10 @@
           "default": "Powinno być"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Lub",
           "default": "lub"
         },

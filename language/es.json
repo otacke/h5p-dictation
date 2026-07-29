@@ -318,6 +318,10 @@
           "default": "Debería haber sido"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "O",
           "default": "o"
         },

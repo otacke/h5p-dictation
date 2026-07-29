@@ -318,6 +318,10 @@
           "default": "Izan beharko litzateke"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Edo",
           "default": "edo"
         },

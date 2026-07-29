@@ -318,6 +318,10 @@
           "default": "Oleks pidanud olema"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Või",
           "default": "või"
         },
