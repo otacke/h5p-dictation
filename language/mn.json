@@ -318,6 +318,10 @@
           "default": "байх ёстой байсан"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Эсвэл",
           "default": "эсвэлor"
         },

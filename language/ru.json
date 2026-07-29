@@ -318,6 +318,10 @@
           "default": "Нужно было"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Или",
           "default": "Или"
         },

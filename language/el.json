@@ -318,6 +318,10 @@
           "default": "Θα έπρεπε να είναι"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Ή",
           "default": "Ή"
         },

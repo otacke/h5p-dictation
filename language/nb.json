@@ -318,6 +318,10 @@
             "default": "Skulle vært"
           },
           {
+            "label": "Wrong capitalization",
+            "default": "Feil stor bokstav"
+          },
+          {
             "label": "Eller",
             "default": "eller"
           },

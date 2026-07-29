@@ -318,6 +318,10 @@
           "default": "Lilipaswa kuwa"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Au",
           "default": "au"
         },

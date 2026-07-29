@@ -318,6 +318,10 @@
           "default": "Ar fi trebuit să fie"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Sau",
           "default": "sau"
         },

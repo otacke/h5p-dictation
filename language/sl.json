@@ -318,6 +318,10 @@
           "default": "Pravilno bi bilo"
         },
         {
+          "label": "Wrong capitalization",
+          "default": "Wrong capitalization"
+        },
+        {
           "label": "Ali",
           "default": "ali"
         },
