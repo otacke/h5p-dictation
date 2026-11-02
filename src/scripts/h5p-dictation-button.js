@@ -1,5 +1,17 @@
 import Util from '@services/util.js';
 
+/** @constant {number} BLIP_FREQUENCY_HZ Blip sound frequency. */
+const BLIP_FREQUENCY_HZ = 880;
+
+/** @constant {number} BLIP_DURATION_SECONDS Blip sound duration in seconds. */
+const BLIP_DURATION_SECONDS = 0.08;
+
+/** @constant {number} BLIP_VOLUME Blip sound volume. */
+const BLIP_VOLUME = 0.15;
+
+/** @constant {number} SILENCE_LEVEL Silence level. */
+const SILENCE_LEVEL = 0.001;
+
 /** Class representing a sound playing button. */
 class Button {
   /**
@@ -420,8 +432,7 @@ class Button {
 
     this.isDelayingPlay = true;
     this.button.classList.add('h5p-dictation-delay-animation');
-    this.button.style.animationDuration =
-      `${this.params.playButtonDelay + WORKAROUND_DELAY}s`;
+    this.button.style.animationDuration = `${this.params.playButtonDelay + WORKAROUND_DELAY}s`;
 
     window.clearTimeout(this.playTimeout);
     this.playTimeout = window.setTimeout(() => {
@@ -430,6 +441,42 @@ class Button {
       this.button.style.animationDuration = '';
       this.isDelayingPlay = false;
     }, this.params.playButtonDelay * MS_IN_S);
+
+    this.playBlips();
+  }
+
+  /** Play blips as long as in delay playing mode. */
+  playBlips() {
+    window.clearTimeout(this.blipTimeout);
+    if (!this.isDelayingPlay) {
+      return;
+    }
+
+    this.playBlip();
+
+    this.blipTimeout = window.setTimeout(() => {
+      this.playBlips();
+      // eslint-disable-next-line no-magic-numbers
+    }, 1000);
+  }
+
+  /**
+   * Play blip sound.
+   */
+  playBlip() {
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.value = BLIP_FREQUENCY_HZ;
+    gain.gain.setValueAtTime(BLIP_VOLUME, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(SILENCE_LEVEL, ctx.currentTime + BLIP_DURATION_SECONDS);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + BLIP_DURATION_SECONDS);
   }
 
   isAudioPlaying() {
